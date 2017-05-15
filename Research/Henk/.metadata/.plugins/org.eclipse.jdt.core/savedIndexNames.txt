@@ -1,4 +1,3 @@
 INDEX VERSION 1.130+D:\IIPSEN\Github\ipsen1\Research\Henk\.metadata\.plugins\org.eclipse.jdt.core
 1155623881.index
-3653810794.index
 4008107930.index
