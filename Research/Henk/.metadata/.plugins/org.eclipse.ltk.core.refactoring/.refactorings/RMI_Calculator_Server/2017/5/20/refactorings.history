@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;nl.hsleiden.rmi.calculator.server&apos; to &apos;RMI_Calculator_Client/src&apos;&#x0D;&#x0A;- Original project: &apos;RMI_Calculator_Server&apos;&#x0D;&#x0A;- Destination element: &apos;RMI_Calculator_Client/src&apos;&#x0D;&#x0A;- Original element: &apos;RMI_Calculator_Server/src/nl.hsleiden.rmi.calculator.server&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=RMI_Calculator_Client/src" element1="/src&lt;nl.hsleiden.rmi.calculator.server" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1494848650505" version="1.0"/>
+</session>
