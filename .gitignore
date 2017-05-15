@@ -1,4 +1,4 @@
 .DS_Store
-/Research/Henk/.metadata
-/Research/Henk/.recommenders
+Research/Henk/.metadata/*
+Research/Henk/.recommenders/*
 
