@@ -6,6 +6,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -99,7 +100,14 @@ public class GameClient extends Application{
 	public static void updatePlayerList()
 	{
 		try {
-			player1.setText(lobbyStub.playerList());
+			Platform.runLater(() -> {
+				try {
+					player1.setText(lobbyStub.playerList());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
 			System.out.println(lobbyStub.playerList());
 			
 			
