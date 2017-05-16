@@ -46,8 +46,12 @@ public class GameClient extends Application{
 		Scene mainScene = new Scene(mainPane, 400, 400);
 		Button addPlayer = new Button("Join Game");
 		Button leaveGame = new Button("Leave Game");
+		Button localHost = new Button("Localhost");
+		Button remoteServer = new Button("Remote Server");
 		
 		FlowPane lobbyPane = new FlowPane();
+		
+		Label serverIP = new Label(connectAdress);
 		
 		Label playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("Arial", 20));
@@ -56,6 +60,7 @@ public class GameClient extends Application{
 		player1.setText("empty");
 		player1.setFont(new Font("Arial", 15));
 		player1.setAlignment(Pos.CENTER);
+		
 				
 		HBox playerBox = new HBox();
 		playerBox.getChildren().addAll(playersLabel, player1);
@@ -64,7 +69,7 @@ public class GameClient extends Application{
 		Scene lobbyScene = new Scene(lobbyPane, 400, 400);
 
 		
-		mainPane.getChildren().setAll(naamVeld, addPlayer);
+		mainPane.getChildren().setAll(naamVeld, addPlayer, localHost, remoteServer, serverIP);
 		naamVeld.setAlignment(Pos.TOP_CENTER);
 		
 		mainStage.setScene(mainScene);
@@ -108,7 +113,21 @@ public class GameClient extends Application{
 		leaveGame.setOnAction(e -> 
 		{
 			mainStage.setScene(mainScene);
+			ViewThread.kill();
 		});
+		
+		localHost.setOnAction(e -> 
+		{
+			connectAdress = localAddress;
+			serverIP.setText(connectAdress);
+		});
+		
+		remoteServer.setOnAction(e -> 
+		{
+			connectAdress = remoteAddress;
+			serverIP.setText(connectAdress);
+		});
+		
 		
 	}
 	
