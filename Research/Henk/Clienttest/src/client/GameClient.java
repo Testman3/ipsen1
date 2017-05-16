@@ -72,7 +72,7 @@ public class GameClient extends Application{
 		{
 			try {				
 				System.out.println("Getting access to the registry");
-				Registry registry = LocateRegistry.getRegistry("127.0.0.1"); // if server on another machine: provide that machine's IP address. Default port  1099	
+				Registry registry = LocateRegistry.getRegistry("149.201.245.145"); // if server on another machine: provide that machine's IP address. Default port  1099	
 				System.out.println("Getting the Lobby stub from registry");
 	            lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
 	           
@@ -102,6 +102,10 @@ public class GameClient extends Application{
 			}
 		});
 		
+		leaveGame.setOnAction(e -> 
+		{
+			mainStage.setScene(mainScene);
+		});
 		
 	}
 	
