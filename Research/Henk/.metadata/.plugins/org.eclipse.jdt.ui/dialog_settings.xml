@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="filter_imports;" key="filters_last_used"/>
 	<section name="javadoc">
 		<item value="public" key="access"/>
 		<item value="false" key="noindex"/>
@@ -21,6 +22,19 @@
 		<item value="false" key="openinbrowser"/>
 		<section name="projects">
 		</section>
+	</section>
+	<section name="FatJarPackageWizard">
+		<item value="D:\IIPSEN\Github\ipsen1\Research\Henk" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="GameServer - Clienttest" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\overb\Desktop\test.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
+		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
+		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\overb\Desktop\test.jar"/>
+		</list>
+		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value=".xml"/>
+		</list>
 	</section>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
@@ -47,6 +61,9 @@
 		<item value="558" key="DIALOG_HEIGHT"/>
 		<item value="334" key="DIALOG_X_ORIGIN"/>
 		<item value="70" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="0" key="pageIndex"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>

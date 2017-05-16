@@ -23,6 +23,7 @@ public class GameClient extends Application{
     static Label player1;
     Label player2;
     Label player3;
+    Thread viewUpdater;
 
 	
 	public static void main(String[] args) 
@@ -70,13 +71,16 @@ public class GameClient extends Application{
 				System.out.println("Joining the game as " + playerName);
 				System.out.println(lobbyStub.playerList());
 				updatePlayerList();
-
+				
+				ViewThread.main(null);
 				mainStage.setScene(lobbyScene);
+
 				
 				//Zorgt ervoor dat de speler word verwijderd uit de spelerslijst wanneer
 				//het speelvenster wordt gesloten
 				mainStage.setOnCloseRequest(e3 -> {
 				try {
+					ViewThread.kill();
 					lobbyStub.removePlayer(playerName);
 				} catch (RemoteException e1) {e1.printStackTrace();}});
 				
@@ -87,13 +91,20 @@ public class GameClient extends Application{
 			}
 		});
 		
+		
 	}
 	
+
+
 	public static void updatePlayerList()
 	{
 		try {
 			player1.setText(lobbyStub.playerList());
-			} catch (RemoteException e) {e.printStackTrace();
+			System.out.println(lobbyStub.playerList());
+			
+			
+			} catch (RemoteException e) {e.printStackTrace(); 
+			
 		}
 	}
 }
