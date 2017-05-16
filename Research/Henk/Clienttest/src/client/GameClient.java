@@ -23,6 +23,9 @@ import server.Lobby;
 
 public class GameClient extends Application{
 
+	String connectAdress = "127.0.0.1";
+	String localAddress = "127.0.0.1";
+	String remoteAddress = "149.201.245.145";
     static Lobby lobbyStub;
     String playerName ="Testspeler";
     static Label player1;
@@ -72,7 +75,7 @@ public class GameClient extends Application{
 		{
 			try {				
 				System.out.println("Getting access to the registry");
-				Registry registry = LocateRegistry.getRegistry("149.201.245.145"); // if server on another machine: provide that machine's IP address. Default port  1099	
+				Registry registry = LocateRegistry.getRegistry(connectAdress); // if server on another machine: provide that machine's IP address. Default port  1099	
 				System.out.println("Getting the Lobby stub from registry");
 	            lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
 	           
