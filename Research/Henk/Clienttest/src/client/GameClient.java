@@ -30,6 +30,8 @@ public class GameClient extends Application{
     String playerName ="Testspeler";
     static Label player1;
     Thread viewUpdater;
+	ViewThread t = new ViewThread();
+	Thread thread = new Thread(t);
 
 	
 	public static void main(String[] args) 
@@ -90,7 +92,9 @@ public class GameClient extends Application{
 				System.out.println(lobbyStub.playerList());
 				updatePlayerList();
 				
-				ViewThread.main(null);
+				thread.start();
+				
+				//ViewThread.main(null);
 				mainStage.setScene(lobbyScene);
 
 				
@@ -112,8 +116,16 @@ public class GameClient extends Application{
 		
 		leaveGame.setOnAction(e -> 
 		{
-			mainStage.setScene(mainScene);
-			ViewThread.kill();
+			mainStage.setScene(mainScene);		
+			
+			try {
+				lobbyStub.removePlayer(playerName);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			//System.exit killt alle gerelateerde processen, hierdoor sluit het programma volledig
+			System.exit(0);
 		});
 		
 		localHost.setOnAction(e -> 

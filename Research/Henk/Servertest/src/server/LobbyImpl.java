@@ -23,9 +23,10 @@ public class LobbyImpl implements Lobby{
 	}
 
 	@Override
-	public void addPlayer(String naam) throws RemoteException 
+	public void addPlayer(String playerNaam) throws RemoteException 
 	{
-		playerArr.add(naam);
+		playerArr.add(playerNaam);
+		System.out.println(playerNaam + " has entered the game");
 	}
 
 	@Override
