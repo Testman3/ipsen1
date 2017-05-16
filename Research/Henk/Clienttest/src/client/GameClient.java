@@ -13,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import server.Lobby;
 
@@ -22,8 +24,6 @@ public class GameClient extends Application{
     static Lobby lobbyStub;
     String playerName ="Testspeler";
     static Label player1;
-    Label player2;
-    Label player3;
     Thread viewUpdater;
 
 	
@@ -43,10 +43,16 @@ public class GameClient extends Application{
 		
 		FlowPane lobbyPane = new FlowPane();
 		
+		Label playersLabel = new Label("Players in this game: ");
+		playersLabel.setFont(new Font("Arial", 20));
+
 		player1 = new Label();
 		player1.setText("empty");
-		VBox playerBox = new VBox();
-		playerBox.getChildren().addAll(player1);
+		player1.setFont(new Font("Arial", 15));
+		player1.setAlignment(Pos.CENTER);
+				
+		HBox playerBox = new HBox();
+		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox);
 		
 		Scene lobbyScene = new Scene(lobbyPane, 400, 400);
