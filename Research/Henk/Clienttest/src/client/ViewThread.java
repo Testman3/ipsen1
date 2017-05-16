@@ -3,7 +3,7 @@ package client;
 public class ViewThread implements Runnable
 {
 
-	boolean enableThread = true;
+	static boolean enableThread = true;
 
 	public static void main(String[] args) 
 	{
@@ -26,6 +26,7 @@ public class ViewThread implements Runnable
 		}
 	public static void kill() 
 	{
+		enableThread = false;
 		Thread.interrupted();
 		System.out.print("Thread killed");
 	}

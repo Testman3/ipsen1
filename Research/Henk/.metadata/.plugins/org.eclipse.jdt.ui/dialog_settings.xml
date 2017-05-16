@@ -25,14 +25,18 @@
 	</section>
 	<section name="FatJarPackageWizard">
 		<item value="D:\IIPSEN\Github\ipsen1\Research\Henk" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
-		<item value="GameServer - Clienttest" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="C:\Users\overb\Desktop\test.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="GameClient - Clienttest" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\overb\Desktop\GameClient.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\overb\Desktop\GameClient.jar"/>
+			<item value="C:\Users\overb\Desktop\ServerClient.jar"/>
+			<item value="C:\Users\overb\Desktop\GameCLient.jar"/>
 			<item value="C:\Users\overb\Desktop\test.jar"/>
 		</list>
 		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value="D:\IIPSEN\Github\ipsen1\Research\Henk.xml"/>
 			<item value=".xml"/>
 		</list>
 	</section>

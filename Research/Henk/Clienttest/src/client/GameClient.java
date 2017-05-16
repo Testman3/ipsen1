@@ -25,7 +25,7 @@ public class GameClient extends Application{
 
 	String connectAdress = "127.0.0.1";
 	String localAddress = "127.0.0.1";
-	String remoteAddress = "149.201.245.145";
+	String remoteAddress = "149.210.245.145";
     static Lobby lobbyStub;
     String playerName ="Testspeler";
     static Label player1;
