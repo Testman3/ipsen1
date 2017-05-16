@@ -83,6 +83,7 @@ public class GameClient extends Application{
 				try {
 					ViewThread.kill();
 					lobbyStub.removePlayer(playerName);
+					System.exit(0);
 				} catch (RemoteException e1) {e1.printStackTrace();}});
 				
 				
