@@ -19,6 +19,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import server.Lobby;
 
+@SuppressWarnings("unused")
+
 public class GameClient extends Application{
 
     static Lobby lobbyStub;
@@ -40,6 +42,7 @@ public class GameClient extends Application{
 		
 		Scene mainScene = new Scene(mainPane, 400, 400);
 		Button addPlayer = new Button("Join Game");
+		Button leaveGame = new Button("Leave Game");
 		
 		FlowPane lobbyPane = new FlowPane();
 		
@@ -53,7 +56,7 @@ public class GameClient extends Application{
 				
 		HBox playerBox = new HBox();
 		playerBox.getChildren().addAll(playersLabel, player1);
-		lobbyPane.getChildren().addAll(playerBox);
+		lobbyPane.getChildren().addAll(playerBox, leaveGame);
 		
 		Scene lobbyScene = new Scene(lobbyPane, 400, 400);
 

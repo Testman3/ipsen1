@@ -1,13 +1,13 @@
 package client;
 
-public class ViewThread implements Runnable{
+public class ViewThread implements Runnable
+{
 
-	long tStart = System.currentTimeMillis();
 	boolean enableThread = true;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		new Thread((new ViewThread())).start();
-
 	}
 
 	public void run() {
@@ -16,22 +16,13 @@ public class ViewThread implements Runnable{
 		System.out.println("Thread Started");
 		
 		try {
-			while(enableThread == true){
-			Thread.sleep(500);
-			GameClient.updatePlayerList();
+			while(enableThread == true)
+				{
+				Thread.sleep(500);
+				GameClient.updatePlayerList();
+				}
+			} catch (InterruptedException e) {e.printStackTrace();}
 
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//while (true)
-		//{
-		//	System.out.println("Thread Running");
-		//	GameClient.updatePlayerList();
-		//	}
-		//GameClient.updatePlayerList();
-		//System.out.println("Playerlist updated, thread running");
 		}
 	public static void kill() 
 	{
@@ -39,4 +30,4 @@ public class ViewThread implements Runnable{
 		System.out.print("Thread killed");
 	}
 	
-	}
+}
