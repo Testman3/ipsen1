@@ -2,6 +2,9 @@ package server;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+/////////////////////////////////////
+//Geschreven door Henk van Overbeek//
+/////////////////////////////////////
 
 public interface Lobby extends Remote
 {

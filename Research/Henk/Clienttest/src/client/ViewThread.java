@@ -1,5 +1,9 @@
 package client;
 
+/////////////////////////////////////
+//Geschreven door Henk van Overbeek//
+/////////////////////////////////////
+
 public class ViewThread implements Runnable
 {
 

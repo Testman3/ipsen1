@@ -18,7 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import server.Lobby;
-
+/////////////////////////////////////
+//Geschreven door Henk van Overbeek//
+/////////////////////////////////////
 @SuppressWarnings("unused")
 
 public class GameClient extends Application{

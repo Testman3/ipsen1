@@ -6,6 +6,9 @@ import java.rmi.server.UnicastRemoteObject;
 
 import server.Lobby;
 import server.LobbyImpl;
+/////////////////////////////////////
+//Geschreven door Henk van Overbeek//
+/////////////////////////////////////
 
 public class GameServer {
 

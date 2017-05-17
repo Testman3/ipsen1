@@ -3,6 +3,9 @@ package server;
 import java.rmi.RemoteException;
 import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
+/////////////////////////////////////
+//Geschreven door Henk van Overbeek//
+/////////////////////////////////////
 
 @SuppressWarnings("unused")
 public class LobbyImpl implements Lobby{
