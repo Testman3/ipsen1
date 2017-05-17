@@ -27,13 +27,9 @@ import server.Lobby;
 
 public class GameClient extends Application{
 
-<<<<<<< HEAD
+
 	String connectAdress = "127.0.0.1";
 	String localAddress = "127.0.0.1";
-=======
-	String connectAdress = "149.210.245.145";
-	String localAddress = "149.210.245.145";
->>>>>>> origin/master
 	String remoteAddress = "149.210.245.145";
     static Lobby lobbyStub;
     String playerName ="Testspeler";
@@ -57,19 +53,13 @@ public class GameClient extends Application{
 		Scene mainScene = new Scene(mainPane, 400, 400);
 		Button addPlayer = new Button("Join Game");
 		Button leaveGame = new Button("Leave Game");
-<<<<<<< HEAD
 		Button localHost = new Button("Localhost");
 		Button remoteServer = new Button("Remote Server");
 		
 		FlowPane lobbyPane = new FlowPane();
 		
 		Label serverIP = new Label(connectAdress);
-		
-=======
 
-		FlowPane lobbyPane = new FlowPane();
-
->>>>>>> origin/master
 		Label playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("Arial", 20));
 
@@ -77,25 +67,15 @@ public class GameClient extends Application{
 		player1.setText("empty");
 		player1.setFont(new Font("Arial", 15));
 		player1.setAlignment(Pos.CENTER);
-<<<<<<< HEAD
-		
-				
-=======
 
->>>>>>> origin/master
 		HBox playerBox = new HBox();
 		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
 
 		Scene lobbyScene = new Scene(lobbyPane, 400, 400);
 
-<<<<<<< HEAD
-		
 		mainPane.getChildren().setAll(naamVeld, addPlayer, localHost, remoteServer, serverIP);
-=======
 
-		mainPane.getChildren().setAll(naamVeld, addPlayer);
->>>>>>> origin/master
 		naamVeld.setAlignment(Pos.TOP_CENTER);
 
 		mainStage.setScene(mainScene);
@@ -115,15 +95,12 @@ public class GameClient extends Application{
 				System.out.println("Joining the game as " + playerName);
 				System.out.println(lobbyStub.playerList());
 				updatePlayerList();
-<<<<<<< HEAD
 				
 				thread.start();
 				
 				//ViewThread.main(null);
-=======
 
 				ViewThread.main(null);
->>>>>>> origin/master
 				mainStage.setScene(lobbyScene);
 
 
@@ -162,7 +139,6 @@ public class GameClient extends Application{
 			connectAdress = localAddress;
 			serverIP.setText(connectAdress);
 		});
-<<<<<<< HEAD
 		
 		remoteServer.setOnAction(e -> 
 		{
@@ -170,13 +146,9 @@ public class GameClient extends Application{
 			serverIP.setText(connectAdress);
 		});
 		
-		
-=======
-
->>>>>>> origin/master
 	}
 
-
+//test
 
 	public static void updatePlayerList()
 	{
