@@ -27,8 +27,13 @@ import server.Lobby;
 
 public class GameClient extends Application{
 
+<<<<<<< HEAD
 	String connectAdress = "127.0.0.1";
 	String localAddress = "127.0.0.1";
+=======
+	String connectAdress = "149.210.245.145";
+	String localAddress = "149.210.245.145";
+>>>>>>> origin/master
 	String remoteAddress = "149.210.245.145";
     static Lobby lobbyStub;
     String playerName ="Testspeler";
@@ -37,21 +42,22 @@ public class GameClient extends Application{
 	ViewThread t = new ViewThread();
 	Thread thread = new Thread(t);
 
-	
-	public static void main(String[] args) 
+
+	public static void main(String[] args)
 	{
 		launch(args);
 	}
 
 	@Override
-	public void start(Stage mainStage) throws Exception 
+	public void start(Stage mainStage) throws Exception
 	{
 		FlowPane mainPane = new FlowPane();
 		TextField naamVeld = new TextField();
-		
+
 		Scene mainScene = new Scene(mainPane, 400, 400);
 		Button addPlayer = new Button("Join Game");
 		Button leaveGame = new Button("Leave Game");
+<<<<<<< HEAD
 		Button localHost = new Button("Localhost");
 		Button remoteServer = new Button("Remote Server");
 		
@@ -59,6 +65,11 @@ public class GameClient extends Application{
 		
 		Label serverIP = new Label(connectAdress);
 		
+=======
+
+		FlowPane lobbyPane = new FlowPane();
+
+>>>>>>> origin/master
 		Label playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("Arial", 20));
 
@@ -66,42 +77,56 @@ public class GameClient extends Application{
 		player1.setText("empty");
 		player1.setFont(new Font("Arial", 15));
 		player1.setAlignment(Pos.CENTER);
+<<<<<<< HEAD
 		
 				
+=======
+
+>>>>>>> origin/master
 		HBox playerBox = new HBox();
 		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
-		
+
 		Scene lobbyScene = new Scene(lobbyPane, 400, 400);
 
+<<<<<<< HEAD
 		
 		mainPane.getChildren().setAll(naamVeld, addPlayer, localHost, remoteServer, serverIP);
+=======
+
+		mainPane.getChildren().setAll(naamVeld, addPlayer);
+>>>>>>> origin/master
 		naamVeld.setAlignment(Pos.TOP_CENTER);
-		
+
 		mainStage.setScene(mainScene);
 		mainStage.setTitle("Carcassonne Client");
 		mainStage.show();
-	
-		addPlayer.setOnAction(e -> 
+
+		addPlayer.setOnAction(e ->
 		{
-			try {				
+			try {
 				System.out.println("Getting access to the registry");
-				Registry registry = LocateRegistry.getRegistry(connectAdress); // if server on another machine: provide that machine's IP address. Default port  1099	
+				Registry registry = LocateRegistry.getRegistry(connectAdress); // if server on another machine: provide that machine's IP address. Default port  1099
 				System.out.println("Getting the Lobby stub from registry");
 	            lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
-	           
+
 				playerName = naamVeld.getText();
 				lobbyStub.addPlayer(playerName);
 				System.out.println("Joining the game as " + playerName);
 				System.out.println(lobbyStub.playerList());
 				updatePlayerList();
+<<<<<<< HEAD
 				
 				thread.start();
 				
 				//ViewThread.main(null);
+=======
+
+				ViewThread.main(null);
+>>>>>>> origin/master
 				mainStage.setScene(lobbyScene);
 
-				
+
 				//Zorgt ervoor dat de speler word verwijderd uit de spelerslijst wanneer
 				//het speelvenster wordt gesloten
 				mainStage.setOnCloseRequest(e3 -> {
@@ -110,15 +135,15 @@ public class GameClient extends Application{
 					lobbyStub.removePlayer(playerName);
 					System.exit(0);
 				} catch (RemoteException e1) {e1.printStackTrace();}});
-				
-				
+
+
 			} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
-		
-		leaveGame.setOnAction(e -> 
+
+		leaveGame.setOnAction(e ->
 		{
 			mainStage.setScene(mainScene);		
 			
@@ -137,6 +162,7 @@ public class GameClient extends Application{
 			connectAdress = localAddress;
 			serverIP.setText(connectAdress);
 		});
+<<<<<<< HEAD
 		
 		remoteServer.setOnAction(e -> 
 		{
@@ -145,8 +171,11 @@ public class GameClient extends Application{
 		});
 		
 		
+=======
+
+>>>>>>> origin/master
 	}
-	
+
 
 
 	public static void updatePlayerList()
@@ -161,10 +190,10 @@ public class GameClient extends Application{
 				}
 			});
 			System.out.println(lobbyStub.playerList());
-			
-			
-			} catch (RemoteException e) {e.printStackTrace(); 
-			
+
+
+			} catch (RemoteException e) {e.printStackTrace();
+
 		}
 	}
 }
