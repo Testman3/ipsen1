@@ -21,6 +21,8 @@ import server.Lobby;
 /////////////////////////////////////
 //Geschreven door Henk van Overbeek//
 /////////////////////////////////////
+
+//TODO Verifiëren IP adres input//
 @SuppressWarnings("unused")
 
 public class GameClient extends Application{
