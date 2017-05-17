@@ -4,12 +4,17 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
@@ -22,13 +27,11 @@ import server.Lobby;
 //Geschreven door Henk van Overbeek//
 /////////////////////////////////////
 
-//TODO Verifiëren IP adres input//
 @SuppressWarnings("unused")
 
 public class GameClient extends Application{
 
 
-	String connectAdress = "127.0.0.1";
 	String localAddress = "127.0.0.1";
 	String remoteAddress = "149.210.245.145";
     static Lobby lobbyStub;
@@ -48,7 +51,8 @@ public class GameClient extends Application{
 	public void start(Stage mainStage) throws Exception
 	{
 		FlowPane mainPane = new FlowPane();
-		TextField naamVeld = new TextField();
+		TextField naamVeld = new TextField("Player1");
+		TextField ipVeld = new TextField(localAddress);
 
 		Scene mainScene = new Scene(mainPane, 400, 400);
 		Button addPlayer = new Button("Join Game");
@@ -57,8 +61,6 @@ public class GameClient extends Application{
 		Button remoteServer = new Button("Remote Server");
 		
 		FlowPane lobbyPane = new FlowPane();
-		
-		Label serverIP = new Label(connectAdress);
 
 		Label playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("Arial", 20));
@@ -74,9 +76,7 @@ public class GameClient extends Application{
 
 		Scene lobbyScene = new Scene(lobbyPane, 400, 400);
 
-		mainPane.getChildren().setAll(naamVeld, addPlayer, localHost, remoteServer, serverIP);
-
-		naamVeld.setAlignment(Pos.TOP_CENTER);
+		mainPane.getChildren().setAll(naamVeld, addPlayer, localHost, remoteServer, ipVeld);
 
 		mainStage.setScene(mainScene);
 		mainStage.setTitle("Carcassonne Client");
@@ -85,8 +85,18 @@ public class GameClient extends Application{
 		addPlayer.setOnAction(e ->
 		{
 			try {
+				
+				if (!validateIP(ipVeld.getText())) 
+				{
+					Alert alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
+					alert.showAndWait();
+				}
+				
+				else
+				{
+				
 				System.out.println("Getting access to the registry");
-				Registry registry = LocateRegistry.getRegistry(connectAdress); // if server on another machine: provide that machine's IP address. Default port  1099
+				Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if server on another machine: provide that machine's IP address. Default port  1099
 				System.out.println("Getting the Lobby stub from registry");
 	            lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
 
@@ -114,11 +124,12 @@ public class GameClient extends Application{
 				} catch (RemoteException e1) {e1.printStackTrace();}});
 
 
-			} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {
+			}} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
+		
 
 		leaveGame.setOnAction(e ->
 		{
@@ -134,22 +145,22 @@ public class GameClient extends Application{
 			System.exit(0);
 		});
 		
+		//
 		localHost.setOnAction(e -> 
 		{
-			connectAdress = localAddress;
-			serverIP.setText(connectAdress);
+			ipVeld.setText(localAddress);
 		});
 		
+		//
 		remoteServer.setOnAction(e -> 
 		{
-			connectAdress = remoteAddress;
-			serverIP.setText(connectAdress);
+			ipVeld.setText(remoteAddress);
 		});
 		
 	}
-
-//test
-
+	
+	//Deze methode wordt gebruikt om de playerlist voor de client te updaten
+	//Deze methode wordt elke halve seconde aangeroepen door ViewThread
 	public static void updatePlayerList()
 	{
 		try {
@@ -167,5 +178,19 @@ public class GameClient extends Application{
 			} catch (RemoteException e) {e.printStackTrace();
 
 		}
+	}
+	
+	public boolean validateIP(final String ip) 
+	{
+			Pattern pattern;
+			Matcher matcher;
+			String IPADDRESS_PATTERN
+					= "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+					+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+					+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+					+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+			pattern = Pattern.compile(IPADDRESS_PATTERN);
+			matcher = pattern.matcher(ip);
+			return matcher.matches();
 	}
 }
