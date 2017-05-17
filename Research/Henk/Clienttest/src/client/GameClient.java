@@ -23,32 +23,32 @@ import server.Lobby;
 
 public class GameClient extends Application{
 
-	String connectAdress = "127.0.0.1";
-	String localAddress = "127.0.0.1";
-	String remoteAddress = "149.201.245.145";
+	String connectAdress = "149.210.245.145";
+	String localAddress = "149.210.245.145";
+	String remoteAddress = "149.210.245.145";
     static Lobby lobbyStub;
     String playerName ="Testspeler";
     static Label player1;
     Thread viewUpdater;
 
-	
-	public static void main(String[] args) 
+
+	public static void main(String[] args)
 	{
 		launch(args);
 	}
 
 	@Override
-	public void start(Stage mainStage) throws Exception 
+	public void start(Stage mainStage) throws Exception
 	{
 		FlowPane mainPane = new FlowPane();
 		TextField naamVeld = new TextField();
-		
+
 		Scene mainScene = new Scene(mainPane, 400, 400);
 		Button addPlayer = new Button("Join Game");
 		Button leaveGame = new Button("Leave Game");
-		
+
 		FlowPane lobbyPane = new FlowPane();
-		
+
 		Label playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("Arial", 20));
 
@@ -56,39 +56,39 @@ public class GameClient extends Application{
 		player1.setText("empty");
 		player1.setFont(new Font("Arial", 15));
 		player1.setAlignment(Pos.CENTER);
-				
+
 		HBox playerBox = new HBox();
 		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
-		
+
 		Scene lobbyScene = new Scene(lobbyPane, 400, 400);
 
-		
+
 		mainPane.getChildren().setAll(naamVeld, addPlayer);
 		naamVeld.setAlignment(Pos.TOP_CENTER);
-		
+
 		mainStage.setScene(mainScene);
 		mainStage.setTitle("Carcassonne Client");
 		mainStage.show();
-	
-		addPlayer.setOnAction(e -> 
+
+		addPlayer.setOnAction(e ->
 		{
-			try {				
+			try {
 				System.out.println("Getting access to the registry");
-				Registry registry = LocateRegistry.getRegistry(connectAdress); // if server on another machine: provide that machine's IP address. Default port  1099	
+				Registry registry = LocateRegistry.getRegistry(connectAdress); // if server on another machine: provide that machine's IP address. Default port  1099
 				System.out.println("Getting the Lobby stub from registry");
 	            lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
-	           
+
 				playerName = naamVeld.getText();
 				lobbyStub.addPlayer(playerName);
 				System.out.println("Joining the game as " + playerName);
 				System.out.println(lobbyStub.playerList());
 				updatePlayerList();
-				
+
 				ViewThread.main(null);
 				mainStage.setScene(lobbyScene);
 
-				
+
 				//Zorgt ervoor dat de speler word verwijderd uit de spelerslijst wanneer
 				//het speelvenster wordt gesloten
 				mainStage.setOnCloseRequest(e3 -> {
@@ -97,21 +97,21 @@ public class GameClient extends Application{
 					lobbyStub.removePlayer(playerName);
 					System.exit(0);
 				} catch (RemoteException e1) {e1.printStackTrace();}});
-				
-				
+
+
 			} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
-		
-		leaveGame.setOnAction(e -> 
+
+		leaveGame.setOnAction(e ->
 		{
 			mainStage.setScene(mainScene);
 		});
-		
+
 	}
-	
+
 
 
 	public static void updatePlayerList()
@@ -126,10 +126,10 @@ public class GameClient extends Application{
 				}
 			});
 			System.out.println(lobbyStub.playerList());
-			
-			
-			} catch (RemoteException e) {e.printStackTrace(); 
-			
+
+
+			} catch (RemoteException e) {e.printStackTrace();
+
 		}
 	}
 }
