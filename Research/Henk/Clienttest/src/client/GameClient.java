@@ -42,14 +42,12 @@ public class GameClient extends Application{
 	Thread thread = new Thread(t);
 
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args){
 		launch(args);
 	}
 
 	@Override
-	public void start(Stage mainStage) throws Exception
-	{
+	public void start(Stage mainStage) throws Exception {
 		FlowPane mainPane = new FlowPane();
 		TextField naamVeld = new TextField("Player1");
 		TextField ipVeld = new TextField(localAddress);
@@ -82,18 +80,14 @@ public class GameClient extends Application{
 		mainStage.setTitle("Carcassonne Client");
 		mainStage.show();
 
-		addPlayer.setOnAction(e ->
-		{
+		addPlayer.setOnAction(e -> {
 			try {
-				
-				if (!validateIP(ipVeld.getText())) 
-				{
+				if (!validateIP(ipVeld.getText())) {
 					Alert alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
 					alert.showAndWait();
 				}
 				
-				else
-				{
+				else{
 				
 				System.out.println("Getting access to the registry");
 				Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if server on another machine: provide that machine's IP address. Default port  1099
@@ -101,6 +95,12 @@ public class GameClient extends Application{
 	            lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
 
 				playerName = naamVeld.getText();
+				if (playerName == ""){
+					
+				}
+				
+				else {
+				
 				lobbyStub.addPlayer(playerName);
 				System.out.println("Joining the game as " + playerName);
 				System.out.println(lobbyStub.playerList());
@@ -112,7 +112,7 @@ public class GameClient extends Application{
 
 				ViewThread.main(null);
 				mainStage.setScene(lobbyScene);
-
+				
 
 				//Zorgt ervoor dat de speler word verwijderd uit de spelerslijst wanneer
 				//het speelvenster wordt gesloten
@@ -121,18 +121,19 @@ public class GameClient extends Application{
 					ViewThread.kill();
 					lobbyStub.removePlayer(playerName);
 					System.exit(0);
-				} catch (RemoteException e1) {e1.printStackTrace();}});
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+					}});
 
 
-			}} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {
+			}}} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
 		
 
-		leaveGame.setOnAction(e ->
-		{
+		leaveGame.setOnAction(e ->{
 			mainStage.setScene(mainScene);		
 			
 			try {
@@ -146,14 +147,12 @@ public class GameClient extends Application{
 		});
 		
 		//
-		localHost.setOnAction(e -> 
-		{
+		localHost.setOnAction(e -> {
 			ipVeld.setText(localAddress);
 		});
 		
 		//
-		remoteServer.setOnAction(e -> 
-		{
+		remoteServer.setOnAction(e -> {
 			ipVeld.setText(remoteAddress);
 		});
 		
@@ -161,8 +160,7 @@ public class GameClient extends Application{
 	
 	//Deze methode wordt gebruikt om de playerlist voor de client te updaten
 	//Deze methode wordt elke halve seconde aangeroepen door ViewThread
-	public static void updatePlayerList()
-	{
+	public static void updatePlayerList(){
 		try {
 			Platform.runLater(() -> {
 				try {
@@ -180,8 +178,7 @@ public class GameClient extends Application{
 		}
 	}
 	
-	public boolean validateIP(final String ip) 
-	{
+	public boolean validateIP(final String ip) {
 			Pattern pattern;
 			Matcher matcher;
 			String IPADDRESS_PATTERN
