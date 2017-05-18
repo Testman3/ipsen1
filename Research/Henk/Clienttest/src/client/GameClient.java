@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -31,13 +32,14 @@ import server.Lobby;
 
 public class GameClient extends Application{
 
-
+	int maxTextFieldWidth = 200;
+	int maxButtonWidth = 200;
 	String localAddress = "127.0.0.1";
 	String remoteAddress = "149.210.245.145";
-    static Lobby lobbyStub;
-    String playerName ="Testspeler";
-    static Label player1;
-    Thread viewUpdater;
+	static Lobby lobbyStub;
+	String playerName ="Testspeler";
+	static Label player1;
+	Thread viewUpdater;
 	ViewThread t = new ViewThread();
 	Thread thread = new Thread(t);
 
@@ -48,15 +50,27 @@ public class GameClient extends Application{
 
 	@Override
 	public void start(Stage mainStage) throws Exception {
-		FlowPane mainPane = new FlowPane();
+		BorderPane mainPane = new BorderPane();
 		TextField naamVeld = new TextField("Player1");
+			naamVeld.setMaxWidth(maxTextFieldWidth);
 		TextField ipVeld = new TextField(localAddress);
+			ipVeld.setMaxWidth(maxTextFieldWidth);
+		VBox joinViewButtons = new VBox(10);
+		HBox playerBox = new HBox();
 
 		Scene mainScene = new Scene(mainPane, 400, 400);
+		
+		//Define required buttons
 		Button addPlayer = new Button("Join Game");
+			addPlayer.setMaxWidth(maxButtonWidth);
 		Button leaveGame = new Button("Leave Game");
+			leaveGame.setMaxWidth(maxButtonWidth);
 		Button localHost = new Button("Localhost");
+			localHost.setMaxWidth(maxButtonWidth);
 		Button remoteServer = new Button("Remote Server");
+			remoteServer.setMaxWidth(maxButtonWidth);
+		Button backToHome = new Button("Terug naar Hoofdmenu");
+			backToHome.setMaxWidth(maxButtonWidth);
 		
 		FlowPane lobbyPane = new FlowPane();
 
@@ -68,13 +82,16 @@ public class GameClient extends Application{
 		player1.setFont(new Font("Arial", 15));
 		player1.setAlignment(Pos.CENTER);
 
-		HBox playerBox = new HBox();
 		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
+		
+		joinViewButtons.getChildren().addAll(naamVeld, ipVeld, addPlayer, localHost, remoteServer, backToHome);
+		joinViewButtons.setAlignment(Pos.CENTER);
 
 		Scene lobbyScene = new Scene(lobbyPane, 400, 400);
 
-		mainPane.getChildren().setAll(naamVeld, addPlayer, localHost, remoteServer, ipVeld);
+		//mainPane.getChildren().setAll(lobbyButtons);
+		mainPane.setTop(joinViewButtons);
 
 		mainStage.setScene(mainScene);
 		mainStage.setTitle("Carcassonne Client");
@@ -92,7 +109,7 @@ public class GameClient extends Application{
 				System.out.println("Getting access to the registry");
 				Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if server on another machine: provide that machine's IP address. Default port  1099
 				System.out.println("Getting the Lobby stub from registry");
-	            lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
+				lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
 
 				playerName = naamVeld.getText();
 				if (playerName == ""){

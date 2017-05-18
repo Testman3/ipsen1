@@ -9,8 +9,7 @@ public class ViewThread implements Runnable
 
 	static boolean enableThread = true;
 
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		new Thread((new ViewThread())).start();
 	}
 
@@ -20,16 +19,15 @@ public class ViewThread implements Runnable
 		System.out.println("Thread Started");
 		
 		try {
-			while(enableThread == true)
-				{
+			while(enableThread == true){
 				Thread.sleep(500);
 				GameClient.updatePlayerList();
 				}
-			} catch (InterruptedException e) {e.printStackTrace();}
+			} catch (InterruptedException e) {
+				e.printStackTrace();}
 
 		}
-	public static void kill() 
-	{
+	public static void kill() {
 		enableThread = false;
 		Thread.interrupted();
 		System.out.print("Thread killed");

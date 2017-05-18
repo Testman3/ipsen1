@@ -17,8 +17,7 @@ public class LobbyImpl implements Lobby{
 	public String playerList() throws RemoteException {
 		String spelerLijst ="";
 		
-		for (int i = 0; i < playerArr.size(); i++)
-		{
+		for (int i = 0; i < playerArr.size(); i++) {
 			spelerLijst = spelerLijst + playerArr.get(i) + " ";
 		}
 		
@@ -26,15 +25,13 @@ public class LobbyImpl implements Lobby{
 	}
 
 	@Override
-	public void addPlayer(String playerNaam) throws RemoteException 
-	{
+	public void addPlayer(String playerNaam) throws RemoteException {
 		playerArr.add(playerNaam);
 		System.out.println(playerNaam + " has entered the game");
 	}
 
 	@Override
-	public void removePlayer(String playerNaam) throws RemoteException 
-	{
+	public void removePlayer(String playerNaam) throws RemoteException {
 		playerArr.remove(playerNaam);
 		System.out.println(playerNaam + " has left the game");
 		//GameClient.updatePlayerList();
