@@ -3,9 +3,11 @@ Ipsen 1 periode 4
 
 # Script regels
 Accolades op dezelfde regel ie:
+```
 If (uml == “shit”) {
 //code
 }
+```
 
 Voor indentation gebruiken we tabs.
 
