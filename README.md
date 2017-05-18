@@ -16,6 +16,7 @@ Boven een if statement een lege regel houden
 Bij elke functie die je maakt moet er een uitleg zijn wat de functie doet
 Je geeft aan wat er in moet en wat er uitgaat. (je kan gemakkelijk een template hiervoor invoegen met alt+shift+j)
 
+```
 /**
 * Uitleg script: geef naam en achternaam terug
 * blabadv uitleg
@@ -28,6 +29,7 @@ Je geeft aan wat er in moet en wat er uitgaat. (je kan gemakkelijk een template 
 public String getName(String achternaam) {
       return name + achternaam;
 }
+```
 
 # Design regels
 Voor de interface gebruiken we het font Enchanted Land.
