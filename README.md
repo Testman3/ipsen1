@@ -1,9 +1,7 @@
 # ipsen1
 Ipsen 1 periode 4
 
-# Test mail
-
-Script regels
+# Script regels
 Accolades op dezelfde regel ie:
 If (uml == “shit”) {
 //code
