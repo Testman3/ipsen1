@@ -15,7 +15,6 @@
 <fullyQualifiedTypeName name="javafx.geometry.Pos"/>
 <fullyQualifiedTypeName name="javafx.scene.layout.FlowPane"/>
 <fullyQualifiedTypeName name="java.sql.ClientInfoStatus"/>
-<fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
 <fullyQualifiedTypeName name="client.Lobby"/>
 <fullyQualifiedTypeName name="server.Lobby"/>
 <fullyQualifiedTypeName name="java.util.Timer"/>
@@ -32,4 +31,6 @@
 <fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
 <fullyQualifiedTypeName name="javafx.scene.control.Alert.AlertType"/>
 <fullyQualifiedTypeName name="javafx.scene.control.ButtonType"/>
+<fullyQualifiedTypeName name="javafx.scene.layout.BorderPane"/>
+<fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 </qualifiedTypeNameHistroy>

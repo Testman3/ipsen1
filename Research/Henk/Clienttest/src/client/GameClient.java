@@ -78,9 +78,9 @@ public class GameClient extends Application{
 		playersLabel.setFont(new Font("Arial", 20));
 
 		player1 = new Label();
-		player1.setText("empty");
-		player1.setFont(new Font("Arial", 15));
-		player1.setAlignment(Pos.CENTER);
+			player1.setText("empty");
+			player1.setFont(new Font("Arial", 15));
+			player1.setAlignment(Pos.CENTER);
 
 		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
@@ -99,40 +99,38 @@ public class GameClient extends Application{
 
 		addPlayer.setOnAction(e -> {
 			try {
+				
 				if (!validateIP(ipVeld.getText())) {
 					Alert alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
 					alert.showAndWait();
-				}
-				
-				else{
-				
-				System.out.println("Getting access to the registry");
-				Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if server on another machine: provide that machine's IP address. Default port  1099
-				System.out.println("Getting the Lobby stub from registry");
-				lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
-
-				playerName = naamVeld.getText();
-				if (playerName == ""){
+				} else {
+					System.out.println("Getting access to the registry");
+					Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if server on another machine: provide that machine's IP address. Default port  1099
+					System.out.println("Getting the Lobby stub from registry");
+					lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
+						
+					playerName = naamVeld.getText();
 					
-				}
-				
-				else {
-				
-				lobbyStub.addPlayer(playerName);
-				System.out.println("Joining the game as " + playerName);
-				System.out.println(lobbyStub.playerList());
-				updatePlayerList();
-				
-				thread.start();
-				
+				if (lobbyStub.playerList().contains(playerName)){
+					Alert alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
+					alert.showAndWait();
+					playerName = "";
+					lobbyStub = null;
+					registry = null;
+				} else {
+					lobbyStub.addPlayer(playerName);
+					System.out.println("Joining the game as " + playerName);
+					System.out.println(lobbyStub.playerList());
+					updatePlayerList();
+					thread.start();				
 				//ViewThread.main(null);
-
-				ViewThread.main(null);
 				mainStage.setScene(lobbyScene);
-				
+				}
+		}
 
 				//Zorgt ervoor dat de speler word verwijderd uit de spelerslijst wanneer
-				//het speelvenster wordt gesloten
+				//het speelvenster wordt gesloten, en dat de NullPointerException
+				//Wordt afgehandeld als de speler geen verbinding heeft
 				mainStage.setOnCloseRequest(e3 -> {
 				try {
 					ViewThread.kill();
@@ -140,10 +138,12 @@ public class GameClient extends Application{
 					System.exit(0);
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
+					} catch (NullPointerException e1) {
+					System.out.println("\nPlayer heeft geen verbinding en probeert zich te verwijderen");
 					}});
 
 
-			}}} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {
+			} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -178,21 +178,15 @@ public class GameClient extends Application{
 	//Deze methode wordt gebruikt om de playerlist voor de client te updaten
 	//Deze methode wordt elke halve seconde aangeroepen door ViewThread
 	public static void updatePlayerList(){
-		try {
-			Platform.runLater(() -> {
-				try {
-					player1.setText(lobbyStub.playerList());
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			});
-			System.out.println(lobbyStub.playerList());
-
-
-			} catch (RemoteException e) {e.printStackTrace();
-
-		}
+		Platform.runLater(() -> {
+			try {
+				player1.setText(lobbyStub.playerList());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		//System.out.println(lobbyStub.playerList());
 	}
 	
 	public boolean validateIP(final String ip) {
