@@ -7,6 +7,8 @@ import java.rmi.registry.Registry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.xml.bind.helpers.ValidationEventImpl;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -57,7 +59,6 @@ public class GameClient extends Application{
 			ipVeld.setMaxWidth(maxTextFieldWidth);
 		VBox joinViewButtons = new VBox(10);
 		HBox playerBox = new HBox();
-
 		Scene mainScene = new Scene(mainPane, 400, 400);
 		
 		//Define required buttons
@@ -99,7 +100,6 @@ public class GameClient extends Application{
 
 		addPlayer.setOnAction(e -> {
 			try {
-				
 				if (!validateIP(ipVeld.getText())) {
 					Alert alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
 					alert.showAndWait();
@@ -188,7 +188,13 @@ public class GameClient extends Application{
 		});
 		//System.out.println(lobbyStub.playerList());
 	}
-	
+
+
+	/**
+	 * Blabla
+	 * @param ip
+	 * @return
+	 */
 	public boolean validateIP(final String ip) {
 			Pattern pattern;
 			Matcher matcher;
