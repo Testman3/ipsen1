@@ -25,18 +25,18 @@ public class GameServer {
 
 			// if you'd like to run rmiregistry from the commend line
 			//	run it from the project's bin directory, so rmiregistry can find the necessary classes
-			
+
 		} catch (Exception e) {
 			System.out.println("EXCEPTION: " + e);
 		}
 	}
-	
+
 	private void runServer(){
-		
+
 	}
-	
-	
-	
+
+
+
 	public static void main(String[] args) {
 		new GameServer().runServer();
 

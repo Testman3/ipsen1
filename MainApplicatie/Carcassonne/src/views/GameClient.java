@@ -60,7 +60,7 @@ public class GameClient extends Application{
 		VBox joinViewButtons = new VBox(10);
 		HBox playerBox = new HBox();
 		Scene mainScene = new Scene(mainPane, 400, 400);
-		
+
 		//Define required buttons
 		Button addPlayer = new Button("Join Game");
 			addPlayer.setMaxWidth(maxButtonWidth);
@@ -72,7 +72,7 @@ public class GameClient extends Application{
 			remoteServer.setMaxWidth(maxButtonWidth);
 		Button backToHome = new Button("Terug naar Hoofdmenu");
 			backToHome.setMaxWidth(maxButtonWidth);
-		
+
 		FlowPane lobbyPane = new FlowPane();
 
 		Label playersLabel = new Label("Players in this game: ");
@@ -85,7 +85,7 @@ public class GameClient extends Application{
 
 		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
-		
+
 		joinViewButtons.getChildren().addAll(naamVeld, ipVeld, addPlayer, localHost, remoteServer, backToHome);
 		joinViewButtons.setAlignment(Pos.CENTER);
 
@@ -108,9 +108,9 @@ public class GameClient extends Application{
 					Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if server on another machine: provide that machine's IP address. Default port  1099
 					System.out.println("Getting the Lobby stub from registry");
 					lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
-						
+
 					playerName = naamVeld.getText();
-					
+
 				if (lobbyStub.playerList().contains(playerName)){
 					Alert alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
 					alert.showAndWait();
@@ -122,7 +122,7 @@ public class GameClient extends Application{
 					System.out.println("Joining the game as " + playerName);
 					System.out.println(lobbyStub.playerList());
 					updatePlayerList();
-					thread.start();				
+					thread.start();
 				//ViewThread.main(null);
 				mainStage.setScene(lobbyScene);
 				}
@@ -148,11 +148,11 @@ public class GameClient extends Application{
 				e1.printStackTrace();
 			}
 		});
-		
+
 
 		leaveGame.setOnAction(e ->{
-			mainStage.setScene(mainScene);		
-			
+			mainStage.setScene(mainScene);
+
 			try {
 				lobbyStub.removePlayer(playerName);
 			} catch (RemoteException e1) {
@@ -162,19 +162,19 @@ public class GameClient extends Application{
 			//System.exit killt alle gerelateerde processen, hierdoor sluit het programma volledig
 			System.exit(0);
 		});
-		
+
 		//
 		localHost.setOnAction(e -> {
 			ipVeld.setText(localAddress);
 		});
-		
+
 		//
 		remoteServer.setOnAction(e -> {
 			ipVeld.setText(remoteAddress);
 		});
-		
+
 	}
-	
+
 	//Deze methode wordt gebruikt om de playerlist voor de client te updaten
 	//Deze methode wordt elke halve seconde aangeroepen door ViewThread
 	public static void updatePlayerList(){
