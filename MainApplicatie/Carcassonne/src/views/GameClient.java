@@ -108,7 +108,6 @@ public class GameClient extends Application{
 					Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if server on another machine: provide that machine's IP address. Default port  1099
 					System.out.println("Getting the Lobby stub from registry");
 					lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote Calculator object from registry
-
 					playerName = naamVeld.getText();
 
 				// Als de gekozen naam reeds bestaat wordt er een error weergegeven en wordt de connectie
@@ -124,12 +123,14 @@ public class GameClient extends Application{
 					System.out.println(lobbyStub.playerList());
 					updatePlayerList();
 					
+					//Als de thread loop gedisabled is enablen we hem weer i.p.v. het Thread te starten
 					if (ViewThread.enableThread == false){
 						ViewThread.enableThread = true;
 					}
 					else{
 					thread.start();
 					}
+					
 				//ViewThread.main(null);
 				mainStage.setScene(lobbyScene);
 				}
@@ -150,9 +151,7 @@ public class GameClient extends Application{
 					}});
 
 
-			} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} catch (RemoteException e1) {e1.printStackTrace();} catch (NotBoundException e1) {e1.printStackTrace();
 			}
 		});
 
@@ -169,12 +168,12 @@ public class GameClient extends Application{
 			ViewThread.enableThread = false;
 		});
 
-		//
+		//Stelt de actie in voor de Localhost knop
 		localHost.setOnAction(e -> {
 			ipVeld.setText(localAddress);
 		});
 
-		//
+		//Stelt de actie in voor de Remote server knop
 		remoteServer.setOnAction(e -> {
 			ipVeld.setText(remoteAddress);
 		});
