@@ -41,7 +41,6 @@ public class GameClient extends Application{
 	static Lobby lobbyStub;
 	String playerName ="Testspeler";
 	static Label player1;
-	Thread viewUpdater;
 	ViewThread t = new ViewThread();
 	Thread thread = new Thread(t);
 
@@ -112,6 +111,7 @@ public class GameClient extends Application{
 
 					playerName = naamVeld.getText();
 
+				// Als de gekozen naam reeds bestaat wordt er een error weergegeven en wordt de connectie
 				if (lobbyStub.playerList().contains(playerName)){
 					Alert alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
 					alert.showAndWait();
@@ -123,7 +123,13 @@ public class GameClient extends Application{
 					System.out.println("Joining the game as " + playerName);
 					System.out.println(lobbyStub.playerList());
 					updatePlayerList();
+					
+					if (ViewThread.enableThread == false){
+						ViewThread.enableThread = true;
+					}
+					else{
 					thread.start();
+					}
 				//ViewThread.main(null);
 				mainStage.setScene(lobbyScene);
 				}
@@ -150,7 +156,7 @@ public class GameClient extends Application{
 			}
 		});
 
-
+		//Definieert wat er gebeurt wanneer er op de Leave Game knop wordt gedrukt in de lobby
 		leaveGame.setOnAction(e ->{
 			mainStage.setScene(mainScene);
 
@@ -160,8 +166,7 @@ public class GameClient extends Application{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			//System.exit killt alle gerelateerde processen, hierdoor sluit het programma volledig
-			System.exit(0);
+			ViewThread.enableThread = false;
 		});
 
 		//
@@ -190,11 +195,10 @@ public class GameClient extends Application{
 		//System.out.println(lobbyStub.playerList());
 	}
 
-
 	/**
-	 * Blabla
-	 * @param ip
-	 * @return
+	 * Controleert of de gegeven String een geldig ip adres is
+	 * @param ip:String
+	 * @return true or false
 	 */
 	public boolean validateIP(final String ip) {
 			Pattern pattern;
