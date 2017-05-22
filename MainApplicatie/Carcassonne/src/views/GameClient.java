@@ -29,8 +29,6 @@ import main.Lobby;
 /////////////////////////////////////
 //Geschreven door Henk van Overbeek//
 /////////////////////////////////////
-// 22 mei 2017
-// 22-05-2017
 
 @SuppressWarnings("unused")
 
@@ -100,6 +98,7 @@ public class GameClient extends Application{
 		mainStage.setTitle("Carcassonne Client");
 		mainStage.show();
 
+		//Definieert wat er gebeurd als er op de knop addPlayer wordt gedrukt.
 		addPlayer.setOnAction(e -> {
 			try {
 				if (!validateIP(ipVeld.getText())) {
