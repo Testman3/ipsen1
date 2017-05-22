@@ -1,6 +1,30 @@
 # ipsen1
 Ipsen 1 periode 4
 
+# Commit regels
+Voor het programmeren:
+1: 
+```
+git pull
+```
+2: 
+```
+edits maken in script
+```
+3:
+```
+git status
+```
+4: 
+```
+git commit -am "message goeie" optioneelFiles.java (optioneelFiles.java verwijderen als je alles wil commiten in repo)
+```
+5:
+```
+git push
+```
+
+
 # Script regels
 Accolades op dezelfde regel ie:
 ```
