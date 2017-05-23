@@ -74,11 +74,11 @@ public class GameClient extends Application{
 		FlowPane lobbyPane = new FlowPane();
 
 		Label playersLabel = new Label("Players in this game: ");
-		playersLabel.setFont(new Font("Arial", 20));
+		playersLabel.setFont(new Font("CALIBRI", 20));
 
 		player1 = new Label();
 			player1.setText("empty");
-			player1.setFont(new Font("Arial", 15));
+			player1.setFont(new Font("CALIBRI", 15));
 			player1.setAlignment(Pos.CENTER);
 
 		playerBox.getChildren().addAll(playersLabel, player1);
