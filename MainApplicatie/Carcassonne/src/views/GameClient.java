@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 /////////////////////////////////////
 //Geschreven door Henk van Overbeek//
 /////////////////////////////////////
+import models.LobbyInterface;
 
 public class GameClient extends Application {
 
@@ -35,7 +36,7 @@ public class GameClient extends Application {
 	int maxButtonWidth = 200;
 	String localAddress = "127.0.0.1";
 	String remoteAddress = "149.210.245.145";
-	static Lobby lobbyStub;
+	static LobbyInterface lobbyStub;
 	String playerName = "Testspeler";
 	static Label player1;
 	ViewThread t = new ViewThread();
@@ -104,7 +105,7 @@ public class GameClient extends Application {
 					Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if server
 					//on another machine: provide that machine's IP address. Default port 1099
 					System.out.println("Getting the Lobby stub from registry");
-					lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote lobby from registry
+					lobbyStub = (LobbyInterface) registry.lookup("Lobby"); // get remote lobby from registry
 
 					playerName = naamVeld.getText();
 

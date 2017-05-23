@@ -21,6 +21,7 @@ public class LobbyScene extends Scene{
 	private MenuView view = new MenuView();
 	private MenuController controller = new MenuController();
 	
+	
 	public LobbyScene(MenuView menu){
 		super(new FlowPane(), 400, 400);
 		view = menu;
@@ -28,6 +29,8 @@ public class LobbyScene extends Scene{
 		init(lobbyPane);
 		
 	}
+	
+	
 	
 	private void init(FlowPane pane){
 		
@@ -48,6 +51,10 @@ public class LobbyScene extends Scene{
 		leaveGame.setOnAction(e -> view.getStage().setScene(controller.setPreLobbyGame(view)));
 		
 		
+	}
+	
+	public void setPlayerList(String spelers){
+		player1.setText(spelers);
 	}
 
 }

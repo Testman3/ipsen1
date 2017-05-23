@@ -4,18 +4,15 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import models.LobbyInterface;
 import models.LobbyImpl;
-/////////////////////////////////////
-//Geschreven door Henk van Overbeek//
-/////////////////////////////////////
-import views.Lobby;
 
 public class GameServer {
 
 	public GameServer(){
 		try {
 			LobbyImpl lobbyImpl = new LobbyImpl(); // create calculator and treat as Calculator
-			Lobby lobbySkeleton = 	(Lobby) UnicastRemoteObject.exportObject(lobbyImpl, 0); // cast to remote object
+			LobbyInterface lobbySkeleton = 	(LobbyInterface) UnicastRemoteObject.exportObject(lobbyImpl, 0); // cast to remote object
 			System.out.println("Lobby skeleton created");
 			Registry registry = LocateRegistry.createRegistry(1099); // default port 1099 // run RMI registry on local host
 			System.out.println("RMI Registry starter");

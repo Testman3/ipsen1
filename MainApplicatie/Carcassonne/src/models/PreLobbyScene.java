@@ -11,7 +11,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import views.Lobby;
 import views.MenuView;
 import views.ViewThread;
 
@@ -19,13 +18,9 @@ public class PreLobbyScene extends Scene {
 
 	int maxTextFieldWidth = 200;
 	int maxButtonWidth = 200;
-	String localAddress = "127.0.0.1";
-	String remoteAddress = "149.210.245.145";
-	static Lobby lobbyStub;
+	static LobbyInterface lobbyStub;
 	String playerName = "Testspeler";
-	static Label player1;
-	ViewThread t = new ViewThread();
-	Thread thread = new Thread(t);
+	
 
 	BorderPane mainPane;
 	private MenuView view = new MenuView();
@@ -43,7 +38,7 @@ public class PreLobbyScene extends Scene {
 
 		TextField naamVeld = new TextField("Player1");
 		naamVeld.setMaxWidth(maxTextFieldWidth);
-		TextField ipVeld = new TextField(localAddress);
+		TextField ipVeld = new TextField("127.0.0.1");
 		ipVeld.setMaxWidth(maxTextFieldWidth);
 
 		VBox joinViewButtons = new VBox(10);
@@ -66,22 +61,28 @@ public class PreLobbyScene extends Scene {
 		Label playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("CALIBRI", 20));
 
-		player1 = new Label();
-		player1.setText("empty");
-		player1.setFont(new Font("CALIBRI", 15));
-		player1.setAlignment(Pos.CENTER);
-
-		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
 
 		joinViewButtons.getChildren().addAll(naamVeld, ipVeld, addPlayer, localHost, remoteServer, backToHome);
 		joinViewButtons.setAlignment(Pos.CENTER);
 
 		backToHome.setOnAction(e -> view.getStage().setScene(view.getScene()));
-		addPlayer.setOnAction(e -> view.getStage().setScene(controller.setLobbyScene(view)));
+		addPlayer.setOnAction(e -> {
+			controller.connectToServer(ipVeld.getText(), naamVeld.getText());
+			
+			if (controller.canConnect()){
+				view.getStage().setScene(controller.setLobbyScene(view));
+				controller.addPlayer(naamVeld.getText());
+			}
+		});
+			
+		
+		
 
 		// mainPane.getChildren().setAll(lobbyButtons);
 		pane.setTop(joinViewButtons);
 
 	}
+	
+
 }
