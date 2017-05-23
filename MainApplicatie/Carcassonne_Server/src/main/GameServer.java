@@ -4,11 +4,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import main.Lobby;
-import main.LobbyImpl;
+import models.LobbyImpl;
 /////////////////////////////////////
 //Geschreven door Henk van Overbeek//
 /////////////////////////////////////
+import views.Lobby;
 
 public class GameServer {
 
