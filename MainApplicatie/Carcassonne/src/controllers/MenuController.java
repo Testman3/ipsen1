@@ -16,7 +16,6 @@ import models.LobbyInterface;
 import models.LobbyScene;
 import models.PreLobbyScene;
 import views.MenuView;
-import views.ViewThread;
 
 public class MenuController {
 
