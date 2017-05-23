@@ -2,24 +2,21 @@ package controllers;
 
 import javafx.scene.Scene;
 import models.LobbyScene;
-import models.StartenGame;
 import views.MenuView;
 
-
-
 public class MenuController {
-	
-	private StartenGame test;
+
 	private LobbyScene lobby;
-	
-	public Scene setNewGame(MenuView view){
-		test = new StartenGame(view);
-		return test;
-	}
-	
-	public Scene setLobbyScene(){
-		lobby = new LobbyScene();
+	private MenuView menu;
+
+	public Scene setLobbyScene(MenuView view) {
+		lobby = new LobbyScene(view);
 		return lobby;
 	}
-	
+
+	public Scene setMenuScene() {
+		menu = new MenuView();
+		return menu.getScene();
+	}
+
 }
