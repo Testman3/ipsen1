@@ -29,8 +29,6 @@ import javafx.stage.Stage;
 //Geschreven door Henk van Overbeek//
 /////////////////////////////////////
 
-@SuppressWarnings("unused")
-
 public class GameClient extends Application {
 
 	int maxTextFieldWidth = 200;
@@ -103,25 +101,11 @@ public class GameClient extends Application {
 					alert.showAndWait();
 				} else {
 					System.out.println("Getting access to the registry");
-					Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if
-																						// server
-																						// on
-																						// another
-																						// machine:
-																						// provide
-																						// that
-																						// machine's
-																						// IP
-																						// address.
-																						// Default
-																						// port
-																						// 1099
+					Registry registry = LocateRegistry.getRegistry(ipVeld.getText()); // if server
+					//on another machine: provide that machine's IP address. Default port 1099
 					System.out.println("Getting the Lobby stub from registry");
-					lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote
-																	// Calculator
-																	// object
-																	// from
-																	// registry
+					lobbyStub = (Lobby) registry.lookup("Lobby"); // get remote lobby from registry
+
 					playerName = naamVeld.getText();
 
 					// Als de gekozen naam reeds bestaat wordt er een error

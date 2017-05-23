@@ -47,7 +47,7 @@ public class MenuView extends Application {
 		primaryStage.show();
 
 		knoppen[0].setText("Nieuw spel");
-		knoppen[0].setOnAction(e -> primaryStage.setScene(controller.setLobbyScene(this)));
+		knoppen[0].setOnAction(e -> primaryStage.setScene(controller.setPreLobbyGame(this)));
 
 		// Maakt een variabele aan die naar het handleiding document verwijst,
 		// wanneer je op de handleiding knop drukt wordt het html doc geopend
@@ -62,6 +62,9 @@ public class MenuView extends Application {
 				System.out.println(e1);
 			}
 		});
+		
+		knoppen[5].setText("Spel afsluiten");
+		knoppen[5].setOnAction(e -> System.exit(0));
 
 	}
 
