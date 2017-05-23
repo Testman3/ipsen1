@@ -31,14 +31,14 @@ public class LobbyImpl implements LobbyInterface{
 	@Override
 	public void addPlayer(String playerNaam) throws RemoteException {
 		playerArr.add(playerNaam);
-		MenuController.updatePlayerList();
+		//controller.updatePlayerList();
 		System.out.println(playerNaam + " has entered the game");
 	}
 
 	@Override
 	public void removePlayer(String playerNaam) throws RemoteException {
 		playerArr.remove(playerNaam);
-		MenuController.updatePlayerList();
+		//controller.updatePlayerList();
 		System.out.println(playerNaam + " has left the game");
 		//GameClient.updatePlayerList();
 	}

@@ -1,5 +1,7 @@
 package models;
 
+import java.rmi.RemoteException;
+
 import controllers.MenuController;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -73,7 +75,17 @@ public class PreLobbyScene extends Scene {
 			if (controller.canConnect()){
 				view.getStage().setScene(controller.setLobbyScene(view));
 				controller.addPlayer(naamVeld.getText());
+				try {
+					controller.updatePlayerList();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
+			else {
+				System.out.println("Kan niet connecten dus switcht de scene niet");
+			}
+
 		});
 			
 		

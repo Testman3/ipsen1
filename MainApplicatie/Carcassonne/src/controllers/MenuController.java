@@ -25,6 +25,7 @@ public class MenuController {
 	private static LobbyScene lobby;
 	private static LobbyInterface lobbyStub;
 	private boolean ableToConnect;
+	
 	public Scene setPreLobbyGame(MenuView view) {
 		preLobby = new PreLobbyScene(view);
 		return preLobby;
@@ -71,8 +72,8 @@ public class MenuController {
 					System.out.println("Joining the game as " + naam);
 					System.out.println(lobbyStub.playerList());
 					ableToConnect = true;
-				}
-			} catch (RemoteException e) {
+
+			}} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 
@@ -89,18 +90,13 @@ public class MenuController {
 		return matcher.matches();
 	}
 
-	public static void updatePlayerList() {
-		Platform.runLater(() -> {
-			try {
+	public void updatePlayerList() throws RemoteException {
+
 				lobby.setPlayerList(lobbyStub.playerList());
 				
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		});
+		};
 
-	}
-	
+		
 	public void addPlayer(String naam){
 		try {
 			lobbyStub.addPlayer(naam);

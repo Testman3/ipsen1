@@ -189,14 +189,14 @@ public class GameClient extends Application {
 	// Deze methode wordt gebruikt om de playerlist voor de client te updaten
 	// Deze methode wordt elke halve seconde aangeroepen door ViewThread
 	public static void updatePlayerList() {
-		Platform.runLater(() -> {
+
 			try {
 				player1.setText(lobbyStub.playerList());
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		});
+		;
 		// System.out.println(lobbyStub.playerList());
 	}
 

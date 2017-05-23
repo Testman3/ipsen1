@@ -55,6 +55,7 @@ public class LobbyScene extends Scene{
 	
 	public void setPlayerList(String spelers){
 		player1.setText(spelers);
+		System.out.println("WERK KUT DING");
 	}
 
 }
