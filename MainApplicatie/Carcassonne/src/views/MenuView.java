@@ -18,9 +18,13 @@ public class MenuView extends Application{
 		launch(args);
 
 	}
+	
+	private Stage stage;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		stage = primaryStage;
 		
 		VBox box = new VBox(10);
 		
@@ -47,7 +51,7 @@ public class MenuView extends Application{
 		primaryStage.show();
 		
 		knoppen[0].setText("Nieuw spel");
-		knoppen[0].setOnAction(e -> primaryStage.setScene(controller.setNewGame()));
+		knoppen[0].setOnAction(e -> primaryStage.setScene(controller.setNewGame(this)));
 		
 		//Maakt een variabele aan die naar het handleiding document verwijst,
 		//wanneer je op de handleiding knop drukt wordt het html doc geopend
@@ -61,6 +65,10 @@ public class MenuView extends Application{
 				System.out.println(e1);
 			}});
 		
+	}
+	
+	public Stage getStage(){
+		return stage;
 	}
 
 }
