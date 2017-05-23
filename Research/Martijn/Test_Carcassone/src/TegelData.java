@@ -22,7 +22,7 @@ public class TegelData {
 
 	public TegelData(String imageId, Tegel.ZijdeType noordZijde, Tegel.ZijdeType oostZijde, Tegel.ZijdeType zuidZijde,
 			Tegel.ZijdeType westZijde, boolean noordZijdeEinde, boolean oostZijdeEinde, boolean zuidZijdeEinde,
-			boolean westZijdeEinde, boolean heeftKlooster, boolean heeftBonus, int rotation) {
+			boolean westZijdeEinde, boolean heeftKlooster, boolean heeftBonus) {
 		super();
 		this.imageId = imageId;
 		NoordZijde = noordZijde;
@@ -35,7 +35,7 @@ public class TegelData {
 		this.westZijdeEinde = westZijdeEinde;
 		this.heeftKlooster = heeftKlooster;
 		this.heeftBonus = heeftBonus;
-		this.rotation = rotation;
+		this.rotation = 0;
 	}
 
 

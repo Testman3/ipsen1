@@ -1,0 +1,56 @@
+{
+   "alleKaarten": [
+    { 
+        "noordZijde": "Gras",
+        "noordEinde" : true,
+        "oostZijde": "Weg",
+        "oostEinde" : true,
+        "zuidZijde": "Weg",
+        "zuidEinde" : false,
+        "westZijde": "Gras",
+        "westEinde" : false,
+        "heeftKlooster":true,
+        "heeftBonus":true,
+        "image_id":"kaart01"
+    },
+    { 
+        "noordZijde": "Gras",
+        "noordEinde" : true,
+        "oostZijde": "Weg",
+        "oostEinde" : true,
+        "zuidZijde": "Weg",
+        "zuidEinde" : false,
+        "westZijde": "Gras",
+        "westEinde" : false,
+        "heeftKlooster":true,
+        "heeftBonus":true,
+        "image_id":"kaart01"
+    },
+    { 
+        "noordZijde": "Gras",
+        "noordEinde" : true,
+        "oostZijde": "Weg",
+        "oostEinde" : true,
+        "zuidZijde": "Weg",
+        "zuidEinde" : false,
+        "westZijde": "Gras",
+        "westEinde" : false,
+        "heeftKlooster":true,
+        "heeftBonus":true,
+        "image_id":"kaart01"
+    },
+    { 
+        "noordZijde": "Gras",
+        "noordEinde" : true,
+        "oostZijde": "Weg",
+        "oostEinde" : true,
+        "zuidZijde": "Weg",
+        "zuidEinde" : false,
+        "westZijde": "Gras",
+        "westEinde" : false,
+        "heeftKlooster":true,
+        "heeftBonus":true,
+        "image_id":"kaart01"
+    }
+   ]
+}
