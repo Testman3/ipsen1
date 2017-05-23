@@ -49,7 +49,9 @@ public class MenuView extends Application{
 		knoppen[0].setText("Nieuw spel");
 		knoppen[0].setOnAction(e -> primaryStage.setScene(controller.setNewGame()));
 		
-		
+		//Maakt een variabele aan die naar het handleiding document verwijst,
+		//wanneer je op de handleiding knop drukt wordt het html doc geopend
+		//in het default programma voor het openen van .html
 		File handleidingDoc = new File("Handleiding.html");
 		knoppen[2].setText("Gebruiksaanwijzing");
 		knoppen[2].setOnAction(e -> {
