@@ -21,6 +21,7 @@ public class PreLobbyScene extends Scene {
 	int maxButtonWidth = 200;
 	static LobbyInterface lobbyStub;
 	String playerName = "Testspeler";
+	Speler speler;
 	
 
 	BorderPane mainPane;
@@ -73,7 +74,8 @@ public class PreLobbyScene extends Scene {
 			
 			if (controller.canConnect()){
 				view.getStage().setScene(controller.setLobbyScene(view));
-				controller.addPlayer(naamVeld.getText());
+				speler = new Speler(naamVeld.getText());
+				controller.addPlayer(speler);
 				try {
 					controller.updatePlayerList();
 				} catch (RemoteException e1) {
@@ -86,7 +88,7 @@ public class PreLobbyScene extends Scene {
 			}
 
 		});
-			
+		
 		
 		
 

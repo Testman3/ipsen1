@@ -7,7 +7,6 @@ import java.rmi.registry.Registry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -15,15 +14,17 @@ import javafx.scene.control.Alert.AlertType;
 import models.LobbyInterface;
 import models.LobbyScene;
 import models.PreLobbyScene;
+import models.Speler;
 import views.MenuView;
 
 public class MenuController {
 
 	private PreLobbyScene preLobby;
 	private MenuView menu;
-	private static LobbyScene lobby;
-	private static LobbyInterface lobbyStub;
+	private  LobbyScene lobby;
+	private  LobbyInterface lobbyStub;
 	private boolean ableToConnect;
+	Speler speler;
 	
 	public Scene setPreLobbyGame(MenuView view) {
 		preLobby = new PreLobbyScene(view);
@@ -96,12 +97,19 @@ public class MenuController {
 		};
 
 		
-	public void addPlayer(String naam){
+	public void addPlayer(Speler incomingSpeler){
 		try {
-			lobbyStub.addPlayer(naam);
+			speler = new Speler(incomingSpeler.naam);
+			lobbyStub.addPlayer(speler);
+			System.out.println("Dit zou de naam van de speler moeten zijn: " + speler.getnaam());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void removePlayer(Speler spelerToBeRemoved){
+		System.out.println("Removing " + spelerToBeRemoved.getnaam());
+		//lobbyStub.removePlayer(this.speler.naam);
 	}
 
 	public boolean canConnect(){
@@ -110,5 +118,9 @@ public class MenuController {
 		} else {
 			return false;
 		}
+	}
+	
+	public Speler getCurrentSpeler(){
+		return this.speler;
 	}
 }

@@ -3,7 +3,6 @@ package models;
 import java.rmi.RemoteException;
 import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
-
 import controllers.MenuController;
 /////////////////////////////////////
 //Geschreven door Henk van Overbeek//
@@ -14,32 +13,34 @@ public class LobbyImpl implements LobbyInterface{
 	
 	MenuController controller = new MenuController();
 
-	private ArrayList<String> playerArr = new ArrayList<String>();
-	//private String[] playerArr = new String[6];
-	//private int playerCount = 0;
+	private ArrayList<Speler> playerArr = new ArrayList<Speler>();
+	//Speler speler;
+
 	@Override
 	public String playerList() throws RemoteException {
 		String spelerLijst ="";
 		
 		for (int i = 0; i < playerArr.size(); i++) {
-			spelerLijst = spelerLijst + playerArr.get(i) + " ";
+			spelerLijst = spelerLijst + playerArr.get(i).naam + " ";
 		}
 		
 		return spelerLijst;
 	}
 
 	@Override
-	public void addPlayer(String playerNaam) throws RemoteException {
-		playerArr.add(playerNaam);
+	public void addPlayer(Speler speler) throws RemoteException {
+		playerArr.add(speler);
+		//this.speler = speler;
 		//controller.updatePlayerList();
-		System.out.println(playerNaam + " has entered the game");
+		System.out.println(speler.naam + " has entered the game");
 	}
 
 	@Override
-	public void removePlayer(String playerNaam) throws RemoteException {
-		playerArr.remove(playerNaam);
+	public void removePlayer(Speler spelerToBeRemoved) throws RemoteException {
+		//System.out.println(this.speler.naam + " has left the game");
+		playerArr.remove(spelerToBeRemoved);
 		//controller.updatePlayerList();
-		System.out.println(playerNaam + " has left the game");
+		
 		//GameClient.updatePlayerList();
 	}
 

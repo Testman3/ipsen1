@@ -5,6 +5,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import models.LobbyInterface;
+import models.Speler;
 import models.LobbyImpl;
 
 public class GameServer {

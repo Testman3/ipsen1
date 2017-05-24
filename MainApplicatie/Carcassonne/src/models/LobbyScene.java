@@ -48,9 +48,10 @@ public class LobbyScene extends Scene{
 		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
 		
-		leaveGame.setOnAction(e -> view.getStage().setScene(controller.setPreLobbyGame(view)));
-		
-		
+		leaveGame.setOnAction(e -> {
+			view.getStage().setScene(controller.setPreLobbyGame(view));
+			controller.removePlayer(controller.getCurrentSpeler());
+		});
 	}
 	
 	public void setPlayerList(String spelers){

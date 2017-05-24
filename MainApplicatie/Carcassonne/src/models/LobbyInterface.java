@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 
 public interface LobbyInterface extends Remote{
 	public String playerList() throws RemoteException;
-	public void addPlayer(String naam) throws RemoteException;
-	public void removePlayer(String naam) throws RemoteException;
+	public void addPlayer(Speler speler) throws RemoteException;
+	public void removePlayer(Speler speler) throws RemoteException;
 	
 }
