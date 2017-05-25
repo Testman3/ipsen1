@@ -43,12 +43,13 @@ public class RMIController implements RMIInterface{
 
 	@Override
 	public void removePlayer(int ID) {
-		System.out.println( " has tried to remove themselves");
+		System.out.println(alSpelers.get(ID).getNaam() + " has tried to remove themselves from the ArrayList");
 		alSpelers.set(ID, null);
 		
 		
 	}
 
+	//Onderstaande operaties worden uitgevoerd in een try blok zodat we de nullpointerexception kunnen opvangen en afhandelen
 	@Override
 	public String playerList() {
 		String spelerlijst ="";
@@ -56,11 +57,13 @@ public class RMIController implements RMIInterface{
 			try {
 			spelerlijst = spelerlijst + alSpelers.get(i).getNaam() + " ";
 			} catch(java.lang.NullPointerException e1){
-				System.out.println("null found, skipping index position");;}
+				System.out.println("null found, skipping this index position");;}
 		}
 		return spelerlijst;
 	}
 
+	
+	//Onderstaande operaties worden uitgevoerd in een try blok zodat we de nullpointerexception kunnen opvangen en afhandelen
 	@Override
 	public int getPlayerID(String naam){
 		
@@ -78,7 +81,7 @@ public class RMIController implements RMIInterface{
 		}
 			System.out.println(alSpelers.get(i).getNaam());
 			}catch (java.lang.NullPointerException e1){
-				System.out.println("null found, skipping index position");
+				System.out.println("null found, skipping this index position");
 			}
 			
 	}

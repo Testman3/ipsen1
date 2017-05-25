@@ -31,6 +31,7 @@ public class JoinView extends Application{
 	@Override
 	public void start(Stage mainStage) throws Exception {
 		
+		//Maak alle benodigde javafx dingen aan
 		BorderPane mainPane = new BorderPane();
 		Scene mainScene = new Scene(mainPane, 400, 400);
 		Button addPlayer = new Button("Add Player");
@@ -53,13 +54,17 @@ public class JoinView extends Application{
 		mainStage.setScene(mainScene);
 		mainStage.show();
 		
+		//Maak meteen verbinding met de gameserver zodra de applicatie is opgestart
 		Registry registry;
 		registry = LocateRegistry.getRegistry("127.0.0.1");
 		System.out.println("Getting the Lobby stub from registry");
 		rmiStub = (RMIInterface) registry.lookup("RMI");
 		
+		//Update meteen de playerlist zodat je kan zien welke spelers er aanwezig zijn in de arraylist
 		updatePlayerList();
 		
+		
+		//Zorgt er voor dat de addplayer knop een speler aanmaakt met de ingevoerde naam en toevoegd aan de arraylist op de server.
 		addPlayer.setOnAction(e -> {
 			naamSpeler = spelerNaam.getText();
 			
@@ -72,6 +77,7 @@ public class JoinView extends Application{
 				else{
 				speler.setNaam(naamSpeler);
 				rmiStub.addPlayer(speler);
+				//Stelt spelerID in aan de hand van de locatie van de speler in de arraylist
 				spelerID = rmiStub.getPlayerID(naamSpeler);
 				System.out.println("Gejoined als "+ naamSpeler +", index in ArrayList = " + spelerID);
 				updatePlayerList();
@@ -82,6 +88,9 @@ public class JoinView extends Application{
 			}
 		});
 		
+		
+		//zorgt ervoor dat de aangemaakte speler uit de arraylist verwijderd kan worden aan de hand van het playerid
+		//zoals opgehaald met de addplayer knop
 		removePlayer.setOnAction(e -> {
 			try {
 				rmiStub.removePlayer(spelerID);
@@ -96,6 +105,7 @@ public class JoinView extends Application{
 	}
 
 	
+	//Update het lokale label door de method playerList aan te roepen op de server.
 	public void updatePlayerList(){
 		try {
 			playerList.setText(rmiStub.playerList());
