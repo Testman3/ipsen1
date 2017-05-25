@@ -41,6 +41,7 @@ public class RMIController implements RMIInterface{
 		
 	}
 
+	
 	@Override
 	public void removePlayer(int ID) {
 		System.out.println(alSpelers.get(ID).getNaam() + " has tried to remove themselves from the ArrayList");
