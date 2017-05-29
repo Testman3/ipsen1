@@ -14,7 +14,7 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 	public void addPlayer(String naam) {
 		Player player = new Player(naam);
 		allePlayers.add(player);
-		System.out.println("Player " + naam + " was added");
+		System.out.println("Player " + naam + " has joined the game");
 	}
 
 	@Override
@@ -22,6 +22,7 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 
 		for (Player player : allePlayers) {
 			if(player.naam.contains(naam)){
+				System.out.println("Player " + naam + " has left the game");
 				allePlayers.remove(player);
 				return;
 			}
