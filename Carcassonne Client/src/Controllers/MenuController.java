@@ -104,8 +104,10 @@ public class MenuController {
 	private boolean validateIP(final String ip) {
 		Pattern pattern;
 		Matcher matcher;
-		String IPADDRESS_PATTERN = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
-				+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+		String IPADDRESS_PATTERN = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + 
+									"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + 
+									"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + 
+									"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 		pattern = Pattern.compile(IPADDRESS_PATTERN);
 		matcher = pattern.matcher(ip);
 		return matcher.matches();
