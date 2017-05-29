@@ -78,7 +78,6 @@ public class PreLobbyScene extends Scene{
 			try {
 				controller.connectToServer(ipVeld.getText(), naamVeld.getText());
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
@@ -86,6 +85,7 @@ public class PreLobbyScene extends Scene{
 				controller.setLobbyScene();
 				try {
 					controller.RMIstub.addPlayer(naamVeld.getText());
+					controller.setSpelernaam(naamVeld.getText());
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

@@ -35,6 +35,8 @@ public class MenuController {
 
 	public RMIInterface RMIstub;
 
+	private String spelernaam;
+	
 	public MenuController(Stage gameStage) {
 
 
@@ -48,9 +50,18 @@ public class MenuController {
 
 		setMenuViewScene();
 		gameStage.show();
+		gameStage.setOnCloseRequest(e -> {
+			System.exit(0);
+		});
 	}
 
 
+	/**
+	 * Probeert de speler te laten verbinden met de rmi server
+	 * @param ip
+	 * @param naam
+	 * @throws RemoteException
+	 */
 	public void connectToServer(String ip, String naam) throws RemoteException {
 		if (!validateIP(ip)) {
 			Alert alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
@@ -79,13 +90,17 @@ public class MenuController {
 			} else {
 
 				System.out.println("Joining the game as " + naam);
-				//System.out.println(RMIstub.getPlayerList());
 				ableToConnect = true;
 
 }
 		}
 	}
 
+	/**
+	 * Controleert of de opgegeven String een geldig IP format is
+	 * @param ip
+	 * @return
+	 */
 	private boolean validateIP(final String ip) {
 		Pattern pattern;
 		Matcher matcher;
@@ -97,6 +112,10 @@ public class MenuController {
 	}
 
 
+	/**
+	 * Deze functie wordt gebruikt bij het verbinding maken met de rmi server.
+	 * @return true / false
+	 */
 	public boolean canConnect(){
 		if (ableToConnect){
 			return true;
@@ -112,6 +131,9 @@ public class MenuController {
 		getGameStage().setScene(getMenuViewScene());
 	}
 
+	/**
+	 * Buttion action method om de speler naar het spel einde scherm te laten stellen
+	 */
 	public void setEndGameScene(){
 		gameStage.setScene(endGameScene);
 	}
@@ -170,6 +192,16 @@ public class MenuController {
 	public void updatePlayerList() {
 		// TODO Auto-generated method stub
 
+	}
+
+
+	public String getSpelernaam() {
+		return spelernaam;
+	}
+
+
+	public void setSpelernaam(String spelernaam) {
+		this.spelernaam = spelernaam;
 	}
 
 

@@ -19,6 +19,7 @@ public class LobbyScene extends Scene{
 	private Label playersLabel;
 	private HBox playerBox;
 	private Button leaveGame;
+	private boolean enableThread;
 
 	private FlowPane lobbyPane;
 	MenuController controller;
@@ -52,13 +53,24 @@ public class LobbyScene extends Scene{
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
 
 		leaveGame.setOnAction(e -> {
-		// TODO fix this
+			
+			try {
+				controller.RMIstub.removePlayer(controller.getSpelernaam());
+				System.out.println(controller.getSpelernaam());
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			controller.setPreLobbyScene();
+			enableThread = false;
 		});
 	}
 
 	public void Join() {
+		enableThread = true;
 		lobbyThread = new Thread( () -> {
-			while(true){
+			while(enableThread == true){
 				Update();
 				System.out.println("Running...");
 				try {
@@ -79,7 +91,6 @@ public class LobbyScene extends Scene{
 		try {
 		allenamen = controller.RMIstub.getPlayerList();
 		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

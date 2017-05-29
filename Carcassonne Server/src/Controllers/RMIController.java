@@ -21,8 +21,9 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 	public void removePlayer(String naam) {
 
 		for (Player player : allePlayers) {
-			if(player.naam == naam){
+			if(player.naam.contains(naam)){
 				allePlayers.remove(player);
+				return;
 			}
 		}
 
@@ -40,7 +41,7 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 	@Override
 	public boolean checkContains(String naam) throws RemoteException {
 		for (Player player : allePlayers) {
-			if(player.naam == naam){
+			if(player.naam.contains(naam)){
 				return true;
 			}
 		}
