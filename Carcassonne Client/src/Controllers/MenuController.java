@@ -24,12 +24,12 @@ public class MenuController {
 
 	Stage gameStage;
 
-	EndGameScene endGameScene;
-	GameScene gameScene;
-	LobbyScene lobbyScene;
-	MenuViewScene menuViewScene;
-	PreLobbyScene preLobbyScene;
-	SettingsScene settingsScene;
+	private EndGameScene endGameScene;
+	private GameScene gameScene;
+	private LobbyScene lobbyScene;
+	private MenuViewScene menuViewScene;
+	private PreLobbyScene preLobbyScene;
+	private SettingsScene settingsScene;
 
 	private boolean ableToConnect;
 
@@ -121,6 +121,7 @@ public class MenuController {
 
 	public void setLobbyScene(){
 		gameStage.setScene(lobbyScene);
+		getLobbyScene().Join();
 	}
 
 	public void setMenuViewScene(){

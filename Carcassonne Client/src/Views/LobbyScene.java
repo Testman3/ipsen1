@@ -1,6 +1,10 @@
 package Views;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
 import Controllers.MenuController;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,7 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 public class LobbyScene extends Scene{
-	private Label player1;
+	private Label allePlayerNamen;
 	private Label playersLabel;
 	private HBox playerBox;
 	private Button leaveGame;
@@ -19,12 +23,14 @@ public class LobbyScene extends Scene{
 	private FlowPane lobbyPane;
 	MenuController controller;
 
-
+	Thread lobbyThread;
+	ArrayList<String> allenamen;
+	
 	public LobbyScene(MenuController controller){
 		super(new FlowPane(), 400, 400);
 		lobbyPane = (FlowPane) this.getRoot();
 		init(lobbyPane);
-
+		this.controller = controller;
 	}
 
 
@@ -33,16 +39,16 @@ public class LobbyScene extends Scene{
 
 		playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("CALIBRI", 20));
-		player1 = new Label();
-		player1.setText("empty");
-		player1.setFont(new Font("CALIBRI", 15));
-		player1.setAlignment(Pos.CENTER);
+		allePlayerNamen = new Label();
+		allePlayerNamen.setText("empty");
+		allePlayerNamen.setFont(new Font("CALIBRI", 15));
+		allePlayerNamen.setAlignment(Pos.CENTER);
 		playerBox = new HBox();
 		leaveGame = new Button("Leave Game");
 		leaveGame.setMaxWidth(200);
+		
 
-
-		playerBox.getChildren().addAll(playersLabel, player1);
+		playerBox.getChildren().addAll(playersLabel, allePlayerNamen);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
 
 		leaveGame.setOnAction(e -> {
@@ -50,8 +56,41 @@ public class LobbyScene extends Scene{
 		});
 	}
 
+	public void Join() {
+		lobbyThread = new Thread( () -> {
+			while(true){
+				Update();
+				System.out.println("Running...");
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		lobbyThread.start();
+		
+	}
+	
+	public void Update() {
+		allenamen = new ArrayList<String>();
+		
+		try {
+		allenamen = controller.RMIstub.getPlayerList();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		Platform.runLater(() -> {
+			allePlayerNamen.setText("");
+		for (String string : allenamen) {
+			allePlayerNamen.setText(allePlayerNamen.getText() + string);
+		}});
+	}
 	public void setPlayerList(String spelers){
-		player1.setText(spelers);
+		allePlayerNamen.setText(spelers);
 		System.out.println("WERK KUT DING");
 	}
 

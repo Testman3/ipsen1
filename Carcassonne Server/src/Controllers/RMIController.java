@@ -29,8 +29,12 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 	}
 
 	@Override
-	public ArrayList<Player> getPlayerList() {
-		return allePlayers;
+	public ArrayList<String> getPlayerList() {
+		ArrayList<String> Spelernamen = new ArrayList<String>();
+		for (Player player : allePlayers) {
+			Spelernamen.add(player.naam);
+		}
+		return Spelernamen;
 	}
 
 	@Override
