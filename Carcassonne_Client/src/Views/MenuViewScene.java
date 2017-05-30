@@ -12,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MenuViewScene extends Scene{
@@ -30,6 +31,7 @@ public class MenuViewScene extends Scene{
 	}
 
 		public void init() {
+			mainPane.getStylesheets().add("style.css");
 			/*
 			 * 0 = New game 1 = Laden game 2 = Gebruiksaanwijzing 3 = About 4 =
 			 * Instellingen 5 = Spel verlaten
@@ -38,6 +40,7 @@ public class MenuViewScene extends Scene{
 
 			for (int i = 0; i < knoppen.length; i++) {
 				knoppen[i] = new Button();
+				knoppen[i].setId("menuKnoppen");
 				mainPane.getChildren().add(knoppen[i]);
 			}
 

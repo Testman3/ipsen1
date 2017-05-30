@@ -1,4 +1,7 @@
-
+@font-face{
+	font-family: EnchantedLand;
+	 src: url(EnchantedLand.otf);
+}
 #linksZijkant{
 -fx-image: url("Text_Back_T  ower.png");
 -fx-background-size: cover;
@@ -23,4 +26,10 @@
 	-fx-stroke: black;
 	-fx-font-size: 30px;
 	-fx-fill: white;
+}
+
+#menuKnoppen{
+	-fx-background-color: transparent;
+	-fx-font-size: 30px;
+	-fx-font-family: "Enchanted Land";
 }
