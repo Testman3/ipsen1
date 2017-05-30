@@ -48,8 +48,8 @@ public class MenuController {
 		preLobbyScene = new PreLobbyScene(this);
 		settingsScene = new SettingsScene();
 
-		//setMenuViewScene();
-		setGameScene();
+		setMenuViewScene();
+		//setGameScene();
 		gameStage.show();
 		gameStage.setOnCloseRequest(e -> {
 			System.exit(0);
