@@ -26,17 +26,17 @@ public class LobbyScene extends Scene{
 
 	Thread lobbyThread;
 	ArrayList<String> allenamen;
-	
+
 	public LobbyScene(MenuController controller){
 		super(new FlowPane(), 400, 400);
 		lobbyPane = (FlowPane) this.getRoot();
-		init(lobbyPane);
+		init();
 		this.controller = controller;
 	}
 
 
 
-	private void init(FlowPane pane){
+	private void init(){
 
 		playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("CALIBRI", 20));
@@ -47,13 +47,13 @@ public class LobbyScene extends Scene{
 		playerBox = new HBox();
 		leaveGame = new Button("Leave Game");
 		leaveGame.setMaxWidth(200);
-		
+
 
 		playerBox.getChildren().addAll(playersLabel, allePlayerNamen);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
 
 		leaveGame.setOnAction(e -> {
-			
+
 			try {
 				controller.RMIstub.removePlayer(controller.getSpelernaam());
 				System.out.println(controller.getSpelernaam());
@@ -61,7 +61,7 @@ public class LobbyScene extends Scene{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
+
 			controller.setPreLobbyScene();
 			enableThread = false;
 		});
@@ -82,18 +82,18 @@ public class LobbyScene extends Scene{
 			}
 		});
 		lobbyThread.start();
-		
+
 	}
-	
+
 	public void Update() {
 		allenamen = new ArrayList<String>();
-		
+
 		try {
 		allenamen = controller.RMIstub.getPlayerList();
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		Platform.runLater(() -> {
 			allePlayerNamen.setText("");
 		for (String string : allenamen) {

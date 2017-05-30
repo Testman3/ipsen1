@@ -1,0 +1,26 @@
+
+#linksZijkant{
+-fx-image: url("Text_Back_T  ower.png");
+-fx-background-size: cover;
+}
+#BottomZijkant{
+	-fx-image: url("Text_Back_Wall.png");
+
+}
+#test{
+	-fx-background-image: url("Tet_Back_test.png");
+	-fx-background-size: cover;
+}
+#Player{
+-fx-image: url("Text_Back_Player.png");
+}
+#Kaartview{
+	-fx-image: url("Text_Back_Pot.png");
+
+}
+
+#KaartenLeft{
+	-fx-stroke: black;
+	-fx-font-size: 30px;
+	-fx-fill: white;
+}

@@ -36,19 +36,20 @@ public class MenuController {
 	public RMIInterface RMIstub;
 
 	private String spelernaam;
-	
+
 	public MenuController(Stage gameStage) {
 
 
 		this.gameStage = gameStage;
 		endGameScene = new EndGameScene();
-		gameScene = new GameScene();
+		gameScene = new GameScene(this);
 		lobbyScene = new LobbyScene(this);
 		menuViewScene = new MenuViewScene(this);
 		preLobbyScene = new PreLobbyScene(this);
 		settingsScene = new SettingsScene();
 
-		setMenuViewScene();
+		//setMenuViewScene();
+		setGameScene();
 		gameStage.show();
 		gameStage.setOnCloseRequest(e -> {
 			System.exit(0);
