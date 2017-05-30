@@ -62,7 +62,7 @@ public class MenuView extends Application {
 				System.out.println(e1);
 			}
 		});
-		
+
 		knoppen[5].setText("Spel afsluiten");
 		knoppen[5].setOnAction(e -> System.exit(0));
 

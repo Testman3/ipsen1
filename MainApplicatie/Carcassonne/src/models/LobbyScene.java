@@ -16,24 +16,24 @@ public class LobbyScene extends Scene{
 	private Label playersLabel;
 	private HBox playerBox;
 	private Button leaveGame;
-	
+
 	private FlowPane lobbyPane;
 	private MenuView view = new MenuView();
 	private MenuController controller = new MenuController();
-	
-	
+
+
 	public LobbyScene(MenuView menu){
 		super(new FlowPane(), 400, 400);
 		view = menu;
 		lobbyPane = (FlowPane) this.getRoot();
 		init(lobbyPane);
-		
+
 	}
-	
-	
-	
+
+
+
 	private void init(FlowPane pane){
-		
+
 		playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("CALIBRI", 20));
 		player1 = new Label();
@@ -43,17 +43,17 @@ public class LobbyScene extends Scene{
 		playerBox = new HBox();
 		leaveGame = new Button("Leave Game");
 		leaveGame.setMaxWidth(200);
-		
-		
+
+
 		playerBox.getChildren().addAll(playersLabel, player1);
 		lobbyPane.getChildren().addAll(playerBox, leaveGame);
-		
+
 		leaveGame.setOnAction(e -> {
 			view.getStage().setScene(controller.setPreLobbyGame(view));
 			controller.removePlayer(controller.getCurrentSpeler());
 		});
 	}
-	
+
 	public void setPlayerList(String spelers){
 		player1.setText(spelers);
 		System.out.println("WERK KUT DING");
