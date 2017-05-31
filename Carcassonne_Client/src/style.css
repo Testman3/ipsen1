@@ -32,22 +32,23 @@
 	-fx-background-color: transparent;
 	-fx-font-size: 55px;
 	-fx-font-family: "Enchanted Land";
+	-fx-text-fill: white;
+	-fx-padding: 3px;
 }
 
 #labelStyle{
-	-fx-background-color: transparent;
 	-fx-font-size: 35px;
 	-fx-font-family: "Enchanted Land";
-	-fx-text-fill: white;
 	-fx-padding: 1px;
     -fx-border-insets: 5px;
     -fx-background-insets: 5px;
+    -fx-text-fill: white;
 }
 
 #creditStyle{
-	-fx-background-color: transparent;
 	-fx-font-size: 45px;
 	-fx-font-family: "Enchanted Land";
+	-fx-text-fill: white;
 }
 
 #textVelden{
@@ -55,22 +56,22 @@
 	-fx-font-family: "Enchanted Land";
 }
 
+/*-fx-padding: naar boven | naar links | naar rechts | naar beneden */
 #titel{
 	-fx-background-color: transparent;
 	-fx-font-size: 120px;
 	-fx-font-family: "Enchanted Land";
 	-fx-text-fill: white;
-	
+	-fx-padding: 50 0 0 0;
 }
 
-
-#mainMenu{
+/* mainBackground komt terug in alle menu vensters en regelt de achtergrondafbeelding */
+#mainBackground{
 	-fx-background-image: url("Afbeeldingen/Texture_Menu_Background.jpg");
 	-fx-background-size: cover;
-	
 }
 
-#button{
+#schild{
 	-fx-background-image: url("Afbeeldingen/Texture_Menu.png");
 	-fx-background-repeat: no-repeat; 
 	-fx-background-position: center center;

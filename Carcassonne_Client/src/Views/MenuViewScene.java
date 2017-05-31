@@ -23,7 +23,7 @@ public class MenuViewScene extends Scene{
 	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
 	private BorderPane mainPane;
 	private Label titel = new Label("Carcassonne");
-	private VBox buttonPane = new VBox();
+	private VBox buttonVBox = new VBox();
 	private MenuController controller;
 
 
@@ -36,29 +36,28 @@ public class MenuViewScene extends Scene{
 	}
 
 		public void init() {
-		//	buttonPane.getStylesheets().add("style.css");
-			buttonPane.setId("button");
+			buttonVBox.setId("schild");
 			mainPane.getStylesheets().add("style.css");
-			mainPane.setId("mainMenu");
+			mainPane.setId("mainBackground");
 			titel.setId("titel");
 			/*
 			 * 0 = New game 1 = Laden game 2 = Gebruiksaanwijzing 3 = About 4 =
 			 * Instellingen 5 = Spel verlaten
 			 */
 			
-			buttonPane.getChildren().add(titel);
+			buttonVBox.getChildren().add(titel);
 			Button[] knoppen = new Button[6];
 
 			for (int i = 0; i < knoppen.length; i++) {
 				knoppen[i] = new Button();
 				knoppen[i].setId("menuKnoppen");
-				buttonPane.getChildren().add(knoppen[i]);
+				buttonVBox.getChildren().add(knoppen[i]);
 			}
 
 			
 		//	mainPane.getChildren().add(buttonPane);
-			mainPane.setCenter(buttonPane);
-			buttonPane.setAlignment(Pos.CENTER);
+			mainPane.setCenter(buttonVBox);
+			buttonVBox.setAlignment(Pos.CENTER);
 
 			knoppen[0].setText("Nieuw spel");
 			knoppen[0].setOnAction(e -> {
