@@ -10,3 +10,9 @@ MainApplicatie/\.metadata/
 \.metadata/
 
 \.recommenders/
+
+Carcassonne_Client/\.idea/
+
+Carcassonne_Client/Carcassonne_Client\.iml
+
+Carcassonne_Server/Carcassonne_Server\.iml
