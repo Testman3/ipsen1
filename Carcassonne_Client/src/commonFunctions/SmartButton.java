@@ -6,7 +6,6 @@ import Views.SettingsScene;
 import javafx.css.PseudoClass;
 import javafx.scene.AccessibleRole;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 public class SmartButton extends Button {
 
@@ -44,7 +43,7 @@ public class SmartButton extends Button {
 				talk(this.getText());
 			});
 		}
-		
+
 		initialize();
 	}
 
