@@ -7,6 +7,7 @@ import java.rmi.registry.Registry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Views.CreditsScene;
 import Views.EndGameScene;
 import Views.GameScene;
 import Views.LobbyScene;
@@ -30,6 +31,7 @@ public class MenuController {
 	private MenuViewScene menuViewScene;
 	private PreLobbyScene preLobbyScene;
 	private SettingsScene settingsScene;
+	private CreditsScene creditsScene;
 
 	private boolean ableToConnect;
 
@@ -47,6 +49,7 @@ public class MenuController {
 		menuViewScene = new MenuViewScene(this);
 		preLobbyScene = new PreLobbyScene(this);
 		settingsScene = new SettingsScene();
+		creditsScene = new CreditsScene(this);
 
 		setMenuViewScene();
 		//setGameScene();
@@ -159,6 +162,10 @@ public class MenuController {
 	public void setSettingsScene(){
 		gameStage.setScene(settingsScene);
 	}
+	
+	public void setCreditsScene(){
+		gameStage.setScene(creditsScene);
+	}
 
 
 
@@ -189,6 +196,10 @@ public class MenuController {
 
 	public SettingsScene getSettingsScene() {
 		return settingsScene;
+	}
+	
+	public CreditsScene getCreditsScene() {
+		return creditsScene;
 	}
 
 

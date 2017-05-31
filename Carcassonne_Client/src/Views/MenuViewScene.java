@@ -25,7 +25,7 @@ public class MenuViewScene extends Scene{
 
 
 	public MenuViewScene(MenuController controller){
-		super(new VBox(), 400,400);
+		super(new VBox(), 1280,720);
 		mainPane = (VBox) this.getRoot();
 		this.controller = controller;
 
@@ -78,6 +78,7 @@ public class MenuViewScene extends Scene{
 			knoppen[3].setText("Credits");
 			knoppen[3].setOnAction(e -> {
 				clickSound.play();
+				controller.setCreditsScene();
 				
 			});
 			

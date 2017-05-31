@@ -36,7 +36,6 @@ public class PreLobbyScene extends Scene{
 		try {
 			init();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -63,12 +62,10 @@ public class PreLobbyScene extends Scene{
 		Button backToHome = new Button("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
 
-		FlowPane lobbyPane = new FlowPane();
-
 		Label playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("CALIBRI", 20));
 
-		lobbyPane.getChildren().addAll(playerBox, leaveGame);
+
 
 		joinViewButtons.getChildren().addAll(naamVeld, ipVeld, addPlayer, localHost, remoteServer, backToHome);
 		joinViewButtons.setAlignment(Pos.CENTER);
