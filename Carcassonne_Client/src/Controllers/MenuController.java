@@ -93,7 +93,7 @@ public class MenuController {
 				System.out.println("Joining the game as " + naam);
 				ableToConnect = true;
 
-}
+			}
 		}
 	}
 

@@ -53,11 +53,11 @@ public class MenuViewScene extends Scene{
 				clickSound.play();
 				controller.setPreLobbyScene();
 			});
-			
+
 			knoppen[1].setText("Laad spel");
 			knoppen[1].setOnAction(e -> {
 				clickSound.play();
-				
+				controller.setGameScene();
 			});
 
 			// Maakt een variabele aan die naar het handleiding document verwijst,
@@ -74,17 +74,17 @@ public class MenuViewScene extends Scene{
 				}
 				clickSound.play();
 			});
-			
+
 			knoppen[3].setText("Credits");
 			knoppen[3].setOnAction(e -> {
 				clickSound.play();
-				
+
 			});
-			
+
 			knoppen[4].setText("Instellingen");
 			knoppen[4].setOnAction(e -> {
 				clickSound.play();
-				
+
 			});
 
 			//Try Catch blok is hier nodig omdat anders het geluid niet af speelt voordat het programma wordt gesloten
