@@ -35,7 +35,7 @@ public class MenuViewScene extends Scene{
 		init();
 	}
 
-		public void init() {
+		private void init() {
 			buttonVBox.setId("schild");
 			mainPane.getStylesheets().add("style.css");
 			mainPane.setId("mainBackground");
