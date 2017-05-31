@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import Controllers.MenuController;
-import commonFunctions.SmartButton;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,84 +21,96 @@ import javafx.stage.Stage;
 public class MenuViewScene extends Scene{
 
 	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
-	VBox mainPane;
+	private BorderPane mainPane;
+	private Label titel = new Label("Carcassonne");
+	private VBox buttonVBox = new VBox();
 	private MenuController controller;
-
-	// Smartbutton kan text uitspreken
-	private SmartButton[] knoppen = new SmartButton[6];
 
 
 	public MenuViewScene(MenuController controller){
-		super(new VBox(), 400,400);
-		mainPane = (VBox) this.getRoot();
+		super(new BorderPane(), 1280, 720);
+		mainPane = (BorderPane) this.getRoot();
 		this.controller = controller;
 
 		init();
 	}
 
-	// Init alle menu buttons
-	public void initButtons(){
-		/*
-		 * 0 = New game 1 = Laden game
-		 * 2 = Gebruiksaanwijzing
-		 * 3 = About 4 = Instellingen
-		 * 5 = Spel verlaten
-		 */
-		for (int i = 0; i < knoppen.length; i++) {
-			knoppen[i] = new SmartButton();
-			knoppen[i].setId("menuKnoppen");
-			// Elke knop een klik sound
-			knoppen[i].setOnAction(e -> {
+		private void init() {
+			buttonVBox.setId("schild");
+			mainPane.getStylesheets().add("style.css");
+			mainPane.setId("mainBackground");
+			titel.setId("titel");
+			/*
+			 * 0 = New game 1 = Laden game 2 = Gebruiksaanwijzing 3 = About 4 =
+			 * Instellingen 5 = Spel verlaten
+			 */
+			
+			buttonVBox.getChildren().add(titel);
+			Button[] knoppen = new Button[6];
+
+			for (int i = 0; i < knoppen.length; i++) {
+				knoppen[i] = new Button();
+				knoppen[i].setId("menuKnoppen");
+				buttonVBox.getChildren().add(knoppen[i]);
+			}
+
+			
+		//	mainPane.getChildren().add(buttonPane);
+			mainPane.setCenter(buttonVBox);
+			buttonVBox.setAlignment(Pos.CENTER);
+
+			knoppen[0].setText("Nieuw spel");
+			knoppen[0].setOnAction(e -> {
+				clickSound.play();
+				controller.setPreLobbyScene();
+			});
+			
+			knoppen[1].setText("Laden spel");
+			knoppen[1].setOnAction(e -> {
+				clickSound.play();
+				controller.setGameScene();
+			});
+
+			// Maakt een variabele aan die naar het handleiding document verwijst,
+			// wanneer je op de handleiding knop drukt wordt het html doc geopend
+			// in het default programma voor het openen van .html
+
+			File handleidingDoc = new File("Handleiding.html");
+			knoppen[2].setText("Spelregels");
+			knoppen[2].setOnAction(e -> {
+				try {
+					Desktop.getDesktop().browse(handleidingDoc.toURI());
+				} catch (IOException e1) {
+					System.out.println(e1);
+				}
 				clickSound.play();
 			});
-			mainPane.getChildren().add(knoppen[i]);
+
+			knoppen[3].setText("Credits");
+			knoppen[3].setOnAction(e -> {
+				clickSound.play();
+				controller.setCreditsScene();
+				
+			});
+
+			knoppen[4].setText("Instellingen");
+			knoppen[4].setOnAction(e -> {
+				clickSound.play();
+
+			});
+
+			//Try Catch blok is hier nodig omdat anders het geluid niet af speelt voordat het programma wordt gesloten
+			//Er word precies zo lang gewacht als het geluid lang is
+			knoppen[5].setText("Spel afsluiten");
+			knoppen[5].setOnAction(e -> {
+				clickSound.play();
+				try {
+					Thread.sleep(142);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				System.exit(0);
+			});
+
 		}
 	}
-
-	public void init() {
-		mainPane.getStylesheets().add("style.css");
-
-
-		// Init alle menu buttons
-		initButtons();
-
-		mainPane.setAlignment(Pos.CENTER);
-
-		knoppen[0].setText("Nieuw spel");
-		knoppen[0].setOnAction(e -> {
-			controller.setPreLobbyScene();
-		});
-
-		knoppen[1].setText("Laad spel");
-
-		// Maakt een variabele aan die naar het handleiding document verwijst,
-		// wanneer je op de handleiding knop drukt wordt het html doc geopend
-		// in het default programma voor het openen van .html
-		File handleidingDoc = new File("Handleiding.html");
-		knoppen[2].setText("Gebruiksaanwijzing");
-
-		knoppen[2].setOnAction(e -> {
-			try {
-				Desktop.getDesktop().browse(handleidingDoc.toURI());
-			} catch (IOException e1) {
-				System.out.println(e1);
-			}
-		});
-
-		knoppen[3].setText("Credits");
-		knoppen[4].setText("Instellingen");
-
-		//Try Catch blok is hier nodig omdat anders het geluid niet af speelt voordat het programma wordt gesloten
-		//Er word precies zo lang gewacht als het geluid lang is
-		knoppen[5].setText("Spel afsluiten");
-		knoppen[5].setOnAction(e -> {
-			try {
-				Thread.sleep(142);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-			System.exit(0);
-		});
-
-	}
-}

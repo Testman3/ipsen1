@@ -45,7 +45,6 @@ public class PreLobbyScene extends Scene{
 
 	private void init() throws RemoteException {
 		mainPane.getStylesheets().add("style.css");
-		mainPane.setId("mainBackground");
 
 		TextField naamVeld = new TextField("Player1");
 		naamVeld.setMaxWidth(maxTextFieldWidth);
