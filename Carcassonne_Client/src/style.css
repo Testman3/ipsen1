@@ -30,6 +30,18 @@
 
 #menuKnoppen{
 	-fx-background-color: transparent;
+	-fx-font-size: 45px;
+	-fx-font-family: "Enchanted Land";
+}
+
+#labelStyle{
+	-fx-background-color: transparent;
 	-fx-font-size: 35px;
+	-fx-font-family: "Enchanted Land";
+}
+
+#creditStyle{
+	-fx-background-color: transparent;
+	-fx-font-size: 45px;
 	-fx-font-family: "Enchanted Land";
 }
