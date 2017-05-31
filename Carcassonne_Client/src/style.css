@@ -73,6 +73,17 @@
 
 #schild{
 	-fx-background-image: url("Afbeeldingen/Texture_Menu.png");
-	-fx-background-repeat: no-repeat; 
+	-fx-background-repeat: no-repeat;
 	-fx-background-position: center center;
+}
+
+#KaartTest{
+		-fx-image: url("Kaart_03.png");
+}
+#hallo{
+/* 	-fx-background-color: #3C93EF;*/
+-fx-background-image: url("TestenPLZ.jpg");
+}
+#KaartPreview{
+		-fx-image: url("Kaart_00.png");
 }
