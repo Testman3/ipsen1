@@ -1,5 +1,6 @@
 package Views;
 
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 
 import javafx.geometry.Pos;
@@ -12,13 +13,15 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import Controllers.MenuController;
 
 public class PreLobbyScene extends Scene{
 
-	int maxTextFieldWidth = 200;
-	int maxButtonWidth = 200;
+	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
+	int maxTextFieldWidth = 400;
+	int maxButtonWidth = 400;
 	String playerName = "Testspeler";
 
 	private MenuController controller;
@@ -29,7 +32,7 @@ public class PreLobbyScene extends Scene{
 
 	public PreLobbyScene(MenuController controller) {
 
-		super(new BorderPane(), 400, 400);
+		super(new BorderPane(), 1280, 720);
 		mainPane = (BorderPane) this.getRoot();
 		this.controller = controller;
 
@@ -41,37 +44,41 @@ public class PreLobbyScene extends Scene{
 	}
 
 	private void init() throws RemoteException {
+		mainPane.getStylesheets().add("style.css");
 
 		TextField naamVeld = new TextField("Player1");
 		naamVeld.setMaxWidth(maxTextFieldWidth);
+		naamVeld.setId("textVelden");
 		TextField ipVeld = new TextField("127.0.0.1");
 		ipVeld.setMaxWidth(maxTextFieldWidth);
+		ipVeld.setId("textVelden");
 
 		VBox joinViewButtons = new VBox(10);
-		HBox playerBox = new HBox();
-		// Scene mainScene = new Scene(pane, 400, 400);
 
 		Button addPlayer = new Button("Join Game");
 		addPlayer.setMaxWidth(maxButtonWidth);
+		addPlayer.setId("menuKnoppen");
 		Button leaveGame = new Button("Leave Game");
 		leaveGame.setMaxWidth(maxButtonWidth);
-		Button localHost = new Button("Localhost");
-		localHost.setMaxWidth(maxButtonWidth);
-		Button remoteServer = new Button("Remote Server");
-		remoteServer.setMaxWidth(maxButtonWidth);
+		leaveGame.setId("menuKnoppen");
 		Button backToHome = new Button("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
+		backToHome.setId("menuKnoppen");
 
 		Label playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("CALIBRI", 20));
 
 
 
-		joinViewButtons.getChildren().addAll(naamVeld, ipVeld, addPlayer, localHost, remoteServer, backToHome);
+		joinViewButtons.getChildren().addAll(naamVeld, ipVeld, addPlayer, backToHome);
 		joinViewButtons.setAlignment(Pos.CENTER);
 
-		backToHome.setOnAction(e -> controller.backToMainMenu());
+		backToHome.setOnAction(e -> {
+			clickSound.play();
+			controller.backToMainMenu();
+		});
 		addPlayer.setOnAction(e -> {
+			clickSound.play();
 			try {
 				controller.connectToServer(ipVeld.getText(), naamVeld.getText());
 			} catch (RemoteException e1) {
@@ -84,7 +91,6 @@ public class PreLobbyScene extends Scene{
 					controller.RMIstub.addPlayer(naamVeld.getText());
 					controller.setSpelernaam(naamVeld.getText());
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				controller.updatePlayerList();
@@ -95,10 +101,7 @@ public class PreLobbyScene extends Scene{
 
 		});
 
-
-
-		// mainPane.getChildren().setAll(lobbyButtons);
-		mainPane.setTop(joinViewButtons);
+		mainPane.setCenter(joinViewButtons);
 
 	}
 
