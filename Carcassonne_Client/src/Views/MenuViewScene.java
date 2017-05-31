@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 
 import Controllers.MenuController;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,33 +21,44 @@ import javafx.stage.Stage;
 public class MenuViewScene extends Scene{
 
 	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
-	VBox mainPane;
+	private BorderPane mainPane;
+	private Label titel = new Label("Carcassonne");
+	private VBox buttonPane = new VBox();
 	private MenuController controller;
 
 
 	public MenuViewScene(MenuController controller){
-		super(new VBox(), 1280,720);
-		mainPane = (VBox) this.getRoot();
+		super(new BorderPane(), 1280, 720);
+		mainPane = (BorderPane) this.getRoot();
 		this.controller = controller;
 
 		init();
 	}
 
 		public void init() {
+		//	buttonPane.getStylesheets().add("style.css");
+			buttonPane.setId("button");
 			mainPane.getStylesheets().add("style.css");
+			mainPane.setId("mainMenu");
+			titel.setId("titel");
 			/*
 			 * 0 = New game 1 = Laden game 2 = Gebruiksaanwijzing 3 = About 4 =
 			 * Instellingen 5 = Spel verlaten
 			 */
+			
+			buttonPane.getChildren().add(titel);
 			Button[] knoppen = new Button[6];
 
 			for (int i = 0; i < knoppen.length; i++) {
 				knoppen[i] = new Button();
 				knoppen[i].setId("menuKnoppen");
-				mainPane.getChildren().add(knoppen[i]);
+				buttonPane.getChildren().add(knoppen[i]);
 			}
 
-			mainPane.setAlignment(Pos.CENTER);
+			
+		//	mainPane.getChildren().add(buttonPane);
+			mainPane.setCenter(buttonPane);
+			buttonPane.setAlignment(Pos.CENTER);
 
 			knoppen[0].setText("Nieuw spel");
 			knoppen[0].setOnAction(e -> {
@@ -54,7 +66,7 @@ public class MenuViewScene extends Scene{
 				controller.setPreLobbyScene();
 			});
 			
-			knoppen[1].setText("Laad spel");
+			knoppen[1].setText("Laden spel");
 			knoppen[1].setOnAction(e -> {
 				clickSound.play();
 				
@@ -65,7 +77,7 @@ public class MenuViewScene extends Scene{
 			// in het default programma voor het openen van .html
 
 			File handleidingDoc = new File("Handleiding.html");
-			knoppen[2].setText("Gebruiksaanwijzing");
+			knoppen[2].setText("Spelregels");
 			knoppen[2].setOnAction(e -> {
 				try {
 					Desktop.getDesktop().browse(handleidingDoc.toURI());
