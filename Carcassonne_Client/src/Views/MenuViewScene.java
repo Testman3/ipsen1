@@ -36,10 +36,9 @@ public class MenuViewScene extends Scene{
 	}
 
 		public void init() {
-		//	buttonPane.getStylesheets().add("style.css");
 			buttonPane.setId("button");
 			mainPane.getStylesheets().add("style.css");
-			mainPane.setId("mainMenu");
+			mainPane.setId("mainBackground");
 			titel.setId("titel");
 			/*
 			 * 0 = New game 1 = Laden game 2 = Gebruiksaanwijzing 3 = About 4 =

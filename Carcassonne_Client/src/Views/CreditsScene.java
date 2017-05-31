@@ -9,13 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 
 public class CreditsScene extends Scene {
 
 	private MenuController controller;
-	private int maxButtonWidth = 400;
+	private int maxButtonWidth = 800;
 	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
 	
 	BorderPane mainPane;
@@ -36,6 +37,8 @@ public class CreditsScene extends Scene {
 	private void init() throws RemoteException {
 		
 		mainPane.getStylesheets().add("style.css");
+		mainPane.setId("mainBackground");
+		
 		Button backToHome = new Button("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
 		backToHome.setId("menuKnoppen");
