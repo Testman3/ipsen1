@@ -75,6 +75,7 @@
 	-fx-background-image: url("Afbeeldingen/Texture_Menu.png");
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center center;
+	-fx-background-size:contain, stretch;
 }
 
 #KaartTest{
