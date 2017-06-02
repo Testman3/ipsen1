@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 public class ClientManager extends Application {
 
 	public static void main(String[] args) {
-		
+		//Dit is de main, de launch is niet wit!
 		launch(args);
 	}
 
