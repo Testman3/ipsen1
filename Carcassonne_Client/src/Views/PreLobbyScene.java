@@ -55,6 +55,7 @@ public class PreLobbyScene extends Scene{
 		ipVeld.setId("textVelden");
 
 		VBox joinViewButtons = new VBox(10);
+		joinViewButtons.setId("schild");
 
 		Button addPlayer = new Button("Join Game");
 		addPlayer.setMaxWidth(maxButtonWidth);
