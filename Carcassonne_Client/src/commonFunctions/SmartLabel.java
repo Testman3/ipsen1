@@ -30,8 +30,7 @@ public class SmartLabel extends Label {
 				talk(this.getText());
 			});
 		}
-		initialize();
-	}
+}
 
 	public SmartLabel() {
 		voice = vm.getVoice(VOICENAME);
@@ -44,8 +43,6 @@ public class SmartLabel extends Label {
 				talk(this.getText());
 			});
 		}
-
-		initialize();
 	}
 
 	// Lees label text voor (speech)
