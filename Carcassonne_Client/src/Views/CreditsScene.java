@@ -51,6 +51,7 @@ public class CreditsScene extends Scene {
 		VBox creditText = new VBox();
 		VBox creditsNamen = new VBox(10);
 		VBox backToHomeButton = new VBox();
+		VBox alles = new VBox();
 		
 		backToHomeButton.getChildren().add(backToHome);
 		
@@ -81,10 +82,13 @@ public class CreditsScene extends Scene {
 		
 		creditText.getChildren().add(credits);
 		creditText.setAlignment(Pos.CENTER);
-		
-		mainPane.setTop(creditText);
-		mainPane.setCenter(creditsNamen);
-		mainPane.setBottom(backToHomeButton);
+
+		alles.setId("schild");
+		alles.getChildren().setAll(creditText, creditsNamen, backToHomeButton);
+
+		//mainPane.setTop(creditText);
+		mainPane.setCenter(alles);
+		//mainPane.setBottom(backToHomeButton);
 		
 		
 	}
