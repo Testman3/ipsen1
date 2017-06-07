@@ -23,22 +23,29 @@ public class main extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
+		//New button for save game
 		Button idk = new Button("Save game");
+		
 		idk.setOnAction(e -> {
+			// open window explorer
 			FileChooser fileChooser = new FileChooser();
+			
+			// show json in explorer
 			fileChooser.getExtensionFilters().addAll(
-					new FileChooser.ExtensionFilter("Carcassonne", "*.json")
-					);
+				new FileChooser.ExtensionFilter("Carcassonne", "*.json")
+			);
+			
+			// explorer window name
 			fileChooser.setTitle("Save Game");
+			// show explorer window
 			File fle = fileChooser.showSaveDialog(primaryStage);
-			
+			//get path of selected file
 			String path = fle.getPath();
+			// File handeling in class fileManager
 			fileManager.saveGame(path);
-			
-			
 		});
 		
+		//new button for load game
 		Button openen = new Button("Laad spel");
 		openen.setOnAction(e -> {
 			FileChooser fileChooser = new FileChooser();
