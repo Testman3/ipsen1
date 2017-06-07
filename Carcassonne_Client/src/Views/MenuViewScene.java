@@ -36,10 +36,11 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		mainPane = (BorderPane) this.getRoot();
 		this.controller = controller;
 
-		init();
+		initGui();
 	}
 
-	public void buttonInit(){
+	public void InitAction(){
+		System.out.println("SprekenMENU : " + SettingsScene.optieSpreken);
 		/*
 		 * 0 = New game 1 = Laden game
 		 * 2 = Gebruiksaanwijzing
@@ -54,7 +55,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		}
 	}
 
-	public void init() {
+	public void initGui() {
 		buttonVBox.setId("schild");
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
@@ -62,7 +63,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 
 		buttonVBox.getChildren().add(titel);
 
-		buttonInit();
+		InitAction();
 
 		//mainPane.getChildren().add(buttonPane);
 		mainPane.setCenter(buttonVBox);

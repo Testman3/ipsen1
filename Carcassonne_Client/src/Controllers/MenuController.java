@@ -48,7 +48,7 @@ public class MenuController {
 		lobbyScene = new LobbyScene(this);
 		menuViewScene = new MenuViewScene(this);
 		preLobbyScene = new PreLobbyScene(this);
-		settingsScene = new SettingsScene();
+		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
 
 		setMenuViewScene();
