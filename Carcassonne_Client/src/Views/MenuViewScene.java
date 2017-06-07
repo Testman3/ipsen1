@@ -40,7 +40,6 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 	}
 
 	public void InitAction(){
-		System.out.println("SprekenMENU : " + SettingsScene.optieSpreken);
 		/*
 		 * 0 = New game 1 = Laden game
 		 * 2 = Gebruiksaanwijzing
