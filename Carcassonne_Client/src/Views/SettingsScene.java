@@ -73,10 +73,10 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		spraak = new Label("Spraakondersteuning");
 		fullscreen = new Label("Fullscreen");
 
-		titel.setId("titel");
-		sounds.setId("sounds");
-		spraak.setId("spraak");
-		fullscreen.setId("fullscreen");
+		titel.setId("title");
+		sounds.setId("standardLabel");
+		spraak.setId("standardLabel");
+		fullscreen.setId("standardLabel");
 
 		soundBox.getChildren().addAll(sounds, soundCheckBox);
 		spraakBox.getChildren().addAll(spraak, spraakCheckBox);

@@ -50,7 +50,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		 */
 		for (int i = 0; i < knoppen.length; i++) {
 			knoppen[i] = new SmartButton();
-			knoppen[i].setId("menuKnoppen");
+			knoppen[i].setId("standardLabel");
 			buttonVBox.getChildren().add(knoppen[i]);
 		}
 	}
@@ -59,7 +59,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		buttonVBox.setId("schild");
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
-		titel.setId("titel");
+		titel.setId("title");
 
 		buttonVBox.getChildren().add(titel);
 
