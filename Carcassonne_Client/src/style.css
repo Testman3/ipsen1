@@ -88,3 +88,24 @@
 #KaartPreview{
 		-fx-image: url("Kaart_00.png");
 }
+
+#sounds{
+	-fx-font-size: 55px;
+	-fx-font-family: "Enchanted Land";
+	-fx-text-fill: white;
+	-fx-padding: 3px;
+}
+
+#spraak{
+	-fx-font-size: 55px;
+	-fx-font-family: "Enchanted Land";
+	-fx-text-fill: white;
+	-fx-padding: 3px;
+}
+
+#fullscreen{
+	-fx-font-size: 55px;
+	-fx-font-family: "Enchanted Land";
+	-fx-text-fill: white;
+	-fx-padding: 3px;
+}

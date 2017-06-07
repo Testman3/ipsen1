@@ -1,5 +1,6 @@
 package Views;
 
+import commonFunctions.SceneInitialiser;
 import javafx.scene.Scene;
 
 import java.awt.Desktop;
@@ -19,7 +20,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class MenuViewScene extends Scene{
+public class MenuViewScene extends Scene implements SceneInitialiser{
 
 	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
 	private BorderPane mainPane;
@@ -38,7 +39,7 @@ public class MenuViewScene extends Scene{
 		init();
 	}
 
-	public void buttonsInit(){
+	public void buttonInit(){
 		/*
 		 * 0 = New game 1 = Laden game
 		 * 2 = Gebruiksaanwijzing
@@ -53,7 +54,7 @@ public class MenuViewScene extends Scene{
 		}
 	}
 
-	private void init() {
+	public void init() {
 		buttonVBox.setId("schild");
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
@@ -61,7 +62,7 @@ public class MenuViewScene extends Scene{
 
 		buttonVBox.getChildren().add(titel);
 
-		buttonsInit();
+		buttonInit();
 
 		//mainPane.getChildren().add(buttonPane);
 		mainPane.setCenter(buttonVBox);
@@ -78,6 +79,8 @@ public class MenuViewScene extends Scene{
 			clickSound.play();
 			controller.setGameScene();
 		});
+
+
 
 		// Maakt een variabele aan die naar het handleiding document verwijst,
 		// wanneer je op de handleiding knop drukt wordt het html doc geopend
@@ -104,6 +107,7 @@ public class MenuViewScene extends Scene{
 		knoppen[4].setText("Instellingen");
 		knoppen[4].setOnAction(e -> {
 			clickSound.play();
+			controller.setSettingsScene();
 
 		});
 

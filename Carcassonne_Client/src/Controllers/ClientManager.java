@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 
 public class ClientManager extends Application {
 
+	static MenuController menucontroller;
+
 	public static void main(String[] args) {
 		//Dit is de main, de launch is niet wit!
 		launch(args);
@@ -19,7 +21,7 @@ public class ClientManager extends Application {
 	 * Start de client van de speler
 	 */
 	public static void runClient(Stage stage) {
-		MenuController menucontroller = new MenuController(stage);
+		menucontroller = new MenuController(stage);
 	}
 }
 
