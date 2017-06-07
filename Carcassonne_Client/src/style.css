@@ -2,6 +2,15 @@
 	font-family: EnchantedLand;
 	 src: url(EnchantedLand.otf);
 }
+
+.root * {
+	-fx-font-family: "Enchanted Land";
+	-fx-text-fill: white;
+     -fx-stroke: black;
+	-fx-padding: 3px;
+}
+
+
 #linksZijkant{
 -fx-image: url("Text_Back_Tower.png");
 -fx-background-size: cover;
@@ -19,49 +28,36 @@
 }
 #Kaartview{
 	-fx-image: url("Text_Back_Pot.png");
-
 }
 
 #KaartenLeft{
-	-fx-stroke: black;
 	-fx-font-size: 30px;
-	-fx-fill: white;
 }
 
 #menuKnoppen{
 	-fx-background-color: transparent;
 	-fx-font-size: 55px;
-	-fx-font-family: "Enchanted Land";
-	-fx-text-fill: white;
-	-fx-padding: 3px;
 }
 
 #labelStyle{
 	-fx-font-size: 35px;
-	-fx-font-family: "Enchanted Land";
 	-fx-padding: 1px;
     -fx-border-insets: 5px;
     -fx-background-insets: 5px;
-    -fx-text-fill: white;
 }
 
 #creditStyle{
 	-fx-font-size: 45px;
-	-fx-font-family: "Enchanted Land";
-	-fx-text-fill: white;
 }
 
 #textVelden{
 	-fx-font-size: 45px;
-	-fx-font-family: "Enchanted Land";
 }
 
 /*-fx-padding: naar boven | naar links | naar rechts | naar beneden */
 #titel{
 	-fx-background-color: transparent;
 	-fx-font-size: 120px;
-	-fx-font-family: "Enchanted Land";
-	-fx-text-fill: white;
 	-fx-padding: 50 0 0 0;
 }
 
@@ -87,4 +83,18 @@
 }
 #KaartPreview{
 		-fx-image: url("Kaart_00.png");
+}
+
+#sounds{
+	-fx-font-size: 55px;
+
+}
+
+#spraak{
+	-fx-font-size: 55px;
+}
+
+#fullscreen{
+	-fx-font-size: 55px;
+
 }
