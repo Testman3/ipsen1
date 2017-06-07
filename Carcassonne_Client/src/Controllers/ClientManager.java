@@ -18,6 +18,8 @@ public class ClientManager extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		//Als de username overeenkomt met overb wordt het onderstaande code blok NIET uitgevoerd
+		if (!(System.getProperty("user.name").equals("overb"))){
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
 		primaryStage.setX(primaryScreenBounds.getMinX());
@@ -26,7 +28,7 @@ public class ClientManager extends Application {
 		primaryStage.setHeight(primaryScreenBounds.getHeight());
 
 		primaryStage.setResizable(false);
-
+		}
 
 		runClient(primaryStage);
 

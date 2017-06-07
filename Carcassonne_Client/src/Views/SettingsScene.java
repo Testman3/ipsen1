@@ -10,8 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+
+import java.nio.file.Paths;
 
 public class SettingsScene extends Scene implements SceneInitialiser {
+
+	//Importing audioclip for click sound
+	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
 
 	//Settings vars
 	private BorderPane mainPane;
@@ -106,6 +112,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		});
 
 		backToHome.setOnAction(e -> {
+			clickSound.play();
 			controller.backToMainMenu();
 		});
 
