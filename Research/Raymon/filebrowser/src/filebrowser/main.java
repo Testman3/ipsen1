@@ -27,8 +27,12 @@ public class main extends Application{
 		Button idk = new Button("Save game");
 		idk.setOnAction(e -> {
 			FileChooser fileChooser = new FileChooser();
+			fileChooser.getExtensionFilters().addAll(
+					new FileChooser.ExtensionFilter("Carcassonne", "*.json")
+					);
 			fileChooser.setTitle("Save Game");
 			File fle = fileChooser.showSaveDialog(primaryStage);
+			
 			String path = fle.getPath();
 			fileManager.saveGame(path);
 			

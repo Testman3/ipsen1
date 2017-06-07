@@ -8,8 +8,7 @@ import javafx.stage.FileChooser;
 public class fileManager {
 
 	public static void saveGame(String path){
-		String Bestand = path + ".json";
-		File file = new File(Bestand);
+		File file = new File(path);
 		System.out.print(file.getAbsoluteFile());
 		if(!file.exists()){
 			try {
