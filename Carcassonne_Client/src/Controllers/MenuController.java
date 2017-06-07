@@ -145,6 +145,7 @@ public class MenuController {
 	}
 	public void setGameScene(){
 		gameStage.setScene(gameScene);
+		gameStage.setFullScreen(SettingsScene.fullScreen);
 	}
 
 	public void setLobbyScene(){
@@ -158,12 +159,15 @@ public class MenuController {
 
 	public void setPreLobbyScene(){
 		gameStage.setScene(preLobbyScene);
+
 	}
 	public void setSettingsScene(){
+
 		gameStage.setScene(settingsScene);
 	}
 	
 	public void setCreditsScene(){
+
 		gameStage.setScene(creditsScene);
 	}
 

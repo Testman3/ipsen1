@@ -1,5 +1,6 @@
 package Controllers;
 
+import Views.SettingsScene;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
@@ -23,6 +24,10 @@ public class ClientManager extends Application {
 		primaryStage.setY(primaryScreenBounds.getMinY());
 		primaryStage.setWidth(primaryScreenBounds.getWidth());
 		primaryStage.setHeight(primaryScreenBounds.getHeight());
+
+		primaryStage.setResizable(false);
+
+
 		runClient(primaryStage);
 
 	}

@@ -34,6 +34,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 	//spraak
 	public static boolean optieSpreken = false;
+	public static boolean fullScreen = false;
 
 	public SettingsScene(MenuController controller) {
 		super(new BorderPane(), 1280, 720);
@@ -98,6 +99,10 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 		spraakCheckBox.setOnAction(e -> {
 			optieSpreken = spraakCheckBox.isSelected();
+		});
+
+		fullscreenCheckBox.setOnAction(e -> {
+			fullScreen = fullscreenCheckBox.isSelected();
 		});
 
 		backToHome.setOnAction(e -> {
