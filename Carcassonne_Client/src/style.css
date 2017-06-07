@@ -7,9 +7,15 @@
     -fx-font-family: "Enchanted Land";
     -fx-text-fill: white;
     -fx-stroke: black;
+}
+.button {
     -fx-padding: 0;
     -fx-background-color: transparent;
+    }
+#checkBox {
+
 }
+
 
 #standardLabel {
     -fx-font-size: 4em;
@@ -32,6 +38,9 @@
 
 #KaartenLeft{
 	-fx-font-size: 30px;
+}
+#Horige {
+-fx-image: url("Horige_Rood.png");
 }
 
 #labelStyle{
@@ -79,17 +88,5 @@
 		-fx-image: url("Kaart_00.png");
 }
 
-
-}
-
-#soundCheckbox{
-
-}
-
-#spraakCheckbox{
-
-}
-
-fullscreenCheckbox{
 
 }

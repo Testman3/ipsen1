@@ -42,21 +42,22 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		this.controller = controller;
 
 		initGui();
+		InitAction();
 	}
 
 
 	public void initGui() {
 
 		backToHome = new Button("Terug naar hoofdmenu");
-		backToHome.setId("menuKnoppen");
+		backToHome.setId("standardLabel");
 
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
 
 		buttonVBox = new VBox();
-		soundBox = new HBox();
-		spraakBox = new HBox();
-		fullscreenBox = new HBox();
+		soundBox = new HBox(5);
+		spraakBox = new HBox(5);
+		fullscreenBox = new HBox(5);
 
 		buttonVBox.setId("schild");
 
@@ -64,9 +65,9 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		spraakCheckBox = new CheckBox();
 		fullscreenCheckBox = new CheckBox();
 
-		soundCheckBox.setId("soundCheckbox");
-		spraakCheckBox.setId("spraakCheckbox");
-		fullscreenCheckBox.setId("fullscreenCheckbox");
+		soundCheckBox.setId("checkBox");
+		spraakCheckBox.setId("checkBox");
+		fullscreenCheckBox.setId("checkBox");
 
 		titel = new Label("Instellingen");
 		sounds = new Label("Geluid");
@@ -92,10 +93,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		spraakBox.setAlignment(Pos.CENTER);
 		fullscreenBox.setAlignment(Pos.CENTER);
 
-		InitAction();
-
 	}
-
 	public void InitAction() {
 
 		spraakCheckBox.setOnAction(e -> {
