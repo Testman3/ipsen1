@@ -36,10 +36,10 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		buttonVBox.setId("schild");
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
-		titel.setId("titel");
-		sounds.setId("sounds");
-		spraak.setId("spraak");
-		fullscreen.setId("fullscreen");
+		titel.setId("title");
+		sounds.setId("standardLabel");
+		spraak.setId("standardLabel");
+		fullscreen.setId("standardLabel");
 
 		buttonVBox.getChildren().addAll(titel, sounds, spraak, fullscreen);
 

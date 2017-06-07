@@ -42,7 +42,7 @@ public class CreditsScene extends Scene {
 		
 		Button backToHome = new Button("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
-		backToHome.setId("menuKnoppen");
+		backToHome.setId("standardLabel");
 		backToHome.setOnAction(e -> {
 			clickSound.play();
 			controller.backToMainMenu();			
@@ -62,7 +62,7 @@ public class CreditsScene extends Scene {
 		
 		for (int i = 0; i < labels.length; i++ ){
 			labels[i] = new Label();
-			labels[i].setId("labelStyle");
+			labels[i].setId("standardLabel");
 			creditsNamen.getChildren().add(labels[i]);
 		}
 		
@@ -73,7 +73,7 @@ public class CreditsScene extends Scene {
 		labels[4].setText("Henk van Overbeek");
 		Label credits = new Label();
 		credits.setText("Credits");
-		credits.setId("creditStyle");
+		credits.setId("title");
 		
 		creditsNamen.setAlignment(Pos.CENTER);
 		backToHomeButton.setAlignment(Pos.CENTER);

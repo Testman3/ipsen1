@@ -49,23 +49,23 @@ public class PreLobbyScene extends Scene{
 
 		TextField naamVeld = new TextField("Player1");
 		naamVeld.setMaxWidth(maxTextFieldWidth);
-		naamVeld.setId("textVelden");
+		naamVeld.setId("standardLabel");
 		TextField ipVeld = new TextField("127.0.0.1");
 		ipVeld.setMaxWidth(maxTextFieldWidth);
-		ipVeld.setId("textVelden");
+		ipVeld.setId("standardLabel");
 
 		VBox joinViewButtons = new VBox(10);
 		joinViewButtons.setId("schild");
 
 		Button addPlayer = new Button("Join Game");
 		addPlayer.setMaxWidth(maxButtonWidth);
-		addPlayer.setId("menuKnoppen");
+		addPlayer.setId("standardLabel");
 		Button leaveGame = new Button("Leave Game");
 		leaveGame.setMaxWidth(maxButtonWidth);
-		leaveGame.setId("menuKnoppen");
+		leaveGame.setId("standardLabel");
 		Button backToHome = new Button("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
-		backToHome.setId("menuKnoppen");
+		backToHome.setId("standardLabel");
 
 		Label playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("CALIBRI", 20));

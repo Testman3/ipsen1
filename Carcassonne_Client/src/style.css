@@ -4,20 +4,20 @@
 }
 
 .root * {
-	-fx-font-family: "Enchanted Land";
-	-fx-text-fill: white;
-     -fx-stroke: black;
-	-fx-padding: 3px;
+    -fx-font-family: "Enchanted Land";
+    -fx-text-fill: white;
+    -fx-stroke: black;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
 }
 
-
-#linksZijkant{
--fx-image: url("Text_Back_Tower.png");
--fx-background-size: cover;
+#standardLabel {
+    -fx-font-size: 4em;
 }
-#BottomZijkant{
-	-fx-image: url("Text_Back_Wall.png");
 
+#title {
+	-fx-padding: 5em 0 0 0;
+    -fx-font-size: 10em;
 }
 #test{
 	-fx-background-image: url("Tet_Back_test.png");
@@ -32,11 +32,6 @@
 
 #KaartenLeft{
 	-fx-font-size: 30px;
-}
-
-#menuKnoppen{
-	-fx-background-color: transparent;
-	-fx-font-size: 55px;
 }
 
 #labelStyle{
@@ -57,8 +52,8 @@
 /*-fx-padding: naar boven | naar links | naar rechts | naar beneden */
 #titel{
 	-fx-background-color: transparent;
-	-fx-font-size: 120px;
-	-fx-padding: 50 0 0 0;
+	-fx-font-size: 8em;
+	-fx-padding: 10em 0 0 0;
 }
 
 /* mainBackground komt terug in alle menu vensters en regelt de achtergrondafbeelding */
@@ -78,23 +73,11 @@
 		-fx-image: url("Kaart_03.png");
 }
 #hallo{
-/* 	-fx-background-color: #3C93EF;*/
 -fx-background-image: url("TestenPLZ.jpg");
 }
 #KaartPreview{
 		-fx-image: url("Kaart_00.png");
 }
 
-#sounds{
-	-fx-font-size: 55px;
-
-}
-
-#spraak{
-	-fx-font-size: 55px;
-}
-
-#fullscreen{
-	-fx-font-size: 55px;
 
 }
