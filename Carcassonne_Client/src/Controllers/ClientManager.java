@@ -1,6 +1,9 @@
 package Controllers;
 
+import Views.SettingsScene;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class ClientManager extends Application {
@@ -14,6 +17,17 @@ public class ClientManager extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
+		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+
+		primaryStage.setX(primaryScreenBounds.getMinX());
+		primaryStage.setY(primaryScreenBounds.getMinY());
+		primaryStage.setWidth(primaryScreenBounds.getWidth());
+		primaryStage.setHeight(primaryScreenBounds.getHeight());
+
+		primaryStage.setResizable(false);
+
+
 		runClient(primaryStage);
 
 	}

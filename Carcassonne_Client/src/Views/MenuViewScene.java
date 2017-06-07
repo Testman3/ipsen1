@@ -36,10 +36,10 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		mainPane = (BorderPane) this.getRoot();
 		this.controller = controller;
 
-		init();
+		initGui();
 	}
 
-	public void buttonInit(){
+	public void InitAction(){
 		/*
 		 * 0 = New game 1 = Laden game
 		 * 2 = Gebruiksaanwijzing
@@ -49,20 +49,20 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		 */
 		for (int i = 0; i < knoppen.length; i++) {
 			knoppen[i] = new SmartButton();
-			knoppen[i].setId("menuKnoppen");
+			knoppen[i].setId("standardLabel");
 			buttonVBox.getChildren().add(knoppen[i]);
 		}
 	}
 
-	public void init() {
+	public void initGui() {
 		buttonVBox.setId("schild");
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
-		titel.setId("titel");
+		titel.setId("title");
 
 		buttonVBox.getChildren().add(titel);
 
-		buttonInit();
+		InitAction();
 
 		//mainPane.getChildren().add(buttonPane);
 		mainPane.setCenter(buttonVBox);

@@ -5,7 +5,7 @@ package commonFunctions;
  */
 public interface SceneInitialiser {
 
-	 public void init();
-	 public void buttonInit();
+	 public void initGui();
+	 public void InitAction();
 
 }

@@ -39,10 +39,10 @@ public class LobbyScene extends Scene{
 	private void init(){
 
 		playersLabel = new Label("Players in this game: ");
-		playersLabel.setFont(new Font("CALIBRI", 20));
+		playersLabel.setId("standardLabel");
 		allePlayerNamen = new Label();
 		allePlayerNamen.setText("empty");
-		allePlayerNamen.setFont(new Font("CALIBRI", 15));
+		allePlayerNamen.setId("standardLabel");
 		allePlayerNamen.setAlignment(Pos.CENTER);
 		playerBox = new HBox();
 		leaveGame = new Button("Leave Game");
