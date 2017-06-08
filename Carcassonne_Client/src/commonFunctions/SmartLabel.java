@@ -3,7 +3,9 @@ package commonFunctions;
 import com.sun.speech.freetts.*;
 
 import Views.SettingsScene;
+import javafx.beans.value.WritableValue;
 import javafx.css.PseudoClass;
+import javafx.css.StyleableProperty;
 import javafx.scene.AccessibleRole;
 import javafx.scene.control.Label;
 
@@ -24,36 +26,50 @@ public class SmartLabel extends Label {
 		voice.allocate();
 
 		// Onhover talk text
-		if (SettingsScene.optieSpreken) {
 			this.setOnMouseEntered(e -> {
 				System.out.println("HOVER : " + this.getText());
 				talk(this.getText());
 			});
-		}
-}
+
+		initialize();
+	}
 
 	public SmartLabel() {
 		voice = vm.getVoice(VOICENAME);
 		voice.allocate();
 
 		// Onhover talk text
-		if (SettingsScene.optieSpreken) {
 			this.setOnMouseEntered(e -> {
 				System.out.println("HOVER : " + this.getText());
 				talk(this.getText());
 			});
-		}
+
+		initialize();
 	}
 
 	// Lees label text voor (speech)
 	// @param String text - label tekst
 	// @throws Exception
-	public void talk(String text) {
-		try{
-			voice.speak(text);
-		}catch(Exception e){
-			System.out.println("FOUT: " + e);
+	public void talk(String text){
+		if(SettingsScene.optieSpreken) {
+			try {
+				voice.speak(text);
+			} catch (Exception e) {
+				System.out.println("FOUT: " + e);
+			}
 		}
+	}
+
+	// Ignore, dit is allemaal van label
+	private void initialize() {
+		getStyleClass().setAll("label");
+		setAccessibleRole(AccessibleRole.TEXT);
+		// Labels are not focus traversable, unlike most other UI Controls.
+		// focusTraversable is styleable through css. Calling setFocusTraversable
+		// makes it look to css like the user set the value and css will not
+		// override. Initializing focusTraversable by calling set on the
+		// CssMetaData ensures that css will be able to override the value.
+		((StyleableProperty<Boolean>)(WritableValue<Boolean>)focusTraversableProperty()).applyStyle(null, Boolean.FALSE);
 	}
 
 }

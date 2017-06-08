@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import commonFunctions.*;
 
 public class CreditsScene extends Scene {
 
@@ -39,8 +40,8 @@ public class CreditsScene extends Scene {
 		
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
-		
-		Button backToHome = new Button("Terug naar Hoofdmenu");
+
+		SmartButton backToHome = new SmartButton("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
 		backToHome.setId("standardLabel");
 		backToHome.setOnAction(e -> {
@@ -54,15 +55,15 @@ public class CreditsScene extends Scene {
 		VBox alles = new VBox();
 		
 		backToHomeButton.getChildren().add(backToHome);
-		
-		Label[] labels = new Label[5];
+
+		SmartLabel[] labels = new SmartLabel[5];
 		
 		/*
 		 * 0 = Martijn 1 = Jusin 2 = Raymon 3 = Haitam 4 = Henk
 		 */
 		
 		for (int i = 0; i < labels.length; i++ ){
-			labels[i] = new Label();
+			labels[i] = new SmartLabel();
 			labels[i].setId("creditsLabel");
 			creditsNamen.getChildren().add(labels[i]);
 		}
@@ -72,7 +73,7 @@ public class CreditsScene extends Scene {
 		labels[2].setText("Raymon Haalebos");
 		labels[3].setText("Haitam el Attar");
 		labels[4].setText("Henk van Overbeek");
-		Label credits = new Label();
+		Label credits = new SmartLabel();
 		credits.setText("Credits");
 		credits.setId("titel");
 
