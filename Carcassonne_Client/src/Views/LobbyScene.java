@@ -58,7 +58,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 		box1 = new HBox(35);
 		spelerBox = new VBox();
-		horigenBox = new VBox(30);
+		horigenBox = new VBox(15);
 		spelers = new Label[5];
 
 		horigen = new ImageView[5];
