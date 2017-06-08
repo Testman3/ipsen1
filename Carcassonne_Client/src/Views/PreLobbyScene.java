@@ -43,6 +43,7 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 	private Button backToHome;
 
 	private Label playersLabel;
+
 	public PreLobbyScene(MenuController controller, LobbyController lobbyController) {
 
 		super(new BorderPane(), 1280, 720);
@@ -119,14 +120,6 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 			}
 
 		});
-	}
-
-	public PreLobbyScene(MenuController controller) {
-
-		super(new BorderPane(), 1280, 720);
-		mainPane = (BorderPane) this.getRoot();
-		this.controller = controller;
-		initGui();
 	}
 
 }
