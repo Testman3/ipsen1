@@ -12,7 +12,7 @@
 			.headerImg {
 				height: 400px;
 				background: linear-gradient(0deg,rgba(16, 28, 79, 0.3),rgba(16, 28, 79,0.3)),
-				url("http://www.domainelesmagasins.fr/image/carcassonne.jpg") top no-repeat;
+				url("src/Afbeeldingen/spelregelHeader.jpg") top no-repeat;
 				text-align: center;
 				background-size: cover;
 				font-family: MedievalSharp;
@@ -58,9 +58,9 @@
 		<div class="informatie">
 				<div class="guide-step clear">
 					<h2>1. Doel van het spel</h2>
-					Doordat de spelers iedere beurt landtegels neerleggen ontstaan er wegen, 
-					steden, kastelen en kloosters waarop de spelers een horige mogen zetten.
-					Als de speler een weg, dorp of stad afbouwt scoort hij punten. 
+					Doordat de spelers iedere beurt kaarten neerleggen ontstaan er wegen,
+					 kastelen en kloosters waarop de spelers een horige mogen zetten.
+					Als de speler een weg, klooster of kasteel afbouwt scoort hij punten.
 					De speler die aan het eind van het spel de meeste punten heeft verdient wint.
 				</div>
 				
@@ -69,8 +69,8 @@
 						<figcaption>Fig. 1 - Een horige </figcaption>
 					</figure>
 					<h2>2. Het spelmateriaal</h2>
-					De tegel met de donkere achterkant is de starttegel. Deze is open op het bord gelegd. <br>
-					De overige tegels zijn geschud en in een stapel omgekeerd op de blauw met gele vlag gelegd. <br>
+					De kaart met de donkere achterkant is de startkaart. Deze is open op het bord gelegd. <br>
+					De overige kaarten zijn geschud en in een stapel omgekeerd op de blauw met gele vlag gelegd. <br>
 					Verder vindt de speler nog een 7-tal "horigen" in de interface. <br>
 
 				</div>
@@ -90,15 +90,15 @@
 
 				<div class="guide-dont">Het is niet toegestaan kaarten alleen met de hoeken aan te leggen!</div>
 				
-				<div class="guide-dont">Stadsdelen en wegen mogen niet onderbroken worden!</div>
+				<div class="guide-dont">Delen van kastelen en wegen mogen niet onderbroken worden!</div>
 
 				<div class="guide-step clear">
 					<h2>5. Het plaatsen van horigen</h2>
 					Meteen nadat de speler een kaart heeft geplaatst mag hij ervoor kiezen om hierop een van zijn
-					 horigen neer te zetten. De speler bepaalt waar hij de horige op de kaart plaatst, in de stad,
+					 horigen neer te zetten. De speler bepaalt waar hij de horige op de kaart plaatst - in de stad,
 					 in een klooster of op de weg. <br>
 					Daarbij geldt: eens geplaatst, blijft geplaatst.<br>
-					Als de speler geen horige meer heeft, legt hij alleen de kaart neer.<br>
+					Als de speler geen horigen meer heeft, legt hij alleen de kaart neer.<br>
 				</div>
 
 				<div class="guide-dont">De speler mag de horige alleen plaatsen op de kaart die hij net heeft
@@ -109,41 +109,50 @@
 					plaatsen als deze verbonden is met een tegel waar al een horige op staat!</div>
 
 				<div class="guide-step clear">
+					<figure id = "figure"> <img src="src/Kaarten/Kaart_21.png" alt="Weg" width="100px" height="100px">
+						<figcaption>Fig. 2 - Een Weg</figcaption>
+					</figure>
 					<h2>6. Een afgebouwde weg tellen</h2>
 					Een weg is afgebouwd als deze een doorlopende verbinding vormt tussen twee punten. 
-					Die punten kunnen een splitsing, klooster met een weg, of een stadspoort zijn.<br>
+					Die punten kunnen een splitsing, klooster met een weg, of een kasteelspoort zijn.<br>
 					De speler die de weg met zijn horige bezet ontvangt 1 punt per tegel die de weg lang is. <br>
-					Als de punten zijn geteld neemt de speler de horige terug in zijn voorraad.
+					Als de punten zijn geteld krijgt de speler zijn horige terug.
 				</div>
 				
 				<div class="guide-step clear">
-					<h2>7. Een afgebouwde stad tellen </h2>
-					Een stad is afgebouwd als deze een sluitende stadsmuur heeft. Binnen de muur mogen 
+					<figure id = "figure"> <img src="src/Kaart_03.png" alt="Kasteel" width="100px" height="100px">
+						<figcaption>Fig. 3 - Een Kasteelkaart <br>met schild </figcaption>
+					</figure>
+					<h2>7. Een afgebouwd kasteel tellen </h2>
+					Een kasteel is afgebouwd als deze een sluitende muur heeft. Binnen de muur mogen
 					zich geen gaten meer bevinden. <br>
-					De speler die de stad met zijn horige bezet ontvangt voor iedere tegel waaruit de stad 
-					bestaat 2 punten. Daarnaast ontvangt hij voor ieder schild in de stad 2 bonuspunten.<br>
-					Als de punten zijn geteld neemt de speler de horige terug in zijn voorraad.
+					De speler die het kasteel met zijn horige bezet ontvangt voor iedere tegel waaruit het kasteel
+					bestaat 2 punten. Daarnaast ontvangt hij voor ieder schild in het kasteel 2 bonuspunten.<br>
+					Als de punten zijn geteld krijgt de speler zijn horige terug.
 				</div>
 				
 				<div class="guide-step clear">
+					<figure id = "figure"> <img src="src/Kaarten/Kaart_02.png" alt="Klooster" width="100px" height="100px">
+						<figcaption>Fig. 4 - Een Klooster</figcaption>
+					</figure>
 					<h2>8. Een afgebouwd klooster tellen </h2>
-					Een klooster is afgebouwd als de kaart met het gebouw aan alle zijden en hoeken
-					is omgeven door andere kaarten. <br>
+					Een klooster is afgebouwd als de kaart met het klooster aan alle zijden en hoeken
+					is omringd door andere kaarten. <br>
 					De speler krijgt 9 punten voor een afgebouwd klooster. <br>
-					Als de punten zijn geteld neemt de speler zijn horige terug in de voorraad.
+					Als de punten zijn geteld krijgt de speler zijn horige terug.
 				</div>
 				
 				<div class="guide-step clear">
 					<h2>9. De eindtelling</h2>
-					Aan het einde van de beurt waarbij de laatste landtegel is gepakt, is het spel afgelopen.<br>
+					Aan het einde van de beurt waarbij de laatste kaart is gepakt, is het spel afgelopen.<br>
 					De speler maakt zijn beurt af, waarna de eindtelling kan beginnen.
 				</div>
 				
 				<div class="guide-step clear">
-						<h2>10. De onafgemaakte wegen, steden en kloosters tellen</h2>
-						Eerst worden alle onafgemaakte wegen, steden en kloosters geteld. <br>
+						<h2>10. De onafgemaakte wegen, kastelen en kloosters tellen</h2>
+						Eerst worden alle onafgemaakte wegen, kastelen en kloosters geteld. <br>
 						De spelers krijgen 1 punt per tegel waaruit het bouwwerk bestaat. <br>
-						De schilden in de stad zijn ook 1 punt waard. <br>
+						De schilden in het ksateel zijn ook 1 punt waard. <br>
 						Door handig te spelen kan het zijn dat er horigen van meerdere spelers in het 
 						bouwwerk staan. De speler met de meeste horigen in een bouwwerk ontvangt de punten.
 				</div>

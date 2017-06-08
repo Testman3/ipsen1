@@ -88,11 +88,11 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 
 		mainPane.setCenter(joinViewButtons);
 
-		InitAction();
+		initAction();
 	}
 
 	@Override
-	public void InitAction() {
+	public void initAction() {
 		backToHome.setOnAction(e -> {
 			clickSound.play();
 			controller.backToMainMenu();

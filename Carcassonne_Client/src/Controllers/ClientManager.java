@@ -10,6 +10,9 @@ public class ClientManager extends Application {
 
 	static MenuController menucontroller;
 
+	//Change debug to true, too see debug prints
+	public static boolean debug = false;
+
 	public static void main(String[] args) {
 		//Dit is de main, de launch is niet wit!
 		launch(args);

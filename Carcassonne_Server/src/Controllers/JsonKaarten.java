@@ -3,9 +3,6 @@ package Controllers;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-/**
- * Created by Marti on 8-6-2017.
- */
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
