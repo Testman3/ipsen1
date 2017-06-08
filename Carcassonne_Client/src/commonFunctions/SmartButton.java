@@ -30,6 +30,7 @@ public class SmartButton extends Button {
 		voice = vm.getVoice(VOICENAME);
 		voice.allocate();
 
+		//Speel het clickSound af wanneer er met de muis op een knop gedrukt wordt
 		this.setOnMousePressed (e -> {
 			clickSound.play();
 		});
@@ -47,10 +48,11 @@ public class SmartButton extends Button {
 	public SmartButton() {
 		voice = vm.getVoice(VOICENAME);
 		voice.allocate();
+
+		//Speel het clickSound af wanneer er met de muis op een knop gedrukt wordt
 		this.setOnMousePressed(e-> {
 
 			clickSound.play();
-			System.out.println("goeie");
 		});
 
 		 //Onhover talk text

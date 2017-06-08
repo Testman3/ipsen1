@@ -14,77 +14,87 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import commonFunctions.*;
 
-public class CreditsScene extends Scene {
+public class CreditsScene extends Scene implements SceneInitialiser {
 
+	//Setting vars
 	private MenuController controller;
 	private int maxButtonWidth = 800;
-	private VBox buttonVBox = new VBox();
-	
 	BorderPane mainPane;
-	
+
+	private SmartButton backToHome;
+	private SmartLabel[] labels = new SmartLabel[5];
+
+	private VBox creditText;
+	private VBox creditsNamen;
+	private VBox backToHomeButton;
+	private VBox alles;
+
+	private Label credits;
+
 	public CreditsScene(MenuController controller) {
 
 		super(new BorderPane(), 1280, 720);
 		mainPane = (BorderPane) this.getRoot();
 		this.controller = controller;
 
-		try {
-			init();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+			initGui();
 	}
-	
-	private void init() throws RemoteException {
-		
+
+	@Override
+	public void initGui() {
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
 
-		SmartButton backToHome = new SmartButton("Terug naar Hoofdmenu");
+		backToHome = new SmartButton("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
 		backToHome.setId("standardLabel");
-		backToHome.setOnAction(e -> {
-			controller.backToMainMenu();			
-		});
-		
-		VBox creditText = new VBox();
-		VBox creditsNamen = new VBox(10);
-		VBox backToHomeButton = new VBox();
-		VBox alles = new VBox();
-		
-		backToHomeButton.getChildren().add(backToHome);
 
-		SmartLabel[] labels = new SmartLabel[5];
-		
+		creditText = new VBox();
+		creditsNamen = new VBox(10);
+		backToHomeButton = new VBox();
+		alles = new VBox();
+
 		/*
 		 * 0 = Martijn 1 = Jusin 2 = Raymon 3 = Haitam 4 = Henk
 		 */
-		
+
 		for (int i = 0; i < labels.length; i++ ){
 			labels[i] = new SmartLabel();
 			labels[i].setId("creditsLabel");
 			creditsNamen.getChildren().add(labels[i]);
 		}
-		
+
 		labels[0].setText("Martijn van Adrichem");
 		labels[1].setText("Justin Moor");
 		labels[2].setText("Raymon Haalebos");
 		labels[3].setText("Haitam el Attar");
 		labels[4].setText("Henk van Overbeek");
-		Label credits = new SmartLabel();
+
+		credits = new SmartLabel();
 		credits.setText("Credits");
 		credits.setId("titel");
 
 		creditsNamen.setAlignment(Pos.CENTER);
 		backToHomeButton.setAlignment(Pos.CENTER);
-		
+
 		creditText.getChildren().add(credits);
 		creditText.setAlignment(Pos.CENTER);
+
+		backToHomeButton.getChildren().add(backToHome);
 
 		alles.setId("schild");
 		alles.getChildren().setAll(creditText, creditsNamen, backToHomeButton);
 
 		mainPane.setCenter(alles);
 
+		initAction();
 	}
+
+	@Override
+	public void initAction() {
+		backToHome.setOnAction(e -> {
+		controller.backToMainMenu();
+		});
+	}
+
 }
