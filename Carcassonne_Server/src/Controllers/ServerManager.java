@@ -6,7 +6,7 @@ import java.rmi.server.UnicastRemoteObject;
 import Models.RMIInterface;
 
 
-public class GameManager {
+public class ServerManager {
 
 	public static void main(String[] args){
 		runServer();
