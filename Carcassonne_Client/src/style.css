@@ -91,3 +91,7 @@
 #creditsLabel {
 	-fx-font-size: 3.5em;
 }
+
+#Kaart_01{
+-fx-image: url("Kaarten/Kaart_00.png");
+}
