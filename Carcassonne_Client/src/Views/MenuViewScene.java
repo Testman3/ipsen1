@@ -64,7 +64,6 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 
 		InitAction();
 
-		//mainPane.getChildren().add(buttonPane);
 		mainPane.setCenter(buttonVBox);
 		buttonVBox.setAlignment(Pos.CENTER);
 
@@ -79,8 +78,6 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 			clickSound.play();
 			controller.setGameScene();
 		});
-
-
 
 		// Maakt een variabele aan die naar het handleiding document verwijst,
 		// wanneer je op de handleiding knop drukt wordt het html doc geopend

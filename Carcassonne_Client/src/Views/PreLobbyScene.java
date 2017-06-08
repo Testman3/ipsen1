@@ -3,6 +3,7 @@ package Views;
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
 
+import commonFunctions.SceneInitialiser;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,65 +17,71 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import Controllers.MenuController;
+import javafx.scene.text.Text;
 
-public class PreLobbyScene extends Scene{
+public class PreLobbyScene extends Scene implements SceneInitialiser{
 
+	//Importing audioclip for click sound
 	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
-	int maxTextFieldWidth = 400;
-	int maxButtonWidth = 400;
-	String playerName = "Testspeler";
 
+	//Setting variables
+	private int maxTextFieldWidth = 400;
+	private int maxButtonWidth = 400;
+	private String playerName = "Testspeler";
 	private MenuController controller;
+	private BorderPane mainPane;
 
-	BorderPane mainPane;
+	private TextField naamVeld;
+	private TextField ipVeld;
 
+	private VBox joinViewButtons;
 
+	private Button addPlayer;
+	private Button leaveGame;
+	private Button backToHome;
 
-	public PreLobbyScene(MenuController controller) {
+	private Label playersLabel;
 
-		super(new BorderPane(), 1280, 720);
-		mainPane = (BorderPane) this.getRoot();
-		this.controller = controller;
-
-		try {
-			init();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void init() throws RemoteException {
+	@Override
+	public void initGui() {
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
 
-		TextField naamVeld = new TextField("Player1");
+		naamVeld = new TextField("Player1");
 		naamVeld.setMaxWidth(maxTextFieldWidth);
 		naamVeld.setId("standardLabel");
-		TextField ipVeld = new TextField("127.0.0.1");
+		ipVeld = new TextField("127.0.0.1");
 		ipVeld.setMaxWidth(maxTextFieldWidth);
 		ipVeld.setId("standardLabel");
 
-		VBox joinViewButtons = new VBox(10);
+		joinViewButtons = new VBox(10);
 		joinViewButtons.setId("schild");
 
-		Button addPlayer = new Button("Join Game");
+		addPlayer = new Button("Join Game");
 		addPlayer.setMaxWidth(maxButtonWidth);
 		addPlayer.setId("standardLabel");
-		Button leaveGame = new Button("Leave Game");
+
+		leaveGame = new Button("Leave Game");
 		leaveGame.setMaxWidth(maxButtonWidth);
 		leaveGame.setId("standardLabel");
-		Button backToHome = new Button("Terug naar Hoofdmenu");
+
+		backToHome = new Button("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
 		backToHome.setId("standardLabel");
 
-		Label playersLabel = new Label("Players in this game: ");
+		playersLabel = new Label("Players in this game: ");
 		playersLabel.setFont(new Font("CALIBRI", 20));
-
-
 
 		joinViewButtons.getChildren().addAll(naamVeld, ipVeld, addPlayer, backToHome);
 		joinViewButtons.setAlignment(Pos.CENTER);
 
+		mainPane.setCenter(joinViewButtons);
+
+		InitAction();
+	}
+
+	@Override
+	public void InitAction() {
 		backToHome.setOnAction(e -> {
 			clickSound.play();
 			controller.backToMainMenu();
@@ -102,11 +109,15 @@ public class PreLobbyScene extends Scene{
 			}
 
 		});
-
-		mainPane.setCenter(joinViewButtons);
-
 	}
 
+	public PreLobbyScene(MenuController controller) {
+
+		super(new BorderPane(), 1280, 720);
+		mainPane = (BorderPane) this.getRoot();
+		this.controller = controller;
+		initGui();
+	}
 
 }
 
