@@ -1,13 +1,12 @@
 package Controllers;
 
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -37,7 +36,9 @@ public class JsonKaarten {
 
 		try {
 			// Get file json file (in map json)
-			obj = parser.parse(new FileReader(Paths.get("alleGoeieKaarten.json").toString()));
+			File reader = new File("alleGoeieKaarten.json");
+			System.out.println(reader.getAbsolutePath());
+			obj = parser.parse(new FileReader(reader));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
