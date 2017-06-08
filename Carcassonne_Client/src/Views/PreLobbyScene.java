@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.rmi.RemoteException;
 
 import commonFunctions.SceneInitialiser;
+import Controllers.LobbyController;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -30,6 +31,7 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 	private String playerName = "Testspeler";
 	private MenuController controller;
 	private BorderPane mainPane;
+	private LobbyController lobbyController;
 
 	private TextField naamVeld;
 	private TextField ipVeld;
@@ -41,6 +43,18 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 	private Button backToHome;
 
 	private Label playersLabel;
+	public PreLobbyScene(MenuController controller, LobbyController lobbyController) {
+
+		super(new BorderPane(), 1280, 720);
+		mainPane = (BorderPane) this.getRoot();
+		this.controller = controller;
+		this.lobbyController = lobbyController;
+		try {
+			init();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void initGui() {
@@ -89,15 +103,15 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 		addPlayer.setOnAction(e -> {
 			clickSound.play();
 			try {
-				controller.connectToServer(ipVeld.getText(), naamVeld.getText());
+				lobbyController.connectToServer(ipVeld.getText(), naamVeld.getText());
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}
 
-			if (controller.canConnect()){
+			if (lobbyController.canConnect()){
 				controller.setLobbyScene();
 				try {
-					controller.RMIstub.addPlayer(naamVeld.getText());
+					lobbyController.RMIstub.addPlayer(naamVeld.getText());
 					controller.setSpelernaam(naamVeld.getText());
 				} catch (RemoteException e1) {
 					e1.printStackTrace();

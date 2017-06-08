@@ -13,6 +13,8 @@ public class ServerManager {
 	}
 
 
+	public static boolean gameStarted = false;
+
 
 	/**
 	 * Start de gameserver en initialiseert de RMIcontroller,

@@ -50,4 +50,15 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 
 	}
 
+	@Override
+	public void startenGame() throws RemoteException {
+		ServerManager.gameStarted = true;
+	}
+
+	@Override
+	public boolean isGameStarted() throws RemoteException {
+		System.out.println(ServerManager.gameStarted);
+		return ServerManager.gameStarted;
+
+	}
 }

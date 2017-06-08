@@ -3,6 +3,7 @@ package Views;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import Controllers.LobbyController;
 import Controllers.MenuController;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -19,19 +20,22 @@ public class LobbyScene extends Scene{
 	private Label playersLabel;
 	private HBox playerBox;
 	private Button leaveGame;
+	private Button startGame;
 	private boolean enableThread;
 
 	private FlowPane lobbyPane;
 	MenuController controller;
+	LobbyController lobbyController;
 
 	Thread lobbyThread;
 	ArrayList<String> allenamen;
 
-	public LobbyScene(MenuController controller){
+	public LobbyScene(MenuController controller, LobbyController lobbyController){
 		super(new FlowPane(), 400, 400);
 		lobbyPane = (FlowPane) this.getRoot();
 		init();
 		this.controller = controller;
+		this.lobbyController = lobbyController;
 	}
 
 
@@ -47,15 +51,23 @@ public class LobbyScene extends Scene{
 		playerBox = new HBox();
 		leaveGame = new Button("Leave Game");
 		leaveGame.setMaxWidth(200);
+		startGame = new Button("Start game");
 
+		startGame.setOnAction(e -> {
+			try {
+				lobbyController.RMIstub.startenGame();
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
+		});
 
 		playerBox.getChildren().addAll(playersLabel, allePlayerNamen);
-		lobbyPane.getChildren().addAll(playerBox, leaveGame);
+		lobbyPane.getChildren().addAll(playerBox, leaveGame, startGame);
 
 		leaveGame.setOnAction(e -> {
 
 			try {
-				controller.RMIstub.removePlayer(controller.getSpelernaam());
+				lobbyController.RMIstub.removePlayer(controller.getSpelernaam());
 				System.out.println(controller.getSpelernaam());
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
@@ -85,16 +97,26 @@ public class LobbyScene extends Scene{
 
 	}
 
+	boolean starten = false;
+
 	public void Update() {
 		allenamen = new ArrayList<String>();
 
 		try {
-		allenamen = controller.RMIstub.getPlayerList();
+		allenamen = lobbyController.RMIstub.getPlayerList();
+		if(lobbyController.RMIstub.isGameStarted()){
+			starten = true;
+		}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
 
+
+
 		Platform.runLater(() -> {
+			if(starten){
+				controller.setGameScene();
+			}
 			allePlayerNamen.setText("");
 		for (String string : allenamen) {
 			allePlayerNamen.setText(allePlayerNamen.getText() + string);
