@@ -39,20 +39,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		initGui();
 	}
 
-	public void InitAction(){
-		/*
-		 * 0 = New game 1 = Laden game
-		 * 2 = Gebruiksaanwijzing
-		 * 3 = About
-		 * 4 = Instellingen
-		 * 5 = Spel verlaten
-		 */
-		for (int i = 0; i < knoppen.length; i++) {
-			knoppen[i] = new SmartButton();
-			knoppen[i].setId("standardLabel");
-			buttonVBox.getChildren().add(knoppen[i]);
-		}
-	}
+
 
 	public void initGui() {
 		buttonVBox.setId("schild");
@@ -62,10 +49,28 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 
 		buttonVBox.getChildren().add(titel);
 
-		InitAction();
-
 		mainPane.setCenter(buttonVBox);
 		buttonVBox.setAlignment(Pos.CENTER);
+
+		initAction();
+
+
+	}
+
+	public void initAction(){
+		/*
+		 * 0 = New game 1 = Laden game
+		 * 2 = Gebruiksaanwijzing
+		 * 3 = About
+		 * 4 = Instellingen
+		 * 5 = Spel verlaten
+		 */
+
+		for (int i = 0; i < knoppen.length; i++) {
+			knoppen[i] = new SmartButton();
+			knoppen[i].setId("standardLabel");
+			buttonVBox.getChildren().add(knoppen[i]);
+		}
 
 		knoppen[0].setText("Nieuw spel");
 		knoppen[0].setOnAction(e -> {
@@ -120,6 +125,8 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 			}
 			System.exit(0);
 		});
+
+
 	}
 
 }

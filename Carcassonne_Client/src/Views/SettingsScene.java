@@ -49,7 +49,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		this.controller = controller;
 
 		initGui();
-		InitAction();
+
 	}
 
 
@@ -100,8 +100,10 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		spraakBox.setAlignment(Pos.CENTER);
 		fullscreenBox.setAlignment(Pos.CENTER);
 
+		initAction();;
+
 	}
-	public void InitAction() {
+	public void initAction() {
 
 		spraakCheckBox.setOnAction(e -> {
 			optieSpreken = spraakCheckBox.isSelected();

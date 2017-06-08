@@ -34,7 +34,7 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 	public ArrayList<String> getPlayerList() {
 		ArrayList<String> Spelernamen = new ArrayList<String>();
 		for (Player player : allePlayers) {
-			Spelernamen.add(player.naam);
+			Spelernamen.add(player.naam + " ");
 		}
 		return Spelernamen;
 	}
