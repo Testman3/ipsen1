@@ -1,6 +1,9 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import Controllers.JsonKaarten;
 
 /**
@@ -13,9 +16,10 @@ public class Stapel {
 	//De tile die deze beurt getrokken is
 	Tile turnTile;
 
-	public void Stapel(){
-	kaartenOver = JsonKaarten.getAllKaarten();
-
+	public Stapel(){
+		kaartenOver = JsonKaarten.getAllKaarten();
+		System.out.println(kaartenOver.size());
+		Collections.shuffle(kaartenOver);
 	}
 
 	public int getKaartenOver() {
@@ -23,7 +27,12 @@ public class Stapel {
 	}
 
 	public void pakKaart(){
+		turnTile = kaartenOver.get(0);
+		kaartenOver.remove(0);
+	}
 
+	public Tile getTurnTile() {
+		return turnTile;
 	}
 
 }

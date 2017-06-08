@@ -1,15 +1,17 @@
 package Models;
 
-public class Player {
+public class Speler {
 
 	public String naam;
 
-	public Player(String naam){
+	public Speler(String naam){
 
 		this.naam = naam;
 	}
 
-	public String getNaam(){
+	public String getNaam() {
 		return naam;
 	}
+
+
 }

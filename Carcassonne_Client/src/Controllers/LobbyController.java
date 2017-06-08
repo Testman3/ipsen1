@@ -111,4 +111,8 @@ public class LobbyController {
 	public void gameStarten() {
 
 	}
+
+	public RMIInterface getRmiStub() {
+		return RMIstub;
+	}
 }

@@ -171,6 +171,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		Platform.runLater(() -> {
 			if (starten) {
 				controller.setGameScene();
+				controller.getGameScene().setRmiStub(lobbyController.getRmiStub());
+				enableThread = false;
 			}
 
 			for (int i = 0; i < spelers.length; i++) {
@@ -182,5 +184,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			}
 		});
 	}
+
 
 }
