@@ -27,7 +27,7 @@ public class SmartButton extends Button {
 		// Onhover talk text
 		this.setOnMouseEntered(e -> {
 			if(ClientManager.debug == true)
-			System.out.println("HOVER : " + this.getText());
+				System.out.println("HOVER : " + this.getText());
 
 			talk(this.getText());
 		});
@@ -41,7 +41,7 @@ public class SmartButton extends Button {
 		// Onhover talk text
 		this.setOnMouseEntered(e -> {
 			if(ClientManager.debug == true)
-			System.out.println("HOVER : " + this.getText());
+				System.out.println("HOVER : " + this.getText());
 
 			talk(this.getText());
 
