@@ -35,4 +35,19 @@ public interface RMIInterface extends Remote {
 	 */
 	public ArrayList<String> getPlayerList() throws RemoteException;
 
+	/**
+	 * Deze functie start de game, wordt gerunt als de speler op starten drukt in de lobby
+	 * @throws RemoteException
+	 */
+	public void startenGame() throws RemoteException;
+
+
+	/**
+	 * Checkt of de game al gestart is
+	 * @return isStarted
+	 * @throws RemoteException
+	 */
+	public boolean isGameStarted() throws RemoteException;
+
+
 }

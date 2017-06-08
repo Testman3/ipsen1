@@ -19,15 +19,16 @@ public class ClientManager extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		//Als de username overeenkomt met overb wordt het onderstaande code blok NIET uitgevoerd
-		if (!(System.getProperty("user.name").equals("overb"))){
+		if (!(System.getProperty("user.name").equals("overb")) || (System.getProperty("user.name").equals("Marti"))){
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
-		primaryStage.setX(primaryScreenBounds.getMinX());
-		primaryStage.setY(primaryScreenBounds.getMinY());
-		primaryStage.setWidth(primaryScreenBounds.getWidth());
-		primaryStage.setHeight(primaryScreenBounds.getHeight());
+		//System.out.println(System.getProperty("user.name"));
+		//primaryStage.setX(primaryScreenBounds.getMinX());
+		//primaryStage.setY(primaryScreenBounds.getMinY());
+		//primaryStage.setWidth(primaryScreenBounds.getWidth());
+		//primaryStage.setHeight(primaryScreenBounds.getHeight());
 
-		primaryStage.setResizable(false);
+		//primaryStage.setResizable(false);
 		}
 
 		runClient(primaryStage);
