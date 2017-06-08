@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 
 import commonFunctions.SceneInitialiser;
 import Controllers.LobbyController;
+import commonFunctions.SmartButton;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,9 +23,6 @@ import javafx.scene.text.Text;
 
 public class PreLobbyScene extends Scene implements SceneInitialiser{
 
-	//Importing audioclip for click sound
-	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
-
 	//Setting variables
 	private int maxTextFieldWidth = 400;
 	private int maxButtonWidth = 400;
@@ -38,9 +36,9 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 
 	private VBox joinViewButtons;
 
-	private Button addPlayer;
-	private Button leaveGame;
-	private Button backToHome;
+	private SmartButton addPlayer;
+	private SmartButton leaveGame;
+	private SmartButton backToHome;
 
 	private Label playersLabel;
 
@@ -68,15 +66,15 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 		joinViewButtons = new VBox(10);
 		joinViewButtons.setId("schild");
 
-		addPlayer = new Button("Join Game");
+		addPlayer = new SmartButton("Join Game");
 		addPlayer.setMaxWidth(maxButtonWidth);
 		addPlayer.setId("standardLabel");
 
-		leaveGame = new Button("Leave Game");
+		leaveGame = new SmartButton("Leave Game");
 		leaveGame.setMaxWidth(maxButtonWidth);
 		leaveGame.setId("standardLabel");
 
-		backToHome = new Button("Terug naar Hoofdmenu");
+		backToHome = new SmartButton("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
 		backToHome.setId("standardLabel");
 
@@ -94,11 +92,9 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 	@Override
 	public void initAction() {
 		backToHome.setOnAction(e -> {
-			clickSound.play();
 			controller.backToMainMenu();
 		});
 		addPlayer.setOnAction(e -> {
-			clickSound.play();
 			try {
 				lobbyController.connectToServer(ipVeld.getText(), naamVeld.getText());
 			} catch (RemoteException e1) {

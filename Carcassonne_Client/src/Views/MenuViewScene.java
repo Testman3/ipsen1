@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 
 public class MenuViewScene extends Scene implements SceneInitialiser{
 
-	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
 	private BorderPane mainPane;
 	private Label titel = new Label("Carcassonne");
 	private VBox buttonVBox = new VBox();
@@ -74,13 +73,11 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 
 		knoppen[0].setText("Nieuw spel");
 		knoppen[0].setOnAction(e -> {
-			clickSound.play();
 			controller.setPreLobbyScene();
 		});
 
 		knoppen[1].setText("Laden spel");
 		knoppen[1].setOnAction(e -> {
-			clickSound.play();
 			controller.setGameScene();
 		});
 
@@ -96,19 +93,16 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 			} catch (IOException e1) {
 				System.out.println(e1);
 			}
-			clickSound.play();
 		});
 
 		knoppen[3].setText("Credits");
 		knoppen[3].setOnAction(e -> {
-			clickSound.play();
 			controller.setCreditsScene();
 
 		});
 
 		knoppen[4].setText("Instellingen");
 		knoppen[4].setOnAction(e -> {
-			clickSound.play();
 			controller.setSettingsScene();
 
 		});
@@ -117,7 +111,6 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		//Er word precies zo lang gewacht als het geluid lang is
 		knoppen[5].setText("Spel afsluiten");
 		knoppen[5].setOnAction(e -> {
-			clickSound.play();
 			try {
 				Thread.sleep(142);
 			} catch (InterruptedException e1) {

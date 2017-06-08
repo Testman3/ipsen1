@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Controllers.LobbyController;
 import Controllers.MenuController;
 import commonFunctions.SceneInitialiser;
+import commonFunctions.SmartButton;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,8 +18,8 @@ import javafx.scene.layout.*;
 
 public class LobbyScene extends Scene implements SceneInitialiser {
 
-	private Button leaveGame;
-	private Button startGame;
+	private SmartButton leaveGame;
+	private SmartButton startGame;
 	private Label[] spelers;
 	private boolean enableThread;
 
@@ -89,9 +90,9 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		box1.setAlignment(Pos.CENTER);
 
 
-		leaveGame = new Button("Leave Game");
+		leaveGame = new SmartButton("Leave Game");
 		leaveGame.setId("standardLabel");
-		startGame = new Button("Start game");
+		startGame = new SmartButton("Start game");
 		startGame.setId("standardLabel");
 
 		knoppenBox.getChildren().addAll(leaveGame, startGame);

@@ -7,8 +7,14 @@ import Views.SettingsScene;
 import javafx.css.PseudoClass;
 import javafx.scene.AccessibleRole;
 import javafx.scene.control.Button;
+import javafx.scene.media.AudioClip;
+
+import java.nio.file.Paths;
 
 public class SmartButton extends Button {
+
+	//Importeer de audioclip te gebruiken voor alle knoppen
+	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
 
 	// Stem type van speech (Kevin)
 	private static final String VOICENAME="kevin16";
@@ -24,6 +30,10 @@ public class SmartButton extends Button {
 		voice = vm.getVoice(VOICENAME);
 		voice.allocate();
 
+		this.setOnMousePressed (e -> {
+			clickSound.play();
+		});
+
 		// Onhover talk text
 		this.setOnMouseEntered(e -> {
 			if(ClientManager.debug == true)
@@ -37,8 +47,13 @@ public class SmartButton extends Button {
 	public SmartButton() {
 		voice = vm.getVoice(VOICENAME);
 		voice.allocate();
+		this.setOnMousePressed(e-> {
 
-		// Onhover talk text
+			clickSound.play();
+			System.out.println("goeie");
+		});
+
+		 //Onhover talk text
 		this.setOnMouseEntered(e -> {
 			if(ClientManager.debug == true)
 				System.out.println("HOVER : " + this.getText());

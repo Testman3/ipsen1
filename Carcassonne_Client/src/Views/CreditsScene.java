@@ -18,7 +18,6 @@ public class CreditsScene extends Scene {
 
 	private MenuController controller;
 	private int maxButtonWidth = 800;
-	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
 	private VBox buttonVBox = new VBox();
 	
 	BorderPane mainPane;
@@ -45,7 +44,6 @@ public class CreditsScene extends Scene {
 		backToHome.setMaxWidth(maxButtonWidth);
 		backToHome.setId("standardLabel");
 		backToHome.setOnAction(e -> {
-			clickSound.play();
 			controller.backToMainMenu();			
 		});
 		

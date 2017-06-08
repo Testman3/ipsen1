@@ -2,6 +2,7 @@ package Views;
 
 import Controllers.MenuController;
 import commonFunctions.SceneInitialiser;
+import commonFunctions.SmartButton;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,9 +16,6 @@ import javafx.scene.media.AudioClip;
 import java.nio.file.Paths;
 
 public class SettingsScene extends Scene implements SceneInitialiser {
-
-	//Importing audioclip for click sound
-	private AudioClip clickSound = new AudioClip(Paths.get("Sounds/Snd_Click.wav").toUri().toString());
 
 	//Settings vars
 	private BorderPane mainPane;
@@ -35,7 +33,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	private CheckBox spraakCheckBox;
 	private CheckBox fullscreenCheckBox;
 
-	private Button backToHome;
+	private SmartButton backToHome;
 	private MenuController controller;
 
 	//spraak
@@ -55,7 +53,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 	public void initGui() {
 
-		backToHome = new Button("Terug naar hoofdmenu");
+		backToHome = new SmartButton("Terug naar hoofdmenu");
 		backToHome.setId("standardLabel");
 
 		mainPane.getStylesheets().add("style.css");
@@ -114,7 +112,6 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		});
 
 		backToHome.setOnAction(e -> {
-			clickSound.play();
 			controller.backToMainMenu();
 		});
 
