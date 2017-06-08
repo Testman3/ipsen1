@@ -13,5 +13,15 @@
 	<classpathentry kind="lib" path="D:/IIPSEN/Github/ipsen1/lib/freetts-jsapi10.jar"/>
 	<classpathentry kind="lib" path="D:/IIPSEN/Github/ipsen1/lib/jsonSimple.jar"/>
 	<classpathentry kind="lib" path="D:/IIPSEN/Github/ipsen1/lib/mbrola.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/jsonSimple.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/cmulex.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/en_us.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/freetts.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/cmudict04.jar"/>
+	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/freetts-jsapi10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
