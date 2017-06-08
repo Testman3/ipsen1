@@ -12,18 +12,25 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 
 public class LobbyScene extends Scene implements SceneInitialiser {
 
 	private Button leaveGame;
 	private Button startGame;
-	private Label[] spelers = new Label[5];
+	private Label[] spelers;
 	private boolean enableThread;
 
-	private VBox playerBox;
+	private VBox completeBox;
 	private HBox knoppenBox;
+
+	private HBox box1;
+
+	private VBox horigenBox;
+	private VBox spelerBox;
+
+	private ImageView [] horigen;
 
 	private BorderPane lobbyPane;
 	MenuController controller;
@@ -48,30 +55,52 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		lobbyPane.getStylesheets().add("style.css");
 		lobbyPane.setId("mainBackground");
 
+		box1 = new HBox(35);
+		spelerBox = new VBox();
+		horigenBox = new VBox(30);
+		spelers = new Label[5];
 
-		knoppenBox = new HBox(35);
-		playerBox = new VBox();
-		knoppenBox.setPadding(new Insets(50,0,0,0));
-		playerBox.setId("schild");
+		horigen = new ImageView[5];
+		horigen[0] = new ImageView("Horige_Rood.png");
+		horigen[1] = new ImageView("Horige_Blauw.png");
+		horigen[2] = new ImageView("Horige_Geel.png");
+		horigen[3] = new ImageView("Horige_Groen.png");
+		horigen[4] = new ImageView("Horige_Zwart.png");
+
+		knoppenBox = new HBox(60);
+		completeBox = new VBox();
+		knoppenBox.setPadding(new Insets(50, 0, 0, 0));
+		box1.setPadding(new Insets(60, 0, 0, 0));
+		completeBox.setId("schild");
 
 		for (int i = 0; i < spelers.length; i++) {
 			spelers[i] = new Label();
 			spelers[i].setId("standardLabel");
-			playerBox.getChildren().add(spelers[i]);
+
+			horigen[i].setFitHeight(50);
+			horigen[i].setFitWidth(50);
+			spelerBox.getChildren().addAll(spelers[i]);
+			horigenBox.getChildren().add(horigen[i]);
+
 		}
+
+		box1.getChildren().addAll(spelerBox, horigenBox);
+		completeBox.getChildren().add(box1);
+		box1.setAlignment(Pos.CENTER);
+
 
 		leaveGame = new Button("Leave Game");
 		leaveGame.setId("standardLabel");
 		startGame = new Button("Start game");
 		startGame.setId("standardLabel");
 
-		knoppenBox.getChildren().addAll(startGame, leaveGame);
+		knoppenBox.getChildren().addAll(leaveGame, startGame);
 		knoppenBox.setAlignment(Pos.CENTER);
 
-		playerBox.getChildren().add(knoppenBox);
-		playerBox.setAlignment(Pos.CENTER);
+		completeBox.getChildren().add(knoppenBox);
+		completeBox.setAlignment(Pos.CENTER);
 
-		lobbyPane.setCenter(playerBox);
+		lobbyPane.setCenter(completeBox);
 
 
 		initAction();
@@ -93,7 +122,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			try {
 				lobbyController.RMIstub.removePlayer(controller.getSpelernaam());
 				System.out.println(controller.getSpelernaam());
-
 
 
 			} catch (RemoteException e1) {
@@ -146,7 +174,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			}
 
 			for (int i = 0; i < spelers.length; i++) {
-				if(allenamen.size() <= i ){
+				if (allenamen.size() <= i) {
 					spelers[i].setText("Leeg");
 				} else {
 					spelers[i].setText(allenamen.get(i));
