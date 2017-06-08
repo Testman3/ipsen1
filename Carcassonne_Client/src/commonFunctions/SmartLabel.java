@@ -1,5 +1,8 @@
 package commonFunctions;
 
+import Controllers.ClientManager;
+import Controllers.MenuController;
+import com.sun.security.ntlm.Client;
 import com.sun.speech.freetts.*;
 
 import Views.SettingsScene;
@@ -26,10 +29,12 @@ public class SmartLabel extends Label {
 		voice.allocate();
 
 		// Onhover talk text
-			this.setOnMouseEntered(e -> {
+		this.setOnMouseEntered(e -> {
+			if(ClientManager.debug == true)
 				System.out.println("HOVER : " + this.getText());
-				talk(this.getText());
-			});
+
+			talk(this.getText());
+		});
 
 		initialize();
 	}
@@ -39,10 +44,12 @@ public class SmartLabel extends Label {
 		voice.allocate();
 
 		// Onhover talk text
-			this.setOnMouseEntered(e -> {
+		this.setOnMouseEntered(e -> {
+			if(ClientManager.debug == true)
 				System.out.println("HOVER : " + this.getText());
-				talk(this.getText());
-			});
+
+			talk(this.getText());
+		});
 
 		initialize();
 	}

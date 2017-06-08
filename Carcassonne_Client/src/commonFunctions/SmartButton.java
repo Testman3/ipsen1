@@ -1,5 +1,6 @@
 package commonFunctions;
 
+import Controllers.ClientManager;
 import com.sun.speech.freetts.*;
 
 import Views.SettingsScene;
@@ -25,7 +26,9 @@ public class SmartButton extends Button {
 
 		// Onhover talk text
 		this.setOnMouseEntered(e -> {
+			if(ClientManager.debug == true)
 			System.out.println("HOVER : " + this.getText());
+
 			talk(this.getText());
 		});
 		initialize();
@@ -37,7 +40,9 @@ public class SmartButton extends Button {
 
 		// Onhover talk text
 		this.setOnMouseEntered(e -> {
+			if(ClientManager.debug == true)
 			System.out.println("HOVER : " + this.getText());
+
 			talk(this.getText());
 
 			initialize();
