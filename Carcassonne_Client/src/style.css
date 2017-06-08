@@ -88,4 +88,6 @@
 		-fx-image: url("Kaart_00.png");
 }
 
-
+#creditsLabel {
+	-fx-font-size: 3.5em;
+}

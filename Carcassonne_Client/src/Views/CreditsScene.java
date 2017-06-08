@@ -63,7 +63,7 @@ public class CreditsScene extends Scene {
 		
 		for (int i = 0; i < labels.length; i++ ){
 			labels[i] = new Label();
-			labels[i].setId("standardLabel");
+			labels[i].setId("creditsLabel");
 			creditsNamen.getChildren().add(labels[i]);
 		}
 		
@@ -74,11 +74,10 @@ public class CreditsScene extends Scene {
 		labels[4].setText("Henk van Overbeek");
 		Label credits = new Label();
 		credits.setText("Credits");
-		credits.setId("title");
-		
+		credits.setId("titel");
+
 		creditsNamen.setAlignment(Pos.CENTER);
 		backToHomeButton.setAlignment(Pos.CENTER);
-		credits.setAlignment(Pos.CENTER);
 		
 		creditText.getChildren().add(credits);
 		creditText.setAlignment(Pos.CENTER);
@@ -86,12 +85,7 @@ public class CreditsScene extends Scene {
 		alles.setId("schild");
 		alles.getChildren().setAll(creditText, creditsNamen, backToHomeButton);
 
-		//mainPane.setTop(creditText);
 		mainPane.setCenter(alles);
-		//mainPane.setBottom(backToHomeButton);
-		
-		
+
 	}
-	
-	
 }
