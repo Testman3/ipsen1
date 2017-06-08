@@ -106,25 +106,30 @@ public class LobbyScene extends Scene{
 		allenamen = lobbyController.RMIstub.getPlayerList();
 		if(lobbyController.RMIstub.isGameStarted()){
 			starten = true;
+
 		}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
 
 
-
+		if(enableThread){
 		Platform.runLater(() -> {
 			if(starten){
 				controller.setGameScene();
+				controller.getGameScene().setRmiStub(lobbyController.getRmiStub());
+				enableThread = false;
 			}
 			allePlayerNamen.setText("");
 		for (String string : allenamen) {
 			allePlayerNamen.setText(allePlayerNamen.getText() + string);
 		}});
-	}
+	}}
+
 	public void setPlayerList(String spelers){
 		allePlayerNamen.setText(spelers);
 		System.out.println("WERK KUT DING");
 	}
+
 
 }

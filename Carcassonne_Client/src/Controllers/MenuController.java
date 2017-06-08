@@ -73,7 +73,8 @@ public class MenuController {
 	}
 	public void setGameScene(){
 		gameStage.setScene(gameScene);
-		gameStage.setFullScreen(SettingsScene.fullScreen);
+		gameScene.Join(spelernaam);
+	//	gameStage.setFullScreen(SettingsScene.fullScreen);
 	}
 
 	public void setLobbyScene(){

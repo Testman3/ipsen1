@@ -50,4 +50,11 @@ public interface RMIInterface extends Remote {
 	public boolean isGameStarted() throws RemoteException;
 
 
+	/**
+	 *
+ 	 * @param spelerNaam
+	 * @return ID van de kaart die gepakt is
+	 * @throws RemoteException
+	 */
+	public String pakKaart(String spelerNaam) throws RemoteException;
 }

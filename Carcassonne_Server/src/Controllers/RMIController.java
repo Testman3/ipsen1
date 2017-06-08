@@ -3,27 +3,34 @@ package Controllers;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import Models.Player;
+import Models.Speler;
 import Models.RMIInterface;
 
 public class RMIController implements RMIInterface {
 
-public	ArrayList<Player> allePlayers = new ArrayList<Player>();
+	public static ArrayList<Speler> alleSpelers = new ArrayList<Speler>();
+
+	public ServerManager serverManager;
+
+
+	public RMIController(ServerManager manager) {
+		serverManager = manager;
+	}
 
 	@Override
 	public void addPlayer(String naam) {
-		Player player = new Player(naam);
-		allePlayers.add(player);
-		System.out.println("Player " + naam + " has joined the game");
+		Speler speler = new Speler(naam);
+		alleSpelers.add(speler);
+		System.out.println("Speler " + naam + " has joined the game");
 	}
 
 	@Override
 	public void removePlayer(String naam) {
 
-		for (Player player : allePlayers) {
-			if(player.naam.contains(naam)){
-				System.out.println("Player " + naam + " has left the game");
-				allePlayers.remove(player);
+		for (Speler speler : alleSpelers) {
+			if (speler.naam.contains(naam)) {
+				System.out.println("Speler " + naam + " has left the game");
+				alleSpelers.remove(speler);
 				return;
 			}
 		}
@@ -33,16 +40,16 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 	@Override
 	public ArrayList<String> getPlayerList() {
 		ArrayList<String> Spelernamen = new ArrayList<String>();
-		for (Player player : allePlayers) {
-			Spelernamen.add(player.naam);
+		for (Speler speler : alleSpelers) {
+			Spelernamen.add(speler.naam);
 		}
 		return Spelernamen;
 	}
 
 	@Override
 	public boolean checkContains(String naam) throws RemoteException {
-		for (Player player : allePlayers) {
-			if(player.naam.contains(naam)){
+		for (Speler speler : alleSpelers) {
+			if (speler.naam.contains(naam)) {
 				return true;
 			}
 		}
@@ -52,7 +59,7 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 
 	@Override
 	public void startenGame() throws RemoteException {
-		ServerManager.gameStarted = true;
+		serverManager.startGame();
 	}
 
 	@Override
@@ -61,4 +68,10 @@ public	ArrayList<Player> allePlayers = new ArrayList<Player>();
 		return ServerManager.gameStarted;
 
 	}
+
+	@Override
+	public String pakKaart(String spelerNaam) throws RemoteException {
+		return serverManager.bordController.pakKaartvanStapel(spelerNaam);
+	}
+
 }

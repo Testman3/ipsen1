@@ -1,6 +1,9 @@
 package Views;
 
 import Controllers.MenuController;
+import Controllers.RMIController;
+import Models.RMIInterface;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,6 +18,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 import javax.swing.*;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class GameScene extends Scene {
 
@@ -28,6 +33,14 @@ public class GameScene extends Scene {
 	HBox test;
 
 	TileView[][] tileViews;
+
+	RMIInterface RmiStub;
+
+	Thread gameThread;
+
+	private boolean enableThread;
+
+	private String spelerNaam;
 
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
@@ -123,7 +136,7 @@ public class GameScene extends Scene {
 		ImageView imgView = new ImageView();
 		imgView.fitHeightProperty().bind(heightProperty().multiply(0.2));
 		imgView.fitWidthProperty().bind(widthProperty().multiply(0.11));
-		//imgView.setId("Player");
+		//imgView.setId("Speler");
 		links.getChildren().add(imgView);
 
 		for (int i = 0; i < 5; i++) {
@@ -133,7 +146,7 @@ public class GameScene extends Scene {
 			imgView.prefHeight(100);
 			imgView.fitHeightProperty().bind(heightProperty().multiply(0.1));
 			imgView.fitWidthProperty().bind(widthProperty().multiply(0.11));
-			imgView.setId("Player");
+			imgView.setId("Speler");
 			links.getChildren().add(imgView);
 		}
 
@@ -143,6 +156,14 @@ public class GameScene extends Scene {
 		imgView.fitWidthProperty().bind(widthProperty().multiply(0.11));
 		imgView.setId("Kaartview");
 		links.getChildren().add(imgView);
+		imgView.setOnMouseClicked(e -> {
+
+			try {
+				RmiStub.pakKaart(controller.getSpelernaam());
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
+		});
 
 		HBox onder = new HBox();
 		onder.setPadding(new Insets(0, 0, 0, 0));
@@ -162,4 +183,38 @@ public class GameScene extends Scene {
 		}
 
 	}
+
+	public void setRmiStub(RMIInterface rmiController) {
+		 RmiStub = rmiController;
+	}
+
+	public void Join(String spelerNaam) {
+
+		gameThread = new Thread( () -> {
+			while(enableThread == true){
+				Update();
+				System.out.println("Running...");
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		gameThread.start();
+
+	}
+
+
+	public void Update() {
+
+
+
+
+		Platform.runLater(() -> {
+			});
+	}
+
+
 }

@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -39,14 +40,17 @@ public class JsonKaarten {
 
 		try {
 			// Get file json file (in map json)
-			obj = parser.parse(new FileReader("json/alleGoeieKaarten.json"));
+			obj = parser.parse(new FileReader(Paths.get("alleGoeieKaarten.json").toString()));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("FileNotFound");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("IO");
 			e.printStackTrace();
 		} catch (org.json.simple.parser.ParseException e) {
+			System.out.println("I have no clue what this is");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

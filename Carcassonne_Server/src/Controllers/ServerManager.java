@@ -9,22 +9,22 @@ import Models.RMIInterface;
 public class ServerManager {
 
 	public static void main(String[] args){
-		runServer();
+		ServerManager manager = new ServerManager();
+		manager.runServer();
 	}
 
 
 	public static boolean gameStarted = false;
-
-
+	BordController bordController;
 	/**
 	 * Start de gameserver en initialiseert de RMIcontroller,
 	 * om vervolgens connectie te kunnen maken met de clients
 	 * 
 	 */
-	public static void runServer() {
+	public void runServer() {
 		try {
 
-			RMIController RMIimlp = new RMIController();
+			RMIController RMIimlp = new RMIController(this);
 			RMIInterface rmiSkeleton = 	(RMIInterface) UnicastRemoteObject.exportObject(RMIimlp, 0);
 			System.out.println("rmiSkeleton created");
 			Registry registry = LocateRegistry.createRegistry(1099);
@@ -36,5 +36,10 @@ public class ServerManager {
 		} catch (Exception e) {
 			System.out.println("EXCEPTION: " + e);
 		}
+	}
+
+	public void startGame() {
+		bordController = new BordController();
+		gameStarted = true;
 	}
 }

@@ -27,4 +27,8 @@ public class Tile {
 		this.heeftKlooster = heeftKlooster;
 		this.heeftBonus = heeftBonus;
 	}
+
+	public String getImageID() {
+		return imageID;
+	}
 }
