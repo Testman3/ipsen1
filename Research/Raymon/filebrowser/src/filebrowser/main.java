@@ -37,12 +37,12 @@ public class main extends Application{
 			
 			// explorer window name
 			fileChooser.setTitle("Save Game");
+			
 			// show explorer window
 			File fle = fileChooser.showSaveDialog(primaryStage);
-			//get path of selected file
-			String path = fle.getPath();
+			
 			// File handeling in class fileManager
-			fileManager.saveGame(path);
+			fileManager.saveGame(fle.getPath());
 		});
 		
 		//new button for load game
@@ -51,6 +51,7 @@ public class main extends Application{
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Laadgame");
 			File fle = fileChooser.showOpenDialog(primaryStage);
+			fileManager.loadGame(fle.getPath());
 		});
 		
 		HBox pane = new HBox(10);
