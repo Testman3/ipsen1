@@ -18,6 +18,7 @@ public class TileView extends ImageView {
 	public TileView(int x, int y, GameScene scene){
 		this.x = x;
 		this.y = y;
+		this.scene = scene;
 		setFitHeight(90);
 		setFitWidth(90);
 		minHeight(90);
@@ -26,7 +27,11 @@ public class TileView extends ImageView {
 		setId("Empty");
 		setOnMouseClicked(e -> {
 			System.out.println("Clicked on " + x +  " " + y);
-			setId("KaartTest");
+			if(scene.kaartPlaatsId != "") {
+				System.out.println(scene.kaartPlaatsId);
+				setId(scene.kaartPlaatsId);
+				scene.kaartPlaatsId = "";
+			}
 			scene.addPreviews(x, y);
 		});
 	}

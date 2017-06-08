@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -41,6 +42,7 @@ public class GameScene extends Scene {
 	private boolean enableThread;
 
 	private String spelerNaam;
+	public String kaartPlaatsId = "";
 
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
@@ -150,16 +152,18 @@ public class GameScene extends Scene {
 			links.getChildren().add(imgView);
 		}
 
+		final ImageView ShowKaart = new ImageView();
+		ShowKaart.fitHeightProperty().bind(heightProperty().multiply(0.2));
+		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
+		ShowKaart.setId("Kaartview");
 
-		imgView = new ImageView();
-		imgView.fitHeightProperty().bind(heightProperty().multiply(0.2));
-		imgView.fitWidthProperty().bind(widthProperty().multiply(0.11));
-		imgView.setId("Kaartview");
-		links.getChildren().add(imgView);
-		imgView.setOnMouseClicked(e -> {
+		links.getChildren().add(ShowKaart);
+		ShowKaart.setOnMouseClicked(e -> {
 
 			try {
-				RmiStub.pakKaart(controller.getSpelernaam());
+				String id = RmiStub.pakKaart(controller.getSpelernaam());
+				ShowKaart.setId(id);
+				kaartPlaatsId = id;
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}
