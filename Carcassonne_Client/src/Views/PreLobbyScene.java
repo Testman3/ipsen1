@@ -49,11 +49,7 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 		mainPane = (BorderPane) this.getRoot();
 		this.controller = controller;
 		this.lobbyController = lobbyController;
-		try {
-			init();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		initGui();
 	}
 
 	@Override
