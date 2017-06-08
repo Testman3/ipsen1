@@ -24,10 +24,10 @@ public class SmartButton extends Button {
 		voice.allocate();
 
 		// Onhover talk text
-			this.setOnMouseEntered(e -> {
-				System.out.println("HOVER : " + this.getText());
-				talk(this.getText());
-			});
+		this.setOnMouseEntered(e -> {
+			System.out.println("HOVER : " + this.getText());
+			talk(this.getText());
+		});
 		initialize();
 	}
 
@@ -47,12 +47,12 @@ public class SmartButton extends Button {
 	// @param String text - label tekst
 	// @throws Exception
 	public void talk(String text) {
-		try{
-			if (SettingsScene.optieSpreken) {
+		if (SettingsScene.optieSpreken) {
+			try {
 				voice.speak(text);
+			} catch (Exception e) {
+				System.out.println("FOUT: " + e);
 			}
-		}catch(Exception e){
-			System.out.println("FOUT: " + e);
 		}
 	}
 
