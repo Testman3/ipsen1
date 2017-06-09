@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -20,12 +21,13 @@ import Models.RMIInterface;
 public class LobbyController {
 
 
-	private boolean ableToConnect;
+	private boolean ableToConnect = false;
 
 	public RMIInterface RMIstub;
 
 	/**
 	 * Probeert de speler te laten verbinden met de rmi server
+	 *
 	 * @param ip
 	 * @param naam
 	 * @throws RemoteException
@@ -42,10 +44,17 @@ public class LobbyController {
 				registry = LocateRegistry.getRegistry(ip);
 				System.out.println("Getting the Lobby stub from registry");
 				RMIstub = (RMIInterface) registry.lookup("Lobby");
+				ableToConnect = true;
+			} catch (ConnectException e) {
+				Alert alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
+				alert.showAndWait();
+				ableToConnect = false;
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			} catch (NotBoundException e) {
-				e.printStackTrace();
+				Alert alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
+				alert.showAndWait();
+				ableToConnect = false;
 			}
 
 			if (controleerNaam(naam)) {
@@ -56,29 +65,28 @@ public class LobbyController {
 				registry = null;
 				ableToConnect = false;
 			} else {
-
 				System.out.println("Joining the game as " + naam);
-				ableToConnect = true;
-
 			}
 		}
 	}
 
 
-	private boolean controleerNaam(String naam){
-	if(RMIstub == null){
-		//Speler is niet connected met de RMI, dus de naam kan niet gechecked worden
-		return false;
-	}
-	boolean naamCheck = false;
-	try {
-		 naamCheck = RMIstub.checkContains(naam);
-	} catch(RemoteException e ) {
+	private boolean controleerNaam(String naam) {
+		if (RMIstub == null) {
+			//Speler is niet connected met de RMI, dus de naam kan niet gechecked worden
+			return false;
 		}
-	return naamCheck;
+		boolean naamCheck = false;
+		try {
+			naamCheck = RMIstub.checkContains(naam);
+		} catch (RemoteException e) {
+		}
+		return naamCheck;
 	}
+
 	/**
 	 * Controleert of de opgegeven String een geldig IP format is
+	 *
 	 * @param ip
 	 * @return
 	 */
@@ -97,14 +105,12 @@ public class LobbyController {
 
 	/**
 	 * Deze functie wordt gebruikt bij het verbinding maken met de rmi server.
+	 *
 	 * @return true / false
 	 */
-	public boolean canConnect(){
-		if (ableToConnect){
-			return true;
-		} else {
-			return false;
-		}
+	public boolean canConnect() {
+		if (ableToConnect) return true;
+		else return false;
 	}
 
 
