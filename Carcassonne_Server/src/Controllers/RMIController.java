@@ -72,6 +72,7 @@ public class RMIController implements RMIInterface {
 	@Override
 	public String pakKaart(String spelerNaam) throws RemoteException {
 		return serverManager.bordController.pakKaartvanStapel(spelerNaam);
+
 	}
 
 

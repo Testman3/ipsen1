@@ -19,12 +19,12 @@ import javafx.scene.layout.*;
 public class LobbyScene extends Scene implements SceneInitialiser {
 
 	private SmartButton leaveGame;
-	private SmartButton startGame;
+	private static SmartButton startGame;
 	private Label[] spelers;
 	private boolean enableThread;
 
 	private VBox completeBox;
-	private HBox knoppenBox;
+	private static HBox knoppenBox;
 
 	private HBox box1;
 
@@ -34,11 +34,11 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	private ImageView [] horigen;
 
 	private BorderPane lobbyPane;
-	private MenuController controller;
-	private LobbyController lobbyController;
+	MenuController controller;
+	LobbyController lobbyController;
 
-	private Thread lobbyThread;
-	private ArrayList<String> allenamen;
+	Thread lobbyThread;
+	ArrayList<String> allenamen;
 
 	public LobbyScene(MenuController controller, LobbyController lobbyController) {
 		super(new BorderPane(), 1280, 720);
@@ -50,14 +50,13 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		initGui();
 	}
 
-
 	public void initGui() {
 
 		lobbyPane.getStylesheets().add("style.css");
 		lobbyPane.setId("mainBackground");
 
 		box1 = new HBox(35);
-		spelerBox = new VBox(15);
+		spelerBox = new VBox();
 		horigenBox = new VBox(15);
 		spelers = new Label[5];
 
@@ -77,6 +76,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		for (int i = 0; i < spelers.length; i++) {
 			spelers[i] = new Label();
 			spelers[i].setId("standardLabel");
+
 			horigen[i].setFitHeight(50);
 			horigen[i].setFitWidth(50);
 			spelerBox.getChildren().addAll(spelers[i]);
@@ -94,7 +94,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		startGame = new SmartButton("Start game");
 		startGame.setId("standardLabel");
 
-		knoppenBox.getChildren().addAll(leaveGame, startGame);
+		knoppenBox.getChildren().addAll(leaveGame);
 		knoppenBox.setAlignment(Pos.CENTER);
 
 		completeBox.getChildren().add(knoppenBox);
@@ -185,5 +185,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		});
 	}
 
+	public static void setAbleToStartGame(){
+	knoppenBox.getChildren().add(startGame);
+	}
 
 }

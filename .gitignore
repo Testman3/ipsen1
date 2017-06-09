@@ -11,6 +11,10 @@ MainApplicatie/\.metadata/
 
 \.recommenders/
 
+.classpath
+
+*.class
+
 Carcassonne_Client/\.idea/
 
 Carcassonne_Client/Carcassonne_Client\.iml
