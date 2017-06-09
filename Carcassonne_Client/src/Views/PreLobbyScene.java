@@ -1,25 +1,20 @@
 package Views;
 
-import java.nio.file.Paths;
+
 import java.rmi.RemoteException;
 
 import commonFunctions.SceneInitialiser;
 import Controllers.LobbyController;
 import commonFunctions.SmartButton;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import Controllers.MenuController;
-import javafx.scene.text.Text;
 
 public class PreLobbyScene extends Scene implements SceneInitialiser{
 
@@ -94,7 +89,7 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 		backToHome.setOnAction(e -> {
 			controller.backToMainMenu();
 		});
-		addPlayer.setOnAction(e -> {
+		addPlayer.setOnAction((ActionEvent e) -> {
 			try {
 				lobbyController.connectToServer(ipVeld.getText(), naamVeld.getText());
 			} catch (RemoteException e1) {
@@ -107,6 +102,7 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 					lobbyController.RMIstub.addPlayer(naamVeld.getText());
 					controller.setSpelernaam(naamVeld.getText());
 					if (lobbyController.getRmiStub().getPlayerList().get(0).contains(naamVeld.getText())){
+
 						LobbyScene.setAbleToStartGame();
 					}
 				} catch (RemoteException e1) {

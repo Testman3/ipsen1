@@ -43,6 +43,7 @@ public class RMIController implements RMIInterface {
 		for (Speler speler : alleSpelers) {
 			Spelernamen.add(speler.naam);
 		}
+
 		return Spelernamen;
 	}
 
