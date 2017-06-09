@@ -40,12 +40,14 @@ public class GameScene extends Scene {
 
 	Thread gameThread;
 
-	private boolean enableThread;
+	private boolean enableThread = true;
 
 	 public ImageView ShowKaart;
 
 	private String spelerNaam;
 	public String kaartPlaatsId = "";
+
+	String spelerBeurt = "";
 
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
@@ -56,8 +58,8 @@ public class GameScene extends Scene {
 
 		//Spane.getChildren().add(tilesPane);
 		createTileGrid(100, 100);
-		tileViews[10][10].setKaartId("Kaart_04");
-		addPreviews(10,10);
+		//tileViews[10][10].setKaartId("Kaart_04");
+		//addPreviews(10,10);
 		init();
 
 
@@ -111,6 +113,9 @@ public class GameScene extends Scene {
 	}
 
 	public void addPreview(int x, int y) {
+		if(x < 0 || y < 0){
+			return;
+		}
 		if (tileViews[x][y].getId().contains("Empty")) {
 			tileViews[x][y].setId("KaartPreview");
 		}
@@ -167,6 +172,9 @@ public class GameScene extends Scene {
 
 			try {
 				String id = RmiStub.pakKaart(controller.getSpelernaam());
+				if(id == null){
+					return;
+				}
 				ShowKaart.setId(id);
 				kaartPlaatsId = id;
 			} catch (RemoteException e1) {
@@ -215,7 +223,6 @@ public class GameScene extends Scene {
 		gameThread = new Thread( () -> {
 			while(enableThread == true){
 				Update();
-				System.out.println("Running...");
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
@@ -230,7 +237,22 @@ public class GameScene extends Scene {
 
 
 	public void Update() {
-
+		try {
+			System.out.println("Spelerbeurt naam " + spelerBeurt + " en rmi naam " + RmiStub.getPlayerBeurt());
+		if(spelerBeurt != RmiStub.getPlayerBeurt()){
+			System.out.println("Spelerbeurt komt niet overen met RMI beurt ==================================");
+			int kaartX = RmiStub.getKaartX();
+			int kaartY = RmiStub.getKaartY();
+			String kaartId = RmiStub.getKaartId();
+			int kaartRotation = RmiStub.getKaartRotation();
+			tileViews[kaartX][kaartY].setKaartId(kaartId);
+			tileViews[kaartX][kaartY].setRotate(kaartRotation);
+			addPreviews(kaartX, kaartY);
+			spelerBeurt = RmiStub.getPlayerBeurt();
+		}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 
 
 

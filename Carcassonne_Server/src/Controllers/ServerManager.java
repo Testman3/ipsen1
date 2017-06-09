@@ -2,8 +2,10 @@ package Controllers;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import Models.RMIInterface;
+import Models.Speler;
 
 
 public class ServerManager {
@@ -38,8 +40,8 @@ public class ServerManager {
 		}
 	}
 
-	public void startGame() {
-		bordController = new BordController();
+	public void startGame(ArrayList<Speler> spelerList) {
+		bordController = new BordController(spelerList);
 		gameStarted = true;
 	}
 }

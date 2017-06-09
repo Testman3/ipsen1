@@ -62,4 +62,14 @@ public interface RMIInterface extends Remote {
 
 	public void draaiKaart() throws RemoteException;
 
+	public String getPlayerBeurt() throws RemoteException;
+
+	public int getKaartX() throws RemoteException;
+
+	public int getKaartY() throws RemoteException;
+
+	public String getKaartId() throws RemoteException;
+
+	public int getKaartRotation() throws RemoteException;
+
 }

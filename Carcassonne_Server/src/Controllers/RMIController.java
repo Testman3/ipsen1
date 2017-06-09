@@ -60,7 +60,7 @@ public class RMIController implements RMIInterface {
 
 	@Override
 	public void startenGame() throws RemoteException {
-		serverManager.startGame();
+		serverManager.startGame(alleSpelers);
 	}
 
 	@Override
@@ -83,5 +83,32 @@ public class RMIController implements RMIInterface {
 
 	public void draaiKaart() {
 		serverManager.bordController.draaiKaart();
-	};
+	}
+
+	@Override
+	public String getPlayerBeurt() throws RemoteException {
+		return serverManager.bordController.bord.getSpelerBeurt().naam;
+	}
+
+	@Override
+	public int getKaartX() throws RemoteException {
+		return serverManager.bordController.bord.getLaatstGeplaatst().getX();
+	}
+
+	@Override
+	public int getKaartY() throws RemoteException {
+		return serverManager.bordController.bord.getLaatstGeplaatst().getY();
+	}
+
+	@Override
+	public String getKaartId() throws RemoteException {
+		return serverManager.bordController.bord.getLaatstGeplaatst().getKaartId();
+	}
+
+	@Override
+	public int getKaartRotation() throws RemoteException {
+		return serverManager.bordController.bord.getLaatstGeplaatst().getRotation();
+	}
+
+	;
 }

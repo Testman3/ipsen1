@@ -2,17 +2,25 @@ package Models;
 
 import Controllers.BordController;
 
+import java.util.ArrayList;
+
 public class Bord {
+
+	ArrayList<Speler> alleSpelers;
 
 	Speler spelerBeurt;
 
 	Tile[][] alleTiles;
 
-	public Bord() {
+	Tile laatstGeplaatst;
 
+	public Tile getLaatstGeplaatst() {
+		return laatstGeplaatst;
+	}
+	public Bord(ArrayList<Speler> spelerList) {
+		alleSpelers = spelerList;
 		alleTiles = new Tile[100][100];
-
-		geefSpelerBeurt();
+		spelerBeurt = alleSpelers.get(0);
 	}
 
 	public Speler getSpelerBeurt() {
@@ -21,8 +29,13 @@ public class Bord {
 	}
 
 	public void geefSpelerBeurt() {
-		Speler speler = new Speler("Speler1");
-		spelerBeurt = speler;
+		int beurt = alleSpelers.indexOf(spelerBeurt);
+		if( beurt + 1 == alleSpelers.size()){
+			beurt = 0;
+			spelerBeurt = alleSpelers.get(beurt);
+		} else {
+			spelerBeurt = alleSpelers.get(beurt + 1);
+		}
 	}
 	/**
 	 * returnt of de speler aan de beurt is
@@ -30,7 +43,8 @@ public class Bord {
 	 * @return
 	 */
 	public boolean isSpelerBeurt(String spelerNaam) {
-		return spelerBeurt.naam == spelerNaam;
+		System.out.println("Speler naam " + spelerNaam + " Speler beurt " + spelerBeurt.getNaam());
+		return spelerBeurt.naam.equals(spelerNaam);
 	}
 
 	public Tile getTile(int x, int y){
@@ -52,11 +66,15 @@ public class Bord {
 		}
 		alleTiles[x][y] = tile;
 		System.out.println("Kaart geplaatst");
+		laatstGeplaatst = tile;
+		geefSpelerBeurt();
 		return true;
 	}
 
 	public void plaatsKaartCheat(int x, int y, Tile tile){
 		alleTiles[x][y] = tile;
+		laatstGeplaatst = tile;
+		tile.plaats(x,y);
 	}
 
 	public boolean checkKaartFit(int x, int y, Tile tile) {

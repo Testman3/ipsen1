@@ -1,7 +1,11 @@
 package Controllers;
 
+import Models.Speler;
 import Models.Stapel;
 import Models.Bord;
+
+import java.util.ArrayList;
+
 /**
  * Created by Marti on 8-6-2017.
  */
@@ -10,15 +14,15 @@ public class BordController {
 	Stapel kaartenStapel;
 	Bord bord;
 
-	public BordController() {
+	public BordController(ArrayList<Speler> spelerList) {
 		System.out.println("HALLLLLLLLLLLLLO");
 		kaartenStapel = new Stapel();
-		bord = new Bord();
+		bord = new Bord(spelerList);
 		bord.plaatsKaartCheat(10,10,kaartenStapel.getBeginTile());
 	}
 
 	public String pakKaartvanStapel(String spelerNaam) {
-		if (!bord.isSpelerBeurt(spelerNaam)) {
+		if (bord.isSpelerBeurt(spelerNaam)) {
 			kaartenStapel.pakKaart();
 
 			return kaartenStapel.getTurnTile().getImageID();

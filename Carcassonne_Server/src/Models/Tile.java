@@ -56,4 +56,18 @@ public class Tile {
 			rotation = 0;
 		}
 	}
+
+	public int getX(){
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+	public int getRotation() {
+		return rotation;
+	}
+	public String getKaartId() {
+		return imageID;
+	}
 }
