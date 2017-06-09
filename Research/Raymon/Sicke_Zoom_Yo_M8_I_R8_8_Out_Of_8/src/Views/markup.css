@@ -1,0 +1,6 @@
+#hallo{
+	-fx-background-image: url("TestenPLZ.jpg");
+}
+#KaartPreview{
+	-fx-image: url("Kaart_00.png");
+}
