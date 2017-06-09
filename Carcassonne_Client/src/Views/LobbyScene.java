@@ -31,7 +31,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	private VBox horigenBox;
 	private VBox spelerBox;
 
-	private ImageView [] horigen;
+	private ImageView[] horigen;
 
 	private BorderPane lobbyPane;
 	MenuController controller;
@@ -179,14 +179,20 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				if (allenamen.size() <= i) {
 					spelers[i].setText("Leeg");
 				} else {
-					spelers[i].setText(allenamen.get(i));
+					if (i == 0) {
+						spelers[i].setText(allenamen.get(i) + (" (Host)"));
+					} else {
+						spelers[i].setText(allenamen.get(i));
+					}
 				}
+
+
 			}
 		});
 	}
 
-	public static void setAbleToStartGame(){
-	knoppenBox.getChildren().add(startGame);
+	public static void setAbleToStartGame() {
+		knoppenBox.getChildren().add(startGame);
 	}
 
 }
