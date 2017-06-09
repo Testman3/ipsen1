@@ -1,5 +1,18 @@
 {
    "alleKaarten": [
+     {
+       "noordZijde": "KASTEEL",
+       "noordEinde" : true,
+       "oostZijde": "WEG",
+       "oostEinde" : false,
+       "zuidZijde": "GRAS",
+       "zuidEinde" : false,
+       "westZijde": "WEG",
+       "westEinde" : false,
+       "heeftKlooster":false,
+       "heeftBonus":false,
+       "image_id": "Kaart_04"
+     },
     { 
         "noordZijde": "GRAS",
         "noordEinde" : false,
@@ -38,19 +51,6 @@
         "heeftKlooster":false,
         "heeftBonus":true,
         "image_id": "Kaart_03"
-    },
-     { 
-        "noordZijde": "KASTEEL",
-        "noordEinde" : true,
-        "oostZijde": "WEG",
-        "oostEinde" : false,
-        "zuidZijde": "GRAS",
-        "zuidEinde" : false,
-        "westZijde": "WEG",
-        "westEinde" : false,
-        "heeftKlooster":false,
-        "heeftBonus":false,
-        "image_id": "Kaart_04"
     },
     { 
         "noordZijde": "KASTEEL",

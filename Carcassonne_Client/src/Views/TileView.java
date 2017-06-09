@@ -2,6 +2,8 @@ package Views;
 
 import javafx.scene.image.ImageView;
 
+import java.rmi.RemoteException;
+
 public class TileView extends ImageView {
 
 	//The size of a tile in pixels
@@ -27,12 +29,21 @@ public class TileView extends ImageView {
 		setId("Empty");
 		setOnMouseClicked(e -> {
 			System.out.println("Clicked on " + x +  " " + y);
-			if(scene.kaartPlaatsId != "") {
-				System.out.println(scene.kaartPlaatsId);
-				setId(scene.kaartPlaatsId);
-				scene.kaartPlaatsId = "";
+			try {
+				if(!scene.ShowKaart.getId().contains("Kaartview") && scene.RmiStub.plaatsKaart(x,y)) {
+					System.out.println("KAART GEPLAATST");
+					System.out.println(scene.kaartPlaatsId);
+					setId(scene.kaartPlaatsId);
+					scene.kaartPlaatsId = "";
+					scene.addPreviews(x, y);
+					scene.ShowKaart.setId("Kaartview");
+					setRotate(scene.ShowKaart.getRotate());
+					scene.ShowKaart.setRotate(0);
+				}
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
 			}
-			scene.addPreviews(x, y);
+
 		});
 	}
 
@@ -43,6 +54,12 @@ public class TileView extends ImageView {
 		setLayoutX(x * SIZE_X);
 		setLayoutY(y * SIZE_Y);
 	}
+
+	public void setKaartId(String Id) {
+		kaartId = Id;
+		setId(kaartId);
+	}
+
 
 
 }

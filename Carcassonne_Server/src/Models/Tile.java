@@ -15,6 +15,8 @@ public class Tile {
 	int x;
 	int y;
 
+	int rotation;
+
 	boolean heeftKlooster;
 	boolean heeftBonus; //Of kasteel tile blauw schild heeft
 
@@ -28,7 +30,30 @@ public class Tile {
 		this.heeftBonus = heeftBonus;
 	}
 
+	public void plaats(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 	public String getImageID() {
 		return imageID;
+	}
+	public void draaiKaart() {
+
+		Zijde noordZijdetmp = noordZijde;
+		Zijde oostZijdetmp = oostZijde;
+		Zijde zuidZijdetmp = zuidZijde;
+		Zijde westZijdetmp = westZijde;
+
+
+
+		noordZijde = westZijdetmp;
+		westZijde = zuidZijdetmp;
+		zuidZijde = oostZijdetmp;
+		oostZijde = noordZijdetmp;
+
+		rotation += 90;
+		if(rotation == 360){
+			rotation = 0;
+		}
 	}
 }
