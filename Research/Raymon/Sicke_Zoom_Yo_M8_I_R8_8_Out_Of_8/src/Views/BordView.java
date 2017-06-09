@@ -1,7 +1,11 @@
 package Views;
 
+import Controller.MenuController;
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -40,8 +44,22 @@ public class BordView extends Application{
 
 	stommeKaarten.getChildren().addAll(kaart1, kaart2);
 	stommeKaarten2.getChildren().addAll(kaart3, kaart4);
-	mainPane.setLeft(stommeKaarten);
-	mainPane.setRight(stommeKaarten2);
+	Group idk = new Group(stommeKaarten, stommeKaarten2);
+	mainPane.setCenter(idk);
+
+	idk.setOnScroll(event -> {
+		if (event.getDeltaY() > 0) {
+			double scale = idk.getScaleX() * 1.1;
+			idk.setScaleY(scale);
+			idk.setScaleX(scale);
+		}
+		if (event.getDeltaY() < 0) {
+			double scale = idk.getScaleX() * 0.9;
+			idk.setScaleY(scale);
+			idk.setScaleX(scale);
+		}
+	});
+
 		Scene mainScene = new Scene(mainPane, 1280, 720);
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
