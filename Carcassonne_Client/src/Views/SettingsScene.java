@@ -3,17 +3,15 @@ package Views;
 import Controllers.MenuController;
 import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
+import commonFunctions.SmartLabel;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 
-import java.nio.file.Paths;
 
 public class SettingsScene extends Scene implements SceneInitialiser {
 
@@ -25,9 +23,9 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	private HBox fullscreenBox;
 
 	private Label titel;
-	private Label sounds;
-	private Label spraak;
-	private Label fullscreen;
+	private SmartLabel sounds;
+	private SmartLabel spraak;
+	private SmartLabel fullscreen;
 
 	private CheckBox soundCheckBox;
 	private CheckBox spraakCheckBox;
@@ -75,9 +73,9 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		fullscreenCheckBox.setId("checkBox");
 
 		titel = new Label("Instellingen");
-		sounds = new Label("Geluid");
-		spraak = new Label("Spraakondersteuning");
-		fullscreen = new Label("Fullscreen");
+		sounds = new SmartLabel("Geluid");
+		spraak = new SmartLabel("Spraakondersteuning");
+		fullscreen = new SmartLabel("Fullscreen");
 
 		titel.setId("title");
 		sounds.setId("standardLabel");
