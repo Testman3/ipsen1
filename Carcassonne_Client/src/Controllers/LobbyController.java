@@ -9,14 +9,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import Views.LobbyScene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import Models.RMIInterface;
 
-/**
- * Created by Marti on 8-6-2017.
- */
 public class LobbyController {
 
 

@@ -106,6 +106,9 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 				try {
 					lobbyController.RMIstub.addPlayer(naamVeld.getText());
 					controller.setSpelernaam(naamVeld.getText());
+					if (lobbyController.getRmiStub().getPlayerList().get(0).contains(naamVeld.getText())){
+						LobbyScene.setAbleToStartGame();
+					}
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}

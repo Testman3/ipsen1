@@ -50,7 +50,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		initGui();
 	}
 
-
 	public void initGui() {
 
 		lobbyPane.getStylesheets().add("style.css");
@@ -95,7 +94,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		startGame = new SmartButton("Start game");
 		startGame.setId("standardLabel");
 
-		knoppenBox.getChildren().addAll(leaveGame, startGame);
+		knoppenBox.getChildren().addAll(leaveGame);
 		knoppenBox.setAlignment(Pos.CENTER);
 
 		completeBox.getChildren().add(knoppenBox);
@@ -185,6 +184,5 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			}
 		});
 	}
-
 
 }
