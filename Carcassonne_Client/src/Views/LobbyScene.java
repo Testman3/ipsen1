@@ -34,11 +34,11 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	private ImageView [] horigen;
 
 	private BorderPane lobbyPane;
-	MenuController controller;
-	LobbyController lobbyController;
+	private MenuController controller;
+	private LobbyController lobbyController;
 
-	Thread lobbyThread;
-	ArrayList<String> allenamen;
+	private Thread lobbyThread;
+	private ArrayList<String> allenamen;
 
 	public LobbyScene(MenuController controller, LobbyController lobbyController) {
 		super(new BorderPane(), 1280, 720);
@@ -56,7 +56,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		lobbyPane.setId("mainBackground");
 
 		box1 = new HBox(35);
-		spelerBox = new VBox();
+		spelerBox = new VBox(15);
 		horigenBox = new VBox(15);
 		spelers = new Label[5];
 
@@ -76,7 +76,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		for (int i = 0; i < spelers.length; i++) {
 			spelers[i] = new Label();
 			spelers[i].setId("standardLabel");
-
 			horigen[i].setFitHeight(50);
 			horigen[i].setFitWidth(50);
 			spelerBox.getChildren().addAll(spelers[i]);
