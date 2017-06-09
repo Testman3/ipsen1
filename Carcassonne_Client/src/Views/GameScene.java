@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -41,6 +42,8 @@ public class GameScene extends Scene {
 
 	private boolean enableThread;
 
+	 public ImageView ShowKaart;
+
 	private String spelerNaam;
 	public String kaartPlaatsId = "";
 
@@ -52,7 +55,9 @@ public class GameScene extends Scene {
 		this.controller = menuController;
 
 		//Spane.getChildren().add(tilesPane);
-		createTileGrid(75, 75);
+		createTileGrid(100, 100);
+		tileViews[10][10].setKaartId("Kaart_04");
+		addPreviews(10,10);
 		init();
 
 
@@ -78,8 +83,7 @@ public class GameScene extends Scene {
 				horizontal.getChildren().add(tileView);
 			}
 		}
-		tileViews[5][5].setId("KaartTest");
-		addPreviews(5, 5);
+
 		tilesPane.getChildren().add(verticaal);
 		tilesPane.setId("hallo");
 		//verticaal.setLayoutX(sceneWidth * 0.149);
@@ -103,6 +107,7 @@ public class GameScene extends Scene {
 		addPreview(x - 1, y);
 		addPreview(x + 1, y);
 		addPreview(x, y + 1);
+		addPreview(x, y-1);
 	}
 
 	public void addPreview(int x, int y) {
@@ -152,7 +157,7 @@ public class GameScene extends Scene {
 			links.getChildren().add(imgView);
 		}
 
-		final ImageView ShowKaart = new ImageView();
+		ShowKaart = new ImageView();
 		ShowKaart.fitHeightProperty().bind(heightProperty().multiply(0.2));
 		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
 		ShowKaart.setId("Kaartview");
@@ -185,6 +190,19 @@ public class GameScene extends Scene {
 			horige.setId("Horige");
 			onder.getChildren().add(horige);
 		}
+
+		Button button = new Button("Draaien");
+		button.setId("standardLabel");
+		onder.getChildren().add(button);
+		button.setOnAction(e -> {
+			try {
+				RmiStub.draaiKaart();
+				ShowKaart.setRotate(ShowKaart.getRotate() + 90);
+
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
+		});
 
 	}
 

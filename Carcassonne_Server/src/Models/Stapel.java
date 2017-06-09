@@ -13,11 +13,15 @@ public class Stapel {
 
 	ArrayList<Tile> kaartenOver;
 
+	Tile beginTile;
+
 	//De tile die deze beurt getrokken is
 	Tile turnTile;
 
+
 	public Stapel(){
 		kaartenOver = JsonKaarten.getAllKaarten();
+		beginTile = kaartenOver.get(0);
 		System.out.println(kaartenOver.size());
 		Collections.shuffle(kaartenOver);
 	}
@@ -34,5 +38,5 @@ public class Stapel {
 	public Tile getTurnTile() {
 		return turnTile;
 	}
-
+	public Tile getBeginTile() { return beginTile;}
 }

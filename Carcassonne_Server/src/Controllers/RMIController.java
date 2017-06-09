@@ -74,4 +74,12 @@ public class RMIController implements RMIInterface {
 		return serverManager.bordController.pakKaartvanStapel(spelerNaam);
 	}
 
+
+	public boolean plaatsKaart(int x, int y) throws RemoteException {
+		return serverManager.bordController.plaatsKaart(x,y);
+	}
+
+	public void draaiKaart() {
+		serverManager.bordController.draaiKaart();
+	};
 }
