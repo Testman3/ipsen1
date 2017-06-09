@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.io.File;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -18,6 +19,7 @@ import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import Models.RMIInterface;
 
@@ -151,6 +153,12 @@ public class MenuController {
 		this.spelernaam = spelernaam;
 	}
 
+	public void openFileBrowser(){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Laadgame");
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Carcassonne", "*.json"));
+		File fle = fileChooser.showOpenDialog(gameStage);
+	}
 
 
 
