@@ -4,3 +4,19 @@
 #KaartPreview{
 	-fx-image: url("Kaart_00.png");
 }
+
+#kaart1{
+	 -fx-background-image: url("Kaart_01.png");
+ }
+
+#kaart2{
+	-fx-background-image: url("Kaart_02.png");
+}
+
+#kaart3{
+	-fx-image: url("Kaart_03.png");
+}
+
+#kaart4{
+	-fx-image: url("Kaart_04.png");
+}
