@@ -8,6 +8,7 @@ import java.rmi.registry.Registry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Models.GameClient;
 import Views.CreditsScene;
 import Views.EndGameScene;
 import Views.GameScene;
@@ -75,7 +76,7 @@ public class MenuController {
 	}
 	public void setGameScene(){
 		gameStage.setScene(gameScene);
-		gameScene.Join(spelernaam);
+
 	//	gameStage.setFullScreen(SettingsScene.fullScreen);
 	}
 

@@ -2,7 +2,10 @@ package Views;
 
 import Controllers.MenuController;
 import Controllers.RMIController;
+import Models.GameClient;
 import Models.RMIInterface;
+import Models.TileStump;
+import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,6 +25,8 @@ import javafx.scene.text.TextAlignment;
 import javax.swing.*;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import Models.TileStump;
+import commonFunctions.SmartLabel;
 
 public class GameScene extends Scene {
 
@@ -36,18 +41,16 @@ public class GameScene extends Scene {
 
 	TileView[][] tileViews;
 
-	RMIInterface RmiStub;
+	public ImageView ShowKaart;
 
-	Thread gameThread;
 
-	private boolean enableThread = true;
+	String kaartPlaatsId;
 
-	 public ImageView ShowKaart;
+	public RMIInterface RmiStub;
 
-	private String spelerNaam;
-	public String kaartPlaatsId = "";
+	SmartLabel KaartenLeft;
 
-	String spelerBeurt = "";
+	int kaartenOver = 72;
 
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
@@ -91,31 +94,36 @@ public class GameScene extends Scene {
 		//verticaal.setLayoutX(sceneWidth * 0.149);
 		//verticaal.setLayoutY(0);
 
+
+		//Verplaatsen over de map met W A S D keys, Speed is de snelheid dat je verplaatst.
+		int speed = 20;
 		setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.W) {
-				verticaal.setLayoutY(verticaal.getLayoutY() + 10);
+				verticaal.setLayoutY(verticaal.getLayoutY() + speed);
 			} else if (e.getCode() == KeyCode.A) {
-				verticaal.setLayoutX(verticaal.getLayoutX() + 10);
+				verticaal.setLayoutX(verticaal.getLayoutX() + speed);
 			} else if (e.getCode() == KeyCode.S) {
-				verticaal.setLayoutY(verticaal.getLayoutY() - 10);
+				verticaal.setLayoutY(verticaal.getLayoutY() - speed);
 			} else if (e.getCode() == KeyCode.D) {
-				verticaal.setLayoutX(verticaal.getLayoutX() - 10);
+				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
 			}
 		});
 
 	}
 
-	public void addPreviews(int x, int y) {
-		addPreview(x - 1, y);
-		addPreview(x + 1, y);
-		addPreview(x, y + 1);
-		addPreview(x, y-1);
+	public void addTilePreviews(int x, int y) {
+		addTilePreview(x - 1, y);
+		addTilePreview(x + 1, y);
+		addTilePreview(x, y + 1);
+		addTilePreview(x, y-1);
 	}
 
-	public void addPreview(int x, int y) {
+	public void addTilePreview(int x, int y) {
 		if(x < 0 || y < 0){
 			return;
 		}
+		//Als de tile "Empty" is dan moet er een kaarPreview komen, empty houdt in dat er geen geplaatste tile in zit
+		//Deze check is nodig om ervoor te zorgen dat tiles waar al een kaart in zit niet overschreven worden.
 		if (tileViews[x][y].getId().contains("Empty")) {
 			tileViews[x][y].setId("KaartPreview");
 		}
@@ -123,14 +131,6 @@ public class GameScene extends Scene {
 
 	public void init() {
 
-		//	 primaryStage.initStyle(StageStyle.UNDECORATED);
-
-		//	Font.loadFont(main.class.getResource("Enchanted Land.otf").toExternalForm(), 10)
-
-
-		//primaryStage.setFullScreen(true);
-
-		//scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		Spane = new BorderPane();
 
 		tilesPane.getChildren().add(Spane);
@@ -187,9 +187,9 @@ public class GameScene extends Scene {
 		//links.getChildren().add(onder);
 		Spane.setBottom(onder);
 
-		Text KaartenLeft = new Text("Kaarten over: 999");
+		 KaartenLeft = new SmartLabel("Kaarten over: " + kaartenOver);
 		links.getChildren().add(KaartenLeft);
-		KaartenLeft.setId("KaartenLeft");
+		KaartenLeft.setId("standardLabel");
 
 		for (int i = 0; i < 7; i++) {
 			ImageView horige = new ImageView();
@@ -214,51 +214,23 @@ public class GameScene extends Scene {
 
 	}
 
-	public void setRmiStub(RMIInterface rmiController) {
-		 RmiStub = rmiController;
-	}
-
-	public void Join(String spelerNaam) {
-
-		gameThread = new Thread( () -> {
-			while(enableThread == true){
-				Update();
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		gameThread.start();
-
-	}
-
-
-	public void Update() {
+	public void updateView(GameClient client) {
+		TileStump stump = null;
 		try {
-			System.out.println("Spelerbeurt naam " + spelerBeurt + " en rmi naam " + RmiStub.getPlayerBeurt());
-		if(spelerBeurt != RmiStub.getPlayerBeurt()){
-			System.out.println("Spelerbeurt komt niet overen met RMI beurt ==================================");
-			int kaartX = RmiStub.getKaartX();
-			int kaartY = RmiStub.getKaartY();
-			String kaartId = RmiStub.getKaartId();
-			int kaartRotation = RmiStub.getKaartRotation();
-			tileViews[kaartX][kaartY].setKaartId(kaartId);
-			tileViews[kaartX][kaartY].setRotate(kaartRotation);
-			addPreviews(kaartX, kaartY);
-			spelerBeurt = RmiStub.getPlayerBeurt();
-		}
+			stump = client.getTile();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-
-
-
+		kaartenOver--;
 		Platform.runLater(() -> {
-			});
+		KaartenLeft.setText("Kaarten over: " + kaartenOver);
+				});
+		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
+		tileViews[stump.getX()][stump.getY()].setRotate(stump.getRotation());
+		addTilePreviews(stump.getX(), stump.getY());
+
 	}
+
 
 
 }

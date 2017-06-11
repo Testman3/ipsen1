@@ -35,7 +35,6 @@ public class TileView extends ImageView {
 					System.out.println(scene.kaartPlaatsId);
 					setId(scene.kaartPlaatsId);
 					scene.kaartPlaatsId = "";
-					scene.addPreviews(x, y);
 					scene.ShowKaart.setId("Kaartview");
 					setRotate(scene.ShowKaart.getRotate());
 					scene.ShowKaart.setRotate(0);

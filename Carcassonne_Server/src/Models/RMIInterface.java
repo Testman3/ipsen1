@@ -72,4 +72,6 @@ public interface RMIInterface extends Remote {
 
 	public int getKaartRotation() throws RemoteException;
 
+	public TileStump getPlacedKaart() throws RemoteException;
+
 }

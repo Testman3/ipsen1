@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import Controllers.LobbyController;
 import Controllers.MenuController;
+import Models.GameClient;
 import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
 import javafx.application.Platform;
@@ -171,7 +172,9 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		Platform.runLater(() -> {
 			if (starten) {
 				controller.setGameScene();
-				controller.getGameScene().setRmiStub(lobbyController.getRmiStub());
+				GameClient client = new GameClient(controller.getGameScene());
+				client.Join(controller.getSpelernaam());
+				client.setRmiStub(lobbyController.getRmiStub());
 				enableThread = false;
 			}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import Models.Speler;
 import Models.RMIInterface;
+import Models.TileStump;
 
 public class RMIController implements RMIInterface {
 
@@ -108,6 +109,16 @@ public class RMIController implements RMIInterface {
 	@Override
 	public int getKaartRotation() throws RemoteException {
 		return serverManager.bordController.bord.getLaatstGeplaatst().getRotation();
+	}
+
+	public TileStump getPlacedKaart() throws RemoteException {
+		return new TileStump(
+				serverManager.bordController.bord.getLaatstGeplaatst().getX(),
+				serverManager.bordController.bord.getLaatstGeplaatst().getY(),
+				serverManager.bordController.bord.getLaatstGeplaatst().getKaartId(),
+				serverManager.bordController.bord.getLaatstGeplaatst().getRotation()
+
+		);
 	}
 
 	;
