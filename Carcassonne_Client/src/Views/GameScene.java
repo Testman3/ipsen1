@@ -40,6 +40,7 @@ public class GameScene extends Scene {
 	HBox test;
 
 	TileView[][] tileViews;
+	HBox[] hBoxes;
 
 	public ImageView ShowKaart;
 
@@ -77,18 +78,20 @@ public class GameScene extends Scene {
 	 */
 	public void createTileGrid(int sizeX, int sizeY) {
 		tileViews = new TileView[sizeX][sizeY];
+		hBoxes = new HBox[100];
 		VBox verticaal = new VBox();
 		//tilesPane.getChildren().add(verticaal);
-		for (int y = 0; y < sizeX; y++) {
+		for (int y = 0; y < sizeY; y++) {
 			HBox horizontal = new HBox();
+			hBoxes[y] = horizontal;
 			verticaal.getChildren().add(horizontal);
-			for (int x = 0; x < sizeY; x++) {
+			for (int x = 0; x < sizeX; x++) {
 				TileView tileView = new TileView(x, y, this);
 				tileViews[x][y] = tileView;
 				horizontal.getChildren().add(tileView);
 			}
-		}
 
+		}
 		tilesPane.getChildren().add(verticaal);
 		tilesPane.setId("hallo");
 		//verticaal.setLayoutX(sceneWidth * 0.149);
@@ -111,6 +114,8 @@ public class GameScene extends Scene {
 
 	}
 
+
+
 	public void addTilePreviews(int x, int y) {
 		addTilePreview(x - 1, y);
 		addTilePreview(x + 1, y);
@@ -127,6 +132,7 @@ public class GameScene extends Scene {
 		if (tileViews[x][y].getId().contains("Empty")) {
 			tileViews[x][y].setId("KaartPreview");
 		}
+
 	}
 
 	public void init() {
@@ -143,7 +149,7 @@ public class GameScene extends Scene {
 		VBox links = new VBox(sceneHeight * 0.0);
 		links.setPadding(new Insets(0, 0, 0, 20));
 
-		Spane.setLeft(links);
+	//	Spane.setLeft(links);
 
 		ImageView imgView = new ImageView();
 		imgView.fitHeightProperty().bind(heightProperty().multiply(0.2));
@@ -183,9 +189,10 @@ public class GameScene extends Scene {
 		});
 
 		HBox onder = new HBox();
+		onder.getChildren().add(links);
 		onder.setPadding(new Insets(0, 0, 0, 0));
 		//links.getChildren().add(onder);
-		Spane.setBottom(onder);
+		Spane.setLeft(onder);
 
 		 KaartenLeft = new SmartLabel("Kaarten over: " + kaartenOver);
 		links.getChildren().add(KaartenLeft);

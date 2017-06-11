@@ -29,7 +29,7 @@
 	-fx-background-image: url("Tet_Back_test.png");
 	-fx-background-size: cover;
 }
-#Player{
+#Speler{
 -fx-image: url("Text_Back_Player.png");
 }
 #Kaartview{
