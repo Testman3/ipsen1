@@ -3,6 +3,7 @@ package Views;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import Controllers.GameController;
 import Controllers.LobbyController;
 import Controllers.MenuController;
 import Models.GameClient;
@@ -173,8 +174,10 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			if (starten) {
 				controller.setGameScene();
 				GameClient client = new GameClient(controller.getGameScene());
+				GameController Gamecontroller = new GameController(client);
 				client.Join(controller.getSpelernaam());
 				client.setRmiStub(lobbyController.getRmiStub());
+				controller.getGameScene().gameController = Gamecontroller;
 				enableThread = false;
 			}
 

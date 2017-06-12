@@ -22,6 +22,7 @@ public class GameClient {
 	public String kaartPlaatsId = "";
 
 	String spelerBeurt = "";
+ 	int beurt = 0;
 
 	RMIInterface RmiStub;
 
@@ -47,6 +48,29 @@ public class GameClient {
 
 	}
 
+	public void pakKaart() {
+		try {
+			String id = RmiStub.pakKaart(spelerNaam);
+			if(id == null){
+				return;
+			}
+			kaartPlaatsId = id;
+			view.showKaart(this);
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void plaatsKaart(int x, int y) {
+		try {
+			System.out.println("DIT WORDT GERUNT DIT WORDT GERUNT DIT WORDT GERUNT");
+			if(kaartPlaatsId != "" && RmiStub.plaatsKaart(x,y)) {
+				view.plaatsKaart(this, kaartPlaatsId, x, y);
+				kaartPlaatsId = "";
+			}
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+	}
 	public void setRmiStub(RMIInterface rmiController) {
 		RmiStub = rmiController;
 		view.RmiStub = rmiController;
@@ -56,10 +80,10 @@ public class GameClient {
 	public void Update() {
 		try {
 			System.out.println("Spelerbeurt naam " + spelerBeurt + " en rmi naam " + RmiStub.getPlayerBeurt());
-			if (!spelerBeurt.contains(RmiStub.getPlayerBeurt())) {
+			if (beurt != RmiStub.getBeurt()) {
 				System.out.println("Spelerbeurt komt niet overen met RMI beurt ==================================");
 				view.updateView(this);
-				spelerBeurt = RmiStub.getPlayerBeurt();
+				beurt = RmiStub.getBeurt();
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();

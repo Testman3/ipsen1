@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.GameController;
 import Controllers.MenuController;
 import Controllers.RMIController;
 import Models.GameClient;
@@ -34,13 +35,17 @@ public class GameScene extends Scene {
 	int sceneWidth = (int) getWidth();
 
 	MenuController controller;
-	BorderPane Spane;
+	GameController gameController;
+
+	BorderPane mainPane;
 
 	Pane tilesPane;
 	HBox test;
 
 	TileView[][] tileViews;
-	HBox[] hBoxes;
+	HorigeView[] horigeViews;
+	ImageView[] playerViews;
+
 
 	public ImageView ShowKaart;
 
@@ -50,8 +55,7 @@ public class GameScene extends Scene {
 	public RMIInterface RmiStub;
 
 	SmartLabel KaartenLeft;
-
-	int kaartenOver = 72;
+	Button menuButton;
 
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
@@ -60,15 +64,13 @@ public class GameScene extends Scene {
 		tilesPane = (Pane) this.getRoot();
 		this.controller = menuController;
 
-		//Spane.getChildren().add(tilesPane);
 		createTileGrid(100, 100);
-		//tileViews[10][10].setKaartId("Kaart_04");
-		//addPreviews(10,10);
+
 		init();
 
 
-	}
 
+	}
 
 	/**
 	 * Creates the tile grid in the game client
@@ -78,25 +80,18 @@ public class GameScene extends Scene {
 	 */
 	public void createTileGrid(int sizeX, int sizeY) {
 		tileViews = new TileView[sizeX][sizeY];
-		hBoxes = new HBox[100];
 		VBox verticaal = new VBox();
-		//tilesPane.getChildren().add(verticaal);
 		for (int y = 0; y < sizeY; y++) {
 			HBox horizontal = new HBox();
-			hBoxes[y] = horizontal;
 			verticaal.getChildren().add(horizontal);
 			for (int x = 0; x < sizeX; x++) {
 				TileView tileView = new TileView(x, y, this);
 				tileViews[x][y] = tileView;
 				horizontal.getChildren().add(tileView);
 			}
-
 		}
 		tilesPane.getChildren().add(verticaal);
 		tilesPane.setId("hallo");
-		//verticaal.setLayoutX(sceneWidth * 0.149);
-		//verticaal.setLayoutY(0);
-
 
 		//Verplaatsen over de map met W A S D keys, Speed is de snelheid dat je verplaatst.
 		int speed = 20;
@@ -115,7 +110,11 @@ public class GameScene extends Scene {
 	}
 
 
-
+	/**
+	 * Plaatst previews om een tile heen, deze methode mag alleen gerunt worden nadat er een tile geplaatst is
+	 * @param x
+	 * @param y
+	 */
 	public void addTilePreviews(int x, int y) {
 		addTilePreview(x - 1, y);
 		addTilePreview(x + 1, y);
@@ -123,7 +122,12 @@ public class GameScene extends Scene {
 		addTilePreview(x, y-1);
 	}
 
-	public void addTilePreview(int x, int y) {
+	/**
+	 * Plaatst 1 preview, deze methode mag niet zomaar gerunnt worden
+	 * @param x
+	 * @param y
+	 */
+	private void addTilePreview(int x, int y) {
 		if(x < 0 || y < 0){
 			return;
 		}
@@ -137,64 +141,51 @@ public class GameScene extends Scene {
 
 	public void init() {
 
-		Spane = new BorderPane();
+		mainPane = new BorderPane();
+		tilesPane.getChildren().add(mainPane);
+		mainPane.setId("test");
+		mainPane.setPrefSize(1280, 720);
+		mainPane.setPickOnBounds(false);
 
-		tilesPane.getChildren().add(Spane);
-		Spane.setId("test");
-		Spane.setPrefSize(1280, 720);
-		Spane.setPickOnBounds(false);
-		Spane.setOnMouseClicked(e -> {
-			System.out.println("biep");
-		});
 		VBox links = new VBox(sceneHeight * 0.0);
+		links.setPickOnBounds(false);
 		links.setPadding(new Insets(0, 0, 0, 20));
 
-	//	Spane.setLeft(links);
+		menuButton = new Button("Menu");
+		menuButton.minHeightProperty().bind(heightProperty().multiply(0.2));
+		menuButton.minWidthProperty().bind(widthProperty().multiply(0.11));
+		menuButton.setId("standardLabel");
+		links.getChildren().add(menuButton);
 
-		ImageView imgView = new ImageView();
-		imgView.fitHeightProperty().bind(heightProperty().multiply(0.2));
-		imgView.fitWidthProperty().bind(widthProperty().multiply(0.11));
-		//imgView.setId("Speler");
-		links.getChildren().add(imgView);
-
+		playerViews = new ImageView[5];
 		for (int i = 0; i < 5; i++) {
-			imgView = new ImageView();
-			//	imgView.setFitHeight(sceneHeight * 0.1);
-			imgView.maxHeight(100);
-			imgView.prefHeight(100);
-			imgView.fitHeightProperty().bind(heightProperty().multiply(0.1));
-			imgView.fitWidthProperty().bind(widthProperty().multiply(0.11));
-			imgView.setId("Speler");
-			links.getChildren().add(imgView);
+			playerViews[i] = new ImageView();
+			playerViews[i].setFitHeight(sceneHeight * 0.1);
+			playerViews[i].maxHeight(100);
+			playerViews[i].prefHeight(100);
+			playerViews[i].fitHeightProperty().bind(heightProperty().multiply(0.1));
+			playerViews[i].fitWidthProperty().bind(widthProperty().multiply(0.11));
+			playerViews[i].setId("Speler");
+			links.getChildren().add(playerViews[i]);
 		}
 
 		ShowKaart = new ImageView();
 		ShowKaart.fitHeightProperty().bind(heightProperty().multiply(0.2));
 		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
 		ShowKaart.setId("Kaartview");
-
 		links.getChildren().add(ShowKaart);
 		ShowKaart.setOnMouseClicked(e -> {
-
-			try {
-				String id = RmiStub.pakKaart(controller.getSpelernaam());
-				if(id == null){
-					return;
-				}
-				ShowKaart.setId(id);
-				kaartPlaatsId = id;
-			} catch (RemoteException e1) {
-				e1.printStackTrace();
-			}
+			gameController.klikPakKaart();
 		});
 
 		HBox onder = new HBox();
+		onder.setPickOnBounds(false);
 		onder.getChildren().add(links);
 		onder.setPadding(new Insets(0, 0, 0, 0));
 		//links.getChildren().add(onder);
-		Spane.setLeft(onder);
-
-		 KaartenLeft = new SmartLabel("Kaarten over: " + kaartenOver);
+		//Spane.setLeft(onder);
+		mainPane.setBottom(onder);
+		 KaartenLeft = new SmartLabel("Kaarten over: 72");
 		links.getChildren().add(KaartenLeft);
 		KaartenLeft.setId("standardLabel");
 
@@ -221,21 +212,28 @@ public class GameScene extends Scene {
 
 	}
 
+	public void plaatsKaart(GameClient client, String id, int x, int y) {
+		ShowKaart.setId("Kaartview");
+		ShowKaart.setRotate(0);
+
+	}
+
+	public void showKaart(GameClient client) {
+		ShowKaart.setId(client.kaartPlaatsId);
+
+	}
 	public void updateView(GameClient client) {
 		TileStump stump = null;
 		try {
+			//Haalt het Tilestump object uit de server om hem vervolgens in de client te kunnen plaatsen
 			stump = client.getTile();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		kaartenOver--;
-		Platform.runLater(() -> {
-		KaartenLeft.setText("Kaarten over: " + kaartenOver);
-				});
-		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 		tileViews[stump.getX()][stump.getY()].setRotate(stump.getRotation());
+		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 		addTilePreviews(stump.getX(), stump.getY());
-
+		System.out.println(stump.getX() + " " + stump.getY() + " " + stump.getRotation());
 	}
 
 

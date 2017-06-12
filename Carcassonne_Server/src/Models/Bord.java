@@ -14,6 +14,11 @@ public class Bord {
 
 	Tile laatstGeplaatst;
 
+	int gameBeurt = 1;
+
+	public int gameBeurt() {
+		return gameBeurt;
+	}
 	public Tile getLaatstGeplaatst() {
 		return laatstGeplaatst;
 	}
@@ -29,6 +34,8 @@ public class Bord {
 	}
 
 	public void geefSpelerBeurt() {
+		gameBeurt++;
+
 		int beurt = alleSpelers.indexOf(spelerBeurt);
 		if( beurt + 1 == alleSpelers.size()){
 			beurt = 0;

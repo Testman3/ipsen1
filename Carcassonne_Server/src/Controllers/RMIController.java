@@ -107,6 +107,7 @@ public class RMIController implements RMIInterface {
 	}
 
 	@Override
+
 	public int getKaartRotation() throws RemoteException {
 		return serverManager.bordController.bord.getLaatstGeplaatst().getRotation();
 	}
@@ -121,5 +122,8 @@ public class RMIController implements RMIInterface {
 		);
 	}
 
-	;
+	@Override
+	public int getBeurt() throws RemoteException {
+		return serverManager.bordController.bord.gameBeurt();
+	}
 }

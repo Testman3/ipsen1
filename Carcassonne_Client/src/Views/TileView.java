@@ -29,20 +29,7 @@ public class TileView extends ImageView {
 		setId("Empty");
 		setOnMouseClicked(e -> {
 			System.out.println("Clicked on " + x +  " " + y);
-			try {
-				if(!scene.ShowKaart.getId().contains("Kaartview") && scene.RmiStub.plaatsKaart(x,y)) {
-					System.out.println("KAART GEPLAATST");
-					System.out.println(scene.kaartPlaatsId);
-					setId(scene.kaartPlaatsId);
-					scene.kaartPlaatsId = "";
-					scene.ShowKaart.setId("Kaartview");
-					setRotate(scene.ShowKaart.getRotate());
-					scene.ShowKaart.setRotate(0);
-				}
-			} catch (RemoteException e1) {
-				e1.printStackTrace();
-			}
-
+			scene.gameController.klikPlaatsKaart(x,y);
 		});
 	}
 
