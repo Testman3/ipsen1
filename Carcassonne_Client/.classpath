@@ -23,5 +23,8 @@
 	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/cmu_us_kal.jar"/>
 	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/cmudict04.jar"/>
 	<classpathentry kind="lib" path="/Users/haitamelattar/Documents/school/projecten/ipsen1/lib/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="D:/Github/ipsen1/lib/jsonSimple.jar"/>
+	<classpathentry kind="lib" path="D:/Github/ipsen1/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/mbr301d.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

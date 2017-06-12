@@ -58,6 +58,13 @@ public interface RMIInterface extends Remote {
 	 */
 	public String pakKaart(String spelerNaam) throws RemoteException;
 
+	/**
+	 *
+	 * @param x
+	 * @param y
+	 * @return
+	 * @throws RemoteException
+	 */
 	public boolean plaatsKaart(int x, int y) throws RemoteException;
 
 	public void draaiKaart() throws RemoteException;
