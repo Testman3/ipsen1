@@ -1,19 +1,16 @@
 package Controllers;
 
-import java.io.File;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
+import Models.Tile;
+import Models.Zijde;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import Models.Tile;
-import Models.Zijde;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class JsonKaarten {
 
@@ -32,6 +29,9 @@ public class JsonKaarten {
 
 		JSONParser parser = new JSONParser();
 		Object obj = null;
+
+		// Debugging info (overwrite in future with debugging function)
+		boolean debug = false;
 
 
 		try {
@@ -91,11 +91,16 @@ public class JsonKaarten {
 			Zijde zuidZijde = new Zijde(zuidZijdeType, zuidEinde);
 			Zijde westZijde = new Zijde(westZijdeType, westEinde);
 
-			Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus );
-			alleKaarten.add(data);
+			Number aantalKaarten = (Number) jsonNumber.get("aantalKaarten");
 
-			// Debugging info (overwrite in future with debugging function)
-			boolean debug = false;
+			for (int i = 0; i <  aantalKaarten.intValue(); i++){
+				Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus);
+				alleKaarten.add(data);
+
+				if (debug) {
+					System.out.println("Voeg kaart toe ");
+				}
+			}
 
 			if (debug){
 				System.out.println("noord zijde: " + noordZijde);
