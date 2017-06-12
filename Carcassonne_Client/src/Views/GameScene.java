@@ -10,6 +10,7 @@ import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -51,6 +52,7 @@ public class GameScene extends Scene {
 
 
 	String kaartPlaatsId;
+	private double scale;
 
 	public RMIInterface RmiStub;
 
@@ -104,6 +106,28 @@ public class GameScene extends Scene {
 				verticaal.setLayoutY(verticaal.getLayoutY() - speed);
 			} else if (e.getCode() == KeyCode.D) {
 				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
+			}
+		});
+
+		setOnScroll(event -> {
+			if (event.getDeltaY() > 0) {
+				if (scale < 10 ) {
+					scale = verticaal.getScaleX() * 1.05;
+					verticaal.setScaleY(scale);
+					verticaal.setScaleX(scale);
+					verticaal.setLayoutX(verticaal.getLayoutX()/verticaal.getScaleX());
+					verticaal.setLayoutY(verticaal.getLayoutY()/verticaal.getScaleY());
+				}
+			}
+			if (event.getDeltaY() < 0) {
+				if (scale > 0.8) {
+					scale = verticaal.getScaleX() * 0.95;
+					verticaal.setScaleY(scale);
+					verticaal.setScaleX(scale);
+					verticaal.setLayoutX(verticaal.getLayoutX()/verticaal.getScaleX());
+					verticaal.setLayoutY(verticaal.getLayoutY()/verticaal.getScaleY());
+
+				}
 			}
 		});
 
