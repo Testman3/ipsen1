@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.Inet4Address;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -43,6 +44,7 @@ public class ServerManager extends Application{
 	public void runServer() {
 		try {
 
+			System.out.println("Current Hostname/I.P Address: " + Inet4Address.getLocalHost());
 			RMIController RMIimlp = new RMIController(this);
 			RMIInterface rmiSkeleton = 	(RMIInterface) UnicastRemoteObject.exportObject(RMIimlp, 0);
 			System.out.println("rmiSkeleton created");
