@@ -1,6 +1,8 @@
 package Models;
 
-public class Speler {
+import java.io.Serializable;
+
+public class Speler implements Serializable {
 
 	private String naam;
 

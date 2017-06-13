@@ -2,34 +2,25 @@ package Views;
 
 import Controllers.GameController;
 import Controllers.MenuController;
-import Controllers.RMIController;
 import Models.GameClient;
 import Models.RMIInterface;
+import Models.Speler;
 import Models.TileStump;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
-import javax.swing.*;
+import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
-import Models.TileStump;
-import commonFunctions.SmartLabel;
 
 public class GameScene extends Scene {
 
@@ -46,7 +37,7 @@ public class GameScene extends Scene {
 
 	TileView[][] tileViews;
 	HorigeView[] horigeViews;
-	ImageView[] playerViews;
+	SpelerView[] playerViews;
 
 
 	public ImageView ShowKaart;
@@ -183,15 +174,12 @@ public class GameScene extends Scene {
 		menuButton.setId("standardLabel");
 		links.getChildren().add(menuButton);
 
-		playerViews = new ImageView[5];
+		playerViews = new SpelerView[5];
 		for (int i = 0; i < 5; i++) {
-			playerViews[i] = new ImageView();
-			playerViews[i].setFitHeight(sceneHeight * 0.1);
+			playerViews[i] = new SpelerView();
 			playerViews[i].maxHeight(100);
 			playerViews[i].prefHeight(100);
-			playerViews[i].fitHeightProperty().bind(heightProperty().multiply(0.1));
-			playerViews[i].fitWidthProperty().bind(widthProperty().multiply(0.11));
-			playerViews[i].setId("Speler");
+			playerViews[i].maxWidth(100);
 			links.getChildren().add(playerViews[i]);
 		}
 
@@ -236,10 +224,12 @@ public class GameScene extends Scene {
 			}
 		});
 
+	//		mainPane.setCenter(ingamePane);
 	}
 
 	public void plaatsKaart(GameClient client, String id, int x, int y) {
 		ShowKaart.setId("Kaartview");
+		tileViews[x][y].laatHorigePreviewZien();
 		ShowKaart.setRotate(0);
 
 	}
@@ -251,11 +241,14 @@ public class GameScene extends Scene {
 
 	}
 	int kaartenOver = 0;
+	ArrayList<Speler> alleSpelers = null;
 	public void updateView(GameClient client) {
 		TileStump stump = null;
+
 		try {
 			//Haalt het Tilestump object uit de server om hem vervolgens in de client te kunnen plaatsen
 			stump = client.getTile();
+			alleSpelers = RmiStub.getPlayerListObject();
 			kaartenOver = RmiStub.getKaartenLeft();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -266,6 +259,13 @@ public class GameScene extends Scene {
 		System.out.println(stump.getX() + " " + stump.getY() + " " + stump.getRotation());
 		Platform.runLater(() -> {
 		KaartenLeft.setText("Kaarten over " + kaartenOver);
+			for (int i = 0; i < playerViews.length ; i++) {
+				if(i == alleSpelers.size()){
+					return;
+				}
+				playerViews[i].setNaam(alleSpelers.get(i).getNaam());
+				playerViews[i].setPunten(alleSpelers.get(i).getPunten());
+			}
 		});
 	}
 

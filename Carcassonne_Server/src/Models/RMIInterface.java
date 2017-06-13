@@ -1,5 +1,7 @@
 package Models;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -35,6 +37,9 @@ public interface RMIInterface extends Remote {
 	 * @throws RemoteException
 	 */
 	public ArrayList<String> getPlayerList() throws RemoteException;
+
+	public ArrayList<Speler> getPlayerListObject() throws RemoteException;
+
 
 	/**
 	 * Deze functie start de game, wordt gerunt als de speler op starten drukt in de lobby
