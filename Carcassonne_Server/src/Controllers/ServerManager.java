@@ -16,7 +16,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import static javafx.scene.paint.Color.*;
 
 
 public class ServerManager extends Application{
@@ -71,6 +75,12 @@ public class ServerManager extends Application{
 		);
 		System.setOut(ps);
 		BorderPane mainPane = new BorderPane();
+		consoleOutput.setEditable(false);
+
+		consoleOutput.setStyle("-fx-text-fill: lime;" +
+				"-fx-control-inner-background: black;" + "-fx-font-family: monospace");
+
+
 
 		mainPane.setCenter(consoleOutput);
 
