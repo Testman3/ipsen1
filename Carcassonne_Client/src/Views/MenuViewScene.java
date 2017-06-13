@@ -9,13 +9,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class MenuViewScene extends Scene implements SceneInitialiser{
 
+	private static final int INDEFINITE = 1;
+	AudioClip backgroundMusic = new AudioClip(Paths.get("Sounds/BackgroundMusic.mp3").toUri().toString());
 	private BorderPane mainPane;
 	private Label titel = new Label("Carcassonne");
 	private VBox buttonVBox = new VBox();
@@ -51,6 +55,12 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 	}
 
 	public void initAction(){
+
+		backgroundMusic.setCycleCount(INDEFINITE);
+		if (!backgroundMusic.isPlaying()) {
+			//backgroundMusic.play();
+		}
+
 		/*
 		 * 0 = New game 1 = Laden game
 		 * 2 = Gebruiksaanwijzing

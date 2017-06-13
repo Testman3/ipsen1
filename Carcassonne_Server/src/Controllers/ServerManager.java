@@ -78,7 +78,7 @@ public class ServerManager extends Application {
 		);
 		System.setOut(ps);
 		BorderPane mainPane = new BorderPane();
-		consoleOutput.setEditable(false);
+		//consoleOutput.setEditable(false);
 
 		consoleOutput.setStyle("-fx-text-fill: lime;" +
 				"-fx-control-inner-background: black;" + "-fx-font-family: monospace");
