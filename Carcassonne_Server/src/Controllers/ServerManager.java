@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import Models.RMIInterface;
 import Models.Speler;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
@@ -67,13 +68,16 @@ public class ServerManager extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-/*
+
 		TextArea consoleOutput = new TextArea();
 		PrintStream ps = new PrintStream(
 				new OutputStream() {
 					@Override
 					public void write(int b) throws IOException {
-						consoleOutput.setText(consoleOutput.getText() + (char) b);
+						Platform.runLater(() -> {
+							consoleOutput.setText(consoleOutput.getText() + (char) b);
+							consoleOutput.setScrollTop(Double.MAX_VALUE);
+						});
 					}
 				}
 		);
@@ -94,7 +98,7 @@ public class ServerManager extends Application {
 			System.exit(0);
 		});
 		primaryStage.setTitle("Server command prompt");
-*/
+
 		manager = new ServerManager();
 		manager.runServer();
 	}
