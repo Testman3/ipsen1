@@ -57,8 +57,8 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 	public void initAction(){
 
 		backgroundMusic.setCycleCount(INDEFINITE);
-		if (!backgroundMusic.isPlaying()) {
-			//backgroundMusic.play();
+		if (!backgroundMusic.isPlaying() && SettingsScene.optieGeluid ){
+			backgroundMusic.play();
 		}
 
 		/*
