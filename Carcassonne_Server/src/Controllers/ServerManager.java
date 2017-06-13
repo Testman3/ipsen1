@@ -80,15 +80,15 @@ public class ServerManager extends Application{
 		consoleOutput.setStyle("-fx-text-fill: lime;" +
 				"-fx-control-inner-background: black;" + "-fx-font-family: monospace");
 
-
-
 		mainPane.setCenter(consoleOutput);
-
 
 		Scene mainScene = new Scene(mainPane, 600, 300);
 
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
+		primaryStage.setOnCloseRequest(event -> {
+			System.exit(0);
+		});
 		manager = new ServerManager();
 		manager.runServer();
 	}
