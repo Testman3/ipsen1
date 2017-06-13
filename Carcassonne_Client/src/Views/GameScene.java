@@ -53,7 +53,7 @@ public class GameScene extends Scene {
 
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
-		super(new Pane(), 1280, 720);
+		super(new Pane(), 1920, 1080);
 		getStylesheets().add("style.css");
 		tilesPane = (Pane) this.getRoot();
 		this.controller = menuController;
@@ -161,7 +161,7 @@ public class GameScene extends Scene {
 		mainPane = new BorderPane();
 		tilesPane.getChildren().add(mainPane);
 		mainPane.setId("test");
-		mainPane.setPrefSize(1280, 720);
+		mainPane.setPrefSize(1920, 1080);
 		mainPane.setPickOnBounds(false);
 
 		VBox links = new VBox(sceneHeight * 0.0);

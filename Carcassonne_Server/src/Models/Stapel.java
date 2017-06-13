@@ -21,7 +21,7 @@ public class Stapel {
 
 	public Stapel(){
 		kaartenOver = JsonKaarten.getAllKaarten();
-		beginTile = kaartenOver.get(0);
+		beginTile = kaartenOver.get(7);
 		System.out.println(kaartenOver.size());
 		Collections.shuffle(kaartenOver);
 	}

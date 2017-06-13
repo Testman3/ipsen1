@@ -67,6 +67,7 @@ public class ServerManager extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+/*
 		TextArea consoleOutput = new TextArea();
 		PrintStream ps = new PrintStream(
 				new OutputStream() {
@@ -78,7 +79,6 @@ public class ServerManager extends Application {
 		);
 		System.setOut(ps);
 		BorderPane mainPane = new BorderPane();
-		consoleOutput.setEditable(false);
 
 		consoleOutput.setStyle("-fx-text-fill: lime;" +
 				"-fx-control-inner-background: black;" + "-fx-font-family: monospace");
@@ -93,6 +93,7 @@ public class ServerManager extends Application {
 			System.exit(0);
 		});
 		primaryStage.setTitle("Server command prompt");
+*/
 		manager = new ServerManager();
 		manager.runServer();
 	}
