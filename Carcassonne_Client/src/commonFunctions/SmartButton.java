@@ -28,7 +28,9 @@ public class SmartButton extends Button {
 	public SmartButton(String text) {
 		super(text);
 		voice = vm.getVoice(VOICENAME);
-		voice.allocate();
+		if(voice != null){
+			voice.allocate();
+		}
 
 		//Speel het clickSound af wanneer er met de muis op een knop gedrukt wordt
 		this.setOnMousePressed (e -> {
@@ -42,12 +44,16 @@ public class SmartButton extends Button {
 
 			talk(this.getText());
 		});
+
 		initialize();
 	}
 
 	public SmartButton() {
 		voice = vm.getVoice(VOICENAME);
-		voice.allocate();
+
+		if(voice != null){
+			voice.allocate();
+		}
 
 		//Speel het clickSound af wanneer er met de muis op een knop gedrukt wordt
 		this.setOnMousePressed(e-> {
