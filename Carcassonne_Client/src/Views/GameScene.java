@@ -27,6 +27,7 @@ import javafx.scene.text.TextAlignment;
 import javax.swing.*;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 import Models.TileStump;
 import commonFunctions.SmartLabel;
 
@@ -71,7 +72,6 @@ public class GameScene extends Scene {
 		init();
 
 
-
 	}
 
 	/**
@@ -111,12 +111,12 @@ public class GameScene extends Scene {
 
 		setOnScroll(event -> {
 			if (event.getDeltaY() > 0) {
-				if (scale < 10 ) {
+				if (scale < 10) {
 					scale = verticaal.getScaleX() * 1.05;
 					verticaal.setScaleY(scale);
 					verticaal.setScaleX(scale);
-					verticaal.setLayoutX(verticaal.getLayoutX()/verticaal.getScaleX());
-					verticaal.setLayoutY(verticaal.getLayoutY()/verticaal.getScaleY());
+					verticaal.setLayoutX(verticaal.getLayoutX() / verticaal.getScaleX());
+					verticaal.setLayoutY(verticaal.getLayoutY() / verticaal.getScaleY());
 				}
 			}
 			if (event.getDeltaY() < 0) {
@@ -124,8 +124,8 @@ public class GameScene extends Scene {
 					scale = verticaal.getScaleX() * 0.95;
 					verticaal.setScaleY(scale);
 					verticaal.setScaleX(scale);
-					verticaal.setLayoutX(verticaal.getLayoutX()/verticaal.getScaleX());
-					verticaal.setLayoutY(verticaal.getLayoutY()/verticaal.getScaleY());
+					verticaal.setLayoutX(verticaal.getLayoutX() / verticaal.getScaleX());
+					verticaal.setLayoutY(verticaal.getLayoutY() / verticaal.getScaleY());
 
 				}
 			}
@@ -136,6 +136,7 @@ public class GameScene extends Scene {
 
 	/**
 	 * Plaatst previews om een tile heen, deze methode mag alleen gerunt worden nadat er een tile geplaatst is
+	 *
 	 * @param x
 	 * @param y
 	 */
@@ -143,16 +144,17 @@ public class GameScene extends Scene {
 		addTilePreview(x - 1, y);
 		addTilePreview(x + 1, y);
 		addTilePreview(x, y + 1);
-		addTilePreview(x, y-1);
+		addTilePreview(x, y - 1);
 	}
 
 	/**
 	 * Plaatst 1 preview, deze methode mag niet zomaar gerunnt worden
+	 *
 	 * @param x
 	 * @param y
 	 */
 	private void addTilePreview(int x, int y) {
-		if(x < 0 || y < 0){
+		if (x < 0 || y < 0) {
 			return;
 		}
 		//Als de tile "Empty" is dan moet er een kaarPreview komen, empty houdt in dat er geen geplaatste tile in zit
@@ -209,7 +211,7 @@ public class GameScene extends Scene {
 		//links.getChildren().add(onder);
 		//Spane.setLeft(onder);
 		mainPane.setBottom(onder);
-		 KaartenLeft = new SmartLabel("Kaarten over: 72");
+		KaartenLeft = new SmartLabel("Kaarten over: 72");
 		links.getChildren().add(KaartenLeft);
 		KaartenLeft.setId("standardLabel");
 
@@ -266,7 +268,6 @@ public class GameScene extends Scene {
 		KaartenLeft.setText("Kaarten over " + kaartenOver);
 		});
 	}
-
 
 
 }

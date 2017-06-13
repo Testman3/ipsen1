@@ -26,7 +26,10 @@ public class SmartLabel extends Label {
 	public SmartLabel(String text) {
 		super(text);
 		voice = vm.getVoice(VOICENAME);
-		voice.allocate();
+
+		if(voice != null){
+			voice.allocate();
+		}
 
 		// Onhover talk text
 		this.setOnMouseEntered(e -> {
@@ -41,7 +44,10 @@ public class SmartLabel extends Label {
 
 	public SmartLabel() {
 		voice = vm.getVoice(VOICENAME);
-		voice.allocate();
+
+		if(voice != null){
+			voice.allocate();
+		}
 
 		// Onhover talk text
 		this.setOnMouseEntered(e -> {
