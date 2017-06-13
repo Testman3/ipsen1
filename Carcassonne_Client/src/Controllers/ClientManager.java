@@ -22,7 +22,7 @@ public class ClientManager extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 
-		if (true == true) {
+		if (!(System.getProperty("user.name").equals("overb"))){
 			//Zet de applicatie op volledige venster grootte.
 			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
