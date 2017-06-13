@@ -43,6 +43,7 @@ public class main extends Application{
 			
 			// File handeling in class fileManager
 			fileManager.saveGame(fle.getPath());
+			System.out.println(fle.getPath());
 		});
 		
 		//new button for load game
