@@ -17,8 +17,16 @@
 
 
 #standardLabel {
-
     -fx-font-size: 4em;
+}
+
+#terugNaarMenu{
+	-fx-font-size: 5em;
+}
+
+#credits {
+    -fx-padding: 14em 0 0 0;
+    -fx-font-size: 7em;
 }
 
 #title {

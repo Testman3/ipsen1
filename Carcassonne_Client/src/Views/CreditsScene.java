@@ -47,7 +47,7 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 
 		backToHome = new SmartButton("Terug naar Hoofdmenu");
 		backToHome.setMaxWidth(maxButtonWidth);
-		backToHome.setId("standardLabel");
+		backToHome.setId("terugNaarMenu");
 
 		creditText = new VBox();
 		creditsNamen = new VBox(10);
@@ -72,7 +72,7 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 
 		credits = new SmartLabel();
 		credits.setText("Credits");
-		credits.setId("titel");
+		credits.setId("credits");
 
 		creditsNamen.setAlignment(Pos.CENTER);
 		backToHomeButton.setAlignment(Pos.CENTER);
