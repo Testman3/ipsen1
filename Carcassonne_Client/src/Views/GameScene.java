@@ -206,7 +206,7 @@ public class GameScene extends Scene {
 		for (int i = 0; i < 5; i++) {
 			playerViews[i] = new SpelerView();
 			playerViews[i].setMinSize(150,70);
-			playerViews[i].setMaxSize(150,70s);
+			playerViews[i].setMaxSize(150,70);
 			//playerViews[i].maxHeightProperty().bind(heightProperty().multiply(0.1));
 			//playerViews[i].maxWidthProperty().bind(widthProperty().multiply(0.1));
 			links.getChildren().add(playerViews[i]);
