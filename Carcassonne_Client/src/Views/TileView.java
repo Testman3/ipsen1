@@ -23,6 +23,10 @@ public class TileView extends Pane {
 	int y;
 
 	public TileView(int x, int y, GameScene scene){
+		minHeight(90);
+		minWidth(90);
+		maxHeight(90);
+		maxWidth(90);
 		this.x = x;
 		this.y = y;
 		this.scene = scene;
@@ -34,6 +38,7 @@ public class TileView extends Pane {
 		setPosition();
 		view.setId("Empty");
 		view.setOnMouseClicked(e -> {
+			System.out.println("Pane coords " + getLayoutX() + " " + getLayoutY());
 			System.out.println("Clicked on " + x +  " " + y);
 			scene.gameController.klikPlaatsKaart(x,y);
 		});
@@ -57,6 +62,7 @@ public class TileView extends Pane {
 	public void setKaartId(String Id) {
 		kaartId = Id;
 		view.setId(kaartId);
+		System.out.println("Coord of tile " + getLayoutX() + " " + getLayoutY() );
 	}
 
 	public void laatHorigePreviewZien() {

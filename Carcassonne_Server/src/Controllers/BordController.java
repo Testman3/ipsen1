@@ -17,7 +17,7 @@ public class BordController {
 	public BordController(ArrayList<Speler> spelerList) {
 		kaartenStapel = new Stapel();
 		bord = new Bord(spelerList);
-		bord.plaatsKaartCheat(10,10,kaartenStapel.getBeginTile());
+		bord.plaatsKaartCheat(5,5,kaartenStapel.getBeginTile());
 	}
 
 	public String pakKaartvanStapel(String spelerNaam) {

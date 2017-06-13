@@ -9,6 +9,7 @@ import Models.TileStump;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -98,6 +99,7 @@ public class GameScene extends Scene {
 			} else if (e.getCode() == KeyCode.D) {
 				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
 			}
+			System.out.println("COORDS + " + verticaal.getLayoutX() + " " + verticaal.getLayoutY());
 		});
 
 		setOnScroll(event -> {
