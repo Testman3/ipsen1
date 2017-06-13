@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Class-Path: lib/jsonSimple.jar lib/freetts.jar lib/cmudict04.jar lib/e
+ n_us.jar lib/cmutimelex.jar lib/cmu_us_kal.jar lib/freetts-jsapi10.ja
+ r lib/cmu_time_awb.jar lib/cmulex.jar lib/json-simple-1.1.1.jar lib/j
+ sonSimple.jar
+Main-Class: Controllers.ClientManager
+
