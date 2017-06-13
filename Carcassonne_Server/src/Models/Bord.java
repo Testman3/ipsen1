@@ -151,4 +151,8 @@ public class Bord {
 
 
 		}
+
+		public ArrayList<Speler> getAlleSpelers() {
+			return alleSpelers;
+		}
 }

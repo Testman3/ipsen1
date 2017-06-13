@@ -57,24 +57,31 @@ public class TileView extends Pane {
 	public void setKaartId(String Id) {
 		kaartId = Id;
 		view.setId(kaartId);
-		laatHorigePreviewZien();
 	}
 
 	public void laatHorigePreviewZien() {
 
 		Platform.runLater(() -> {
-		double[][] posities = {{40,0},{0,40},{40,70},{70,40}};
+			double[][] posities = {{40, 0}, {0, 40}, {40, 70}, {70, 40}};
+			ImageView[] horigeViews = new ImageView[4];
+			for (int i = 0; i < 4; i++) {
+				ImageView horigeView = new ImageView();
+				horigeView.setFitHeight(20);
+				horigeView.setFitWidth(20);
+				horigeView.setId("horigePreview");
 
-		for(int i = 0; i < 4; i++){
-			ImageView horigeView = new ImageView();
-			horigeView.setFitHeight(20);
-			horigeView.setFitWidth(20);
-			horigeView.setId("horigePreview");
-			getChildren().add(horigeView);
-			horigeView.setLayoutX(posities[i][0]);
-			horigeView.setLayoutY(posities[i][1]);
-		}});
+				getChildren().add(horigeView);
+				horigeView.setLayoutX(posities[i][0]);
+				horigeView.setLayoutY(posities[i][1]);
 
+				horigeViews[i] = horigeView;
+
+				horigeView.setOnMouseClicked(e -> {
+					for (int j = 0; j < horigeViews.length; j++) {
+						getChildren().remove(horigeViews[j]);
+					}
+				});
+			}
+		});
 	}
-
 }

@@ -67,6 +67,7 @@ public class ServerManager extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+/*
 		TextArea consoleOutput = new TextArea();
 		PrintStream ps = new PrintStream(
 				new OutputStream() {
@@ -93,6 +94,7 @@ public class ServerManager extends Application {
 			System.exit(0);
 		});
 		primaryStage.setTitle("Server command prompt");
+*/
 		manager = new ServerManager();
 		manager.runServer();
 	}

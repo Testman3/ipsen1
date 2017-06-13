@@ -51,6 +51,11 @@ public class RMIController implements RMIInterface {
 	}
 
 	@Override
+	public ArrayList<Speler> getPlayerListObject() throws RemoteException {
+		return serverManager.bordController.bord.getAlleSpelers();
+	}
+
+	@Override
 	public boolean checkContains(String naam) throws RemoteException {
 		for (Speler speler : alleSpelers) {
 			if (speler.getNaam().contains(naam)) {
