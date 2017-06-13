@@ -1,24 +1,17 @@
 package Views;
 
-import commonFunctions.SceneInitialiser;
-import javafx.scene.Scene;
-
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-
 import Controllers.MenuController;
+import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
-import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class MenuViewScene extends Scene implements SceneInitialiser{
 
@@ -78,8 +71,9 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 
 		knoppen[1].setText("Laden spel");
 		knoppen[1].setOnAction(e -> {
-			controller.openFileBrowser();
-			//controller.setGameScene();
+			MenuController.loadedFile = controller.openFileBrowser();
+
+			System.out.println("File:  " + MenuController.loadedFile.getPath());
 		});
 
 		// Maakt een variabele aan die naar het handleiding document verwijst,

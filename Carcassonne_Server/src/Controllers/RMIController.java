@@ -1,11 +1,12 @@
 package Controllers;
 
+import Models.RMIInterface;
+import Models.Speler;
+import Models.TileStump;
+
+import java.io.File;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
-import Models.Speler;
-import Models.RMIInterface;
-import Models.TileStump;
 
 
 public class RMIController implements RMIInterface {
@@ -65,7 +66,18 @@ public class RMIController implements RMIInterface {
 		serverManager.startGame(alleSpelers);
 	}
 
-	@Override
+    @Override
+    public void startenGame(File jsonFile) throws RemoteException {
+		//File Loaden
+		File importedFile = jsonFile;
+
+		// File inhoud lezen
+
+		//etc 
+
+    }
+
+    @Override
 	public boolean isGameStarted() throws RemoteException {
 		System.out.println(ServerManager.gameStarted);
 		return ServerManager.gameStarted;
