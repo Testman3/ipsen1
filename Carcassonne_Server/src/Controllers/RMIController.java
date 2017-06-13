@@ -31,7 +31,7 @@ public class RMIController implements RMIInterface {
 	public void removePlayer(String naam) {
 
 		for (Speler speler : alleSpelers) {
-			if (speler.naam.contains(naam)) {
+			if (speler.getNaam().contains(naam)) {
 				System.out.println("Speler " + naam + " has left the game");
 				alleSpelers.remove(speler);
 				return;
@@ -44,7 +44,7 @@ public class RMIController implements RMIInterface {
 	public ArrayList<String> getPlayerList() {
 		ArrayList<String> Spelernamen = new ArrayList<String>();
 		for (Speler speler : alleSpelers) {
-			Spelernamen.add(speler.naam);
+			Spelernamen.add(speler.getNaam());
 		}
 
 		return Spelernamen;
@@ -53,7 +53,7 @@ public class RMIController implements RMIInterface {
 	@Override
 	public boolean checkContains(String naam) throws RemoteException {
 		for (Speler speler : alleSpelers) {
-			if (speler.naam.contains(naam)) {
+			if (speler.getNaam().contains(naam)) {
 				return true;
 			}
 		}
@@ -101,7 +101,7 @@ public class RMIController implements RMIInterface {
 
 	@Override
 	public String getPlayerBeurt() throws RemoteException {
-		return serverManager.bordController.bord.getSpelerBeurt().naam;
+		return serverManager.bordController.bord.getSpelerBeurt().getNaam();
 	}
 
 	public TileStump getPlacedKaart() throws RemoteException {

@@ -2,7 +2,7 @@ package Models;
 
 public class Speler {
 
-	public String naam;
+	private String naam;
 
 	private boolean beurt = false;
 
@@ -20,6 +20,10 @@ public class Speler {
 		this.punten = punten;
 	}
 
+	public void setNaam(String naam){
+		this.naam = naam;
+	}
+
 	public String getNaam() {
 		return naam;
 	}
@@ -30,6 +34,10 @@ public class Speler {
 
 	public boolean getBeurt(){
 		return this.beurt;
+	}
+
+	public void setPunten(int punten){
+		this.punten = punten;
 	}
 
 	public int getPunten(){

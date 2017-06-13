@@ -55,7 +55,7 @@ public class Bord {
 	 */
 	public boolean isSpelerBeurt(String spelerNaam) {
 		System.out.println("Speler naam " + spelerNaam + " Speler beurt " + spelerBeurt.getNaam());
-		return spelerBeurt.naam.equals(spelerNaam);
+		return spelerBeurt.getNaam().equals(spelerNaam);
 	}
 
 	public Tile getTile(int x, int y){

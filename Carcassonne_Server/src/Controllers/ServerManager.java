@@ -1,4 +1,5 @@
 package Controllers;
+
 import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -24,10 +25,10 @@ import javafx.stage.Stage;
 import static javafx.scene.paint.Color.*;
 
 
-public class ServerManager extends Application{
+public class ServerManager extends Application {
 	ServerManager manager;
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		launch(args);
 		//manager.runServer();
 
@@ -36,17 +37,17 @@ public class ServerManager extends Application{
 
 	public static boolean gameStarted = false;
 	BordController bordController;
+
 	/**
 	 * Start de gameserver en initialiseert de RMIcontroller,
 	 * om vervolgens connectie te kunnen maken met de clients
-	 * 
 	 */
 	public void runServer() {
 		try {
 
 			System.out.println("Current Hostname/I.P Address: " + Inet4Address.getLocalHost());
 			RMIController RMIimlp = new RMIController(this);
-			RMIInterface rmiSkeleton = 	(RMIInterface) UnicastRemoteObject.exportObject(RMIimlp, 0);
+			RMIInterface rmiSkeleton = (RMIInterface) UnicastRemoteObject.exportObject(RMIimlp, 0);
 			System.out.println("rmiSkeleton created");
 			Registry registry = LocateRegistry.createRegistry(1099);
 			System.out.println("RMI Registry starter");
@@ -91,6 +92,7 @@ public class ServerManager extends Application{
 		primaryStage.setOnCloseRequest(event -> {
 			System.exit(0);
 		});
+		primaryStage.setTitle("Server command prompt");
 		manager = new ServerManager();
 		manager.runServer();
 	}
