@@ -18,8 +18,8 @@ import java.nio.file.Paths;
 
 public class MenuViewScene extends Scene implements SceneInitialiser{
 
-	private static final int INDEFINITE = 1;
-	AudioClip backgroundMusic = new AudioClip(Paths.get("Sounds/BackgroundMusic.mp3").toUri().toString());
+	protected static final int INDEFINITE = 1;
+	static AudioClip backgroundMusic = new AudioClip(Paths.get("Sounds/BackgroundMusic.mp3").toUri().toString());
 	private BorderPane mainPane;
 	private Label titel = new Label("Carcassonne");
 	private VBox buttonVBox = new VBox();

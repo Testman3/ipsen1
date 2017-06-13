@@ -12,6 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import static Views.MenuViewScene.backgroundMusic;
+
 
 public class SettingsScene extends Scene implements SceneInitialiser {
 
@@ -109,6 +111,12 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 		soundCheckBox.setOnAction(e -> {
 			optieGeluid = soundCheckBox.isSelected();
+			backgroundMusic.setCycleCount(MenuViewScene.INDEFINITE);
+			if (!backgroundMusic.isPlaying() && SettingsScene.optieGeluid ){
+				backgroundMusic.play();
+			} else if (optieGeluid == false){
+				backgroundMusic.stop();
+			}
 		});
 
 		fullscreenCheckBox.setOnAction(e -> {
