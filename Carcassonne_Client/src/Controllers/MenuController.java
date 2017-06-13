@@ -1,28 +1,10 @@
 package Controllers;
 
-import java.io.File;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import Models.GameClient;
-import Views.CreditsScene;
-import Views.EndGameScene;
-import Views.GameScene;
-import Views.LobbyScene;
-import Views.MenuViewScene;
-import Views.PreLobbyScene;
-import Views.SettingsScene;
-import javafx.application.Application;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
+import Views.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import Models.RMIInterface;
+
+import java.io.File;
 
 public class MenuController {
 
@@ -37,6 +19,8 @@ public class MenuController {
 	private CreditsScene creditsScene;
 
 	private String spelernaam;
+
+	public static File loadedFile;
 
 	public MenuController(Stage gameStage) {
 
@@ -154,11 +138,15 @@ public class MenuController {
 		this.spelernaam = spelernaam;
 	}
 
-	public void openFileBrowser(){
+	public File openFileBrowser(){
 		FileChooser fileChooser = new FileChooser();
+		//title of window
 		fileChooser.setTitle("Laadgame");
+		//extension filter json
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Carcassonne", "*.json"));
-		File fle = fileChooser.showOpenDialog(gameStage);
+
+		// return file
+		return fileChooser.showOpenDialog(gameStage);
 	}
 
 

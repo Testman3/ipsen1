@@ -1,7 +1,5 @@
 package Models;
 
-import Controllers.BordController;
-
 import java.util.ArrayList;
 
 public class Bord {
@@ -36,13 +34,19 @@ public class Bord {
 	public void geefSpelerBeurt() {
 		gameBeurt++;
 
+		spelerBeurt.setBeurt(true);
+
 		int beurt = alleSpelers.indexOf(spelerBeurt);
+
+
 		if( beurt + 1 == alleSpelers.size()){
 			beurt = 0;
 			spelerBeurt = alleSpelers.get(beurt);
 		} else {
 			spelerBeurt = alleSpelers.get(beurt + 1);
 		}
+
+		spelerBeurt.setBeurt(true);
 	}
 	/**
 	 * returnt of de speler aan de beurt is

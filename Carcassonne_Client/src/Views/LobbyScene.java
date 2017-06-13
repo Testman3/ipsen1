@@ -1,8 +1,5 @@
 package Views;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-
 import Controllers.GameController;
 import Controllers.LobbyController;
 import Controllers.MenuController;
@@ -13,10 +10,14 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class LobbyScene extends Scene implements SceneInitialiser {
 
@@ -113,7 +114,12 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 		startGame.setOnAction(e -> {
 			try {
-				lobbyController.RMIstub.startenGame();
+				if(controller.loadedFile == null) {
+					lobbyController.RMIstub.startenGame();
+				} else {
+					lobbyController.RMIstub.startenGame(controller.loadedFile);
+				}
+
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}

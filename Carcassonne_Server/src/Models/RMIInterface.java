@@ -1,5 +1,6 @@
 package Models;
 
+import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public interface RMIInterface extends Remote {
 	 * @throws RemoteException
 	 */
 	public void startenGame() throws RemoteException;
+
+	public void startenGame(File jsonFile) throws RemoteException;
 
 
 	/**
