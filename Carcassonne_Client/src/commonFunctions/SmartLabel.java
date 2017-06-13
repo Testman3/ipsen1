@@ -56,7 +56,6 @@ public class SmartLabel extends Label {
 
 			talk(this.getText());
 		});
-
 		initialize();
 	}
 

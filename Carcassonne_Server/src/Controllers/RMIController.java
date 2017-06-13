@@ -7,6 +7,7 @@ import Models.Speler;
 import Models.RMIInterface;
 import Models.TileStump;
 
+
 public class RMIController implements RMIInterface {
 
 	public static ArrayList<Speler> alleSpelers = new ArrayList<Speler>();
@@ -91,27 +92,6 @@ public class RMIController implements RMIInterface {
 		return serverManager.bordController.bord.getSpelerBeurt().naam;
 	}
 
-	@Override
-	public int getKaartX() throws RemoteException {
-		return serverManager.bordController.bord.getLaatstGeplaatst().getX();
-	}
-
-	@Override
-	public int getKaartY() throws RemoteException {
-		return serverManager.bordController.bord.getLaatstGeplaatst().getY();
-	}
-
-	@Override
-	public String getKaartId() throws RemoteException {
-		return serverManager.bordController.bord.getLaatstGeplaatst().getKaartId();
-	}
-
-	@Override
-
-	public int getKaartRotation() throws RemoteException {
-		return serverManager.bordController.bord.getLaatstGeplaatst().getRotation();
-	}
-
 	public TileStump getPlacedKaart() throws RemoteException {
 		return new TileStump(
 				serverManager.bordController.bord.getLaatstGeplaatst().getX(),
@@ -125,5 +105,10 @@ public class RMIController implements RMIInterface {
 	@Override
 	public int getBeurt() throws RemoteException {
 		return serverManager.bordController.bord.gameBeurt();
+	}
+
+	@Override
+	public int getKaartenLeft() throws RemoteException {
+		return serverManager.bordController.kaartenStapel.getKaartenOver();
 	}
 }

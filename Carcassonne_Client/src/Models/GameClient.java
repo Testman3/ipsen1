@@ -30,6 +30,12 @@ public class GameClient {
 		this.view = view;
 
 	}
+
+
+	/**
+	 * Deze functie MOET gerunt worden als de speler de game joint, dit start de thread en set de spelernaam.
+ 	 * @param spelerNaam
+	 */
 	public void Join(String spelerNaam) {
 	this.spelerNaam = spelerNaam;
 
@@ -48,6 +54,9 @@ public class GameClient {
 
 	}
 
+	/**
+	 * Pak een kaart van de stapel, dit kan alleen als de speler aan de beurt is
+ 	 */
 	public void pakKaart() {
 		try {
 			String id = RmiStub.pakKaart(spelerNaam);
@@ -60,9 +69,14 @@ public class GameClient {
 			e1.printStackTrace();
 		}
 	}
+
+	/**
+	 * Plaats de kaart in de view
+	 * @param x coordinaat
+	 * @param y coordinaat
+	 */
 	public void plaatsKaart(int x, int y) {
 		try {
-			System.out.println("DIT WORDT GERUNT DIT WORDT GERUNT DIT WORDT GERUNT");
 			if(kaartPlaatsId != "" && RmiStub.plaatsKaart(x,y)) {
 				view.plaatsKaart(this, kaartPlaatsId, x, y);
 				kaartPlaatsId = "";
@@ -71,30 +85,26 @@ public class GameClient {
 			e1.printStackTrace();
 		}
 	}
+
 	public void setRmiStub(RMIInterface rmiController) {
 		RmiStub = rmiController;
 		view.RmiStub = rmiController;
 	}
 
 
+	/**
+	 * De client wordt elke x ms geupdate, als de beurt op de server hoger is dan de beurt op de client betekent dat en
+	 * speler klaar is met zijn beurt, en het spelbord geupdate moet worden.
+	 */
 	public void Update() {
 		try {
-			System.out.println("Spelerbeurt naam " + spelerBeurt + " en rmi naam " + RmiStub.getPlayerBeurt());
 			if (beurt != RmiStub.getBeurt()) {
-				System.out.println("Spelerbeurt komt niet overen met RMI beurt ==================================");
 				view.updateView(this);
 				beurt = RmiStub.getBeurt();
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-	}
-
-		public void getPlacedTile() throws RemoteException {
-		int kaartX = RmiStub.getKaartX();
-		int kaartY = RmiStub.getKaartY();
-		String kaartId = RmiStub.getKaartId();
-		int kaartRotation = RmiStub.getKaartRotation();
 	}
 
 	public TileStump getTile() throws RemoteException {

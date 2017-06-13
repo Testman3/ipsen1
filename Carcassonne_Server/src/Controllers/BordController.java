@@ -15,7 +15,6 @@ public class BordController {
 	Bord bord;
 
 	public BordController(ArrayList<Speler> spelerList) {
-		System.out.println("HALLLLLLLLLLLLLO");
 		kaartenStapel = new Stapel();
 		bord = new Bord(spelerList);
 		bord.plaatsKaartCheat(10,10,kaartenStapel.getBeginTile());
@@ -40,7 +39,6 @@ public class BordController {
 		bord.plaatsKaart(x,y,kaartenStapel.getTurnTile());
 		return true;
 	} else {
-		System.out.println("Kaart niet succesvol geplaatst (BORDCONTROLLER)");
 		return false;
 	}
 	}

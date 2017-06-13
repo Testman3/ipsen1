@@ -159,8 +159,8 @@ public class GameScene extends Scene {
 		}
 		//Als de tile "Empty" is dan moet er een kaarPreview komen, empty houdt in dat er geen geplaatste tile in zit
 		//Deze check is nodig om ervoor te zorgen dat tiles waar al een kaart in zit niet overschreven worden.
-		if (tileViews[x][y].getId().contains("Empty")) {
-			tileViews[x][y].setId("KaartPreview");
+		if (tileViews[x][y].getimgId().contains("Empty")) {
+			tileViews[x][y].setKaartId("KaartPreview");
 		}
 
 	}
@@ -247,13 +247,16 @@ public class GameScene extends Scene {
 	public void showKaart(GameClient client) {
 		ShowKaart.setId(client.kaartPlaatsId);
 
-	}
+		
 
+	}
+	int kaartenOver = 0;
 	public void updateView(GameClient client) {
 		TileStump stump = null;
 		try {
 			//Haalt het Tilestump object uit de server om hem vervolgens in de client te kunnen plaatsen
 			stump = client.getTile();
+			kaartenOver = RmiStub.getKaartenLeft();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -261,6 +264,9 @@ public class GameScene extends Scene {
 		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 		addTilePreviews(stump.getX(), stump.getY());
 		System.out.println(stump.getX() + " " + stump.getY() + " " + stump.getRotation());
+		Platform.runLater(() -> {
+		KaartenLeft.setText("Kaarten over " + kaartenOver);
+		});
 	}
 
 

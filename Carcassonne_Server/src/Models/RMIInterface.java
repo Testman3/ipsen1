@@ -67,21 +67,39 @@ public interface RMIInterface extends Remote {
 	 */
 	public boolean plaatsKaart(int x, int y) throws RemoteException;
 
+	/**
+	 * Draait de kaart die de speler gepakt heeft met 90 graden
+	 * @throws RemoteException
+	 */
 	public void draaiKaart() throws RemoteException;
 
+	/**
+	 * Returnt welke speler er nu aan de beurt is
+	 * @return De spelernaam
+	 * @throws RemoteException
+	 */
 	public String getPlayerBeurt() throws RemoteException;
 
-	public int getKaartX() throws RemoteException;
-
-	public int getKaartY() throws RemoteException;
-
-	public String getKaartId() throws RemoteException;
-
-	public int getKaartRotation() throws RemoteException;
-
+	/**
+	 * Returnt een data-klasse met de informatie over de laatst geplaatste kaart.
+	 * @return de tilestump
+	 * @throws RemoteException
+	 */
 	public TileStump getPlacedKaart() throws RemoteException;
 
+	/**
+	 * Geeft een int van welke beurt het spel op dit moment is
+	*  @return beurt
+	 * @throws RemoteException
+	 */
 	public int getBeurt() throws RemoteException;
+
+	/**
+	 * Returnt hoeveel kaarten er nog in de pot zitten.
+ 	 * @return
+	 * @throws RemoteException
+	 */
+	public int getKaartenLeft() throws RemoteException;
 
 
 }
