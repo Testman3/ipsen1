@@ -11,8 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import static Views.MenuViewScene.backgroundMusic;
+import javafx.scene.media.MediaPlayer;
+import static Views.MenuViewScene.mediaPlayer;
 
 
 public class SettingsScene extends Scene implements SceneInitialiser {
@@ -111,11 +111,11 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 		soundCheckBox.setOnAction(e -> {
 			optieGeluid = soundCheckBox.isSelected();
-			backgroundMusic.setCycleCount(MenuViewScene.INDEFINITE);
-			if (!backgroundMusic.isPlaying() && SettingsScene.optieGeluid ){
-				backgroundMusic.play();
+
+			if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid ){
+				mediaPlayer.play();
 			} else if (optieGeluid == false){
-				backgroundMusic.stop();
+				mediaPlayer.stop();
 			}
 		});
 
