@@ -31,9 +31,9 @@ public class SpelerView extends StackPane {
 		text_Naam.setId("standardLabel");
 		text_Punten.setId("standardLabel");
 		achterkant.setId("Speler");
-		achterkant.setFitWidth(200);
-		achterkant.setFitHeight(100);
-		getChildren().addAll(achterkant, texts);
+		achterkant.fitHeightProperty().bind(this.heightProperty());
+		achterkant.fitWidthProperty().bind(this.widthProperty());
+		getChildren().addAll(achterkant);
 	}
 
 

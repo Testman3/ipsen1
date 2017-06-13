@@ -21,7 +21,7 @@ public class ClientManager extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-
+/*s
 		if (!(System.getProperty("user.name").equals("overb"))){
 			//Zet de applicatie op volledige venster grootte.
 			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -32,7 +32,7 @@ public class ClientManager extends Application {
 			primaryStage.setHeight(primaryScreenBounds.getHeight());
 
 			primaryStage.setResizable(false);
-		}
+	}*/
 
 		runClient(primaryStage);
 

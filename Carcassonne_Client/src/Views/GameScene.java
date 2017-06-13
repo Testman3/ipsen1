@@ -53,7 +53,7 @@ public class GameScene extends Scene {
 
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
-		super(new Pane(), 1920, 1080);
+		super(new Pane(), 1280, 720);
 		getStylesheets().add("style.css");
 		tilesPane = (Pane) this.getRoot();
 		this.controller = menuController;
@@ -161,47 +161,19 @@ public class GameScene extends Scene {
 		mainPane = new BorderPane();
 		tilesPane.getChildren().add(mainPane);
 		mainPane.setId("test");
-		mainPane.setPrefSize(1920, 1080);
+		mainPane.setPrefSize(1280, 720);
+		mainPane.setMaxSize(1280,720);
+		mainPane.setMinSize(1280,720);
 		mainPane.setPickOnBounds(false);
 
-		VBox links = new VBox(sceneHeight * 0.0);
+		VBox links = new VBox(5);
 		links.setPickOnBounds(false);
-		links.setPadding(new Insets(0, 0, 0, 20));
-
-		menuButton = new Button("Menu");
-		menuButton.minHeightProperty().bind(heightProperty().multiply(0.2));
-		menuButton.minWidthProperty().bind(widthProperty().multiply(0.11));
-		menuButton.setId("standardLabel");
-		links.getChildren().add(menuButton);
-
-		playerViews = new SpelerView[5];
-		for (int i = 0; i < 5; i++) {
-			playerViews[i] = new SpelerView();
-			playerViews[i].maxHeight(100);
-			playerViews[i].prefHeight(100);
-			playerViews[i].maxWidth(100);
-			links.getChildren().add(playerViews[i]);
-		}
-
-		ShowKaart = new ImageView();
-		ShowKaart.fitHeightProperty().bind(heightProperty().multiply(0.2));
-		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
-		ShowKaart.setId("Kaartview");
-		links.getChildren().add(ShowKaart);
-		ShowKaart.setOnMouseClicked(e -> {
-			gameController.klikPakKaart();
-		});
+		//links.setPadding(new Insets(0, 0, 0, 20));
 
 		HBox onder = new HBox();
 		onder.setPickOnBounds(false);
 		onder.getChildren().add(links);
 		onder.setPadding(new Insets(0, 0, 0, 0));
-		//links.getChildren().add(onder);
-		//Spane.setLeft(onder);
-		mainPane.setBottom(onder);
-		KaartenLeft = new SmartLabel("Kaarten over: 72");
-		links.getChildren().add(KaartenLeft);
-		KaartenLeft.setId("standardLabel");
 
 		for (int i = 0; i < 7; i++) {
 			ImageView horige = new ImageView();
@@ -223,6 +195,39 @@ public class GameScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
+
+		menuButton = new Button("Menu");
+		menuButton.minHeightProperty().bind(heightProperty().multiply(0.2));
+		menuButton.minWidthProperty().bind(widthProperty().multiply(0.11));
+		menuButton.setId("standardLabel");
+		links.getChildren().add(menuButton);
+
+		playerViews = new SpelerView[5];
+		for (int i = 0; i < 5; i++) {
+			playerViews[i] = new SpelerView();
+			playerViews[i].setMinSize(150,70);
+			playerViews[i].setMaxSize(150,70s);
+			//playerViews[i].maxHeightProperty().bind(heightProperty().multiply(0.1));
+			//playerViews[i].maxWidthProperty().bind(widthProperty().multiply(0.1));
+			links.getChildren().add(playerViews[i]);
+		}
+
+		ShowKaart = new ImageView();
+		ShowKaart.fitHeightProperty().bind(heightProperty().multiply(0.2));
+		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
+		ShowKaart.setId("Kaartview");
+		links.getChildren().add(ShowKaart);
+		ShowKaart.setOnMouseClicked(e -> {
+			gameController.klikPakKaart();
+		});
+
+		//links.getChildren().add(onder);
+		//Spane.setLeft(onder);
+		mainPane.setBottom(onder);
+		KaartenLeft = new SmartLabel("Kaarten over: 72");
+		links.getChildren().add(KaartenLeft);
+		KaartenLeft.setId("standardLabel");
+
 
 	//		mainPane.setCenter(ingamePane);
 	}
