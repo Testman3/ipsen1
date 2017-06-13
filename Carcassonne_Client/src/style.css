@@ -91,7 +91,9 @@
 #creditsLabel {
 	-fx-font-size: 3.5em;
 }
-
+#horigePreview {
+    -fx-image: url("Horige_Zwart.png");
+}
 #Kaart_00{
 -fx-image: url("Kaarten/Kaart_00.png");
 }
@@ -188,4 +190,5 @@
 -fx-image: url("Kaarten/Kaart_23.png");
 }
 #Kaart_24{
--fx-image: url("Kaarten/Kaart_24.png"}
+-fx-image: url("Kaarten/Kaart_24.png");
+}
