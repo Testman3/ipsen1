@@ -6,7 +6,6 @@ package Models;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -37,15 +36,16 @@ public class FileManager {
 
     }
 
-    public static void loadGame(String path) {
-        ArrayList<Speler> spelerLijst = new ArrayList<Speler>();
+    public static void loadGame(File load) {
 
+        ArrayList<Speler> spelerLijst = new ArrayList<Speler>();
         JSONParser parser = new JSONParser();
         Object obj = null;
 
         try {
             // Get file json file (selected in filebrowser)
-            obj = parser.parse(new FileReader(path));
+            obj = parser.parse(new FileReader(load));
+            System.out.println("File Geladen");
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
