@@ -16,7 +16,7 @@ public class FileManager {
 	}
 
 
-	public void createFile(String naam, JSONObject object){
+	}
 
 		try {
 			//new file

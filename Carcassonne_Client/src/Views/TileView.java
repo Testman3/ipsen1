@@ -89,9 +89,9 @@ public class TileView extends Pane {
 				horigeView.setOnMouseClicked(e -> {
 					System.out.println("HORIGE POSITIE " + pos.toString());
 
-				//	for (int j = 0; j < horigeViews.length; j++) {
-				//		getChildren().remove(horigeViews[j]);
-				//	}
+					for (int j = 0; j < horigeViews.length; j++) {
+						getChildren().remove(horigeViews[j]);
+					}
 				});
 			}
 		});
