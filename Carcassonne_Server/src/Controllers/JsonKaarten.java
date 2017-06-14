@@ -23,6 +23,7 @@ public class JsonKaarten {
 	 * Get json file met kaarten data en parse alle data naar een TegelData array
 	 * @return ArrayList<TegelData> - alle kaarten van carcassonne
 	 * @throws FileNotFoundException
+	 * Deze exception wordt gegeven wanneer het systeem het opgegeven Json bestand (alleGoeieKaarten.json) niet kan vinden
 	 */
 	public static ArrayList<Tile> getAllKaarten() {
 

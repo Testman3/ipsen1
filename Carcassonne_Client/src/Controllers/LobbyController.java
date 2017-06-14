@@ -27,8 +27,11 @@ public class LobbyController {
 	 * Probeert de speler te laten verbinden met de rmi server
 	 *
 	 * @param ip
+	 * ip adres in de vorm van een String
 	 * @param naam
+	 * gebruikersnaam in de vorm van een String
 	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er een fout zit in de verbinding met RMI
 	 */
 	public void connectToServer(String ip, String naam) throws RemoteException {
 
