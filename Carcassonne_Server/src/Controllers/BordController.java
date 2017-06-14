@@ -7,7 +7,7 @@ import Models.Bord;
 import java.util.ArrayList;
 
 /**
- * Created by Marti on 8-6-2017.
+ * Deze class regelt alle functies die betrekking hebben tot het bord
  */
 public class BordController {
 

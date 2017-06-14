@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+/**
+ * Deze class zorgt voor de fcunties in het menu van het spel, en is verantwoordelijk voor het switchen van scenes
+ */
 public class MenuController {
 
 	Stage gameStage;

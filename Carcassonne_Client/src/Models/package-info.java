@@ -1,4 +1,4 @@
 /**
- * In deze package staan alle Models waar de client gebruik van maakt
+ * In deze package staan alle Models waar het spel gebruik van maakt
  */
 package Models;

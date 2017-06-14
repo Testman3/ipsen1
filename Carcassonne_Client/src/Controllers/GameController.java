@@ -4,7 +4,7 @@ import Models.GameClient;
 import Models.RMIInterface;
 
 /**
- * Created by Marti on 11-6-2017.
+ * Deze class regelt een aantal functies met betrekking tot het pakken en plaatsen van kaarten
  */
 public class GameController {
 
@@ -15,12 +15,28 @@ public class GameController {
 		this.model = model;
 	}
 
+	/**
+	 * Deze functie zorgt ervoor dat de kaart uit het model gepakt wordt (roept pakKaart() aan in het model)
+	 */
 	public void klikPakKaart() {
 		model.pakKaart();
 	}
+
+	/**
+	 * Deze functie zorgt ervoor dat de kaart in het model (GameClient) geplaatst wordt
+	 * @param x
+	 * geef de x co-ordinaat van de kaart mee
+	 * @param y
+	 * geef de y co-ordinaat van de kaart mee
+	 */
 	public void klikPlaatsKaart(int x, int y) {
 		model.plaatsKaart(x, y);
 	}
+
+	/**
+	 * Deze functie
+	 * @return model
+	 */
 	public GameClient getModel() {
 		return model;
 	}

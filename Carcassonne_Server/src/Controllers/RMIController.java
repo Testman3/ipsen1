@@ -9,7 +9,9 @@ import java.io.File;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-
+/**
+ * Deze class zorgt voor alle kernspelfunctionaliteiten en functies op de server
+ */
 public class RMIController implements RMIInterface {
 
 	public static ArrayList<Speler> alleSpelers = new ArrayList<Speler>();

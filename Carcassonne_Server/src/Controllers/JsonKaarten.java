@@ -13,6 +13,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Deze class is verantwoordelijk voor Json interacties
+ */
 public class JsonKaarten {
 
 	public JsonKaarten() {
@@ -21,9 +24,7 @@ public class JsonKaarten {
 
 	/**
 	 * Get json file met kaarten data en parse alle data naar een TegelData array
-	 * @return ArrayList<TegelData> - alle kaarten van carcassonne
-	 * @throws FileNotFoundException
-	 * Deze exception wordt gegeven wanneer het systeem het opgegeven Json bestand (alleGoeieKaarten.json) niet kan vinden
+	 * @return ArrayList (TegelData - alle kaarten van carcassonne)
 	 */
 	public static ArrayList<Tile> getAllKaarten() {
 
