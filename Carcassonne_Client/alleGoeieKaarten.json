@@ -329,7 +329,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_22",
         "aantalKaarten" : 9,
-       "horigePosities": ["OOST", "ZUID"]
+       "horigePosities": ["WEST", "ZUID"]
     },
      {
         "noordZijde": "GRAS",

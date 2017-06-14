@@ -29,7 +29,8 @@ public class BordController {
 	 * Deze functie zorgt ervoor dat er een kaart van de stapel wordt gepakt
 	 * @param spelerNaam
 	 * Geef de naam van de speler mee die de kaart wil pakken in de vorm van een String
-	 * @return
+	 * @return Wanneer de speler aan de beurt is krijgt hij de imageview van de volgende kaart in de stapel
+	 * wanneer de speler niet aan de beurt is krijgt hij geen imageview terug van de volgende kaart
 	 */
 	public String pakKaartvanStapel(String spelerNaam) {
 		if (bord.isSpelerBeurt(spelerNaam)) {

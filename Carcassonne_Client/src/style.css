@@ -105,7 +105,7 @@
 	-fx-font-size: 3.5em;
 }
 #horigePreview {
-    -fx-image: url("Horige_Zwart.png");
+    -fx-image: url("Horige_Preview.png");
 }
 #Kaart_00{
 -fx-image: url("Kaarten/Kaart_00.png");

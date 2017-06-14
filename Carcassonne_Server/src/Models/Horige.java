@@ -6,8 +6,8 @@ public class Horige {
 
 		NOORD(40,0),
 		OOST(70,40),
-		ZUID(70,40),
-		WEST(0,70),
+		ZUID(40,70),
+		WEST(0,40),
 		MIDDEN(40,40);
 
 		int x;
