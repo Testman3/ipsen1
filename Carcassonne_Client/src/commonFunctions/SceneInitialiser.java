@@ -1,5 +1,8 @@
 package commonFunctions;
 
+/**
+ * Deze interface zorgt ervoor dat alle views zich houden aan de initGui + initAction methode die we hebben bedacht
+ */
 public interface SceneInitialiser {
 
 	/**
