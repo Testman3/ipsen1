@@ -31,6 +31,11 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 
 	private Label credits;
 
+	/**
+	 * Constructor van de creditsscene
+	 * @param controller
+	 * Geef MenuController mee
+	 */
 	public CreditsScene(MenuController controller) {
 
 		super(new BorderPane(), 1280, 720);
