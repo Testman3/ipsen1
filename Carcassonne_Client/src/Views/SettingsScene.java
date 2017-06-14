@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
+import static Views.MenuViewScene.mediaPlayer;
 
 
 public class SettingsScene extends Scene implements SceneInitialiser {
@@ -37,7 +39,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	//spraak
 	public static boolean optieSpreken = false;
 	public static boolean fullScreen = false;
-	public static boolean optieGeluid = false;
+	public static boolean optieGeluid = true;
 
 	public SettingsScene(MenuController controller) {
 		super(new BorderPane(), 1280, 720);
@@ -70,6 +72,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		fullscreenCheckBox = new CheckBox();
 
 		soundCheckBox.setId("checkBox");
+		soundCheckBox.setSelected(true);
 		spraakCheckBox.setId("checkBox");
 		fullscreenCheckBox.setId("checkBox");
 
@@ -108,6 +111,12 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 		soundCheckBox.setOnAction(e -> {
 			optieGeluid = soundCheckBox.isSelected();
+
+			if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid ){
+				mediaPlayer.play();
+			} else if (optieGeluid == false){
+				mediaPlayer.stop();
+			}
 		});
 
 		fullscreenCheckBox.setOnAction(e -> {

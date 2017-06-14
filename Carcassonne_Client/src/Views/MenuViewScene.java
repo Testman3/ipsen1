@@ -9,17 +9,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+import static javafx.scene.media.MediaPlayer.INDEFINITE;
+
 public class MenuViewScene extends Scene implements SceneInitialiser{
 
-	private static final int INDEFINITE = 1;
-	AudioClip backgroundMusic = new AudioClip(Paths.get("Sounds/BackgroundMusic.mp3").toUri().toString());
+	static Media backgroundMuziek = new Media(Paths.get("Sounds/BackgroundMusic.mp3").toUri().toString());
+	static MediaPlayer mediaPlayer = new MediaPlayer(backgroundMuziek);
 	private BorderPane mainPane;
 	private Label titel = new Label("Carcassonne");
 	private VBox buttonVBox = new VBox();
@@ -55,10 +58,9 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 	}
 
 	public void initAction(){
-
-		backgroundMusic.setCycleCount(INDEFINITE);
-		if (!backgroundMusic.isPlaying()) {
-			//backgroundMusic.play();
+			mediaPlayer.setCycleCount(INDEFINITE);
+		if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid ){
+			mediaPlayer.play();
 		}
 
 		/*
