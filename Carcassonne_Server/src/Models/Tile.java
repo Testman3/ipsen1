@@ -20,7 +20,9 @@ public class Tile {
 	boolean heeftKlooster;
 	boolean heeftBonus; //Of kasteel tile blauw schild heeft
 
-	public Tile(String imageId, Zijde noordZijde, Zijde oostZijde, Zijde zuidZijde, Zijde westZijde, boolean heeftKlooster, boolean heeftBonus) {
+	Horige.Posities[] horigenZijdes;
+
+	public Tile(String imageId, Zijde noordZijde, Zijde oostZijde, Zijde zuidZijde, Zijde westZijde, boolean heeftKlooster, boolean heeftBonus, Horige.Posities[] horigen) {
 		this.imageID = imageId;
 		this.noordZijde = noordZijde;
 		this.oostZijde = oostZijde;
@@ -28,6 +30,7 @@ public class Tile {
 		this.westZijde = westZijde;
 		this.heeftKlooster = heeftKlooster;
 		this.heeftBonus = heeftBonus;
+		this.horigenZijdes = horigen;
 	}
 
 	public void plaats(int x, int y) {
@@ -51,6 +54,29 @@ public class Tile {
 		zuidZijde = oostZijdetmp;
 		oostZijde = noordZijdetmp;
 
+		for (int i = 0; i < horigenZijdes.length; i++) {
+
+			if(horigenZijdes[i] == Horige.Posities.MIDDEN){
+				continue;
+			}
+			Horige.Posities old = horigenZijdes[i];
+
+			if(horigenZijdes[i] == Horige.Posities.NOORD){
+				horigenZijdes[i] = Horige.Posities.OOST;
+			} else 	if(horigenZijdes[i] == Horige.Posities.OOST){
+				horigenZijdes[i] = Horige.Posities.ZUID;
+			} else 	if(horigenZijdes[i] == Horige.Posities.ZUID){
+				horigenZijdes[i] = Horige.Posities.WEST;
+			} else 	if(horigenZijdes[i] == Horige.Posities.WEST){
+				horigenZijdes[i] = Horige.Posities.NOORD;
+			}
+
+			//horigenZijdes[i] =  Horige.Posities.values()[(horigenZijdes[i].ordinal() + 1) % Horige.Posities.values().length - 1];
+
+			System.out.println("Old" + old + " New " + horigenZijdes[i]);
+		}
+
+
 		rotation += 90;
 		if(rotation == 360){
 			rotation = 0;
@@ -70,4 +96,5 @@ public class Tile {
 	public String getKaartId() {
 		return imageID;
 	}
+	public 	Horige.Posities[] getHorigenZijdes() { return horigenZijdes; }
 }

@@ -11,6 +11,9 @@ import javafx.scene.media.AudioClip;
 
 import java.nio.file.Paths;
 
+/**
+ * Deze class extend de standaard Button class uit javafx om spraakondersteuning en geluidseffecten toe te voegen
+ */
 public class SmartButton extends Button {
 
 	//Importeer de audioclip te gebruiken voor alle knoppen
@@ -71,9 +74,11 @@ public class SmartButton extends Button {
 			initialize();
 		});
 	}
-	// Lees label text voor (speech)
-	// @param String text - label tekst
-	// @throws Exception
+	/**
+	* Lees label text voor (speech)
+	* @param text
+	 * Geef de tekst mee in de vorm van een String die uitgesproken zal gaan worden
+	*/
 	public void talk(String text) {
 		if (SettingsScene.optieSpreken) {
 			try {

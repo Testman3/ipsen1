@@ -14,10 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.lang.reflect.Array;
 import java.rmi.RemoteException;
@@ -58,7 +55,11 @@ public class GameScene extends Scene {
 		super(new Pane(), 1280, 720);
 		getStylesheets().add("style.css");
 		tilesPane = (Pane) this.getRoot();
+
+
 		this.controller = menuController;
+
+
 
 		createTileGrid(100, 100);
 
@@ -87,7 +88,6 @@ public class GameScene extends Scene {
 		}
 		tilesPane.getChildren().add(verticaal);
 		tilesPane.setId("hallo");
-
 		//Verplaatsen over de map met W A S D keys, Speed is de snelheid dat je verplaatst.
 		int speed = 20;
 		setOnKeyPressed(e -> {
@@ -237,7 +237,11 @@ public class GameScene extends Scene {
 
 	public void plaatsKaart(GameClient client, String id, int x, int y) {
 		ShowKaart.setId("Kaartview");
-		tileViews[x][y].laatHorigePreviewZien();
+		try {
+			tileViews[x][y].laatHorigePreviewZien(RmiStub.getHorigePosities());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		ShowKaart.setRotate(0);
 
 	}
@@ -261,7 +265,7 @@ public class GameScene extends Scene {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		tileViews[stump.getX()][stump.getY()].setRotate(stump.getRotation());
+		tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
 		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 		addTilePreviews(stump.getX(), stump.getY());
 		System.out.println(stump.getX() + " " + stump.getY() + " " + stump.getRotation());

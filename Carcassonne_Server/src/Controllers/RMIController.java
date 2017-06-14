@@ -1,14 +1,14 @@
 package Controllers;
 
-import Models.RMIInterface;
-import Models.Speler;
-import Models.TileStump;
+import Models.*;
 
 import java.io.File;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-
+/**
+ * Deze class zorgt voor alle kernspelfunctionaliteiten en functies op de server
+ */
 public class RMIController implements RMIInterface {
 
 	public static ArrayList<Speler> alleSpelers = new ArrayList<Speler>();
@@ -84,11 +84,8 @@ public class RMIController implements RMIInterface {
     public void startenGame(File jsonFile) throws RemoteException {
 		//File Loaden
 		File importedFile = jsonFile;
-
 		// File inhoud lezen
-
-		//etc 
-
+		FileManager.loadGame(jsonFile);
     }
 
     @Override
@@ -136,5 +133,10 @@ public class RMIController implements RMIInterface {
 	@Override
 	public int getKaartenLeft() throws RemoteException {
 		return serverManager.bordController.kaartenStapel.getKaartenOver();
+	}
+
+	@Override
+	public Horige.Posities[] getHorigePosities() throws RemoteException {
+		return serverManager.bordController.kaartenStapel.getTurnTile().getHorigenZijdes();
 	}
 }

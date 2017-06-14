@@ -15,26 +15,21 @@ import Models.Speler;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import static javafx.scene.paint.Color.*;
 
-
+/**
+ * Deze class zorgt voor het opstarten en draaien van de server en het consolescherm dat hier bij hoort
+ */
 public class ServerManager extends Application {
 	ServerManager manager;
 
 	public static void main(String[] args) {
 		launch(args);
-		//manager.runServer();
-
 	}
-
 
 	public static boolean gameStarted = false;
 	BordController bordController;
