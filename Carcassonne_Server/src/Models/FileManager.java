@@ -12,7 +12,7 @@ public class FileManager {
 
 	public static void saveGame(String naam) {
 		JSONObject object;
-		createFile(naam, object);
+		//createFile(naam, object);
 
 	public static void saveGame(String path) {
 
