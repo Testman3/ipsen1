@@ -146,5 +146,7 @@ public interface RMIInterface extends Remote {
 	 */
 	public int getKaartenLeft() throws RemoteException;
 
+	public 	Horige.Posities[] getHorigePosities() throws RemoteException;
+
 
 }

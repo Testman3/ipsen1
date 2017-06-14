@@ -11,6 +11,7 @@ public class TileStump implements Serializable {
 	int y;
 	String id;
 	int rotation;
+	Horige.Posities[] horigenZijdes;
 
 	public TileStump(int x, int y, String id, int rotation){
 		this.x = x;
@@ -31,4 +32,5 @@ public class TileStump implements Serializable {
 	public int getRotation() {
 		return rotation;
 	}
+	public 	Horige.Posities[] getHorigenZijdes() { return horigenZijdes;}
 }
