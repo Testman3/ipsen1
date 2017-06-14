@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.FileManager;
 import Models.RMIInterface;
 import Models.Speler;
 import Models.TileStump;
@@ -75,11 +76,8 @@ public class RMIController implements RMIInterface {
     public void startenGame(File jsonFile) throws RemoteException {
 		//File Loaden
 		File importedFile = jsonFile;
-
 		// File inhoud lezen
-
-		//etc 
-
+		FileManager.loadGame(jsonFile);
     }
 
     @Override
