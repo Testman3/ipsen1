@@ -40,6 +40,8 @@ public class ClientManager extends Application {
 
 	/**
 	 * Start de client van de speler
+	 * @param stage
+	 * Geef de mainStage mee als parameter
 	 */
 	public static void runClient(Stage stage) {
 		menucontroller = new MenuController(stage);
