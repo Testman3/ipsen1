@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import static javafx.scene.media.MediaPlayer.INDEFINITE;
 
 /**
- * Deze class zorgt ervoor dat de MenuViewScen goed wordt weergegeven.
+ * Deze class zorgt ervoor dat de MenuViewScene goed wordt weergegeven.
  */
 public class MenuViewScene extends Scene implements SceneInitialiser{
 
