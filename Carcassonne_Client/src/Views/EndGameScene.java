@@ -1,6 +1,5 @@
 package Views;
 
-import Controllers.LobbyController;
 import Controllers.MenuController;
 import Models.RMIInterface;
 import Models.Speler;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 
 
 /**
- * Deze class zorgt dat de EndGameScene goed wordt weergegeven.
+ * Deze class zorgt ervoor dat de EndGameScene goed wordt weergegeven.
  */
 public class EndGameScene extends Scene implements SceneInitialiser {
 
@@ -88,6 +87,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	/**
 	 * Deze functie zorgt ervoor dat de verbing van de server er is waarna de functie setScoreboard wordt aangeroepen.
 	 * @param stub
+	 * De RMIInterface wordt meegegeven
 	 */
 	public void join(RMIInterface stub){
 		RMIstub = stub;
@@ -95,7 +95,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	}
 
 	/**
-	 * Deze functie zorgt ervoor dat de spelers worden gesorteerd op score waarna ze op het scherm verschijnen.
+	 * Deze functie zorgt ervoor dat de spelers worden gesorteerd op score, waarna ze op het scherm zullen verschijnen.
 	 */
 	private void setScoreboard(){
 

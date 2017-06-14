@@ -14,7 +14,7 @@ import javafx.scene.media.AudioClip;
 import commonFunctions.*;
 
 /**
- * Deze class zorgt dat de CreditsScene goed wordt weergegeven.
+ * Deze class zorgt ervoor dat de CreditsScene goed wordt weergegeven.
  */
 public class CreditsScene extends Scene implements SceneInitialiser {
 
