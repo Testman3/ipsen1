@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.Horige;
 import Models.Tile;
 import Models.Zijde;
 import org.json.simple.JSONArray;
@@ -93,6 +94,21 @@ public class JsonKaarten {
 			Zijde westZijde = new Zijde(westZijdeType, westEinde);
 
 			Number aantalKaarten = (Number) jsonNumber.get("aantalKaarten");
+
+
+			//get JsonArray horigePosities
+			JSONArray array = (JSONArray) jsonNumber.get("horigePosities");
+
+			//new array
+			String[] positie = new String[5];
+
+			//all data to array
+			for (int i = 0; i < array.size() ; i++) {
+				positie[i] = (String)array.get(i);
+			}
+
+			System.out.println("POSITIE " + positie[0]);
+			//Horige.Posities[] posities = Horige.Posities.valueOf((String)jsonNumber.get("horigePosities"));
 
 			for (int i = 0; i <  aantalKaarten.intValue(); i++){
 				Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus);

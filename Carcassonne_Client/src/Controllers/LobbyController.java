@@ -34,8 +34,11 @@ public class LobbyController {
 	 * RemoteException wordt gegooid wanneer er een fout zit in de verbinding met RMI
 	 */
 	public void connectToServer(String ip, String naam) throws RemoteException {
+
+		Alert alert;
+
 		if (!validateIP(ip)) {
-			Alert alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
+			alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
 			alert.showAndWait();
 		} else {
 			System.out.println("Getting access to the registry");
@@ -47,19 +50,19 @@ public class LobbyController {
 				RMIstub = (RMIInterface) registry.lookup("Lobby");
 				ableToConnect = true;
 			} catch (ConnectException e) {
-				Alert alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
+				alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
 				alert.showAndWait();
 				ableToConnect = false;
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			} catch (NotBoundException e) {
-				Alert alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
+				alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
 				alert.showAndWait();
 				ableToConnect = false;
 			}
 
 			if (controleerNaam(naam)) {
-				Alert alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
+				alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
 				alert.showAndWait();
 				naam = "";
 				RMIstub = null;

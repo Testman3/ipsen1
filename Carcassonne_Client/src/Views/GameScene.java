@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 public class GameScene extends Scene {
 
+
 	int sceneHeight = (int) getHeight();
 	int sceneWidth = (int) getWidth();
 
