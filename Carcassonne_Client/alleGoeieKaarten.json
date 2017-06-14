@@ -12,7 +12,8 @@
         "heeftKlooster":true,
         "heeftBonus":false,
         "image_id": "Kaart_01",
-        "aantalKaarten" : 2
+        "aantalKaarten" : 2,
+        "Horigeposities": ["ZUID","MIDDEN"]
     },
      { 
         "noordZijde": "GRAS",
@@ -26,7 +27,8 @@
         "heeftKlooster":true,
         "heeftBonus":false,
         "image_id": "Kaart_02",
-        "aantalKaarten" : 4
+        "aantalKaarten" : 4,
+        "Horigeposities": ["MIDDEN"]
     },
      { 
         "noordZijde": "KASTEEL",
@@ -40,7 +42,7 @@
         "heeftKlooster":false,
         "heeftBonus":true,
         "image_id": "Kaart_03",
-        "aantalKaarten" : 1
+       "Horigeposities": ["NOORD", "OOST", "ZUID", "WEST"]
     },
      { 
         "noordZijde": "KASTEEL",
