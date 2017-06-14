@@ -94,9 +94,14 @@ public class JsonKaarten {
 
 			Number aantalKaarten = (Number) jsonNumber.get("aantalKaarten");
 
+
+			//get JsonArray horigePosities
 			JSONArray array = (JSONArray) jsonNumber.get("horigePosities");
 
+			//new array
 			String[] positie = new String[5];
+
+			//all data to array
 			for (int i = 0; i < array.size() ; i++) {
 				positie[i] = (String)array.get(i);
 			}
