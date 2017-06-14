@@ -6,6 +6,9 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+/**
+ * Deze class zorgt ervoor dat de client applicatie opgestart wordt
+ */
 public class ClientManager extends Application {
 
 	static MenuController menucontroller;

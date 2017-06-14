@@ -1,15 +1,9 @@
 package Models;
 
 import Views.GameScene;
-import javafx.application.Platform;
-import javafx.scene.image.ImageView;
-import Models.TileStump;
 
 import java.rmi.RemoteException;
 
-/**
- * Created by Marti on 11-6-2017.
- */
 public class GameClient {
 
 	GameScene view;
@@ -35,6 +29,7 @@ public class GameClient {
 	/**
 	 * Deze functie MOET gerunt worden als de speler de game joint, dit start de thread en set de spelernaam.
  	 * @param spelerNaam
+	 * Geef de spelernaam mee in de vorm van een String
 	 */
 	public void Join(String spelerNaam) {
 	this.spelerNaam = spelerNaam;

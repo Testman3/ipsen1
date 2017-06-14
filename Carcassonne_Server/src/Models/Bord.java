@@ -2,6 +2,9 @@ package Models;
 
 import java.util.ArrayList;
 
+/**
+ * Deze class regelt alles met betrekking tot het speelbord
+ */
 public class Bord {
 
 	ArrayList<Speler> alleSpelers;
@@ -14,30 +17,52 @@ public class Bord {
 
 	int gameBeurt = 1;
 
+	/**
+	 * Deze functie geeft aan hoeveel rondes er al zijn geweest
+	 * @return int met aantal beurten die reeds zijn geweest
+	 */
 	public int gameBeurt() {
 		return gameBeurt;
 	}
+
+	/**
+	 * Deze functie geeft aan welke tile er als laatst geplaatst is
+	 * @return Het Tile object dat als laatste geplaatst is
+	 */
 	public Tile getLaatstGeplaatst() {
 		return laatstGeplaatst;
 	}
+
+
+	/**
+	 * Deze constructor zorgt ervoor dat het bord met alle plaatsen voor tiles wordt aangemaakt
+	 * @param spelerList
+	 * Geef een ArrayList met alle spelers mee
+	 */
 	public Bord(ArrayList<Speler> spelerList) {
 		alleSpelers = spelerList;
 		alleTiles = new Tile[100][100];
 		spelerBeurt = alleSpelers.get(0);
 	}
 
+	/**
+	 * Deze functie geeft aan welke speler aan de beurt is
+	 * @return int met de locatie van de speler in de spelerlijst die aan de beurt is
+	 */
 	public Speler getSpelerBeurt() {
 
 		return spelerBeurt;
 	}
 
+	/**
+	 * Deze functie geeft de volgende speler de beurt
+	 */
 	public void geefSpelerBeurt() {
 		gameBeurt++;
 
 		spelerBeurt.setBeurt(true);
 
 		int beurt = alleSpelers.indexOf(spelerBeurt);
-
 
 		if( beurt + 1 == alleSpelers.size()){
 			beurt = 0;
@@ -51,13 +76,22 @@ public class Bord {
 	/**
 	 * returnt of de speler aan de beurt is
 	 * @param spelerNaam
-	 * @return
+	 * Geef de spelernaam mee in de vorm van een String
+	 * @return True als de speler aan de beurt is, false als de speler niet aan de beurt is
 	 */
 	public boolean isSpelerBeurt(String spelerNaam) {
 		System.out.println("Speler naam " + spelerNaam + " Speler beurt " + spelerBeurt.getNaam());
 		return spelerBeurt.getNaam().equals(spelerNaam);
 	}
 
+	/**
+	 * Deze functie geeft een kaart terug op de opgevraagde locatie in het speelbord
+	 * @param x
+	 * X co-ordinaat van de opgevraagde kaart
+	 * @param y
+	 * Y co-ordinaat van de opgevraagde kaart
+	 * @return Tile de opgevraagde tile
+	 */
 	public Tile getTile(int x, int y){
 
 		if(x < 0 || y < 0 || x > 100 || y > 100){
@@ -66,6 +100,16 @@ public class Bord {
 		return alleTiles[x][y];
 	}
 
+	/**
+	 * Deze functie checkt of de kaart geplaatst kan worden op de meegegeven locatie, en zo ja plaatst hem daar
+	 * @param x
+	 * De x co-ordinaat van de kaart
+	 * @param y
+	 * De y co-ordinaat van de kaart
+	 * @param tile
+	 * De meegegeven tile
+	 * @return True als de kaart past en is geplaatst, false als de kaart niet geplaatst kan/mag worden
+	 */
 	public boolean plaatsKaart(int x, int y, Tile tile) {
 		if(!checkKaartFit(x, y, tile)){
 			System.out.println("Kaart past hier niet!");
@@ -82,12 +126,14 @@ public class Bord {
 		return true;
 	}
 
-
 	/**
 	 * Plaats een kaart alle fitchecks ignored.
 	 * @param x
+	 * geef de x co-ordinaat van de kaart mee
 	 * @param y
+	 * geef de y co-ordinaat van de kaart mee
 	 * @param tile
+	 * geef de daadwerkelijke tile mee die geplaatst moet gaan worden
 	 */
 	public void plaatsKaartCheat(int x, int y, Tile tile){
 		alleTiles[x][y] = tile;
@@ -95,7 +141,6 @@ public class Bord {
 		tile.plaats(x,y);
 		System.out.println("=========================== CHEAT KAART GEPLAATST OP X 5 Y 5 ");
 	}
-
 
 	/**
 	 * Checkt of de kaart past op de plek waar de speler hem wil plaatsen
@@ -149,11 +194,13 @@ public class Bord {
 		}
 		return true;
 
-
-
 		}
 
-		public ArrayList<Speler> getAlleSpelers() {
+	/**
+	 * Deze functie geeft een arraylist met alle spelers terug
+	 * @return ArrayList met alle spelers
+	 */
+	public ArrayList<Speler> getAlleSpelers() {
 			return alleSpelers;
 		}
 }

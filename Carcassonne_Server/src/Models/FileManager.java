@@ -1,38 +1,34 @@
 package Models;
 
-/**
- * Created by haitamelattar on 13-06-17.
- */
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import java.io.*;
 import java.util.ArrayList;
 
 public class FileManager {
 
+	public static void saveGame(String naam) {
+		JSONObject object;
+		createFile(naam, object);
 
 
 
-	public static void saveGame(String path) {
+	}
 
-		//Create json Object from getAll()
-		JSONObject obj = getAll();
+	public void createFile(String naam, JSONObject object){
 
-		//Make File
 		try {
 			//new file
-			File newTextFile = new File(path);
+			File newTextFile = new File(naam);
 
 			//create writer
 			FileWriter fw = new FileWriter(newTextFile);
 
 			//Write to json file
-			fw.write(obj.toJSONString());
+			fw.write(object.toJSONString());
 
 			//close writer
 			fw.close();
@@ -40,7 +36,6 @@ public class FileManager {
 			//do stuff with exception
 			iox.printStackTrace();
 		}
-
 	}
 
 	public static void loadGame(File load) {

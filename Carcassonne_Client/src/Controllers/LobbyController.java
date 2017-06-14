@@ -16,6 +16,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import Models.RMIInterface;
 
+/**
+ * Deze class is verantwoordelijk voor de interacties tussen de lobby / prelobby en de RMI server
+ */
 public class LobbyController {
 
 
