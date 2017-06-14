@@ -14,12 +14,23 @@ public class BordController {
 	Stapel kaartenStapel;
 	Bord bord;
 
+	/**
+	 * Maak een bordcontroller aan met een nieuw bord en een nieuwe kaarten stapel
+	 * @param spelerList
+	 * Geef een ArrayList van alle spelers mee
+	 */
 	public BordController(ArrayList<Speler> spelerList) {
 		kaartenStapel = new Stapel();
 		bord = new Bord(spelerList);
 		bord.plaatsKaartCheat(5,5,kaartenStapel.getBeginTile());
 	}
 
+	/**
+	 * Deze functie zorgt ervoor dat er een kaart van de stapel wordt gepakt
+	 * @param spelerNaam
+	 * Geef de naam van de speler mee die de kaart wil pakken in de vorm van een String
+	 * @return
+	 */
 	public String pakKaartvanStapel(String spelerNaam) {
 		if (bord.isSpelerBeurt(spelerNaam)) {
 			kaartenStapel.pakKaart();
@@ -29,10 +40,27 @@ public class BordController {
 		return null;
 	}
 
+	/**
+	 * Roept de functie checkKaartFit aan in het bord
+	 * @param x
+	 * De x co-ordinaat van de kaart
+	 * @param y
+	 * De y co-ordinaat van de kaart
+	 * @return True als de kaart past op de meegegeven locatie, false als de kaart niet past
+	 */
 	public boolean checkKaartFit(int x, int y) {
 		return bord.checkKaartFit(x, y, kaartenStapel.getTurnTile());
 	}
 
+	/**
+	 * Deze functie roept eerst de functie checkKaartFit aan in bord, als hij true is wordt de functie
+	 * plaatsKaart aangeroepen in bord
+	 * @param x
+	 * De x co-ordinaat van de kaart
+	 * @param y
+	 * De y co-ordinaat van de kaart
+	 * @return True als de kaart succesvol is geplaatst, false als de kaart niet succesvol is geplaatst
+	 */
 	public boolean plaatsKaart(int x, int y) {
 	if(bord.checkKaartFit(x,y,kaartenStapel.getTurnTile())){
 		kaartenStapel.getTurnTile().plaats(x,y);
@@ -43,6 +71,9 @@ public class BordController {
 	}
 	}
 
+	/**
+	 * Deze functie roept de functie draaiKaart aan in de kaartenStapel
+	 */
 	public void draaiKaart(){
 		kaartenStapel.getTurnTile().draaiKaart();
 	}
