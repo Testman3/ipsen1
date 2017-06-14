@@ -52,8 +52,6 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		buttonVBox.setAlignment(Pos.CENTER);
 
 		initAction();
-
-
 	}
 
 	public void initAction(){
