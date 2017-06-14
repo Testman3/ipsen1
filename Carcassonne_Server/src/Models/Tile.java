@@ -20,7 +20,9 @@ public class Tile {
 	boolean heeftKlooster;
 	boolean heeftBonus; //Of kasteel tile blauw schild heeft
 
-	public Tile(String imageId, Zijde noordZijde, Zijde oostZijde, Zijde zuidZijde, Zijde westZijde, boolean heeftKlooster, boolean heeftBonus) {
+	Horige[] horigenZijdes;
+
+	public Tile(String imageId, Zijde noordZijde, Zijde oostZijde, Zijde zuidZijde, Zijde westZijde, boolean heeftKlooster, boolean heeftBonus, Horige[] horigen) {
 		this.imageID = imageId;
 		this.noordZijde = noordZijde;
 		this.oostZijde = oostZijde;
@@ -28,6 +30,7 @@ public class Tile {
 		this.westZijde = westZijde;
 		this.heeftKlooster = heeftKlooster;
 		this.heeftBonus = heeftBonus;
+		this.horigenZijdes = horigen;
 	}
 
 	public void plaats(int x, int y) {
