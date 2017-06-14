@@ -11,7 +11,7 @@ MainApplicatie/\.metadata/
 
 \.recommenders/
 
-.classpath
+*.classpath
 
 *.class
 
