@@ -213,12 +213,14 @@ public class GameScene extends Scene {
 		menuButton.setId("standardLabel");
 		links.getChildren().add(menuButton);
 
+		menuButton.setOnAction(event -> controller.showInGameMenu());
+
 		////////////////////////////////////////////////////////////
 		//Hieronder alle code om het popup menu werkend te krijgen//
 		////////////////////////////////////////////////////////////
 
 
-		controller.showInGameMenu();
+
 		//Setonaction worden er een nieuwe pane en button + label aangemaakt.
 //		menuButton.setOnAction(event -> {
 //			BorderPane menuPane = new BorderPane();

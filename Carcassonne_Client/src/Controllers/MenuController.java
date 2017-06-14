@@ -74,11 +74,11 @@ public class MenuController {
 	//}
 
 	public void showInGameMenu(){
-		Stage stage = inGameMenuStage.getMenuStage();
-		stage.initOwner(getGameStage());
-		stage.initModality(Modality.APPLICATION_MODAL);
+		//Stage stage = inGameMenuStage.getMenuStage();
+		//stage.initOwner(getGameStage());
+		//stage.initModality(Modality.APPLICATION_MODAL);
 
-		inGameMenuStage.getMenuStage().show();
+		inGameMenuStage.initGui();
 	}
 
 	/**

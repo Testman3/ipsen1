@@ -39,9 +39,9 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
         stage = new Stage(StageStyle.TRANSPARENT);
         stage.setScene(new Scene(menuPane, Color.TRANSPARENT));
-//        stage.initOwner(menuController.getGameStage());
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.setScene(new Scene(menuPane, Color.TRANSPARENT));
+      stage.initOwner(menuController.getGameStage());
+      stage.initModality(Modality.APPLICATION_MODAL);
+		stage.show();
 
         initAction();
     }
