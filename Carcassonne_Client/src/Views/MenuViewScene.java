@@ -10,14 +10,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-
 import static javafx.scene.media.MediaPlayer.INDEFINITE;
 
+/**
+ * Deze class zorgt ervoor dat de MenuViewScen goed wordt weergegeven.
+ */
 public class MenuViewScene extends Scene implements SceneInitialiser{
 
 	static Media backgroundMuziek = new Media(Paths.get("Sounds/BackgroundMusic.mp3").toUri().toString());
@@ -29,7 +30,11 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 	// alle hoofdmenu buttons (smartButton = button met spraak)
 	private SmartButton[] knoppen = new SmartButton[6];
 
-
+	/**
+	 * Constructor van de MenuViewScene
+	 * @param controller
+	 * Geef MenuController mee
+	 */
 	public MenuViewScene(MenuController controller){
 		super(new BorderPane(), 1280, 720);
 		mainPane = (BorderPane) this.getRoot();
@@ -37,8 +42,6 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 
 		initGui();
 	}
-
-
 
 	public void initGui() {
 		buttonVBox.setId("schild");
