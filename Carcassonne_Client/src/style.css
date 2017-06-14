@@ -79,6 +79,11 @@
 	-fx-background-size: cover;
 }
 
+#exitBackground{
+    -fx-background-image: url("Afbeeldingen/Texture_score_background.jpg");
+    -fx-background-size: cover;
+}
+
 #schild{
 	-fx-background-image: url("Afbeeldingen/Texture_Menu.png");
 	-fx-background-repeat: no-repeat;

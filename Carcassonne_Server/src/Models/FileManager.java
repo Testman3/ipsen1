@@ -16,8 +16,6 @@ import java.util.ArrayList;
 public class FileManager {
 
 
-
-
 	public static void saveGame(String path) {
 
 		//Create json Object from getAll()
@@ -77,8 +75,8 @@ public class FileManager {
 			System(spelerLijst);
 
 		} catch (FileNotFoundException e) {
-			 alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
-			 alert.showAndWait();
+			alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
+			alert.showAndWait();
 		} catch (IOException e) {
 			alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
 			alert.showAndWait();

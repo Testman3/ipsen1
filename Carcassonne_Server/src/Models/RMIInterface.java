@@ -38,6 +38,8 @@ public interface RMIInterface extends Remote {
 	 */
 	public ArrayList<String> getPlayerList() throws RemoteException;
 
+	public ArrayList<Integer> getPlayerScore() throws RemoteException;
+
 	public ArrayList<Speler> getPlayerListObject() throws RemoteException;
 
 

@@ -50,6 +50,15 @@ public class RMIController implements RMIInterface {
 		return Spelernamen;
 	}
 
+	public ArrayList<Integer> getPlayerScore(){
+		ArrayList<Integer> spelerScore = new ArrayList<>();
+		for(Speler speler : alleSpelers){
+			spelerScore.add(speler.getPunten());
+		}
+
+		return spelerScore;
+	}
+
 	@Override
 	public ArrayList<Speler> getPlayerListObject() throws RemoteException {
 		return serverManager.bordController.bord.getAlleSpelers();
