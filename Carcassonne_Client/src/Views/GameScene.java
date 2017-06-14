@@ -217,34 +217,36 @@ public class GameScene extends Scene {
 		//Hieronder alle code om het popup menu werkend te krijgen//
 		////////////////////////////////////////////////////////////
 
+
+		controller.showInGameMenu();
 		//Setonaction worden er een nieuwe pane en button + label aangemaakt.
-		menuButton.setOnAction(event -> {
-			BorderPane menuPane = new BorderPane();
-			SmartButton backToGame = new SmartButton("Terug");
-
-			Label testLabel = new Label("ehwef4wuahfui4wahuirehguieahgiuehgiu4ah;i:");
-
-			//Button + label worden ingedeeld in de pane
-			menuPane.setCenter(backToGame);
-			menuPane.setTop(testLabel);
-
-			//Maakt alles in de mainPane blurry
-			mainPane.setEffect(new GaussianBlur());
-
-			//Maak een nieuwe stage aan, met de gamestage als owner. maak ook een nieuwe Scene
-			// aan met een pane en maak het transparant. Vervolgens de popup stage laten zien
-			Stage popupStage = new Stage(StageStyle.TRANSPARENT);
-			popupStage.initOwner(controller.getGameStage());
-			popupStage.initModality(Modality.APPLICATION_MODAL);
-			popupStage.setScene(new Scene(menuPane, Color.TRANSPARENT));
-			popupStage.show();
-
-			//Als je op de terugknop drukt wordt de popupstage verborgen en de blur gerevert
-			backToGame.setOnAction(event1 -> {
-			popupStage.hide();
-			mainPane.setEffect(null);
-			});
-		});
+//		menuButton.setOnAction(event -> {
+//			BorderPane menuPane = new BorderPane();
+//			SmartButton backToGame = new SmartButton("Terug");
+//
+//			Label testLabel = new Label("ehwef4wuahfui4wahuirehguieahgiuehgiu4ah;i:");
+//
+//			//Button + label worden ingedeeld in de pane
+//			menuPane.setCenter(backToGame);
+//			menuPane.setTop(testLabel);
+//
+//			//Maakt alles in de mainPane blurry
+//			mainPane.setEffect(new GaussianBlur());
+//
+//			//Maak een nieuwe stage aan, met de gamestage als owner. maak ook een nieuwe Scene
+//			// aan met een pane en maak het transparant. Vervolgens de popup stage laten zien
+//			Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+//			popupStage.initOwner(controller.getGameStage());
+//			popupStage.initModality(Modality.APPLICATION_MODAL);
+//			popupStage.setScene(new Scene(menuPane, Color.TRANSPARENT));
+//			popupStage.show();
+//
+//			//Als je op de terugknop drukt wordt de popupstage verborgen en de blur gerevert
+//			backToGame.setOnAction(event1 -> {
+//			popupStage.hide();
+//			mainPane.setEffect(null);
+//			});
+//		});
 		////////////////////////////////
 		//Einde van de popup menu code//
 		////////////////////////////////

@@ -1,8 +1,11 @@
 package Controllers;
 
 import Views.*;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -22,6 +25,7 @@ public class MenuController {
 	private PreLobbyScene preLobbyScene;
 	private SettingsScene settingsScene;
 	private CreditsScene creditsScene;
+	private InGameMenuStage inGameMenuStage;
 
 	private String spelernaam;
 
@@ -38,6 +42,7 @@ public class MenuController {
 
 
 		this.gameStage = gameStage;
+		inGameMenuStage = new InGameMenuStage(this);
 		endGameScene = new EndGameScene(this);
 		gameScene = new GameScene(this);
 		lobbyScene = new LobbyScene(this, lobbyController);
@@ -62,6 +67,18 @@ public class MenuController {
 	 */
 	public void backToMainMenu(){
 		getGameStage().setScene(getMenuViewScene());
+	}
+
+	//public Stage getInGameMenuStage(){
+	//	return this.inGameMenuStage;
+	//}
+
+	public void showInGameMenu(){
+		Stage stage = inGameMenuStage.getMenuStage();
+		stage.initOwner(getGameStage());
+		stage.initModality(Modality.APPLICATION_MODAL);
+
+		inGameMenuStage.getMenuStage().show();
 	}
 
 	/**
