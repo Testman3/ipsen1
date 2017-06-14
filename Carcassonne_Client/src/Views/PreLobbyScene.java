@@ -108,7 +108,6 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}
-				controller.updatePlayerList();
 			}
 			else {
 				System.out.println("Kan niet connecten dus switcht de scene niet");
