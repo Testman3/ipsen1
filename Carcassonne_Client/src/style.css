@@ -79,6 +79,11 @@
 	-fx-background-size: cover;
 }
 
+#exitBackground{
+    -fx-background-image: url("Afbeeldingen/Texture_score_background.jpg");
+    -fx-background-size: cover;
+}
+
 #schild{
 	-fx-background-image: url("Afbeeldingen/Texture_Menu.png");
 	-fx-background-repeat: no-repeat;
@@ -100,7 +105,7 @@
 	-fx-font-size: 3.5em;
 }
 #horigePreview {
-    -fx-image: url("Horige_Zwart.png");
+    -fx-image: url("Horige_Preview.png");
 }
 #Kaart_00{
 -fx-image: url("Kaarten/Kaart_00.png");

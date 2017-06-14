@@ -12,11 +12,9 @@ public class FileManager {
 
 	public static void saveGame(String naam) {
 		JSONObject object;
-		createFile(naam, object);
+		//createFile(naam, object);
 
-
-
-	}
+	public static void saveGame(String path) {
 
 	public void createFile(String naam, JSONObject object){
 
@@ -72,8 +70,8 @@ public class FileManager {
 			System(spelerLijst);
 
 		} catch (FileNotFoundException e) {
-			 alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
-			 alert.showAndWait();
+			alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
+			alert.showAndWait();
 		} catch (IOException e) {
 			alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
 			alert.showAndWait();

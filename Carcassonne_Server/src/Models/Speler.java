@@ -1,6 +1,7 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.Random;
 
 public class Speler implements Serializable {
 
@@ -12,6 +13,8 @@ public class Speler implements Serializable {
 
 
 	public Speler(String naam){
+		Random rand = new Random();
+		punten = rand.nextInt(250);
 
 		this.naam = naam;
 	}

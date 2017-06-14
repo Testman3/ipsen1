@@ -50,6 +50,8 @@ public interface RMIInterface extends Remote {
 	 */
 	public ArrayList<String> getPlayerList() throws RemoteException;
 
+	public ArrayList<Integer> getPlayerScore() throws RemoteException;
+
 	/**
 	 *
 	 * @return ArrayList<Speler>
@@ -145,6 +147,8 @@ public interface RMIInterface extends Remote {
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
 	public int getKaartenLeft() throws RemoteException;
+
+	public 	Horige.Posities[] getHorigePosities() throws RemoteException;
 
 
 }

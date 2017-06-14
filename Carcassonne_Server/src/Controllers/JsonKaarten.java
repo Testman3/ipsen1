@@ -96,22 +96,24 @@ public class JsonKaarten {
 
 			Number aantalKaarten = (Number) jsonNumber.get("aantalKaarten");
 
-
 			//get JsonArray horigePosities
 			JSONArray array = (JSONArray) jsonNumber.get("horigePosities");
 
 			//new array
-			String[] positie = new String[5];
-			Horige.Posities[] horigenPos = new Horige.Posities[5];
+			String[] positie = new String[array.size()];
+			Horige.Posities[] horigenPos = new Horige.Posities[array.size()];
 
 			//all data to array
 			for (int i = 0; i < array.size() ; i++) {
 				positie[i] = (String)array.get(i);
+
 				horigenPos[i] = Horige.Posities.valueOf((String)array.get(i));
 				System.out.println("Kaart ENUM: " + horigenPos[i]);
 			}
 
-//			System.out.println("POSITIE " + positie[0]);
+
+
+
 			//Horige.Posities[] posities = Horige.Posities.valueOf((String)jsonNumber.get("horigePosities"));
 
 			for (int i = 0; i <  aantalKaarten.intValue(); i++){

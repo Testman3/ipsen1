@@ -139,6 +139,7 @@ public class Bord {
 		alleTiles[x][y] = tile;
 		laatstGeplaatst = tile;
 		tile.plaats(x,y);
+		System.out.println("=========================== CHEAT KAART GEPLAATST OP X 5 Y 5 ");
 	}
 
 	/**

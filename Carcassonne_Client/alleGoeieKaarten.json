@@ -58,7 +58,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_04",
         "aantalKaarten" : 4,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["NOORD", "OOST", "WEST"]
 
     },
     { 
@@ -74,7 +74,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_05",
         "aantalKaarten" : 5,
-      "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+      "horigePosities": ["NOORD"]
     },
     { 
         "noordZijde": "GRAS",
@@ -89,7 +89,7 @@
         "heeftBonus":true,
         "image_id": "Kaart_06",
         "aantalKaarten" : 2,
-      "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+      "horigePosities": ["OOST", "WEST"]
     },
     { 
        "noordZijde": "GRAS",
@@ -104,7 +104,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_07",
         "aantalKaarten" : 1,
-      "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+      "horigePosities": ["OOST", "WEST"]
     },
      { 
        "noordZijde": "GRAS",
@@ -119,7 +119,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_08",
         "aantalKaarten" : 3,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["OOST", "WEST"]
     },
      { 
        "noordZijde": "KASTEEL",
@@ -134,7 +134,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_09",
         "aantalKaarten" : 2,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["NOORD", "OOST"]
     },
      { 
        "noordZijde": "KASTEEL",
@@ -149,7 +149,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_10",
         "aantalKaarten" : 3,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["NOORD", "OOST", "ZUID"]
     },
      { 
        "noordZijde": "KASTEEL",
@@ -164,7 +164,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_11",
         "aantalKaarten" : 3,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["NOORD", "WEST", "ZUID"]
     },
      { 
        "noordZijde": "KASTEEL",
@@ -194,7 +194,7 @@
         "heeftBonus":true,
         "image_id": "Kaart_13",
         "aantalKaarten" : 2,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["NOORD", "WEST"]
     },
      { 
        "noordZijde": "KASTEEL",
@@ -209,7 +209,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_14",
         "aantalKaarten" : 3,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["NOORD", "WEST"]
     },
     {
         "noordZijde": "KASTEEL",
@@ -239,7 +239,7 @@
         "heeftBonus":true,
         "image_id": "Kaart_16",
         "aantalKaarten" : 3,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["NOORD", "OOST", "WEST"]
     },
      {
         "noordZijde": "KASTEEL",
@@ -314,7 +314,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_21",
         "aantalKaarten" : 8,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["NOORD", "ZUID"]
     },
      {
         "noordZijde": "GRAS",
@@ -329,7 +329,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_22",
         "aantalKaarten" : 9,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["WEST", "ZUID"]
     },
      {
         "noordZijde": "GRAS",
@@ -344,7 +344,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_23",
         "aantalKaarten" : 4,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["OOST", "ZUID", "WEST"]
     },
       {
         "noordZijde": "WEG",
