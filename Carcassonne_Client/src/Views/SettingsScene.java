@@ -39,7 +39,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	//spraak
 	public static boolean optieSpreken = false;
 	public static boolean fullScreen = false;
-	public static boolean optieGeluid = true;
+	public static boolean optieGeluid = false;
 
 	public SettingsScene(MenuController controller) {
 		super(new BorderPane(), 1280, 720);
