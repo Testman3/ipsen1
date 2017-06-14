@@ -100,17 +100,20 @@ public class JsonKaarten {
 
 			//new array
 			String[] positie = new String[5];
+			Horige.Posities[] horigenPos = new Horige.Posities[5];
 
 			//all data to array
 			for (int i = 0; i < array.size() ; i++) {
 				positie[i] = (String)array.get(i);
+				horigenPos[i] = Horige.Posities.valueOf((String)array.get(i));
+				System.out.println("Kaart ENUM: " + horigenPos[i]);
 			}
 
-			System.out.println("POSITIE " + positie[0]);
+//			System.out.println("POSITIE " + positie[0]);
 			//Horige.Posities[] posities = Horige.Posities.valueOf((String)jsonNumber.get("horigePosities"));
 
 			for (int i = 0; i <  aantalKaarten.intValue(); i++){
-				Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus);
+				Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus, horigenPos);
 				alleKaarten.add(data);
 
 				if (debug) {

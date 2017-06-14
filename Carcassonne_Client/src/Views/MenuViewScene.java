@@ -1,7 +1,6 @@
 package Views;
 
 import Controllers.MenuController;
-import Models.FileManager;
 import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
 import javafx.geometry.Pos;
@@ -85,7 +84,6 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		knoppen[1].setText("Laden spel");
 		knoppen[1].setOnAction(e -> {
 			MenuController.loadedFile = controller.openFileBrowser();
-			FileManager.loadGame(MenuController.loadedFile);
 		});
 
 		// Maakt een variabele aan die naar het handleiding document verwijst,
