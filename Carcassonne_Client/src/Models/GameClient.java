@@ -1,6 +1,7 @@
 package Models;
 
 import Views.GameScene;
+import javafx.application.Platform;
 
 import java.rmi.RemoteException;
 
@@ -16,11 +17,11 @@ public class GameClient {
 	public String kaartPlaatsId = "";
 
 	String spelerBeurt = "";
- 	int beurt = 0;
+	int beurt = 0;
 
 	RMIInterface RmiStub;
 
-	public GameClient(GameScene view){
+	public GameClient(GameScene view) {
 		this.view = view;
 
 	}
@@ -28,14 +29,14 @@ public class GameClient {
 
 	/**
 	 * Deze functie MOET gerunt worden als de speler de game joint, dit start de thread en set de spelernaam.
- 	 * @param spelerNaam
-	 * Geef de spelernaam mee in de vorm van een String
+	 *
+	 * @param spelerNaam Geef de spelernaam mee in de vorm van een String
 	 */
 	public void Join(String spelerNaam) {
-	this.spelerNaam = spelerNaam;
+		this.spelerNaam = spelerNaam;
 
-		gameThread = new Thread( () -> {
-			while(enableThread == true){
+		gameThread = new Thread(() -> {
+			while (enableThread == true) {
 				Update();
 				try {
 					Thread.sleep(250);
@@ -51,11 +52,11 @@ public class GameClient {
 
 	/**
 	 * Pak een kaart van de stapel, dit kan alleen als de speler aan de beurt is
- 	 */
+	 */
 	public void pakKaart() {
 		try {
 			String id = RmiStub.pakKaart(spelerNaam);
-			if(id == null){
+			if (id == null) {
 				return;
 			}
 			kaartPlaatsId = id;
@@ -67,12 +68,13 @@ public class GameClient {
 
 	/**
 	 * Plaats de kaart in de view
+	 *
 	 * @param x coordinaat
 	 * @param y coordinaat
 	 */
 	public void plaatsKaart(int x, int y) {
 		try {
-			if(kaartPlaatsId != "" && RmiStub.plaatsKaart(x,y)) {
+			if (kaartPlaatsId != "" && RmiStub.plaatsKaart(x, y)) {
 				view.plaatsKaart(this, kaartPlaatsId, x, y);
 				kaartPlaatsId = "";
 			}
@@ -96,6 +98,16 @@ public class GameClient {
 			if (beurt != RmiStub.getBeurt()) {
 				view.updateView(this);
 				beurt = RmiStub.getBeurt();
+			}
+			if (RmiStub.getKaartenLeft() <= 69) {
+				enableThread = false;
+
+				Platform.runLater(() -> {
+					view.getController().getEndGameScene().join(RmiStub);
+					view.getController().setEndGameScene();
+				});
+
+
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();

@@ -27,6 +27,7 @@ public class GameScene extends Scene {
 	int sceneWidth = (int) getWidth();
 
 	MenuController controller;
+	public MenuController getController() { return controller;}
 	GameController gameController;
 
 	BorderPane mainPane;

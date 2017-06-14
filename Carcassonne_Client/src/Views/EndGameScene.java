@@ -2,10 +2,12 @@ package Views;
 
 import Controllers.LobbyController;
 import Controllers.MenuController;
+import Models.RMIInterface;
 import Models.Speler;
 import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -18,7 +20,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 	private BorderPane mainPane;
 	private MenuController controller;
-	private LobbyController lobbyController;
+	private RMIInterface RMIstub;
 
 	private VBox allesContainer;
 	private SmartLabel titel;
@@ -39,15 +41,20 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	@Override
 	public void initGui() {
 
+
 		mainPane.getStylesheets().add("style.css");
 		allesContainer = new VBox();
 		spelers = new SmartLabel[5];
 		exit = new SmartButton("Spel verlaten");
+		exit.setId("standardLabel");
 
 		titel = new SmartLabel("Score:");
 		titel.setId("title");
 
 		mainPane.setId("exitBackground");
+		allesContainer.setId("schild");
+
+		allesContainer.getChildren().add(titel);
 
 		for (int i = 0; i < spelers.length; i++) {
 			spelers[i] = new SmartLabel();
@@ -55,23 +62,24 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 			allesContainer.getChildren().add(spelers[i]);
 		}
 
-		mainPane.getChildren().add(allesContainer);
+		allesContainer.getChildren().add(exit);
+		allesContainer.setAlignment(Pos.CENTER);
 
-		setScoreboard();
+		mainPane.setCenter(allesContainer);
+
 		initAction();
 
+	}
+
+	public void join(RMIInterface stub){
+		RMIstub = stub;
+		setScoreboard();
 	}
 
 	@Override
 	public void initAction() {
 
 		exit.setOnAction(e -> {
-			try {
-				lobbyController.RMIstub.removePlayer(controller.getSpelernaam());
-
-			} catch (RemoteException b) {
-
-			}
 			controller.backToMainMenu();
 		});
 
@@ -83,7 +91,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 
 		try {
-			spelerObj = lobbyController.getRmiStub().getPlayerListObject();
+			spelerObj = RMIstub.getPlayerListObject();
 
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -96,7 +104,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 		for (int i = 0; i < spelerObj.size(); i++) {
 			for (int j = 1; j < spelerObj.size() - i; j++) {
-				if (spelerObj.get(j - 1).getPunten() > spelerObj.get(j).getPunten()) {
+				if (spelerObj.get(j - 1).getPunten() < spelerObj.get(j).getPunten()) {
 					tempScore = spelerObj.get(j - 1).getPunten();
 					tempNaam = spelerObj.get(j - 1).getNaam();
 
@@ -111,7 +119,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		}
 
 		for(int i = 0; i < spelerObj.size(); i++){
-			spelers[i].setText(spelerObj.get(i).getNaam());
+			spelers[i].setText((i + 1) + ". " + spelerObj.get(i).getNaam() + "  " + spelerObj.get(i).getPunten());
 		}
 
 	}
