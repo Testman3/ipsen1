@@ -30,7 +30,7 @@ public class PuntenTeller {
 		Tile zuidWest = bord.getTile(x-1, y+1 );
 		Tile noordWest = bord.getTile(x-1, y-1 );
 
-		alleBuren.addAll(Arrays.asList(noord, oost, zuid, west, noordOost, zuidOost, zuidWest, noordWest));
+		alleBuren.addAll(Arrays.asList(tile, noord, oost, zuid, west, noordOost, zuidOost, zuidWest, noordWest));
 		for (Tile buur:alleBuren) {
 			if(buur == null){
 				continue;

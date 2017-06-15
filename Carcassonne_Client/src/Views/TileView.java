@@ -17,6 +17,7 @@ public class TileView extends Pane {
 	private String kaartId;
 	private ImageView view;
 	private ImageView horigeView;
+	ImageView[] horigePreviews;
 
 	int x;
 	int y;
@@ -114,8 +115,17 @@ public class TileView extends Pane {
 		Platform.runLater(() -> {
 			getChildren().remove(horigeView);
 		});
+		verwijderHorigePreviews();
 	}
 
+	public void verwijderHorigePreviews() {
+		if(horigePreviews == null){
+			return;
+		}
+		for (ImageView view : horigePreviews) {
+			getChildren().remove(view);
+		}
+	}
 	/**
 	 * Deze functie zorgt voor het laten zien van de horige preview op de kaarten
 	 * @param horigenZijdes
@@ -125,23 +135,21 @@ public class TileView extends Pane {
 
 		Platform.runLater(() -> {
 			System.out.println("Horige views length " + horigenZijdes.length);
-			ImageView[] horigeViews = new ImageView[horigenZijdes.length];
+			horigePreviews = new ImageView[horigenZijdes.length];
 
 			for (int i = 0; i < horigenZijdes.length; i++) {
-				horigeViews[i] = new ImageView();
-				horigeViews[i].setFitHeight(20);
-				horigeViews[i].setFitWidth(20);
-				horigeViews[i].setId("horigePreview");
+				horigePreviews[i] = new ImageView();
+				horigePreviews[i].setFitHeight(20);
+				horigePreviews[i].setFitWidth(20);
+				horigePreviews[i].setId("horigePreview");
 
-				getChildren().add(horigeViews[i]);
-				horigeViews[i].setLayoutX(horigenZijdes[i].getX());
-				horigeViews[i].setLayoutY(horigenZijdes[i].getY());
+				getChildren().add(horigePreviews[i]);
+				horigePreviews[i].setLayoutX(horigenZijdes[i].getX());
+				horigePreviews[i].setLayoutY(horigenZijdes[i].getY());
 
 				final Horige.Posities pos = horigenZijdes[i];
-				horigeViews[i].setOnMouseClicked(e ->{
-						for (ImageView horige: horigeViews) {
-							getChildren().remove(horige);
-						}
+				horigePreviews[i].setOnMouseClicked(e ->{
+						verwijderHorigePreviews();
 						System.out.println("Horige geplaatst door " + scene.gameController.getModel().spelerNaam);
 						scene.gameController.klikPlaatsHorige(pos);
 				});
