@@ -6,17 +6,17 @@ import Models.GameClient;
 import Models.RMIInterface;
 import Models.Speler;
 import Models.TileStump;
-import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.*;
+import javafx.scene.transform.Affine;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -115,29 +115,54 @@ public class GameScene extends Scene {
 				gameController.saveFileBrowser();
 			}
 			System.out.println("COORDS + " + verticaal.getLayoutX() + " " + verticaal.getLayoutY());
+			System.out.println("x: " + tilesPane.getScaleX() + " y: " + tilesPane.getScaleY());
 		});
 
-		setOnScroll(event -> {
-			if (event.getDeltaY() > 0) {
-				if (scale < 10) {
-					scale = verticaal.getScaleX() * 1.05;
-					verticaal.setScaleY(scale);
-					verticaal.setScaleX(scale);
-					verticaal.setLayoutX(verticaal.getLayoutX() / verticaal.getScaleX());
-					verticaal.setLayoutY(verticaal.getLayoutY() / verticaal.getScaleY());
-				}
-			}
-			if (event.getDeltaY() < 0) {
-				if (scale > 0.8) {
-					scale = verticaal.getScaleX() * 0.95;
-					verticaal.setScaleY(scale);
-					verticaal.setScaleX(scale);
-					verticaal.setLayoutX(verticaal.getLayoutX() / verticaal.getScaleX());
-					verticaal.setLayoutY(verticaal.getLayoutY() / verticaal.getScaleY());
 
-				}
+		final Affine accumulatedScales = new Affine();
+		tilesPane.getTransforms().add(accumulatedScales);
+
+		//Half werkende zoom functie
+		setOnScroll(e -> {
+
+			e.consume();
+
+			if (e.getDeltaY() == 0) {
+				return;
 			}
+
+			double scaleFactor =
+					(e.getDeltaY() > 0)
+							? 1.1
+							: 1 / 1.1;
+
+			accumulatedScales.appendScale(scaleFactor, scaleFactor, e.getX(), e.getY());
+
+
+			if (accumulatedScales.getMxx() < 1.0) {
+				System.out.println("BoundsX");
+				accumulatedScales.setMxx(1.0); //werkt niet
+			}
+
+			if (accumulatedScales.getMyy() < 1.0) {
+				System.out.println("BoundsY");
+				accumulatedScales.setMyy(1.0); //werkt niet
+			}
+
+			if (accumulatedScales.getMxx() > 6) {
+				System.out.println("BoundsX");
+				accumulatedScales.setMxx(6.0); //werkt niet
+
+			}
+
+			if (accumulatedScales.getMyy() > 6) {
+				System.out.println("BoundsY");
+				accumulatedScales.setMyy(6.0); //werkt niet
+
+			}
+
 		});
+
 
 	}
 
@@ -181,8 +206,8 @@ public class GameScene extends Scene {
 		tilesPane.getChildren().add(mainPane);
 		mainPane.setId("test");
 		mainPane.setPrefSize(1280, 720);
-		mainPane.setMaxSize(1280,720);
-		mainPane.setMinSize(1280,720);
+		mainPane.setMaxSize(1280, 720);
+		mainPane.setMinSize(1280, 720);
 		mainPane.setPickOnBounds(false);
 
 		VBox links = new VBox(5);
@@ -222,47 +247,13 @@ public class GameScene extends Scene {
 		menuButton.setId("standardLabel");
 		links.getChildren().add(menuButton);
 
-		////////////////////////////////////////////////////////////
-		//Hieronder alle code om het popup menu werkend te krijgen//
-		////////////////////////////////////////////////////////////
-
-		//Setonaction worden er een nieuwe pane en button + label aangemaakt.
-		menuButton.setOnAction(event -> {
-			BorderPane menuPane = new BorderPane();
-			SmartButton backToGame = new SmartButton("Terug");
-
-			Label testLabel = new Label("ehwef4wuahfui4wahuirehguieahgiuehgiu4ah;i:");
-
-			//Button + label worden ingedeeld in de pane
-			menuPane.setCenter(backToGame);
-			menuPane.setTop(testLabel);
-
-			//Maakt alles in de mainPane blurry
-			mainPane.setEffect(new GaussianBlur());
-
-			//Maak een nieuwe stage aan, met de gamestage als owner. maak ook een nieuwe Scene
-			// aan met een pane en maak het transparant. Vervolgens de popup stage laten zien
-			Stage popupStage = new Stage(StageStyle.TRANSPARENT);
-			popupStage.initOwner(controller.getGameStage());
-			popupStage.initModality(Modality.APPLICATION_MODAL);
-			popupStage.setScene(new Scene(menuPane, Color.TRANSPARENT));
-			popupStage.show();
-
-			//Als je op de terugknop drukt wordt de popupstage verborgen en de blur gerevert
-			backToGame.setOnAction(event1 -> {
-			popupStage.hide();
-			mainPane.setEffect(null);
-			});
-		});
-		////////////////////////////////
-		//Einde van de popup menu code//
-		////////////////////////////////
+		menuButton.setOnAction(event -> controller.showInGameMenu());
 
 		playerViews = new SpelerView[5];
 		for (int i = 0; i < 5; i++) {
 			playerViews[i] = new SpelerView();
-			playerViews[i].setMinSize(150,70);
-			playerViews[i].setMaxSize(150,70);
+			playerViews[i].setMinSize(150, 70);
+			playerViews[i].setMaxSize(150, 70);
 			//playerViews[i].maxHeightProperty().bind(heightProperty().multiply(0.1));
 			//playerViews[i].maxWidthProperty().bind(widthProperty().multiply(0.1));
 			links.getChildren().add(playerViews[i]);
@@ -329,6 +320,16 @@ public class GameScene extends Scene {
 		ShowKaart.setId(client.kaartPlaatsId);
 	}
 
+	public void setSceneBlur(){
+		this.mainPane.setEffect(new GaussianBlur());
+		tilesPane.setEffect(new GaussianBlur());
+	}
+
+	public void hideSceneBlur(){
+		this.mainPane.setEffect(null);
+		tilesPane.setEffect(null);
+	}
+
 	int kaartenOver = 0;
 	ArrayList<Speler> alleSpelers = null;
 
@@ -359,9 +360,9 @@ public class GameScene extends Scene {
 		addTilePreviews(stump.getX(), stump.getY());
 		System.out.println(stump.getX() + " " + stump.getY() + " " + stump.getRotation());
 		Platform.runLater(() -> {
-		KaartenLeft.setText("Kaarten over " + kaartenOver);
-			for (int i = 0; i < playerViews.length ; i++) {
-				if(i == alleSpelers.size()){
+			KaartenLeft.setText("Kaarten over " + kaartenOver);
+			for (int i = 0; i < playerViews.length; i++) {
+				if (i == alleSpelers.size()) {
 					return;
 				}
 				playerViews[i].setNaam(alleSpelers.get(i).getNaam());

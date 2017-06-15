@@ -145,7 +145,7 @@ public class GameClient {
 				kaartGeplaatst = false;
 				beurt = RmiStub.getBeurt();
 			}
-			if (RmiStub.getKaartenLeft() == 0) {
+			if (RmiStub.getKaartenLeft() <= 0) {
 				enableThread = false;
 
 				Platform.runLater(() -> {

@@ -1,15 +1,11 @@
 package Controllers;
 
-import Models.FileManager;
 import Models.GameClient;
 import Models.Horige;
 import Models.RMIInterface;
 import javafx.stage.FileChooser;
-import org.json.simple.JSONObject;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.rmi.RemoteException;
 
 /**
@@ -59,7 +55,6 @@ public class GameController {
 
 
 	public void saveFileBrowser(){
-		FileManager fileManager = new FileManager();
 		FileChooser fileChooser = new FileChooser();
 
 		//title of window
@@ -76,23 +71,12 @@ public class GameController {
 		}
 	}
 
-	public void createFile(String naam, JSONObject object){
 
+	public void getSavefile(String path){
 		try {
-			//new file
-			File newTextFile = new File(naam);
-
-			//create writer
-			FileWriter fw = new FileWriter(newTextFile);
-
-			//Write to json file
-			fw.write(object.toJSONString());
-
-			//close writer
-			fw.close();
-		} catch (IOException iox) {
-			//do stuff with exception
-			iox.printStackTrace();
+			rmiStub.saveFile(path);
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
 	}
 }
