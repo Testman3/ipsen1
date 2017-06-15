@@ -53,7 +53,9 @@ public class GameController {
 	}
 
 
-
+	/**
+	 * Deze functie zort ervoor dat de Filebrowser wordt geopend.
+	 */
 	public void saveFileBrowser(){
 		FileChooser fileChooser = new FileChooser();
 
@@ -71,7 +73,10 @@ public class GameController {
 		}
 	}
 
-
+	/**
+	 * roept de functie saveFile(path) aan.
+	 * @param path
+	 */
 	public void getSavefile(String path){
 		try {
 			rmiStub.saveFile(path);

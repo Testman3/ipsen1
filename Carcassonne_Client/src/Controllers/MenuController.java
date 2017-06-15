@@ -151,7 +151,7 @@ public class MenuController {
 
 	/**
 	 * Deze functie switcht de scene naar de endgamescene
-	 * @return
+	 * @return endGameScene
 	 */
 	public EndGameScene getEndGameScene() {
 		return endGameScene;
