@@ -11,13 +11,14 @@ public class TileStump implements Serializable {
 	int y;
 	String id;
 	int rotation;
-	Horige.Posities[] horigenZijdes;
+	Horige horige;
 
-	public TileStump(int x, int y, String id, int rotation){
+	public TileStump(int x, int y, String id, int rotation, Horige horige){
 		this.x = x;
 		this.y = y;
 		this.id = id;
 		this.rotation = rotation;
+		this.horige = horige;
 	}
 
 	public int getX() {
@@ -32,5 +33,5 @@ public class TileStump implements Serializable {
 	public int getRotation() {
 		return rotation;
 	}
-	public 	Horige.Posities[] getHorigenZijdes() { return horigenZijdes;}
+	public Horige getGeplaatsteHorige() { return horige; }
 }

@@ -205,3 +205,19 @@
 #Kaart_24{
 -fx-image: url("Kaarten/Kaart_24.png");
 }
+#horigeRood{
+-fx-image: url("Horige_Rood.png");
+}
+#horigeBlauw{
+-fx-image: url("Horige_Blauw.png");
+}
+#horigeGroen{
+-fx-image: url("Horige_Groen.png");
+}
+#horigeGeel{
+-fx-image: url("Horige_Geel.png");
+}
+#horigePaars{
+-fx-image: url("Horige_Paars.png");
+}
+

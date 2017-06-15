@@ -9,6 +9,7 @@ public class Zijde {
 		KASTEEL,
 		WEG,
 		GRAS,
+		KLOOSTER,
 		LEEG
 	}
 
@@ -22,6 +23,12 @@ public class Zijde {
 	}
 
 	public void setHorigeSpeler(Horige horige){
+
 		this.horigeSpeler = horige;
+
+	}
+
+	public Horige getHorigeSpeler() {
+		return horigeSpeler;
 	}
 }

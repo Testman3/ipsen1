@@ -11,6 +11,7 @@ public class Tile {
 	Zijde oostZijde;
 	Zijde zuidZijde;
 	Zijde westZijde;
+	Zijde middenZijde;
 
 	int x;
 	int y;
@@ -18,6 +19,7 @@ public class Tile {
 	int rotation;
 
 	boolean heeftKlooster;
+
 	boolean heeftBonus; //Of kasteel tile blauw schild heeft
 
 	Horige.Posities[] horigenZijdes;
@@ -31,19 +33,50 @@ public class Tile {
 		this.heeftKlooster = heeftKlooster;
 		this.heeftBonus = heeftBonus;
 		this.horigenZijdes = horigen;
+		if(heeftKlooster){
+		middenZijde = new Zijde(Zijde.ZijdeType.KLOOSTER, true);
+		}
 	}
 
-	public boolean plaatsHorige(Horige.Posities posititie, Speler speler){
+	public void plaatsHorige(Horige.Posities posititie, Speler speler){
 		if(posititie == Horige.Posities.NOORD){
-			//noordZijde.setHorigeSpeler();
+			noordZijde.setHorigeSpeler(speler.getBeschikbareHorige());
+			noordZijde.getHorigeSpeler().setPositie(Horige.Posities.NOORD);
+		} else if(posititie == Horige.Posities.OOST){
+			oostZijde.setHorigeSpeler(speler.getBeschikbareHorige());
+			oostZijde.getHorigeSpeler().setPositie(Horige.Posities.OOST);
+		} else if(posititie == Horige.Posities.ZUID){
+			zuidZijde.setHorigeSpeler(speler.getBeschikbareHorige());
+			zuidZijde.getHorigeSpeler().setPositie(Horige.Posities.ZUID);
+		} else if(posititie == Horige.Posities.WEST){
+			westZijde.setHorigeSpeler(speler.getBeschikbareHorige());
+			westZijde.getHorigeSpeler().setPositie(Horige.Posities.WEST);
+		} else if(posititie == Horige.Posities.MIDDEN){
+			middenZijde.setHorigeSpeler(speler.getBeschikbareHorige());
+			middenZijde.getHorigeSpeler().setPositie(Horige.Posities.MIDDEN);
 		}
-		return false;
 	}
 
 	public void plaats(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
+
+	public Horige getGeplaatsteHorigePositie(){
+		if(noordZijde.horigeSpeler != null){
+			return noordZijde.horigeSpeler;
+		} else if(oostZijde.horigeSpeler != null){
+			return oostZijde.horigeSpeler;
+		} else if(zuidZijde.horigeSpeler != null){
+			return zuidZijde.horigeSpeler;
+		} else if(westZijde.horigeSpeler != null){
+			return westZijde.horigeSpeler;
+		} else if(middenZijde != null && middenZijde.horigeSpeler != null){
+			return middenZijde.horigeSpeler;
+		}
+		return null;
+	}
+
 	public String getImageID() {
 		return imageID;
 	}

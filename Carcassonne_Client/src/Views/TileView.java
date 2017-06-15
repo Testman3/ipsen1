@@ -19,6 +19,7 @@ public class TileView extends Pane {
 	String kaartId;
 
 	ImageView view;
+	ImageView horigeView;
 
 	int x;
 	int y;
@@ -69,6 +70,18 @@ public class TileView extends Pane {
 		System.out.println("Coord of tile " + getLayoutX() + " " + getLayoutY() );
 	}
 
+	public void plaatsHorige(Horige horige){
+	Platform.runLater(() -> {
+		horigeView = new ImageView();
+		horigeView.setId(horige.getSpeler().getHorigeKleur());
+		horigeView.setFitHeight(20);
+		horigeView.setFitWidth(20);
+		getChildren().add(horigeView);
+		horigeView.setLayoutX(horige.getPositie().getX());
+		horigeView.setLayoutY(horige.getPositie().getY());
+		System.out.println("Dit wordt gerunt!");
+	});
+	}
 	public void laatHorigePreviewZien(Horige.Posities[] horigenZijdes) {
 
 		Platform.runLater(() -> {
@@ -88,6 +101,9 @@ public class TileView extends Pane {
 				final Horige.Posities pos = horigenZijdes[i];
 				horigeView.setOnMouseClicked(e ->{
 					for (int j = 0; j < horigeViews.length; j++) {
+						for (ImageView horige: horigeViews) {
+							getChildren().remove(horige);
+						}
 						scene.gameController.klikPlaatsHorige(pos);
 					}
 				});
