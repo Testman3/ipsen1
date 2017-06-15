@@ -8,6 +8,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
@@ -18,7 +19,7 @@ import javafx.scene.media.AudioClip;
  * Deze class is verantwoordelijk voor de interacties tussen de lobby / prelobby en de RMI server
  */
 public class LobbyController {
-		private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
+	private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
 
 
 	private boolean ableToConnect = false;
@@ -28,12 +29,9 @@ public class LobbyController {
 	/**
 	 * Probeert de speler te laten verbinden met de rmi server
 	 *
-	 * @param ip
-	 * ip adres in de vorm van een String
-	 * @param naam
-	 * gebruikersnaam in de vorm van een String
-	 * @throws RemoteException
-	 * RemoteException wordt gegooid wanneer er een fout zit in de verbinding met RMI
+	 * @param ip   ip adres in de vorm van een String
+	 * @param naam gebruikersnaam in de vorm van een String
+	 * @throws RemoteException RemoteException wordt gegooid wanneer er een fout zit in de verbinding met RMI
 	 */
 	public void connectToServer(String ip, String naam) throws RemoteException {
 
@@ -74,25 +72,29 @@ public class LobbyController {
 				RMIstub = null;
 				registry = null;
 				ableToConnect = false;
+				return;
 			} else {
 				System.out.println("Joining the game as " + naam);
 			}
 
-			if(getRmiStub().isGameStarted()){
+			if (getRmiStub().isGameStarted()) {
 				ableToConnect = false;
 				alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
 				errorSound.play();
 				alert.showAndWait();
+				return;
 			}
 
-			if(getRmiStub().getPlayerList().size() == 5){
+			if (getRmiStub().getPlayerList().size() == 5) {
 				ableToConnect = false;
 				alert = new Alert(AlertType.ERROR, "De lobby zit vol!", ButtonType.OK);
 				errorSound.play();
 				alert.showAndWait();
 			}
 
+
 		}
+
 	}
 
 
@@ -111,10 +113,9 @@ public class LobbyController {
 
 	/**
 	 * Controleert of de opgegeven String een geldig IP format is
-	 * @param ip
-	 * Geef het ip adres mee in de vorm van een String
-	 * @return
-	 * Geeft true terug als het ip valide is, en false als dit niet het geval is
+	 *
+	 * @param ip Geef het ip adres mee in de vorm van een String
+	 * @return Geeft true terug als het ip valide is, en false als dit niet het geval is
 	 */
 	private boolean validateIP(final String ip) {
 		Pattern pattern;
