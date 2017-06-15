@@ -28,23 +28,17 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	private static SmartButton startGame;
 	private Label[] spelers;
 	private boolean enableThread;
-
 	private VBox completeBox;
 	private static HBox knoppenBox;
-
 	private HBox box1;
-
 	private VBox horigenBox;
 	private VBox spelerBox;
-
 	private ImageView[] horigen;
-
 	private BorderPane lobbyPane;
-	MenuController controller;
-	LobbyController lobbyController;
-
+	private MenuController controller;
+	private LobbyController lobbyController;
 	private Thread lobbyThread;
-	ArrayList<String> allenamen;
+	private ArrayList<String> allenamen;
 
 	/**
 	 * Constructor van de LobbyScene
@@ -101,7 +95,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		completeBox.getChildren().add(box1);
 		box1.setAlignment(Pos.CENTER);
 
-
 		leaveGame = new SmartButton("Leave Game");
 		leaveGame.setId("standardLabel");
 		startGame = new SmartButton("Start game");
@@ -114,7 +107,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		completeBox.setAlignment(Pos.CENTER);
 
 		lobbyPane.setCenter(completeBox);
-
 
 		initAction();
 

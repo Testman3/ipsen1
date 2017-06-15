@@ -14,14 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.*;
-import javafx.scene.transform.Affine;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -30,41 +23,27 @@ import java.util.ArrayList;
  */
 public class GameScene extends Scene {
 
-
 	private double xOffset;
 	private double yOffset;
-
-	int sceneHeight = (int) getHeight();
-	int sceneWidth = (int) getWidth();
-
-	MenuController controller;
-
+	private int sceneHeight = (int) getHeight();
+	private int sceneWidth = (int) getWidth();
+	private MenuController controller;
 	public MenuController getController() {
 		return controller;
 	}
-
-	GameController gameController;
-
-	BorderPane mainPane;
-
-	Pane tilesPane;
-	HBox test;
-
-	TileView[][] tileViews;
-	HorigeView[] horigeViews;
-	SpelerView[] playerViews;
-
-
-	public ImageView ShowKaart;
-
-
-	String kaartPlaatsId;
+	public GameController gameController;
+	private BorderPane mainPane;
+	private Pane tilesPane;
+	private HBox test;
+	private TileView[][] tileViews;
+	private HorigeView[] horigeViews;
+	private SpelerView[] playerViews;
+	private ImageView ShowKaart;
+	private String kaartPlaatsId;
 	private double scale;
-
 	public RMIInterface RmiStub;
-
-	SmartLabel KaartenLeft;
-	Button menuButton;
+	private SmartLabel KaartenLeft;
+	private Button menuButton;
 
 	/**
 	 * Constructor van de GameScene
