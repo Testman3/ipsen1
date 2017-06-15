@@ -3,7 +3,6 @@ package Models;
 import Views.GameScene;
 import javafx.application.Platform;
 import javafx.scene.media.AudioClip;
-
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
 
@@ -21,7 +20,7 @@ public class GameClient {
 	public String spelerNaam;
 	public String kaartPlaatsId = "";
 
-	String spelerBeurt = "";
+	//String spelerBeurt = "";
 	int beurt = 0;
 
 	public RMIInterface RmiStub;
