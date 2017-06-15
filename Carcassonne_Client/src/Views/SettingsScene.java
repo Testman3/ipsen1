@@ -25,16 +25,13 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	private HBox soundBox;
 	private HBox spraakBox;
 	private HBox fullscreenBox;
-
 	private Label titel;
 	private SmartLabel sounds;
 	private SmartLabel spraak;
 	private SmartLabel fullscreen;
-
 	private CheckBox soundCheckBox;
 	private CheckBox spraakCheckBox;
 	private CheckBox fullscreenCheckBox;
-
 	private SmartButton backToHome;
 	private MenuController controller;
 
