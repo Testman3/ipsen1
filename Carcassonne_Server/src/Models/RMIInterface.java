@@ -149,7 +149,7 @@ public interface RMIInterface extends Remote {
 	/**
 	 * Opslaan van de game staat
 	 */
-	public void saveFile(String path) throws RemoteException;
+	public File saveFile(String path) throws RemoteException;
 
 
 
