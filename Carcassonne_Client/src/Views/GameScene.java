@@ -99,8 +99,6 @@ public class GameScene extends Scene {
 			} else if (e.getCode() == KeyCode.P) { // Get data
 				gameController.saveFileBrowser();
 			}
-			System.out.println("COORDS + " + verticaal.getLayoutX() + " " + verticaal.getLayoutY());
-			System.out.println("x: " + tilesPane.getScaleX() + " y: " + tilesPane.getScaleY());
 		});
 
 
@@ -351,6 +349,7 @@ public class GameScene extends Scene {
 			stump = client.getTile();
 			alleSpelers = RmiStub.getPlayerListObject();
 			kaartenOver = RmiStub.getKaartenLeft();
+
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

@@ -4,6 +4,7 @@ import Models.Bord;
 import Models.Speler;
 import Models.Tile;
 import com.sun.jndi.ldap.Ber;
+import commonFunctions.Point;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class PuntenTeller {
 		}
 		geefPunten(tile.getMiddenZijde().getHorigeSpeler().getSpeler(), 9);
 		tile.getMiddenZijde().getHorigeSpeler().getSpeler().getHorigeTerug(tile.getMiddenZijde().getHorigeSpeler());
-		bord.verwijderHorige(new Point2D(x,y));
+		bord.verwijderHorige(new Point(x,y));
 
 	}
 

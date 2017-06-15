@@ -1,5 +1,6 @@
 package Models;
 
+import commonFunctions.Point;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class Bord {
 
 	private int gameBeurt = 1;
 
-	private ArrayList<Point2D> verwijderHorigeDezeRonde;
+	private ArrayList<Point> verwijderHorigeDezeRonde;
 
 	/**
 	 * Deze functie geeft aan hoeveel rondes er al zijn geweest
@@ -52,8 +53,9 @@ public class Bord {
 		setSpelerKleuren();
 	}
 
-	public void verwijderHorige(Point2D point){
+	public void verwijderHorige(Point point){
 		verwijderHorigeDezeRonde.add(point);
+		System.out.println("HORIGE " + point.getX() + " " + point.getY() + "zal verwijderd worden!");
 	}
 	/**
 	 * Geeft elke speler zijn eigen horige kleur.
@@ -238,5 +240,5 @@ public class Bord {
 		return this.alleTiles;
 	}
 
-	public ArrayList<Point2D> getVerwijderHorigeDezeRonde() { return verwijderHorigeDezeRonde;}
+	public ArrayList<Point> getVerwijderHorigeDezeRonde() { return verwijderHorigeDezeRonde;}
 }

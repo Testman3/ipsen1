@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.*;
+import commonFunctions.Point;
 import javafx.geometry.Point2D;
 
 import java.io.File;
@@ -156,7 +157,7 @@ public class RMIController implements RMIInterface {
 	}
 
 	@Override
-	public ArrayList<Point2D> getHorigeToRemove() throws RemoteException {
+	public ArrayList<Point> getHorigeToRemove() throws RemoteException {
 		return serverManager.bordController.bord.getVerwijderHorigeDezeRonde();
 	}
 }

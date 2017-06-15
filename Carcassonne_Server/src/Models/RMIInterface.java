@@ -1,5 +1,6 @@
 package Models;
 
+import commonFunctions.Point;
 import javafx.geometry.Point2D;
 
 import java.io.File;
@@ -200,6 +201,6 @@ public interface RMIInterface extends Remote {
 	 */
 	public void beeindigenBeurt(String spelerNaam) throws RemoteException;
 
-	public ArrayList<Point2D> getHorigeToRemove() throws RemoteException;
+	public ArrayList<Point> getHorigeToRemove() throws RemoteException;
 
 }

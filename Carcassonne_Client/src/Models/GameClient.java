@@ -1,8 +1,8 @@
 package Models;
 
 import Views.GameScene;
+import commonFunctions.Point;
 import javafx.application.Platform;
-import javafx.geometry.Point2D;
 import javafx.scene.media.AudioClip;
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
@@ -28,7 +28,7 @@ public class GameClient {
 
 	private boolean kaartGepakt = false;
 	private boolean kaartGeplaatst = false;
-	ArrayList<Point2D> verwijderHorige;
+	ArrayList<Point> verwijderHorige;
 
 	public GameClient(GameScene view) {
 		this.view = view;
@@ -157,17 +157,22 @@ public class GameClient {
 				kaartGepakt = false;
 				kaartGeplaatst = false;
 				beurt = RmiStub.getBeurt();
-				ArrayList<Point2D> verwijderHorige = RmiStub.getHorigeToRemove();
+				verwijderHorige = RmiStub.getHorigeToRemove();
 			}
+
+			if(verwijderHorige != null) {
+				for (Point point : verwijderHorige) {
+					view.removeHorige(point.getX(), point.getY());
+				}
+			}
+
 			if (RmiStub.getKaartenLeft() <= 0) {
 				enableThread = false;
 
 				Platform.runLater(() -> {
 					view.getController().getEndGameScene().join(RmiStub);
 					view.getController().setEndGameScene();
-					for (Point2D point: verwijderHorige) {
-						view.removeHorige((int)point.getX(), (int)point.getY());
-					}
+
 				});
 
 
