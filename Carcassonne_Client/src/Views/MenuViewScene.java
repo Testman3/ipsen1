@@ -21,7 +21,7 @@ import static javafx.scene.media.MediaPlayer.INDEFINITE;
  */
 public class MenuViewScene extends Scene implements SceneInitialiser{
 
-	static Media backgroundMuziek = new Media(Paths.get("Sounds/BackgroundMusic.mp3").toUri().toString());
+	private static Media backgroundMuziek = new Media(Paths.get("Sounds/BackgroundMusic.mp3").toUri().toString());
 	static MediaPlayer mediaPlayer = new MediaPlayer(backgroundMuziek);
 	private BorderPane mainPane;
 	private Label titel = new Label("Carcassonne");
