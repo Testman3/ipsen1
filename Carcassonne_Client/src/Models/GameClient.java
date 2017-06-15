@@ -85,7 +85,7 @@ public class GameClient {
 				kaartPlaatsId = "";
 			}
 			else {
-			meepMerp.play();
+				meepMerp.play();
 			}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();

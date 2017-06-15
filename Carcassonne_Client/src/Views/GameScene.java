@@ -293,7 +293,7 @@ public class GameScene extends Scene {
 	 * @param x
 	 * @param y
 	 */
-	public void plaatsKaart(GameClient client, String id, int x, int y) {
+	public void plaatsKaart(GameClient client, int x, int y) {
 		ShowKaart.setId("Kaartview");
 		try {
 			tileViews[x][y].laatHorigePreviewZien(RmiStub.getHorigePosities());
