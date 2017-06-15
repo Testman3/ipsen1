@@ -11,7 +11,6 @@ public class GameClient {
 	AudioClip meepMerp = new AudioClip(Paths.get("Sounds/meepMerp.mp3").toUri().toString());
 
 	GameScene view;
-	public GameScene getGameScene(){return view;}
 
 	Thread gameThread;
 
@@ -109,7 +108,7 @@ public class GameClient {
 			e1.printStackTrace();
 		}
 	}
-
+	
 	public void draaiKaart() {
 		try {
 		if(RmiStub.draaiKaart(spelerNaam)){
@@ -121,6 +120,11 @@ public class GameClient {
 
 	}
 
+	/**
+	 * Plaats horige op positie
+	 * @param posities
+	 * Geef de positie mee van de horige
+	 */
 	public void plaatsHorige(Horige.Posities posities) {
 		try {
 			RmiStub.plaatsHorige(posities);
@@ -128,13 +132,19 @@ public class GameClient {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Set RmiStub
+	 * @param rmiController
+	 * geef een RMIInterface mee.
+	 */
 	public void setRmiStub(RMIInterface rmiController) {
 		RmiStub = rmiController;
 		view.RmiStub = rmiController;
 	}
 		/**
-		 * De client wordt elke x ms geupdate, als de beurt op de server hoger is dan de beurt op de client betekent dat en
-		 * speler klaar is met zijn beurt, en het spelbord geupdate moet worden.
+		 * De client wordt elke x ms geīüpdatet, als de beurt op de server hoger is dan de beurt op de client betekent dat en
+		 * speler klaar is met zijn beurt, en het spelbord geüpdatet moet worden.
 		 */
 	public void Update() {
 		try {
@@ -159,6 +169,12 @@ public class GameClient {
 		}
 	}
 
+	/**
+	 * Deze functie geeft de laast geplaatste kaart terugg
+	 * @return
+	 * Geeft laatst geplaatste kaart terug mits hij verbinding kan maken met de server. anders geeft hij null terug.
+	 * @throws RemoteException
+	 */
 	public TileStump getTile() throws RemoteException {
 		try {
 			return RmiStub.getPlacedKaart();
@@ -167,6 +183,14 @@ public class GameClient {
 			return null;
 		}
 	}
+
+	/**
+	 * Deze functie geeft de view terug.
+	 * @return view
+	 * Geeft GameScene view terug
+	 */
+	public GameScene getGameScene(){return view;}
+
 }
 
 
