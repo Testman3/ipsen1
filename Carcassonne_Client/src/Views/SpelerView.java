@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 import java.util.Stack;
 
 /**
- * Created by Marti on 13-6-2017.
+ * Deze class regelt de juiste weergave van de spelernamen en punten in de ui bij het spelbord
  */
 public class SpelerView extends StackPane {
 
@@ -19,6 +19,9 @@ public class SpelerView extends StackPane {
 	private SmartLabel text_Punten;
 	private  ImageView achterkant;
 
+	/**
+	 * Constructor van SpelerView
+	 */
 	public SpelerView(){
 
 	VBox texts = new VBox();
@@ -37,14 +40,22 @@ public class SpelerView extends StackPane {
 		getChildren().addAll(achterkant, texts);
 	}
 
-
-
+	/**
+	 * Deze functie stelt de spelernaam in
+	 * @param naam
+	 * Geef spelernaam mee in de vorm van een String
+	 */
 	public void setNaam(String naam ){
 	text_Naam.setText(naam);
 	}
+
+	/**
+	 * Deze functie stelt het aantal punten in
+	 * @param punten
+	 * Geef een int mee met aantal punten
+	 */
 	public void setPunten(int punten){
 		text_Punten.setText(" " + punten);
 	}
-
 
 }

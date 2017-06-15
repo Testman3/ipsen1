@@ -8,6 +8,9 @@ import javafx.scene.layout.Pane;
 
 import java.rmi.RemoteException;
 
+/**
+ * Deze class verzorgt de correcte weergave van alle Tiles
+ */
 public class TileView extends Pane {
 
 	//The size of a tile in pixels
@@ -23,6 +26,15 @@ public class TileView extends Pane {
 	int x;
 	int y;
 
+	/**
+	 * Constructor van TileView
+	 * @param x
+	 * x co-ordinaat
+	 * @param y
+	 * y co-ordinaat
+	 * @param scene
+	 * Geef de GameScene mee
+	 */
 	public TileView(int x, int y, GameScene scene){
 		minHeight(90);
 		minWidth(90);
@@ -48,10 +60,14 @@ public class TileView extends Pane {
 		minWidth(90);
 	}
 
-
+	/**
+	 * Deze functie haalt het image id op
+	 * @return het id van de imageview in de vorm van een String
+	 */
 	public String getimgId() {
 		return view.getId();
 	}
+
 	/**
 	 * Sets the posiion of the tile in the grid
 	 */
@@ -60,15 +76,31 @@ public class TileView extends Pane {
 		setLayoutY(y * SIZE_Y);
 	}
 
+	/**
+	 * Deze functie stelt de rotatie in van de kaart
+	 * @param rotation
+	 * Geef een int mee om de gradatie van rotatie aan te geven
+	 */
 	public void setRotation(int rotation ){
 		view.setRotate(rotation);
 	}
+
+	/**
+	 * Deze functie stlet het ID van de kaart in
+	 * @param Id
+	 * Geef het id van de kaart mee in de vorm van een String
+	 */
 	public void setKaartId(String Id) {
 		kaartId = Id;
 		view.setId(kaartId);
 		System.out.println("Coord of tile " + getLayoutX() + " " + getLayoutY() );
 	}
 
+	/**
+	 * Deze functie zorgt voor het laten zien van de horige preview op de kaarten
+	 * @param horigenZijdes
+	 * Geef de zijden mee waarop een horige kan staan
+	 */
 	public void laatHorigePreviewZien(Horige.Posities[] horigenZijdes) {
 
 		Platform.runLater(() -> {
@@ -86,12 +118,10 @@ public class TileView extends Pane {
 
 				horigeViews[i] = horigeView;
 				final Horige.Posities pos = horigenZijdes[i];
-				horigeView.setOnMouseClicked(e -> {
-					System.out.println("HORIGE POSITIE " + pos.toString());
-
-				//	for (int j = 0; j < horigeViews.length; j++) {
-				//		getChildren().remove(horigeViews[j]);
-				//	}
+				horigeView.setOnMouseClicked(e ->{
+					for (int j = 0; j < horigeViews.length; j++) {
+						scene.gameController.klikPlaatsHorige(pos);
+					}
 				});
 			}
 		});

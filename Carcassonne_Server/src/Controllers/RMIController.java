@@ -106,8 +106,8 @@ public class RMIController implements RMIInterface {
 		return serverManager.bordController.plaatsKaart(x,y);
 	}
 
-	public void draaiKaart() {
-		serverManager.bordController.draaiKaart();
+	public boolean draaiKaart(String naam) {
+		return serverManager.bordController.draaiKaart(naam);
 	}
 
 	@Override
@@ -133,6 +133,17 @@ public class RMIController implements RMIInterface {
 	@Override
 	public int getKaartenLeft() throws RemoteException {
 		return serverManager.bordController.kaartenStapel.getKaartenOver();
+	}
+
+	@Override
+	public void saveFile(String path) {
+		FileManager manager = new FileManager();
+		manager.saveGame(path);
+	}
+
+	public boolean plaatsHorige(Horige.Posities posities) throws RemoteException {
+	//	return serverManager.bordController.kaartenStapel.getTurnTile().plaatsHorige(posities);
+		return false;
 	}
 
 	@Override

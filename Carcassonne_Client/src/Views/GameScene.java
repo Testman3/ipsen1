@@ -6,22 +6,30 @@ import Models.GameClient;
 import Models.RMIInterface;
 import Models.Speler;
 import Models.TileStump;
+import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.*;
 import javafx.scene.transform.Affine;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * Deze class zorgt ervoor dat het daadwerkelijke speelbord goed wordt weergegeven.
+ */
 public class GameScene extends Scene {
 
 
@@ -30,10 +38,7 @@ public class GameScene extends Scene {
 
 	MenuController controller;
 
-	public MenuController getController() {
-		return controller;
-	}
-
+	public MenuController getController() { return controller;}
 	GameController gameController;
 
 	BorderPane mainPane;
@@ -57,21 +62,22 @@ public class GameScene extends Scene {
 	SmartLabel KaartenLeft;
 	Button menuButton;
 
+	/**
+	 * Constructor van de GameScene
+	 * @param menuController
+	 * Geef MenuController mee
+	 */
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
 		super(new Pane(), 1280, 720);
 		getStylesheets().add("style.css");
 		tilesPane = (Pane) this.getRoot();
 
-
 		this.controller = menuController;
-
 
 		createTileGrid(100, 100);
 
 		init();
-
-
 	}
 
 	/**
@@ -80,7 +86,7 @@ public class GameScene extends Scene {
 	 * @param sizeX the x size of the grid (x amount of tiles)
 	 * @param sizeY the y size of the grid (y amount of tiles)
 	 */
-	public void createTileGrid(int sizeX, int sizeY) {
+	private void createTileGrid(int sizeX, int sizeY) {
 		tileViews = new TileView[sizeX][sizeY];
 		VBox verticaal = new VBox();
 		for (int y = 0; y < sizeY; y++) {
@@ -93,9 +99,9 @@ public class GameScene extends Scene {
 			}
 		}
 
-
 		tilesPane.getChildren().add(verticaal);
 		tilesPane.setId("hallo");
+
 		//Verplaatsen over de map met W A S D keys, Speed is de snelheid dat je verplaatst.
 		int speed = 20;
 		setOnKeyPressed(e -> {
@@ -107,6 +113,8 @@ public class GameScene extends Scene {
 				verticaal.setLayoutY(verticaal.getLayoutY() - speed);
 			} else if (e.getCode() == KeyCode.D) {
 				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
+			} else if (e.getCode() == KeyCode.P) { // Get data
+				gameController.saveFileBrowser();
 			}
 			System.out.println("COORDS + " + verticaal.getLayoutX() + " " + verticaal.getLayoutY());
 			System.out.println("x: " + tilesPane.getScaleX() + " y: " + tilesPane.getScaleY());
@@ -163,11 +171,12 @@ public class GameScene extends Scene {
 
 	/**
 	 * Plaatst previews om een tile heen, deze methode mag alleen gerunt worden nadat er een tile geplaatst is
-	 *
 	 * @param x
+	 * x co-ordinaat
 	 * @param y
+	 * y co-ordinaat
 	 */
-	public void addTilePreviews(int x, int y) {
+	private void addTilePreviews(int x, int y) {
 		addTilePreview(x - 1, y);
 		addTilePreview(x + 1, y);
 		addTilePreview(x, y + 1);
@@ -175,10 +184,11 @@ public class GameScene extends Scene {
 	}
 
 	/**
-	 * Plaatst 1 preview, deze methode mag niet zomaar gerunnt worden
-	 *
+	 * Plaatst 1 preview, deze methode mag niet zomaar gerunt worden
 	 * @param x
+	 * x co-ordinaat
 	 * @param y
+	 * y co-ordinaat
 	 */
 	private void addTilePreview(int x, int y) {
 		if (x < 0 || y < 0) {
@@ -192,7 +202,7 @@ public class GameScene extends Scene {
 
 	}
 
-	public void init() {
+	private void init() {
 
 		mainPane = new BorderPane();
 		tilesPane.getChildren().add(mainPane);
@@ -204,7 +214,6 @@ public class GameScene extends Scene {
 
 		VBox links = new VBox(5);
 		links.setPickOnBounds(false);
-		//links.setPadding(new Insets(0, 0, 0, 20));
 
 		HBox onder = new HBox();
 		onder.setPickOnBounds(false);
@@ -223,13 +232,7 @@ public class GameScene extends Scene {
 		button.setId("standardLabel");
 		onder.getChildren().add(button);
 		button.setOnAction(e -> {
-			try {
-				RmiStub.draaiKaart();
-				ShowKaart.setRotate(ShowKaart.getRotate() + 90);
-
-			} catch (RemoteException e1) {
-				e1.printStackTrace();
-			}
+				gameController.klikDraaiKaart();
 		});
 
 		menuButton = new Button("Menu");
@@ -237,6 +240,42 @@ public class GameScene extends Scene {
 		menuButton.minWidthProperty().bind(widthProperty().multiply(0.11));
 		menuButton.setId("standardLabel");
 		links.getChildren().add(menuButton);
+
+		////////////////////////////////////////////////////////////
+		//Hieronder alle code om het popup menu werkend te krijgen//
+		////////////////////////////////////////////////////////////
+
+		//Setonaction worden er een nieuwe pane en button + label aangemaakt.
+		menuButton.setOnAction(event -> {
+			BorderPane menuPane = new BorderPane();
+			SmartButton backToGame = new SmartButton("Terug");
+
+			Label testLabel = new Label("ehwef4wuahfui4wahuirehguieahgiuehgiu4ah;i:");
+
+			//Button + label worden ingedeeld in de pane
+			menuPane.setCenter(backToGame);
+			menuPane.setTop(testLabel);
+
+			//Maakt alles in de mainPane blurry
+			mainPane.setEffect(new GaussianBlur());
+
+			//Maak een nieuwe stage aan, met de gamestage als owner. maak ook een nieuwe Scene
+			// aan met een pane en maak het transparant. Vervolgens de popup stage laten zien
+			Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+			popupStage.initOwner(controller.getGameStage());
+			popupStage.initModality(Modality.APPLICATION_MODAL);
+			popupStage.setScene(new Scene(menuPane, Color.TRANSPARENT));
+			popupStage.show();
+
+			//Als je op de terugknop drukt wordt de popupstage verborgen en de blur gerevert
+			backToGame.setOnAction(event1 -> {
+			popupStage.hide();
+			mainPane.setEffect(null);
+			});
+		});
+		////////////////////////////////
+		//Einde van de popup menu code//
+		////////////////////////////////
 
 		playerViews = new SpelerView[5];
 		for (int i = 0; i < 5; i++) {
@@ -257,18 +296,33 @@ public class GameScene extends Scene {
 			gameController.klikPakKaart();
 		});
 
-		//links.getChildren().add(onder);
-		//Spane.setLeft(onder);
 		mainPane.setBottom(onder);
 		KaartenLeft = new SmartLabel("Kaarten over: 72");
 		links.getChildren().add(KaartenLeft);
 		KaartenLeft.setId("standardLabel");
 
-
-		//		mainPane.setCenter(ingamePane);
 	}
 
-	public void plaatsKaart(GameClient client, String id, int x, int y) {
+	/**
+	 * Deze methode laat de kaart draaien
+	 */
+	public void DraaiKaart() {
+		if(ShowKaart.getId().equals("Kaartview")){
+			return;
+		}
+		ShowKaart.setRotate(ShowKaart.getRotate() + 90);
+	}
+
+	/**
+	 * Deze functie plaatst de kaart
+	 * @param client
+	 * Placeholder
+	 * @param x
+	 * x co-ordinaat
+	 * @param y
+	 * y co-ordinaat
+	 */
+	public void plaatsKaart(GameClient client, int x, int y) {
 		ShowKaart.setId("Kaartview");
 		try {
 			tileViews[x][y].laatHorigePreviewZien(RmiStub.getHorigePosities());
@@ -279,15 +333,23 @@ public class GameScene extends Scene {
 
 	}
 
+	/**
+	 * Deze functie laat de neergelegde kaart zien
+	 * @param client
+	 * Geef GameClient mee
+	 */
 	public void showKaart(GameClient client) {
 		ShowKaart.setId(client.kaartPlaatsId);
-
-
 	}
 
 	int kaartenOver = 0;
 	ArrayList<Speler> alleSpelers = null;
 
+	/**
+	 * Deze functie zorgt ervoor dat de view wordt geüpdatet
+	 * @param client
+	 * Geef GameClient mee
+	 */
 	public void updateView(GameClient client) {
 		TileStump stump = null;
 
@@ -314,6 +376,5 @@ public class GameScene extends Scene {
 			}
 		});
 	}
-
 
 }

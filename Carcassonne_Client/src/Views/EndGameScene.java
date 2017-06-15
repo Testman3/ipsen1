@@ -14,6 +14,10 @@ import javafx.scene.layout.VBox;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+
+/**
+ * Deze class zorgt ervoor dat de EndGameScene goed wordt weergegeven.
+ */
 public class EndGameScene extends Scene implements SceneInitialiser {
 
 	private BorderPane mainPane;
@@ -27,7 +31,11 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 	private ArrayList<Speler> spelerObj;
 
-
+	/**
+	 * Constructor van de EndGameScene
+	 * @param controller
+	 * Geef MenuController mee
+	 */
 	public EndGameScene(MenuController controller) {
 		super(new BorderPane(), 1280, 720);
 		mainPane = (BorderPane) this.getRoot();
@@ -38,8 +46,6 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 	@Override
 	public void initGui() {
-
-
 		mainPane.getStylesheets().add("style.css");
 		allesContainer = new VBox();
 		spelers = new SmartLabel[5];
@@ -69,11 +75,6 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 	}
 
-	public void join(RMIInterface stub){
-		RMIstub = stub;
-		setScoreboard();
-	}
-
 	@Override
 	public void initAction() {
 
@@ -83,6 +84,19 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 	}
 
+	/**
+	 * Deze functie zorgt ervoor dat de verbing van de server er is waarna de functie setScoreboard wordt aangeroepen.
+	 * @param stub
+	 * De RMIInterface wordt meegegeven
+	 */
+	public void join(RMIInterface stub){
+		RMIstub = stub;
+		setScoreboard();
+	}
+
+	/**
+	 * Deze functie zorgt ervoor dat de spelers worden gesorteerd op score, waarna ze op het scherm zullen verschijnen.
+	 */
 	private void setScoreboard(){
 
 		spelerObj = new ArrayList<>();

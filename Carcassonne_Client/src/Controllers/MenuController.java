@@ -1,6 +1,7 @@
 package Controllers;
 
 import Views.*;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -23,7 +24,7 @@ public class MenuController {
 
 	private String spelernaam;
 
-	public static File loadedFile;
+	public File loadedFile;
 
 	/**
 	 * Maak een menucontroller aan met de stage gameStage
@@ -33,7 +34,6 @@ public class MenuController {
 	public MenuController(Stage gameStage) {
 
 		LobbyController lobbyController = new LobbyController();
-
 
 		this.gameStage = gameStage;
 		endGameScene = new EndGameScene(this);
@@ -46,11 +46,14 @@ public class MenuController {
 
 		setMenuViewScene();
 		//setGameScene();
+		gameStage.setTitle("Carcassonne");
+		gameStage.getIcons().add(new Image("Afbeeldingen/gameIcon.png"));
 		gameStage.show();
 		gameStage.setOnCloseRequest(e -> {
 			System.exit(0);
 		});
 	}
+
 
 	/**
 	 * Button action method om de speler terug in het hoofdmenu te krijgen
@@ -209,4 +212,5 @@ public class MenuController {
 		// return file
 		return fileChooser.showOpenDialog(gameStage);
 	}
+
 }

@@ -2,12 +2,17 @@ package Models;
 
 import Views.GameScene;
 import javafx.application.Platform;
+import javafx.scene.media.AudioClip;
 
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 
 public class GameClient {
 
+	AudioClip meepMerp = new AudioClip(Paths.get("Sounds/meepMerp.mp3").toUri().toString());
+
 	GameScene view;
+	public GameScene getGameScene(){return view;}
 
 	Thread gameThread;
 
@@ -19,7 +24,7 @@ public class GameClient {
 	String spelerBeurt = "";
 	int beurt = 0;
 
-	RMIInterface RmiStub;
+	public RMIInterface RmiStub;
 
 	public GameClient(GameScene view) {
 		this.view = view;
@@ -57,6 +62,7 @@ public class GameClient {
 		try {
 			String id = RmiStub.pakKaart(spelerNaam);
 			if (id == null) {
+				meepMerp.play();
 				return;
 			}
 			kaartPlaatsId = id;
@@ -75,24 +81,43 @@ public class GameClient {
 	public void plaatsKaart(int x, int y) {
 		try {
 			if (kaartPlaatsId != "" && RmiStub.plaatsKaart(x, y)) {
-				view.plaatsKaart(this, kaartPlaatsId, x, y);
+				view.plaatsKaart(this, x, y);
 				kaartPlaatsId = "";
+			}
+			else {
+				meepMerp.play();
 			}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
 	}
 
+	public void draaiKaart() {
+		try {
+		if(RmiStub.draaiKaart(spelerNaam)){
+			view.DraaiKaart();
+		}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void plaatsHorige(Horige.Posities posities) {
+		try {
+			RmiStub.plaatsHorige(posities);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 	public void setRmiStub(RMIInterface rmiController) {
 		RmiStub = rmiController;
 		view.RmiStub = rmiController;
 	}
-
-
-	/**
-	 * De client wordt elke x ms geupdate, als de beurt op de server hoger is dan de beurt op de client betekent dat en
-	 * speler klaar is met zijn beurt, en het spelbord geupdate moet worden.
-	 */
+		/**
+		 * De client wordt elke x ms geupdate, als de beurt op de server hoger is dan de beurt op de client betekent dat en
+		 * speler klaar is met zijn beurt, en het spelbord geupdate moet worden.
+		 */
 	public void Update() {
 		try {
 			if (beurt != RmiStub.getBeurt()) {

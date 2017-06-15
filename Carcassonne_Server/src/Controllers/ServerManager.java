@@ -1,6 +1,16 @@
 package Controllers;
 
-import java.awt.*;
+import Models.FileManager;
+import Models.RMIInterface;
+import Models.Speler;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.*;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -10,29 +20,20 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import Models.RMIInterface;
-import Models.Speler;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-
-import static javafx.scene.paint.Color.*;
-
 /**
  * Deze class zorgt voor het opstarten en draaien van de server en het consolescherm dat hier bij hoort
  */
 public class ServerManager extends Application {
 	ServerManager manager;
 
+	FileManager fileManager;
+
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	public static boolean gameStarted = false;
-	BordController bordController;
+	public BordController bordController;
 
 	/**
 	 * Start de gameserver en initialiseert de RMIcontroller,
@@ -88,6 +89,7 @@ public class ServerManager extends Application {
 		Scene mainScene = new Scene(mainPane, 600, 300);
 
 		primaryStage.setScene(mainScene);
+		primaryStage.getIcons().add(new javafx.scene.image.Image("Afbeeldingen/serverIcon.png"));
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(event -> {
 			System.exit(0);

@@ -111,13 +111,14 @@ public class JsonKaarten {
 				System.out.println("Kaart ENUM: " + horigenPos[i]);
 			}
 
-
-
-
 			//Horige.Posities[] posities = Horige.Posities.valueOf((String)jsonNumber.get("horigePosities"));
 
 			for (int i = 0; i <  aantalKaarten.intValue(); i++){
-				Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus, horigenPos);
+				Horige.Posities[] pos = new Horige.Posities[array.size()];
+				for (int j = 0; j < array.size() ; j++) {
+					pos[j] = horigenPos[j];
+				}
+				Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus, pos );
 				alleKaarten.add(data);
 
 				if (debug) {

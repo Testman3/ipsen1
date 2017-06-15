@@ -14,7 +14,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import static Views.MenuViewScene.mediaPlayer;
 
-
+/**
+ * Deze class zorgt voor een correcte weergave van de SettingsScene
+ */
 public class SettingsScene extends Scene implements SceneInitialiser {
 
 	//Settings vars
@@ -41,6 +43,11 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	public static boolean fullScreen = false;
 	public static boolean optieGeluid = false;
 
+	/**
+	 * Constructor van SettingsScene
+	 * @param controller
+	 * Geef MenuController mee
+	 */
 	public SettingsScene(MenuController controller) {
 		super(new BorderPane(), 1280, 720);
 		mainPane = (BorderPane) this.getRoot();
@@ -48,7 +55,6 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		this.controller = controller;
 
 		initGui();
-
 	}
 
 
@@ -91,7 +97,6 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		fullscreenBox.getChildren().addAll(fullscreen, fullscreenCheckBox);
 
 		buttonVBox.getChildren().addAll(titel, soundBox, spraakBox, fullscreenBox, backToHome);
-
 
 		mainPane.setCenter(buttonVBox);
 
