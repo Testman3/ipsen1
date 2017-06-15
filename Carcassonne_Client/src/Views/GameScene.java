@@ -191,13 +191,7 @@ public class GameScene extends Scene {
 		button.setId("standardLabel");
 		onder.getChildren().add(button);
 		button.setOnAction(e -> {
-			try {
-				RmiStub.draaiKaart();
-				ShowKaart.setRotate(ShowKaart.getRotate() + 90);
-
-			} catch (RemoteException e1) {
-				e1.printStackTrace();
-			}
+				gameController.klikDraaiKaart();
 		});
 
 		menuButton = new Button("Menu");
@@ -236,6 +230,12 @@ public class GameScene extends Scene {
 	//		mainPane.setCenter(ingamePane);
 	}
 
+	public void DraaiKaart() {
+		if(ShowKaart.getId().equals("Kaartview")){
+			return;
+		}
+		ShowKaart.setRotate(ShowKaart.getRotate() + 90);
+	}
 	public void plaatsKaart(GameClient client, String id, int x, int y) {
 		ShowKaart.setId("Kaartview");
 		try {

@@ -83,16 +83,32 @@ public class GameClient {
 		}
 	}
 
+	public void draaiKaart() {
+		try {
+		if(RmiStub.draaiKaart(spelerNaam)){
+			view.DraaiKaart();
+		}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void plaatsHorige(Horige.Posities posities) {
+		try {
+			RmiStub.plaatsHorige(posities);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 	public void setRmiStub(RMIInterface rmiController) {
 		RmiStub = rmiController;
 		view.RmiStub = rmiController;
 	}
-
-
-	/**
-	 * De client wordt elke x ms geupdate, als de beurt op de server hoger is dan de beurt op de client betekent dat en
-	 * speler klaar is met zijn beurt, en het spelbord geupdate moet worden.
-	 */
+		/**
+		 * De client wordt elke x ms geupdate, als de beurt op de server hoger is dan de beurt op de client betekent dat en
+		 * speler klaar is met zijn beurt, en het spelbord geupdate moet worden.
+		 */
 	public void Update() {
 		try {
 			if (beurt != RmiStub.getBeurt()) {

@@ -33,6 +33,13 @@ public class Tile {
 		this.horigenZijdes = horigen;
 	}
 
+	public boolean plaatsHorige(Horige.Posities posititie, Speler speler){
+		if(posititie == Horige.Posities.NOORD){
+			//noordZijde.setHorigeSpeler();
+		}
+		return false;
+	}
+
 	public void plaats(int x, int y) {
 		this.x = x;
 		this.y = y;

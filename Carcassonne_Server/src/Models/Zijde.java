@@ -20,4 +20,8 @@ public class Zijde {
 		this.zijde = zijde;
 		this.isEinde = isEinde;
 	}
+
+	public void setHorigeSpeler(Horige horige){
+		this.horigeSpeler = horige;
+	}
 }
