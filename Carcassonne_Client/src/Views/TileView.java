@@ -2,11 +2,8 @@ package Views;
 
 import Models.Horige;
 import javafx.application.Platform;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import java.rmi.RemoteException;
 
 /**
  * Deze class verzorgt de correcte weergave van alle Tiles
@@ -16,13 +13,10 @@ public class TileView extends Pane {
 	//The size of a tile in pixels
 	final int SIZE_X = 90;
 	final int SIZE_Y = 90;
-
-	GameScene scene;
-
-	String kaartId;
-
-	ImageView view;
-	ImageView horigeView;
+	private GameScene scene;
+	private String kaartId;
+	private ImageView view;
+	private ImageView horigeView;
 
 	int x;
 	int y;

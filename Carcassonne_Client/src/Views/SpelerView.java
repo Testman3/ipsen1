@@ -3,12 +3,9 @@ package Views;
 import commonFunctions.SmartLabel;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
-import java.util.Stack;
 
 /**
  * Deze class regelt de juiste weergave van de spelernamen en punten in de ui bij het spelbord
