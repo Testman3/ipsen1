@@ -4,7 +4,6 @@ import Models.GameClient;
 import Models.Horige;
 import Models.RMIInterface;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.rmi.RemoteException;
 
