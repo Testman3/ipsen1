@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.GameClient;
+import Models.Horige;
 import Models.RMIInterface;
 
 /**
@@ -21,7 +22,10 @@ public class GameController {
 	public void klikPakKaart() {
 		model.pakKaart();
 	}
-
+	public void klikDraaiKaart() {model.draaiKaart();}
+	public void klikPlaatsHorige(Horige.Posities positie){
+		model.plaatsHorige(positie);
+	}
 	/**
 	 * Deze functie zorgt ervoor dat de kaart in het model (GameClient) geplaatst wordt
 	 * @param x

@@ -75,7 +75,16 @@ public class BordController {
 	/**
 	 * Deze functie roept de functie draaiKaart aan in de kaartenStapel
 	 */
-	public void draaiKaart(){
-		kaartenStapel.getTurnTile().draaiKaart();
+	public boolean draaiKaart(String speler){
+		if(kaartenStapel.getTurnTile() == bord.getLaatstGeplaatst()){
+			return false;
+		}
+		if(!bord.isSpelerBeurt(speler)){
+			return false;
+		} else {
+			kaartenStapel.getTurnTile().draaiKaart();
+			kaartenStapel.compareTests();
+			return true;
+		}
 	}
 }

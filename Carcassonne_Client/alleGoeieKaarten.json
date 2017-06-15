@@ -254,7 +254,7 @@
         "heeftBonus":false,
         "image_id": "Kaart_17",
         "aantalKaarten" : 1,
-       "horigePosities": ["NOORD", "OOST", "ZUID", "WEST"]
+       "horigePosities": ["NOORD", "OOST", "WEST"]
     },
      {
         "noordZijde": "KASTEEL",
