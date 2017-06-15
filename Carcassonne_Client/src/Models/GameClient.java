@@ -12,6 +12,7 @@ public class GameClient {
 	AudioClip meepMerp = new AudioClip(Paths.get("Sounds/meepMerp.mp3").toUri().toString());
 
 	GameScene view;
+	public GameScene getGameScene(){return view;}
 
 	Thread gameThread;
 
@@ -23,7 +24,7 @@ public class GameClient {
 	String spelerBeurt = "";
 	int beurt = 0;
 
-	RMIInterface RmiStub;
+	public RMIInterface RmiStub;
 
 	public GameClient(GameScene view) {
 		this.view = view;
@@ -84,7 +85,7 @@ public class GameClient {
 				kaartPlaatsId = "";
 			}
 			else {
-			meepMerp.play();
+				meepMerp.play();
 			}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();

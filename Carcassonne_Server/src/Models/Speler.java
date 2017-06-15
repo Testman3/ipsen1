@@ -1,5 +1,7 @@
 package Models;
 
+import org.json.simple.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -90,8 +92,23 @@ public class Speler implements Serializable {
 		return this.punten;
 	}
 
+	// Return alle variables van speler
+	public JSONObject getSpelerData(){
 
+			JSONObject speler = new JSONObject();
 
+			//toevoegen spelernaam  aan Speler json object
+			speler.put("Spelernaam", this.getNaam());
 
+			//toevoegen Punten  aan Speler json object
+			speler.put("Punten", this.getPunten());
+
+			//toevoegen Beurt aan Speler json object
+			speler.put("Beurt", this.getBeurt());
+
+			return speler;
+	}
 
 }
+
+

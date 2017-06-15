@@ -7,15 +7,17 @@ import java.util.ArrayList;
  */
 public class Bord {
 
-	ArrayList<Speler> alleSpelers;
+	private ArrayList<Speler> alleSpelers;
 
-	Speler spelerBeurt;
+	private Speler spelerBeurt;
 
-	Tile[][] alleTiles;
+	private Tile[][] alleTiles;
 
-	Tile laatstGeplaatst;
+	private Tile laatstGeplaatst;
 
-	int gameBeurt = 1;
+	private boolean debug = true;
+
+	private int gameBeurt = 1;
 
 	/**
 	 * Deze functie geeft aan hoeveel rondes er al zijn geweest
@@ -32,7 +34,6 @@ public class Bord {
 	public Tile getLaatstGeplaatst() {
 		return laatstGeplaatst;
 	}
-
 
 	/**
 	 * Deze constructor zorgt ervoor dat het bord met alle plaatsen voor tiles wordt aangemaakt
@@ -204,14 +205,22 @@ public class Bord {
 			}
 		}
 		return true;
-
-		}
+	}
 
 	/**
 	 * Deze functie geeft een arraylist met alle spelers terug
 	 * @return ArrayList met alle spelers
 	 */
 	public ArrayList<Speler> getAlleSpelers() {
-			return alleSpelers;
-		}
+//		System.out.println("GEKKE SPELERS: " + alleSpelers.toString());
+		System.out.println("Get alle spelers nu = " + alleSpelers);
+
+			if(debug) {
+				for (int i = 0; i < alleSpelers.size(); i++) {
+					System.out.println("NIFFO- NAAM: " + alleSpelers.get(i).getNaam());
+				}
+			}
+		return alleSpelers;
+	}
+
 }

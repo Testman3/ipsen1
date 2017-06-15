@@ -136,6 +136,11 @@ public class RMIController implements RMIInterface {
 	}
 
 	@Override
+	public void saveFile(String path) {
+		FileManager manager = new FileManager();
+		manager.saveGame(path);
+	}
+
 	public boolean plaatsHorige(Horige.Posities posities) throws RemoteException {
 		return serverManager.bordController.plaatsHorige(posities);
 	}

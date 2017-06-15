@@ -16,6 +16,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import Controllers.MenuController;
 
+/**
+ * Deze class zorgt voor een goede weergave van de PreLobbyScene
+ */
 public class PreLobbyScene extends Scene implements SceneInitialiser{
 
 	//Setting variables
@@ -37,6 +40,13 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 
 	private Label playersLabel;
 
+	/**
+	 * Constructor van PreLobbyScene
+	 * @param controller
+	 * Geef MenuController mee
+	 * @param lobbyController
+	 * Geef LobbyController mee
+	 */
 	public PreLobbyScene(MenuController controller, LobbyController lobbyController) {
 
 		super(new BorderPane(), 1280, 720);
