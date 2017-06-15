@@ -135,21 +135,21 @@ public class GameScene extends Scene {
 			tilesPane.setTranslateX(e.getX() + tilesPane.getTranslateX() - xOffset);
 			tilesPane.setTranslateY(e.getY() + tilesPane.getTranslateY() - yOffset);
 
-			if(tilesPane.getTranslateY() > controller.getGameStage().getMaxHeight()){
-				tilesPane.setTranslateY(controller.getGameStage().getMaxHeight());
-			}
-
-			if(tilesPane.getTranslateY() < controller.getGameStage().getMinHeight()){
-				tilesPane.setTranslateY(controller.getGameStage().getMinHeight());
-			}
-
-			if(tilesPane.getTranslateX() > controller.getGameStage().getMaxWidth()){
-				tilesPane.setTranslateX(controller.getGameStage().getMaxWidth());
-			}
-
-			if(tilesPane.getTranslateX() < controller.getGameStage().getMinWidth()){
-				tilesPane.setTranslateX(controller.getGameStage().getMinWidth());
-			}
+//			if(tilesPane.getTranslateY() > controller.getGameStage().getMaxHeight()){
+//				tilesPane.setTranslateY(controller.getGameStage().getMaxHeight());
+//			}
+//
+//			if(tilesPane.getTranslateY() < controller.getGameStage().getMinHeight()){
+//				tilesPane.setTranslateY(controller.getGameStage().getMinHeight());
+//			}
+//
+//			if(tilesPane.getTranslateX() > controller.getGameStage().getMaxWidth()){
+//				tilesPane.setTranslateX(controller.getGameStage().getMaxWidth());
+//			}
+//
+//			if(tilesPane.getTranslateX() < controller.getGameStage().getMinWidth()){
+//				tilesPane.setTranslateX(controller.getGameStage().getMinWidth());
+//			}
 
 			e.consume();
 		});
