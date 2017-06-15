@@ -56,6 +56,7 @@ public class MenuController {
 		//setGameScene();
 		gameStage.setTitle("Carcassonne");
 		gameStage.getIcons().add(new Image("Afbeeldingen/gameIcon.png"));
+		this.inGameMenuStage.hide();
 		gameStage.show();
 		gameStage.setOnCloseRequest(e -> {
 			System.exit(0);
@@ -69,16 +70,16 @@ public class MenuController {
 		getGameStage().setScene(getMenuViewScene());
 	}
 
-	//public Stage getInGameMenuStage(){
-	//	return this.inGameMenuStage;
-	//}
-
 	public void showInGameMenu(){
-		//Stage stage = inGameMenuStage.getMenuStage();
-		//stage.initOwner(getGameStage());
-		//stage.initModality(Modality.APPLICATION_MODAL);
+		inGameMenuStage.getMenuStage().show();
+		gameScene.setSceneBlur();
+		//inGameMenuStage.getMenuStage().toFront();
+		//inGameMenuStage.initGui();
+	}
 
-		inGameMenuStage.initGui();
+	public void hideInGameMenu(){
+		inGameMenuStage.getMenuStage().hide();
+		gameScene.hideSceneBlur();
 	}
 
 	/**

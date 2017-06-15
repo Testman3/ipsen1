@@ -300,6 +300,17 @@ public class GameScene extends Scene {
 		
 
 	}
+
+	public void setSceneBlur(){
+		this.mainPane.setEffect(new GaussianBlur());
+		tilesPane.setEffect(new GaussianBlur());
+	}
+
+	public void hideSceneBlur(){
+		this.mainPane.setEffect(null);
+		tilesPane.setEffect(null);
+	}
+
 	int kaartenOver = 0;
 	ArrayList<Speler> alleSpelers = null;
 	public void updateView(GameClient client) {

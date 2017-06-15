@@ -79,6 +79,14 @@
 	-fx-background-size: cover;
 }
 
+#inGameMenu{
+	/*
+	-fx-background-image: url("Afbeeldingen/Texture_Menu.png");
+	-fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: contain, stretch;*/
+}
+
 #exitBackground{
     -fx-background-image: url("Afbeeldingen/Texture_score_background.jpg");
     -fx-background-size: cover;
