@@ -80,7 +80,7 @@ public class GameClient {
 	public void plaatsKaart(int x, int y) {
 		try {
 			if (kaartPlaatsId != "" && RmiStub.plaatsKaart(x, y)) {
-				view.plaatsKaart(this, kaartPlaatsId, x, y);
+				view.plaatsKaart(this, x, y);
 				kaartPlaatsId = "";
 			}
 			else {
