@@ -22,7 +22,7 @@ public class SpelerView extends StackPane {
 	/**
 	 * Constructor van SpelerView
 	 */
-	public SpelerView(){
+	SpelerView(){
 
 	VBox texts = new VBox();
 	texts.setAlignment(Pos.CENTER);
@@ -45,7 +45,7 @@ public class SpelerView extends StackPane {
 	 * @param naam
 	 * Geef spelernaam mee in de vorm van een String
 	 */
-	public void setNaam(String naam ){
+	void setNaam(String naam){
 	text_Naam.setText(naam);
 	}
 
@@ -54,7 +54,7 @@ public class SpelerView extends StackPane {
 	 * @param punten
 	 * Geef een int mee met aantal punten
 	 */
-	public void setPunten(int punten){
+	void setPunten(int punten){
 		text_Punten.setText(" " + punten);
 	}
 

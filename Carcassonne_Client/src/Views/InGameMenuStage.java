@@ -28,7 +28,14 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private ImageView backgroud;
     private GameScene gameScene;
 
-    public InGameMenuStage(MenuController controller, GameScene scene){
+	/**
+	 * Constructor van de ingamemenustage
+	 * @param controller
+	 * Geef MenuController mee
+	 * @param scene
+	 * Geef GameScene mee
+	 */
+	public InGameMenuStage(MenuController controller, GameScene scene){
     	this.gameScene = scene;
         this.menuController = controller;
         initGui();
@@ -122,7 +129,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
 	/**
 	 * Haalt de menuStage op.
-	 * @return
+	 * @return Geeft de stage terug
 	 */
 	public Stage getMenuStage(){
         return  this.stage;

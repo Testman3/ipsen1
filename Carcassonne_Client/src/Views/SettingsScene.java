@@ -38,10 +38,10 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	private SmartButton backToHome;
 	private MenuController controller;
 
-	//spraak
+	//De drie beschikbare menu opties
 	public static boolean optieSpreken = false;
-	public static boolean fullScreen = false;
-	public static boolean optieGeluid = false;
+	static boolean fullScreen = false;
+	static boolean optieGeluid = false;
 
 	/**
 	 * Constructor van SettingsScene
@@ -56,7 +56,6 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 		initGui();
 	}
-
 
 	public void initGui() {
 
