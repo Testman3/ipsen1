@@ -1,22 +1,25 @@
 package Controllers;
 
+import java.nio.file.Paths;
 import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-import Views.LobbyScene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import Models.RMIInterface;
+import javafx.scene.media.AudioClip;
 
+/**
+ * Deze class is verantwoordelijk voor de interacties tussen de lobby / prelobby en de RMI server
+ */
 public class LobbyController {
+		AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
 
 
 	private boolean ableToConnect = false;
@@ -39,6 +42,7 @@ public class LobbyController {
 
 		if (!validateIP(ip)) {
 			alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
+			errorSound.play();
 			alert.showAndWait();
 		} else {
 			System.out.println("Getting access to the registry");
@@ -51,18 +55,21 @@ public class LobbyController {
 				ableToConnect = true;
 			} catch (ConnectException e) {
 				alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
+				errorSound.play();
 				alert.showAndWait();
 				ableToConnect = false;
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			} catch (NotBoundException e) {
 				alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
+				errorSound.play();
 				alert.showAndWait();
 				ableToConnect = false;
 			}
 
 			if (controleerNaam(naam)) {
 				alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
+				errorSound.play();
 				alert.showAndWait();
 				naam = "";
 				RMIstub = null;

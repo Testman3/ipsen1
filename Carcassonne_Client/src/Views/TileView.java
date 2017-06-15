@@ -1,5 +1,6 @@
 package Views;
 
+import Models.Horige;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -59,32 +60,35 @@ public class TileView extends Pane {
 		setLayoutY(y * SIZE_Y);
 	}
 
+	public void setRotation(int rotation ){
+		view.setRotate(rotation);
+	}
 	public void setKaartId(String Id) {
 		kaartId = Id;
 		view.setId(kaartId);
 		System.out.println("Coord of tile " + getLayoutX() + " " + getLayoutY() );
 	}
 
-	public void laatHorigePreviewZien() {
+	public void laatHorigePreviewZien(Horige.Posities[] horigenZijdes) {
 
 		Platform.runLater(() -> {
-			double[][] posities = {{40, 0}, {0, 40}, {40, 70}, {70, 40}};
-			ImageView[] horigeViews = new ImageView[4];
-			for (int i = 0; i < 4; i++) {
+			System.out.println("Horige views length " + horigenZijdes.length);
+			ImageView[] horigeViews = new ImageView[horigenZijdes.length];
+			for (int i = 0; i < horigenZijdes.length; i++) {
 				ImageView horigeView = new ImageView();
 				horigeView.setFitHeight(20);
 				horigeView.setFitWidth(20);
 				horigeView.setId("horigePreview");
 
 				getChildren().add(horigeView);
-				horigeView.setLayoutX(posities[i][0]);
-				horigeView.setLayoutY(posities[i][1]);
+				horigeView.setLayoutX(horigenZijdes[i].getX());
+				horigeView.setLayoutY(horigenZijdes[i].getY());
 
 				horigeViews[i] = horigeView;
-
-				horigeView.setOnMouseClicked(e -> {
+				final Horige.Posities pos = horigenZijdes[i];
+				horigeView.setOnMouseClicked(e ->{
 					for (int j = 0; j < horigeViews.length; j++) {
-						getChildren().remove(horigeViews[j]);
+						scene.gameController.klikPlaatsHorige(pos);
 					}
 				});
 			}

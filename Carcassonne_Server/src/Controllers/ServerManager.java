@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -88,6 +89,7 @@ public class ServerManager extends Application {
 		Scene mainScene = new Scene(mainPane, 600, 300);
 
 		primaryStage.setScene(mainScene);
+		primaryStage.getIcons().add(new javafx.scene.image.Image("Afbeeldingen/serverIcon.png"));
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(event -> {
 			System.exit(0);

@@ -1,19 +1,16 @@
 package Views;
 
-import java.nio.file.Paths;
-import java.rmi.RemoteException;
-
 import Controllers.MenuController;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import commonFunctions.*;
 
+/**
+ * Deze class zorgt ervoor dat de CreditsScene goed wordt weergegeven.
+ */
 public class CreditsScene extends Scene implements SceneInitialiser {
 
 	//Setting vars
@@ -31,6 +28,11 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 
 	private Label credits;
 
+	/**
+	 * Constructor van de creditsscene
+	 * @param controller
+	 * Geef MenuController mee
+	 */
 	public CreditsScene(MenuController controller) {
 
 		super(new BorderPane(), 1280, 720);
@@ -39,6 +41,7 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 
 			initGui();
 	}
+
 
 	@Override
 	public void initGui() {

@@ -12,6 +12,9 @@ import javafx.css.StyleableProperty;
 import javafx.scene.AccessibleRole;
 import javafx.scene.control.Label;
 
+/**
+ * Deze class extend de standaard Label class uit javafx om spraakondersteuning en geluidseffecten toe te voegen
+ */
 public class SmartLabel extends Label {
 
 	// Stem type van speech (Kevin)
@@ -59,9 +62,11 @@ public class SmartLabel extends Label {
 		initialize();
 	}
 
-	// Lees label text voor (speech)
-	// @param String text - label tekst
-	// @throws Exception
+	/**
+	 * Lees label text voor (speech)
+	 * @param text
+	 * Geef de tekst mee in de vorm van een String die uitgesproken zal gaan worden
+	 */
 	public void talk(String text){
 		if(SettingsScene.optieSpreken) {
 			try {

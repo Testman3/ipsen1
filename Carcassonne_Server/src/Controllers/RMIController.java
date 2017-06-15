@@ -1,15 +1,14 @@
 package Controllers;
 
-import Models.FileManager;
-import Models.RMIInterface;
-import Models.Speler;
-import Models.TileStump;
+import Models.*;
 
 import java.io.File;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-
+/**
+ * Deze class zorgt voor alle kernspelfunctionaliteiten en functies op de server
+ */
 public class RMIController implements RMIInterface {
 
 	public static ArrayList<Speler> alleSpelers = new ArrayList<Speler>();
@@ -49,6 +48,15 @@ public class RMIController implements RMIInterface {
 		}
 
 		return Spelernamen;
+	}
+
+	public ArrayList<Integer> getPlayerScore(){
+		ArrayList<Integer> spelerScore = new ArrayList<>();
+		for(Speler speler : alleSpelers){
+			spelerScore.add(speler.getPunten());
+		}
+
+		return spelerScore;
 	}
 
 	@Override
@@ -98,8 +106,8 @@ public class RMIController implements RMIInterface {
 		return serverManager.bordController.plaatsKaart(x,y);
 	}
 
-	public void draaiKaart() {
-		serverManager.bordController.draaiKaart();
+	public boolean draaiKaart(String naam) {
+		return serverManager.bordController.draaiKaart(naam);
 	}
 
 	@Override
@@ -131,5 +139,15 @@ public class RMIController implements RMIInterface {
 	public void saveFile(String path) {
 		FileManager manager = new FileManager();
 		manager.saveGame(path);
+	}
+
+	public boolean plaatsHorige(Horige.Posities posities) throws RemoteException {
+	//	return serverManager.bordController.kaartenStapel.getTurnTile().plaatsHorige(posities);
+		return false;
+	}
+
+	@Override
+	public Horige.Posities[] getHorigePosities() throws RemoteException {
+		return serverManager.bordController.kaartenStapel.getTurnTile().getHorigenZijdes();
 	}
 }

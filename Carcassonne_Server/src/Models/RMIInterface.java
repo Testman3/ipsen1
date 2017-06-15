@@ -48,6 +48,8 @@ public interface RMIInterface extends Remote {
 	 */
 	public ArrayList<String> getPlayerList() throws RemoteException;
 
+	public ArrayList<Integer> getPlayerScore() throws RemoteException;
+
 	/**
 	 *
 	 * @return ArrayList<Speler>
@@ -109,7 +111,7 @@ public interface RMIInterface extends Remote {
 	 * @throws RemoteException
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
-	public void draaiKaart() throws RemoteException;
+	public boolean draaiKaart(String naam) throws RemoteException;
 
 	/**
 	 * Returnt welke speler er nu aan de beurt is
@@ -149,6 +151,11 @@ public interface RMIInterface extends Remote {
 	 */
 	public void saveFile(String path) throws RemoteException;
 
+
+
+	public boolean plaatsHorige(Horige.Posities posities) throws RemoteException;
+
+	public 	Horige.Posities[] getHorigePosities() throws RemoteException;
 
 
 }

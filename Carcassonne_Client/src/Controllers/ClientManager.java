@@ -6,6 +6,9 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+/**
+ * Deze class zorgt ervoor dat de client applicatie opgestart wordt
+ */
 public class ClientManager extends Application {
 
 	static MenuController menucontroller;
@@ -13,15 +16,26 @@ public class ClientManager extends Application {
 	//Change debug to true, too see debug prints
 	public static boolean debug = false;
 
+	/**
+	 * Dit is de mainfunctie die de client opstart
+	 * @param args
+	 * verplicht argument voor de main functie
+	 */
 	public static void main(String[] args) {
-		//Dit is de main, de launch is niet wit!
 		launch(args);
 	}
 
+	/**
+	 * Deze functie start het daadwerkele venster van de applicatie
+	 * @param primaryStage
+	 * Start met een stage (venster) met de naam primaryStage
+	 * @throws Exception
+	 * Generieke javafx Exception
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-/*s
+	/*
 		if (!(System.getProperty("user.name").equals("overb"))){
 			//Zet de applicatie op volledige venster grootte.
 			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -43,7 +57,7 @@ public class ClientManager extends Application {
 	 * @param stage
 	 * Geef de mainStage mee als parameter
 	 */
-	public static void runClient(Stage stage) {
+	private static void runClient(Stage stage) {
 		menucontroller = new MenuController(stage);
 	}
 }

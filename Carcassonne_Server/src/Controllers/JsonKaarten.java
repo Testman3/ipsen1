@@ -13,6 +13,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Deze class is verantwoordelijk voor Json interacties
+ */
 public class JsonKaarten {
 
 	public JsonKaarten() {
@@ -21,9 +24,7 @@ public class JsonKaarten {
 
 	/**
 	 * Get json file met kaarten data en parse alle data naar een TegelData array
-	 * @return ArrayList<TegelData> - alle kaarten van carcassonne
-	 * @throws FileNotFoundException
-	 * Deze exception wordt gegeven wanneer het systeem het opgegeven Json bestand (alleGoeieKaarten.json) niet kan vinden
+	 * @return ArrayList (TegelData - alle kaarten van carcassonne)
 	 */
 	public static ArrayList<Tile> getAllKaarten() {
 
@@ -95,26 +96,29 @@ public class JsonKaarten {
 
 			Number aantalKaarten = (Number) jsonNumber.get("aantalKaarten");
 
-
 			//get JsonArray horigePosities
 			JSONArray array = (JSONArray) jsonNumber.get("horigePosities");
 
 			//new array
-			String[] positie = new String[5];
-			Horige.Posities[] horigenPos = new Horige.Posities[5];
+			String[] positie = new String[array.size()];
+			Horige.Posities[] horigenPos = new Horige.Posities[array.size()];
 
 			//all data to array
 			for (int i = 0; i < array.size() ; i++) {
 				positie[i] = (String)array.get(i);
+
 				horigenPos[i] = Horige.Posities.valueOf((String)array.get(i));
 				System.out.println("Kaart ENUM: " + horigenPos[i]);
 			}
 
-//			System.out.println("POSITIE " + positie[0]);
 			//Horige.Posities[] posities = Horige.Posities.valueOf((String)jsonNumber.get("horigePosities"));
 
 			for (int i = 0; i <  aantalKaarten.intValue(); i++){
-				Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus, horigenPos);
+				Horige.Posities[] pos = new Horige.Posities[array.size()];
+				for (int j = 0; j < array.size() ; j++) {
+					pos[j] = horigenPos[j];
+				}
+				Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus, pos );
 				alleKaarten.add(data);
 
 				if (debug) {

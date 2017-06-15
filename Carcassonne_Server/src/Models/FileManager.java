@@ -1,6 +1,5 @@
 package Models;
 
-import Controllers.GameController;
 import Controllers.ServerManager;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -8,26 +7,25 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManager {
 
-	// HOORT NIET STATIC - IS ALLEEN OM TE TESTEN
 	private ServerManager manager;
 
 	public FileManager(ServerManager manager){
 		this.manager = manager;
 	}
 
-	public FileManager() {
-
-	}
-
+	public FileManager() {}
 
 	//Maak JSON object aan van save game
 	public void saveGame(String naam) {
-		GameController gameController; // niet goeieee
+//		GameController gameController; - niet goeieee
 		JSONObject object = new JSONObject();
 
 		JSONArray spelerInJSON = new JSONArray();
