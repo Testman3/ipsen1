@@ -2,10 +2,14 @@ package Models;
 
 import Views.GameScene;
 import javafx.application.Platform;
+import javafx.scene.media.AudioClip;
 
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 
 public class GameClient {
+
+	AudioClip meepMerp = new AudioClip(Paths.get("Sounds/meepMerp.mp3").toUri().toString());
 
 	GameScene view;
 
@@ -57,6 +61,7 @@ public class GameClient {
 		try {
 			String id = RmiStub.pakKaart(spelerNaam);
 			if (id == null) {
+				meepMerp.play();
 				return;
 			}
 			kaartPlaatsId = id;
@@ -77,6 +82,9 @@ public class GameClient {
 			if (kaartPlaatsId != "" && RmiStub.plaatsKaart(x, y)) {
 				view.plaatsKaart(this, kaartPlaatsId, x, y);
 				kaartPlaatsId = "";
+			}
+			else {
+			meepMerp.play();
 			}
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
