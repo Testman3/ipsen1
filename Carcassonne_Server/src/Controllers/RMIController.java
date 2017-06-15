@@ -120,8 +120,8 @@ public class RMIController implements RMIInterface {
 				serverManager.bordController.bord.getLaatstGeplaatst().getX(),
 				serverManager.bordController.bord.getLaatstGeplaatst().getY(),
 				serverManager.bordController.bord.getLaatstGeplaatst().getKaartId(),
-				serverManager.bordController.bord.getLaatstGeplaatst().getRotation()
-
+				serverManager.bordController.bord.getLaatstGeplaatst().getRotation(),
+				serverManager.bordController.bord.getLaatstGeplaatst().getGeplaatsteHorigePositie()
 		);
 	}
 
@@ -142,8 +142,7 @@ public class RMIController implements RMIInterface {
 	}
 
 	public boolean plaatsHorige(Horige.Posities posities) throws RemoteException {
-	//	return serverManager.bordController.kaartenStapel.getTurnTile().plaatsHorige(posities);
-		return false;
+		return serverManager.bordController.plaatsHorige(posities);
 	}
 
 	@Override

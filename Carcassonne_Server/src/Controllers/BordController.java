@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.Horige;
 import Models.Speler;
 import Models.Stapel;
 import Models.Bord;
@@ -72,6 +73,12 @@ public class BordController {
 	}
 	}
 
+	public boolean plaatsHorige(Horige.Posities positie){
+		kaartenStapel.getTurnTile().plaatsHorige(positie, bord.getSpelerBeurt());
+		System.out.println("Horige wordt geplaatst - bordcontroller");
+		bord.geefSpelerBeurt();
+		return true;
+	}
 	/**
 	 * Deze functie roept de functie draaiKaart aan in de kaartenStapel
 	 */
@@ -83,7 +90,6 @@ public class BordController {
 			return false;
 		} else {
 			kaartenStapel.getTurnTile().draaiKaart();
-			kaartenStapel.compareTests();
 			return true;
 		}
 	}
