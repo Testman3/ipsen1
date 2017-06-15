@@ -77,6 +77,21 @@ public class LobbyController {
 			} else {
 				System.out.println("Joining the game as " + naam);
 			}
+
+			if(getRmiStub().isGameStarted()){
+				ableToConnect = false;
+				alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
+				errorSound.play();
+				alert.showAndWait();
+			}
+
+			if(getRmiStub().getPlayerList().size() == 5){
+				ableToConnect = false;
+				alert = new Alert(AlertType.ERROR, "De lobby zit vol!", ButtonType.OK);
+				errorSound.play();
+				alert.showAndWait();
+			}
+
 		}
 	}
 
