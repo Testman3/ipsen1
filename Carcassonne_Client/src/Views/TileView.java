@@ -22,6 +22,7 @@ public class TileView extends Pane {
 	String kaartId;
 
 	ImageView view;
+	ImageView horigeView;
 
 	int x;
 	int y;
@@ -120,6 +121,9 @@ public class TileView extends Pane {
 				final Horige.Posities pos = horigenZijdes[i];
 				horigeView.setOnMouseClicked(e ->{
 					for (int j = 0; j < horigeViews.length; j++) {
+						for (ImageView horige: horigeViews) {
+							getChildren().remove(horige);
+						}
 						scene.gameController.klikPlaatsHorige(pos);
 					}
 				});

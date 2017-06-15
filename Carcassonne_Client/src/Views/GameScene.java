@@ -325,6 +325,9 @@ public class GameScene extends Scene {
 	public void plaatsKaart(GameClient client, int x, int y) {
 		ShowKaart.setId("Kaartview");
 		try {
+			TileStump stump = client.getTile();
+			tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
+			tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 			tileViews[x][y].laatHorigePreviewZien(RmiStub.getHorigePosities());
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -363,6 +366,12 @@ public class GameScene extends Scene {
 		}
 		tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
 		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
+
+		if(stump.getGeplaatsteHorige() != null) {
+			tileViews[stump.getX()][stump.getY()].plaatsHorige(stump.getGeplaatsteHorige());
+			System.out.println("Horige is niet null!");
+		}
+
 		addTilePreviews(stump.getX(), stump.getY());
 		System.out.println(stump.getX() + " " + stump.getY() + " " + stump.getRotation());
 		Platform.runLater(() -> {

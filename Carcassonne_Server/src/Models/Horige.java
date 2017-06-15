@@ -1,6 +1,26 @@
 package Models;
 
-public class Horige {
+import java.io.Serializable;
+
+public class Horige implements Serializable {
+
+	Speler speler;
+	Posities positie;
+
+	public Horige(Speler speler){
+		this.speler = speler;
+	}
+
+	public void setPositie(Posities positie){
+		this.positie = positie;
+	}
+
+	public Posities getPositie() {
+		return positie;
+	}
+	public Speler getSpeler(){
+		return speler;
+	}
 
 	public enum Posities {
 

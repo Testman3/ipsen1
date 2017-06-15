@@ -44,6 +44,18 @@ public class Bord {
 		alleSpelers = spelerList;
 		alleTiles = new Tile[100][100];
 		spelerBeurt = alleSpelers.get(0);
+		setSpelerKleuren();
+	}
+
+	/**
+	 * Geeft elke speler zijn eigen horige kleur.
+	 */
+	private String[] spelerKleuren = {"horigeRood", "horigeBlauw", "horigeGeel", "horigeGroen", "horigePaars"};
+	public void setSpelerKleuren() {
+		for (int i = 0; i < alleSpelers.size(); i++) {
+			alleSpelers.get(i).setHorigeKleur(spelerKleuren[i]);
+		}
+
 	}
 
 	/**
@@ -123,7 +135,6 @@ public class Bord {
 		alleTiles[x][y] = tile;
 		System.out.println("Kaart geplaatst");
 		laatstGeplaatst = tile;
-		geefSpelerBeurt();
 		return true;
 	}
 
