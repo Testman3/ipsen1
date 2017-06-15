@@ -1,9 +1,12 @@
 package Views;
 
+import Controllers.LobbyController;
 import Controllers.MenuController;
+import Models.GameClient;
 import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -16,6 +19,7 @@ import javafx.stage.StageStyle;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 public class InGameMenuStage extends Stage implements SceneInitialiser{
 	private StackPane menuPane;
@@ -27,6 +31,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private Scene menuScene;
     private ImageView backgroud;
     private GameScene gameScene;
+    private LobbyController lobbyController;
 
 	/**
 	 * Constructor van de ingamemenustage
@@ -35,9 +40,10 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 	 * @param scene
 	 * Geef GameScene mee
 	 */
-	public InGameMenuStage(MenuController controller, GameScene scene){
+	public InGameMenuStage(MenuController controller, GameScene scene, LobbyController lobbyController){
     	this.gameScene = scene;
         this.menuController = controller;
+        this.lobbyController = lobbyController;
         initGui();
     }
 
@@ -117,6 +123,17 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
         //Terug naar hoofdMenu
 		knoppen[3].setOnAction(event -> {
+			Platform.runLater(() -> {
+				try {
+					lobbyController.getRmiStub().removePlayer(menuController.getSpelernaam());
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				menuController.backToMainMenu();
+				menuController.hideInGameMenu();
+
+			});
+
 
 		});
 

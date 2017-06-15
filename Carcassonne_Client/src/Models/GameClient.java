@@ -204,6 +204,10 @@ public class GameClient {
 	 */
 	public GameScene getGameScene(){return view;}
 
-}
 
+
+	public String getSpelerNaam(){
+	return spelerNaam;
+	}
+}
 
