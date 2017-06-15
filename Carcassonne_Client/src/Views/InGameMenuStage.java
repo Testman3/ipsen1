@@ -26,8 +26,10 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private SmartLabel titel;
     private Scene menuScene;
     private ImageView backgroud;
+    private GameScene gameScene;
 
-    public InGameMenuStage(MenuController controller){
+    public InGameMenuStage(MenuController controller, GameScene scene){
+    	this.gameScene = scene;
         this.menuController = controller;
         initGui();
     }
@@ -89,6 +91,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
     	//Spel opslaan
 		knoppen[0].setOnAction(event -> {
+			gameScene.gameController.saveFileBrowser();
 		});
 
 		//Instellingen

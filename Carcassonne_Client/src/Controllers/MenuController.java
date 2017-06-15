@@ -40,7 +40,6 @@ public class MenuController {
 		LobbyController lobbyController = new LobbyController();
 
 		this.gameStage = gameStage;
-		inGameMenuStage = new InGameMenuStage(this);
 		endGameScene = new EndGameScene(this);
 		gameScene = new GameScene(this);
 		lobbyScene = new LobbyScene(this, lobbyController);
@@ -48,6 +47,7 @@ public class MenuController {
 		preLobbyScene = new PreLobbyScene(this, lobbyController);
 		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
+		inGameMenuStage = new InGameMenuStage(this, gameScene);
 
 		setMenuViewScene();
 		//setGameScene();
