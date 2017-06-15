@@ -126,4 +126,10 @@ public class RMIController implements RMIInterface {
 	public int getKaartenLeft() throws RemoteException {
 		return serverManager.bordController.kaartenStapel.getKaartenOver();
 	}
+
+	@Override
+	public void saveFile(String path) {
+		FileManager manager = new FileManager();
+		manager.saveGame(path);
+	}
 }

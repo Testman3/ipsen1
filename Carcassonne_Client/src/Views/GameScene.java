@@ -9,7 +9,6 @@ import Models.TileStump;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -19,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -30,6 +28,7 @@ public class GameScene extends Scene {
 	int sceneWidth = (int) getWidth();
 
 	MenuController controller;
+	public MenuController getController() {return controller;}
 	GameController gameController;
 
 	BorderPane mainPane;
@@ -99,6 +98,8 @@ public class GameScene extends Scene {
 				verticaal.setLayoutY(verticaal.getLayoutY() - speed);
 			} else if (e.getCode() == KeyCode.D) {
 				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
+			} else if (e.getCode() == KeyCode.P) { // Get data
+				gameController.saveFileBrowser();
 			}
 			System.out.println("COORDS + " + verticaal.getLayoutX() + " " + verticaal.getLayoutY());
 		});
@@ -245,7 +246,7 @@ public class GameScene extends Scene {
 	public void showKaart(GameClient client) {
 		ShowKaart.setId(client.kaartPlaatsId);
 
-		
+
 
 	}
 	int kaartenOver = 0;

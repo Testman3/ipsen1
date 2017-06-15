@@ -1,45 +1,56 @@
 package Models;
 
+import Controllers.GameController;
+import Controllers.ServerManager;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class FileManager {
 
-	public static void saveGame(String naam) {
-		JSONObject object;
-		createFile(naam, object);
+	// HOORT NIET STATIC - IS ALLEEN OM TE TESTEN
+	private ServerManager manager;
 
+	public FileManager(ServerManager manager){
+		this.manager = manager;
+	}
 
+	public FileManager() {
 
 	}
 
-	public void createFile(String naam, JSONObject object){
 
-		try {
-			//new file
-			File newTextFile = new File(naam);
+	//Maak JSON object aan van save game
+	public void saveGame(String naam) {
+		GameController gameController; // niet goeieee
+		JSONObject object = new JSONObject();
 
-			//create writer
-			FileWriter fw = new FileWriter(newTextFile);
+		JSONArray spelerInJSON = new JSONArray();
+//      System.out.println("Alle spelers: " + Arrays.toString(new ArrayList[]{manager.bordController.bord.getAlleSpelers()}));
 
-			//Write to json file
-			fw.write(object.toJSONString());
+		ArrayList<Speler> spelerLijst = manager.bordController.bord.getAlleSpelers();
 
-			//close writer
-			fw.close();
-		} catch (IOException iox) {
-			//do stuff with exception
-			iox.printStackTrace();
+		for (int i = 0; i < spelerLijst.size() ; i++) {
+			JSONObject speler = new JSONObject();
+			speler.put("spelerNaam", spelerLijst.get(i).getNaam());
+			speler.put("beurt", spelerLijst.get(i).getBeurt());
+			speler.put("punten", spelerLijst.get(i).getPunten());
+
+			spelerInJSON.add(speler);
 		}
+
+		object.put("Spelers", spelerInJSON);
+
+		//GameController.createFile(naam, object);
 	}
+
 
 	public static void loadGame(File load) {
-
 		Alert alert;
 		ArrayList<Speler> spelerLijst = new ArrayList<Speler>();
 		JSONParser parser = new JSONParser();
@@ -70,10 +81,9 @@ public class FileManager {
 
 			}
 			System(spelerLijst);
-
 		} catch (FileNotFoundException e) {
-			 alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
-			 alert.showAndWait();
+			alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
+			alert.showAndWait();
 		} catch (IOException e) {
 			alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
 			alert.showAndWait();
@@ -98,7 +108,7 @@ public class FileManager {
 		}
 	}
 
-	//Return JsonObject met alle spel data TEST!!! (maken file met alle spelers)
+	//Return JsonObject met alle spel data TEST!!! (maken file met alle spelers) - niet nodig maar handig voor later
 	public static JSONObject getAll() {
 
 		//Aanmaken van spelerlijst voor test

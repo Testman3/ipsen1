@@ -20,7 +20,7 @@ public class MenuController {
 
 	private String spelernaam;
 
-	public static File loadedFile;
+	public File loadedFile;
 
 	public MenuController(Stage gameStage) {
 
@@ -148,9 +148,5 @@ public class MenuController {
 		// return file
 		return fileChooser.showOpenDialog(gameStage);
 	}
-
-
-
-
 
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class BordController {
 
 	Stapel kaartenStapel;
-	Bord bord;
+	public Bord bord;
 
 	public BordController(ArrayList<Speler> spelerList) {
 		kaartenStapel = new Stapel();

@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 public class GameClient {
 
 	GameScene view;
+	public GameScene getGameScene(){return view;}
 
 	Thread gameThread;
 
@@ -18,7 +19,7 @@ public class GameClient {
 	String spelerBeurt = "";
  	int beurt = 0;
 
-	RMIInterface RmiStub;
+	public RMIInterface RmiStub;
 
 	public GameClient(GameScene view){
 		this.view = view;

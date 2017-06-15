@@ -4,22 +4,26 @@ import java.util.ArrayList;
 
 public class Bord {
 
-	ArrayList<Speler> alleSpelers;
+	private ArrayList<Speler> alleSpelers;
 
-	Speler spelerBeurt;
+	private Speler spelerBeurt;
 
-	Tile[][] alleTiles;
+	private Tile[][] alleTiles;
 
-	Tile laatstGeplaatst;
+	private Tile laatstGeplaatst;
 
-	int gameBeurt = 1;
+	private boolean debug = true;
+
+	private int gameBeurt = 1;
 
 	public int gameBeurt() {
 		return gameBeurt;
 	}
+
 	public Tile getLaatstGeplaatst() {
 		return laatstGeplaatst;
 	}
+
 	public Bord(ArrayList<Speler> spelerList) {
 		alleSpelers = spelerList;
 		alleTiles = new Tile[100][100];
@@ -147,12 +151,17 @@ public class Bord {
 			}
 		}
 		return true;
+	}
 
+	public ArrayList<Speler> getAlleSpelers() {
+//		System.out.println("GEKKE SPELERS: " + alleSpelers.toString());
+		System.out.println("Get alle spelers nu = " + alleSpelers);
 
-
-		}
-
-		public ArrayList<Speler> getAlleSpelers() {
+			if(debug) {
+				for (int i = 0; i < alleSpelers.size(); i++) {
+					System.out.println("NIFFO- NAAM: " + alleSpelers.get(i).getNaam());
+				}
+			}
 			return alleSpelers;
 		}
 }
