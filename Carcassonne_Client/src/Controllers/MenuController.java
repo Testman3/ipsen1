@@ -6,7 +6,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.nio.file.Paths;
 
 /**
  * Deze class zorgt voor de functies in het menu van het spel, en is verantwoordelijk voor het switchen van scenes
@@ -25,7 +24,7 @@ public class MenuController {
 
 	private String spelernaam;
 
-	public static File loadedFile;
+	public File loadedFile;
 
 	/**
 	 * Maak een menucontroller aan met de stage gameStage
@@ -36,7 +35,6 @@ public class MenuController {
 
 		LobbyController lobbyController = new LobbyController();
 
-
 		this.gameStage = gameStage;
 		endGameScene = new EndGameScene(this);
 		gameScene = new GameScene(this);
@@ -45,7 +43,6 @@ public class MenuController {
 		preLobbyScene = new PreLobbyScene(this, lobbyController);
 		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
-
 
 		setMenuViewScene();
 		//setGameScene();
@@ -56,6 +53,7 @@ public class MenuController {
 			System.exit(0);
 		});
 	}
+
 
 	/**
 	 * Button action method om de speler terug in het hoofdmenu te krijgen
@@ -214,4 +212,5 @@ public class MenuController {
 		// return file
 		return fileChooser.showOpenDialog(gameStage);
 	}
+
 }

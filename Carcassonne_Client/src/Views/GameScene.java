@@ -35,6 +35,7 @@ public class GameScene extends Scene {
 	int sceneWidth = (int) getWidth();
 
 	MenuController controller;
+
 	public MenuController getController() { return controller;}
 	GameController gameController;
 
@@ -110,6 +111,8 @@ public class GameScene extends Scene {
 				verticaal.setLayoutY(verticaal.getLayoutY() - speed);
 			} else if (e.getCode() == KeyCode.D) {
 				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
+			} else if (e.getCode() == KeyCode.P) { // Get data
+				gameController.saveFileBrowser();
 			}
 			System.out.println("COORDS + " + verticaal.getLayoutX() + " " + verticaal.getLayoutY());
 		});

@@ -1,7 +1,5 @@
 package Models;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -147,6 +145,12 @@ public interface RMIInterface extends Remote {
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
 	public int getKaartenLeft() throws RemoteException;
+
+	/**
+	 * Opslaan van de game staat
+	 */
+	public void saveFile(String path) throws RemoteException;
+
 
 
 	public boolean plaatsHorige(Horige.Posities posities) throws RemoteException;
