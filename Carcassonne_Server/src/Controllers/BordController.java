@@ -87,6 +87,10 @@ public class BordController {
 	}
 	/**
 	 * Deze functie roept de functie draaiKaart aan in de kaartenStapel
+	 * @param speler
+	 * Geef de naam van de speler mee in de vorm van een String
+	 * @return
+	 * Geeft true terug als de kaart is gedraaid, false als dit niet is gebeurt
 	 */
 	boolean draaiKaart(String speler){
 		if(kaartenStapel.getTurnTile() == bord.getLaatstGeplaatst()){

@@ -108,7 +108,12 @@ public interface RMIInterface extends Remote {
 
 	/**
 	 * Draait de kaart die de speler gepakt heeft met 90 graden
+	 * @param naam
+	 * Geef de naam van de speler mee in de vorm van een String
 	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 * @return
+	 * Geeft een true terug wanneer de kaart is gedraait, een false als dit niet is gelukt
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
 	public boolean draaiKaart(String naam) throws RemoteException;
@@ -138,9 +143,9 @@ public interface RMIInterface extends Remote {
 	public int getBeurt() throws RemoteException;
 
 	/**
-	 * Returnt hoeveel kaarten er nog in de pot zitten.
- 	 * @return
 	 * Geeft terug hoeveel kaarten er nog over zijn in de stapel
+	 * @return
+	 * Geeft een int terug met het aantal kaarten dat nog in de stapel zit
 	 * @throws RemoteException
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
@@ -148,6 +153,12 @@ public interface RMIInterface extends Remote {
 
 	/**
 	 * Opslaan van de game staat
+	 * @param path
+	 * Geef het path mee in de vorm van een String
+	 * @return
+	 * placeholder
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
 	public File saveFile(String path) throws RemoteException;
 
