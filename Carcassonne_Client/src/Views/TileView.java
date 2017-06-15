@@ -97,6 +97,19 @@ public class TileView extends Pane {
 		System.out.println("Coord of tile " + getLayoutX() + " " + getLayoutY() );
 	}
 
+	public void plaatsHorige(Horige horige){
+		Platform.runLater(() -> {
+			horigeView = new ImageView();
+			horigeView.setId(horige.getSpeler().getHorigeKleur());
+			horigeView.setFitHeight(20);
+			horigeView.setFitWidth(20);
+			getChildren().add(horigeView);
+			horigeView.setLayoutX(horige.getPositie().getX());
+			horigeView.setLayoutY(horige.getPositie().getY());
+			System.out.println("Dit wordt gerunt!");
+		});
+	}
+	
 	/**
 	 * Deze functie zorgt voor het laten zien van de horige preview op de kaarten
 	 * @param horigenZijdes
