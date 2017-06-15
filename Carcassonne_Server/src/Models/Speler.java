@@ -13,7 +13,6 @@ public class Speler implements Serializable {
 
 	private int punten;
 
-
 	public Speler(String naam){
 		Random rand = new Random();
 		punten = rand.nextInt(250);

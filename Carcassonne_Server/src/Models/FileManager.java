@@ -7,10 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class FileManager {
@@ -21,16 +18,18 @@ public class FileManager {
 		this.manager = manager;
 	}
 
-	public FileManager() {}
+//	public FileManager(){
+//
+//	}
 
 	//Maak JSON object aan van save game
-	public void saveGame(String naam) {
+	public File saveGame(String naam) {
 //		GameController gameController; - niet goeieee
 		JSONObject object = new JSONObject();
 
 		JSONArray spelerInJSON = new JSONArray();
-//      System.out.println("Alle spelers: " + Arrays.toString(new ArrayList[]{manager.bordController.bord.getAlleSpelers()}));
 
+		// Get alle Spelers
 		ArrayList<Speler> spelerLijst = manager.bordController.bord.getAlleSpelers();
 
 		for (int i = 0; i < spelerLijst.size() ; i++) {
@@ -44,10 +43,35 @@ public class FileManager {
 
 		object.put("Spelers", spelerInJSON);
 
-		//GameController.createFile(naam, object);
+		// Get alle BordGegevens
+
+
+
+		return createFile(naam, object);
+
 	}
 
+	public File createFile(String naam, JSONObject object){
 
+		try {
+			//new file
+			File newTextFile = new File(naam);
+
+			//create writer
+			FileWriter fw = new FileWriter(newTextFile);
+
+			//Write to json file
+			fw.write(object.toJSONString());
+
+			//close writer
+			fw.close();
+			return newTextFile;
+		} catch (IOException iox) {
+			//do stuff with exception
+			iox.printStackTrace();
+		}
+		return null;
+	}
 	public static void loadGame(File load) {
 		Alert alert;
 		ArrayList<Speler> spelerLijst = new ArrayList<Speler>();
