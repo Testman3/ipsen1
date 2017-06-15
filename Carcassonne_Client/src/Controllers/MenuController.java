@@ -70,6 +70,9 @@ public class MenuController {
 		getGameStage().setScene(getMenuViewScene());
 	}
 
+	/**
+	 * Deze functie laat de inGameMenu zien op het scherm.
+	 */
 	public void showInGameMenu(){
 		inGameMenuStage.getMenuStage().show();
 		gameScene.setSceneBlur();
@@ -77,6 +80,9 @@ public class MenuController {
 		//inGameMenuStage.initGui();
 	}
 
+	/**
+	 * Deze functie zorgt dat de IngameMenu weg gaat.
+	 */
 	public void hideInGameMenu(){
 		inGameMenuStage.getMenuStage().hide();
 		gameScene.hideSceneBlur();

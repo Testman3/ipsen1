@@ -1,33 +1,31 @@
 package Views;
 
 import Controllers.MenuController;
-import Models.Tile;
 import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
 public class InGameMenuStage extends Stage implements SceneInitialiser{
+	private StackPane menuPane;
     private MenuController menuController;
-    private BorderPane menuPane;
     private SmartButton[] knoppen = new SmartButton[5];
     private Stage stage;
-    private Scene menu;
     private VBox allMenuItemsVBox;
     private SmartLabel titel;
     private Scene menuScene;
+    private ImageView backgroud;
 
     public InGameMenuStage(MenuController controller){
         this.menuController = controller;
@@ -36,8 +34,8 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
     @Override
     public void initGui() {
-		
-        menuPane = new BorderPane();
+		backgroud = new ImageView();
+        menuPane = new StackPane();
         menuPane.setId("inGameMenu");
 		stage = new Stage(StageStyle.TRANSPARENT);
 		allMenuItemsVBox = new VBox();
@@ -46,6 +44,10 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
         //Css toevoegen
         menuPane.getStylesheets().add("style.css");
+
+        backgroud.setFitHeight(800);
+        backgroud.setFitWidth(600);
+        backgroud.setId("BackgroundMenu");
 
         //Tekst in titel zetten.
         titel = new SmartLabel("Menu");
@@ -68,8 +70,9 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
         knoppen[3].setText("Terug naar het hoofdmenu");
         knoppen[4].setText("Terug naar spel");
 
+        allMenuItemsVBox.setAlignment(Pos.CENTER);
 		//Vbox toevoegen aan pane en background op empty
-        menuPane.setCenter(allMenuItemsVBox);
+        menuPane.getChildren().addAll(backgroud, allMenuItemsVBox);
 		menuPane.setBackground(Background.EMPTY);
 
 		//Toevoegen aan stage
@@ -84,6 +87,15 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     @Override
     public void initAction(){
 
+    	//Spel opslaan
+		knoppen[0].setOnAction(event -> {
+		});
+
+		//Instellingen
+		knoppen[1].setOnAction(event -> {
+		});
+
+		//Handleiding
         File handleidingDoc = new File("Handleiding.html");
         knoppen[2].setOnAction(event -> {
             try {
@@ -93,15 +105,23 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
             }
         });
 
+        //Terug naar hoofdMenu
+		knoppen[3].setOnAction(event -> {
+
+		});
+
+		//Terug naar spel
         knoppen[4].setOnAction(event -> {
             menuController.hideInGameMenu();
         });
 
-
-
     }
 
-    public Stage getMenuStage(){
+	/**
+	 * Haalt de menuStage op.
+	 * @return
+	 */
+	public Stage getMenuStage(){
         return  this.stage;
     }
 }
