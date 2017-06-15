@@ -60,18 +60,22 @@ public class GameScene extends Scene {
 	SmartLabel KaartenLeft;
 	Button menuButton;
 
+	/**
+	 * Constructor van de GameScene
+	 * @param menuController
+	 * Geef MenuController mee
+	 */
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
 		super(new Pane(), 1280, 720);
 		getStylesheets().add("style.css");
 		tilesPane = (Pane) this.getRoot();
+
 		this.controller = menuController;
 
 		createTileGrid(100, 100);
 
 		init();
-
-
 	}
 
 	/**
@@ -80,7 +84,7 @@ public class GameScene extends Scene {
 	 * @param sizeX the x size of the grid (x amount of tiles)
 	 * @param sizeY the y size of the grid (y amount of tiles)
 	 */
-	public void createTileGrid(int sizeX, int sizeY) {
+	private void createTileGrid(int sizeX, int sizeY) {
 		tileViews = new TileView[sizeX][sizeY];
 		VBox verticaal = new VBox();
 		for (int y = 0; y < sizeY; y++) {
@@ -92,8 +96,10 @@ public class GameScene extends Scene {
 				horizontal.getChildren().add(tileView);
 			}
 		}
+
 		tilesPane.getChildren().add(verticaal);
 		tilesPane.setId("hallo");
+
 		//Verplaatsen over de map met W A S D keys, Speed is de snelheid dat je verplaatst.
 		int speed = 20;
 		setOnKeyPressed(e -> {
@@ -138,11 +144,12 @@ public class GameScene extends Scene {
 
 	/**
 	 * Plaatst previews om een tile heen, deze methode mag alleen gerunt worden nadat er een tile geplaatst is
-	 *
 	 * @param x
+	 * x co-ordinaat
 	 * @param y
+	 * y co-ordinaat
 	 */
-	public void addTilePreviews(int x, int y) {
+	private void addTilePreviews(int x, int y) {
 		addTilePreview(x - 1, y);
 		addTilePreview(x + 1, y);
 		addTilePreview(x, y + 1);
@@ -150,10 +157,11 @@ public class GameScene extends Scene {
 	}
 
 	/**
-	 * Plaatst 1 preview, deze methode mag niet zomaar gerunnt worden
-	 *
+	 * Plaatst 1 preview, deze methode mag niet zomaar gerunt worden
 	 * @param x
+	 * x co-ordinaat
 	 * @param y
+	 * y co-ordinaat
 	 */
 	private void addTilePreview(int x, int y) {
 		if (x < 0 || y < 0) {
@@ -167,7 +175,7 @@ public class GameScene extends Scene {
 
 	}
 
-	public void init() {
+	private void init() {
 
 		mainPane = new BorderPane();
 		tilesPane.getChildren().add(mainPane);
@@ -179,7 +187,6 @@ public class GameScene extends Scene {
 
 		VBox links = new VBox(5);
 		links.setPickOnBounds(false);
-		//links.setPadding(new Insets(0, 0, 0, 20));
 
 		HBox onder = new HBox();
 		onder.setPickOnBounds(false);
@@ -262,25 +269,30 @@ public class GameScene extends Scene {
 			gameController.klikPakKaart();
 		});
 
-		//links.getChildren().add(onder);
-		//Spane.setLeft(onder);
 		mainPane.setBottom(onder);
 		KaartenLeft = new SmartLabel("Kaarten over: 72");
 		links.getChildren().add(KaartenLeft);
 		KaartenLeft.setId("standardLabel");
 
-
-	//		mainPane.setCenter(ingamePane);
 	}
 
+	/**
+	 * Deze methode laat de kaart draaien
+	 */
 	public void DraaiKaart() {
 		if(ShowKaart.getId().equals("Kaartview")){
 			return;
 		}
 		ShowKaart.setRotate(ShowKaart.getRotate() + 90);
 	}
-	
-	
+
+	/**
+	 * Deze functie plaatst de kaart
+	 * @param client
+	 * Placeholder
+	 * @param x
+	 * @param y
+	 */
 	public void plaatsKaart(GameClient client, String id, int x, int y) {
 		ShowKaart.setId("Kaartview");
 		try {
