@@ -18,13 +18,16 @@ public class GameClient {
 
 	private boolean enableThread = true;
 
-	private String spelerNaam;
+	public String spelerNaam;
 	public String kaartPlaatsId = "";
 
 	String spelerBeurt = "";
 	int beurt = 0;
 
 	public RMIInterface RmiStub;
+
+	private boolean kaartGepakt = false;
+	private boolean kaartGeplaatst = false;
 
 	public GameClient(GameScene view) {
 		this.view = view;
@@ -55,18 +58,33 @@ public class GameClient {
 
 	}
 
+	public void beeindigBeurt() {
+		if(kaartGeplaatst == true){
+			try {
+				RmiStub.beeindigenBeurt(spelerNaam);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	/**
 	 * Pak een kaart van de stapel, dit kan alleen als de speler aan de beurt is
 	 */
 	public void pakKaart() {
 		try {
-			String id = RmiStub.pakKaart(spelerNaam);
-			if (id == null) {
+			if (kaartGepakt) {
 				meepMerp.play();
 				return;
 			}
-			kaartPlaatsId = id;
-			view.showKaart(this);
+			if(kaartGepakt == false) {
+				String id = RmiStub.pakKaart(spelerNaam);
+				kaartGepakt = true;
+				kaartPlaatsId = id;
+				view.showKaart(this);
+				return;
+			}
+
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
@@ -82,6 +100,7 @@ public class GameClient {
 		try {
 			if (kaartPlaatsId != "" && RmiStub.plaatsKaart(x, y)) {
 				view.plaatsKaart(this, x, y);
+				kaartGeplaatst = true;
 				kaartPlaatsId = "";
 			}
 			else {
@@ -122,6 +141,8 @@ public class GameClient {
 		try {
 			if (beurt != RmiStub.getBeurt()) {
 				view.updateView(this);
+				kaartGepakt = false;
+				kaartGeplaatst = false;
 				beurt = RmiStub.getBeurt();
 			}
 			if (RmiStub.getKaartenLeft() == 0) {

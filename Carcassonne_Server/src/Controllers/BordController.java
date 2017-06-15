@@ -36,7 +36,6 @@ public class BordController {
 	public String pakKaartvanStapel(String spelerNaam) {
 		if (bord.isSpelerBeurt(spelerNaam)) {
 			kaartenStapel.pakKaart();
-
 			return kaartenStapel.getTurnTile().getImageID();
 		}
 		return null;
@@ -91,6 +90,13 @@ public class BordController {
 		} else {
 			kaartenStapel.getTurnTile().draaiKaart();
 			return true;
+		}
+	}
+
+	public void beeindigBeurt(String spelernaam) {
+		if(bord.isSpelerBeurt(spelernaam)){
+			bord.geefSpelerBeurt();
+			System.out.println("==@@@@@@@@@@@@@@@@@@@Speler heeft beurt beindigt");
 		}
 	}
 }

@@ -15,7 +15,7 @@ public class Bord {
 
 	private Tile laatstGeplaatst;
 
-	private boolean debug = true;
+	private boolean debug = false;
 
 	private int gameBeurt = 1;
 
@@ -73,7 +73,7 @@ public class Bord {
 	public void geefSpelerBeurt() {
 		gameBeurt++;
 
-		spelerBeurt.setBeurt(true);
+		spelerBeurt.setBeurt(false);
 
 		int beurt = alleSpelers.indexOf(spelerBeurt);
 
@@ -85,6 +85,7 @@ public class Bord {
 		}
 
 		spelerBeurt.setBeurt(true);
+		System.out.println("Speler beurt gegeven aan: " + spelerBeurt.getNaam());
 	}
 	/**
 	 * returnt of de speler aan de beurt is

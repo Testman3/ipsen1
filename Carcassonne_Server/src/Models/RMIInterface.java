@@ -157,5 +157,6 @@ public interface RMIInterface extends Remote {
 
 	public 	Horige.Posities[] getHorigePosities() throws RemoteException;
 
+	public void beeindigenBeurt(String spelerNaam) throws RemoteException;
 
 }

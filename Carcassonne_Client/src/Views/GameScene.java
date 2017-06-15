@@ -208,6 +208,14 @@ public class GameScene extends Scene {
 				gameController.klikDraaiKaart();
 		});
 
+		 button = new Button("Beëindig beurt");
+		button.setId("standardLabel");
+		onder.getChildren().add(button);
+		button.setOnAction(e -> {
+			gameController.klikBeeindigbeurt();
+		});
+
+
 		menuButton = new Button("Menu");
 		menuButton.minHeightProperty().bind(heightProperty().multiply(0.2));
 		menuButton.minWidthProperty().bind(widthProperty().multiply(0.11));
@@ -315,6 +323,9 @@ public class GameScene extends Scene {
 	 * Geef GameClient mee
 	 */
 	public void showKaart(GameClient client) {
+		if(client.kaartPlaatsId == null){
+			ShowKaart.setId("Kaartview");
+		} else
 		ShowKaart.setId(client.kaartPlaatsId);
 	}
 

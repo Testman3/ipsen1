@@ -34,6 +34,9 @@ public class GameController {
 	public void klikPlaatsHorige(Horige.Posities positie){
 		model.plaatsHorige(positie);
 	}
+	public void klikBeeindigbeurt() {
+		model.beeindigBeurt();
+	}
 	/**
 	 * Deze functie zorgt ervoor dat de kaart in het model (GameClient) geplaatst wordt
 	 * @param x

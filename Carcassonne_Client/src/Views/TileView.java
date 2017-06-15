@@ -109,7 +109,7 @@ public class TileView extends Pane {
 			System.out.println("Dit wordt gerunt!");
 		});
 	}
-	
+
 	/**
 	 * Deze functie zorgt voor het laten zien van de horige preview op de kaarten
 	 * @param horigenZijdes
@@ -120,25 +120,24 @@ public class TileView extends Pane {
 		Platform.runLater(() -> {
 			System.out.println("Horige views length " + horigenZijdes.length);
 			ImageView[] horigeViews = new ImageView[horigenZijdes.length];
+
 			for (int i = 0; i < horigenZijdes.length; i++) {
-				ImageView horigeView = new ImageView();
-				horigeView.setFitHeight(20);
-				horigeView.setFitWidth(20);
-				horigeView.setId("horigePreview");
+				horigeViews[i] = new ImageView();
+				horigeViews[i].setFitHeight(20);
+				horigeViews[i].setFitWidth(20);
+				horigeViews[i].setId("horigePreview");
 
-				getChildren().add(horigeView);
-				horigeView.setLayoutX(horigenZijdes[i].getX());
-				horigeView.setLayoutY(horigenZijdes[i].getY());
+				getChildren().add(horigeViews[i]);
+				horigeViews[i].setLayoutX(horigenZijdes[i].getX());
+				horigeViews[i].setLayoutY(horigenZijdes[i].getY());
 
-				horigeViews[i] = horigeView;
 				final Horige.Posities pos = horigenZijdes[i];
-				horigeView.setOnMouseClicked(e ->{
-					for (int j = 0; j < horigeViews.length; j++) {
+				horigeViews[i].setOnMouseClicked(e ->{
 						for (ImageView horige: horigeViews) {
 							getChildren().remove(horige);
 						}
+						System.out.println("Horige geplaatst door " + scene.gameController.getModel().spelerNaam);
 						scene.gameController.klikPlaatsHorige(pos);
-					}
 				});
 			}
 		});

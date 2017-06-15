@@ -149,4 +149,9 @@ public class RMIController implements RMIInterface {
 	public Horige.Posities[] getHorigePosities() throws RemoteException {
 		return serverManager.bordController.kaartenStapel.getTurnTile().getHorigenZijdes();
 	}
+
+	@Override
+	public void beeindigenBeurt(String spelerNaam) throws RemoteException {
+		serverManager.bordController.beeindigBeurt(spelerNaam);
+	}
 }
