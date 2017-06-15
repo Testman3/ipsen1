@@ -6,6 +6,7 @@ import Models.GameClient;
 import Models.RMIInterface;
 import Models.Speler;
 import Models.TileStump;
+import commonFunctions.Point;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -44,6 +45,9 @@ public class GameScene extends Scene {
 	public RMIInterface RmiStub;
 	private SmartLabel KaartenLeft;
 	private Button menuButton;
+
+
+	private	Point laatstGeplaatstLocatie;
 
 	/**
 	 * Constructor van de GameScene
@@ -298,6 +302,7 @@ public class GameScene extends Scene {
 		ShowKaart.setId("Kaartview");
 		try {
 			TileStump stump = client.getTile();
+			laatstGeplaatstLocatie = new Point(stump.getX(), stump.getY());
 			tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
 			tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 			tileViews[x][y].laatHorigePreviewZien(RmiStub.getHorigePosities());
@@ -308,6 +313,10 @@ public class GameScene extends Scene {
 
 	}
 
+	public void verwijdwerHorigePreviews() {
+		System.out.println("Horige verwijderen @ " + laatstGeplaatstLocatie.getX() + " " + laatstGeplaatstLocatie.getY());
+		tileViews[laatstGeplaatstLocatie.getX()][laatstGeplaatstLocatie.getY()].verwijderHorigePreviews();
+	}
 	/**
 	 * Deze functie laat de neergelegde kaart zien
 	 *
@@ -356,7 +365,6 @@ public class GameScene extends Scene {
 		}
 		tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
 		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
-
 		if (stump.getGeplaatsteHorige() != null) {
 			tileViews[stump.getX()][stump.getY()].plaatsHorige(stump.getGeplaatsteHorige());
 			System.out.println("Horige is niet null!");

@@ -28,7 +28,8 @@ public class GameClient {
 
 	private boolean kaartGepakt = false;
 	private boolean kaartGeplaatst = false;
-	ArrayList<Point> verwijderHorige;
+	private ArrayList<Point> verwijderHorige;
+
 
 	public GameClient(GameScene view) {
 		this.view = view;
@@ -63,6 +64,7 @@ public class GameClient {
 		if(kaartGeplaatst == true){
 			try {
 				RmiStub.beeindigenBeurt(spelerNaam);
+				view.verwijdwerHorigePreviews();
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -99,7 +101,7 @@ public class GameClient {
 	 */
 	public void plaatsKaart(int x, int y) {
 		try {
-			if (kaartGepakt && RmiStub.plaatsKaart(x, y)) {
+			if (kaartGepakt && !kaartGeplaatst && RmiStub.plaatsKaart(x, y)) {
 				view.plaatsKaart(this, x, y);
 				kaartGeplaatst = true;
 				kaartPlaatsId = "";
@@ -203,7 +205,6 @@ public class GameClient {
 	 * Geeft GameScene view terug
 	 */
 	public GameScene getGameScene(){return view;}
-
 }
 
 
