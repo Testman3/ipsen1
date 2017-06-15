@@ -1,10 +1,12 @@
 package Controllers;
 
 import Views.*;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.nio.file.Paths;
 
 /**
  * Deze class zorgt voor de functies in het menu van het spel, en is verantwoordelijk voor het switchen van scenes
@@ -44,8 +46,11 @@ public class MenuController {
 		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
 
+
 		setMenuViewScene();
 		//setGameScene();
+		gameStage.setTitle("Carcassonne");
+		gameStage.getIcons().add(new Image("Afbeeldingen/gameIcon.png"));
 		gameStage.show();
 		gameStage.setOnCloseRequest(e -> {
 			System.exit(0);
