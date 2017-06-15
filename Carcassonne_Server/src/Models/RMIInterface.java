@@ -42,7 +42,7 @@ public interface RMIInterface extends Remote {
 
 	/**
 	 * Deze functie geeft een ArrayList terug met de namen van alle spelers aanwezig in de ArrayList op de server
-	 * @return ArrayList<String>
+	 * @return ArrayList(String)
 	 * @throws RemoteException
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
@@ -52,7 +52,7 @@ public interface RMIInterface extends Remote {
 
 	/**
 	 *
-	 * @return ArrayList<Speler>
+	 * @return ArrayList(Speler)
 	 * @throws RemoteException
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
@@ -83,7 +83,7 @@ public interface RMIInterface extends Remote {
 	public boolean isGameStarted() throws RemoteException;
 
 	/**
-	 *
+	 * Deze functie zorgt voor het pakken van een kaart uit de stapel
  	 * @param spelerNaam
 	 * Geef de gebruikersnaam van de speler mee
 	 * @return ID van de kaart die gepakt is
@@ -93,7 +93,7 @@ public interface RMIInterface extends Remote {
 	public String pakKaart(String spelerNaam) throws RemoteException;
 
 	/**
-	 *
+	 * Deze functie zorgt voor het plaatsen van een kaart op het speelveld
 	 * @param x
 	 * Geef de X co-ordinaat mee waar de kaart op geplaatst moet worden
 	 * @param y
@@ -151,12 +151,33 @@ public interface RMIInterface extends Remote {
 	 */
 	public File saveFile(String path) throws RemoteException;
 
-
-
+	/**
+	 * Deze functie zorgt ervoor dat een horige geplaatst wordt op het speelbord
+	 * @param posities
+	 * Geef de positie mee
+	 * @return
+	 * Geeft true terug wanneer de horige succesvol geplaatst is, en false wanneer dit niet zo is
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public boolean plaatsHorige(Horige.Posities posities) throws RemoteException;
 
+	/**
+	 * Deze functie vraagt de positie op van een horige
+	 * @return
+	 * ArrayList met alle horige posities
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public 	Horige.Posities[] getHorigePosities() throws RemoteException;
 
+	/**
+	 * Deze functie zorgt ervoor dat de speler zijn beurt kan beeindigen
+	 * @param spelerNaam
+	 * Geef de spelernaam mee in de vorm van een String
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public void beeindigenBeurt(String spelerNaam) throws RemoteException;
 
 }

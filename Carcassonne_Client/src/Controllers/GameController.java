@@ -76,6 +76,7 @@ public class GameController {
 	/**
 	 * roept de functie saveFile(path) aan.
 	 * @param path
+	 * Geef het path van de safefile mee in de vorm van een String
 	 */
 	public void getSavefile(String path){
 		try {
