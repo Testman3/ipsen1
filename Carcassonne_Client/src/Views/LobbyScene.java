@@ -78,7 +78,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		horigen[1] = new ImageView("Horige_Blauw.png");
 		horigen[2] = new ImageView("Horige_Geel.png");
 		horigen[3] = new ImageView("Horige_Groen.png");
-		horigen[4] = new ImageView("Horige_Zwart.png");
+		horigen[4] = new ImageView("Horige_Paars.png");
 
 		knoppenBox = new HBox(60);
 		completeBox = new VBox();

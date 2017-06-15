@@ -110,6 +110,9 @@ public class TileView extends Pane {
 		});
 	}
 
+	public void verwijderHorige() {
+		getChildren().remove(horigeView);
+	}
 	/**
 	 * Deze functie zorgt voor het laten zien van de horige preview op de kaarten
 	 * @param horigenZijdes

@@ -137,4 +137,6 @@ public class Tile {
 		return imageID;
 	}
 	public 	Horige.Posities[] getHorigenZijdes() { return horigenZijdes; }
+	public boolean getHeeftKlooster() { return heeftKlooster; }
+	public Zijde getMiddenZijde() { return middenZijde; }
 }

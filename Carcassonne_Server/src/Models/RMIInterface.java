@@ -1,5 +1,7 @@
 package Models;
 
+import javafx.geometry.Point2D;
+
 import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -158,5 +160,7 @@ public interface RMIInterface extends Remote {
 	public 	Horige.Posities[] getHorigePosities() throws RemoteException;
 
 	public void beeindigenBeurt(String spelerNaam) throws RemoteException;
+
+	public ArrayList<Point2D> getHorigeToRemove() throws RemoteException;
 
 }

@@ -2,10 +2,12 @@ package Models;
 
 import Views.GameScene;
 import javafx.application.Platform;
+import javafx.geometry.Point2D;
 import javafx.scene.media.AudioClip;
 
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class GameClient {
 
@@ -28,6 +30,7 @@ public class GameClient {
 
 	private boolean kaartGepakt = false;
 	private boolean kaartGeplaatst = false;
+	ArrayList<Point2D> verwijderHorige;
 
 	public GameClient(GameScene view) {
 		this.view = view;
@@ -98,7 +101,7 @@ public class GameClient {
 	 */
 	public void plaatsKaart(int x, int y) {
 		try {
-			if (kaartPlaatsId != "" && RmiStub.plaatsKaart(x, y)) {
+			if (kaartGepakt && RmiStub.plaatsKaart(x, y)) {
 				view.plaatsKaart(this, x, y);
 				kaartGeplaatst = true;
 				kaartPlaatsId = "";
@@ -138,12 +141,14 @@ public class GameClient {
 		 * speler klaar is met zijn beurt, en het spelbord geupdate moet worden.
 		 */
 	public void Update() {
+
 		try {
 			if (beurt != RmiStub.getBeurt()) {
 				view.updateView(this);
 				kaartGepakt = false;
 				kaartGeplaatst = false;
 				beurt = RmiStub.getBeurt();
+				ArrayList<Point2D> verwijderHorige = RmiStub.getHorigeToRemove();
 			}
 			if (RmiStub.getKaartenLeft() <= 0) {
 				enableThread = false;
@@ -151,6 +156,9 @@ public class GameClient {
 				Platform.runLater(() -> {
 					view.getController().getEndGameScene().join(RmiStub);
 					view.getController().setEndGameScene();
+					for (Point2D point: verwijderHorige) {
+						view.removeHorige((int)point.getX(), (int)point.getY());
+					}
 				});
 
 

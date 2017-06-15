@@ -330,6 +330,10 @@ public class GameScene extends Scene {
 		tilesPane.setEffect(null);
 	}
 
+	public void removeHorige(int x, int y){
+		tileViews[x][y].verwijderHorige();
+	}
+
 	int kaartenOver = 0;
 	ArrayList<Speler> alleSpelers = null;
 
