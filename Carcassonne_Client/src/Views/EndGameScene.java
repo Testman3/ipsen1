@@ -10,10 +10,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
 
 /**
  * Deze class zorgt ervoor dat de EndGameScene goed wordt weergegeven.
@@ -23,12 +21,10 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	private BorderPane mainPane;
 	private MenuController controller;
 	private RMIInterface RMIstub;
-
 	private VBox allesContainer;
 	private SmartLabel titel;
 	private SmartLabel[] spelers;
 	private SmartButton exit;
-
 	private ArrayList<Speler> spelerObj;
 
 	/**
@@ -77,7 +73,6 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 	@Override
 	public void initAction() {
-
 		exit.setOnAction(e -> {
 			controller.backToMainMenu();
 		});

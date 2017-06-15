@@ -26,8 +26,17 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private SmartLabel titel;
     private Scene menuScene;
     private ImageView backgroud;
+    private GameScene gameScene;
 
-    public InGameMenuStage(MenuController controller){
+	/**
+	 * Constructor van de ingamemenustage
+	 * @param controller
+	 * Geef MenuController mee
+	 * @param scene
+	 * Geef GameScene mee
+	 */
+	public InGameMenuStage(MenuController controller, GameScene scene){
+    	this.gameScene = scene;
         this.menuController = controller;
         initGui();
     }
@@ -89,6 +98,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
     	//Spel opslaan
 		knoppen[0].setOnAction(event -> {
+			gameScene.gameController.saveFileBrowser();
 		});
 
 		//Instellingen
@@ -119,7 +129,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
 	/**
 	 * Haalt de menuStage op.
-	 * @return
+	 * @return Geeft de stage terug
 	 */
 	public Stage getMenuStage(){
         return  this.stage;

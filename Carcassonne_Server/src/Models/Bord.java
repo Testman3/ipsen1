@@ -230,5 +230,13 @@ public class Bord {
 		return alleSpelers;
 	}
 
+	/**
+	 * Return alle tiles in array als Tile
+	 * @return ArrayList met alle tiles (als Tile)
+	 */
+	public Tile[][] getAlleTiles(){
+		return this.alleTiles;
+	}
+
 	public ArrayList<Point2D> getVerwijderHorigeDezeRonde() { return verwijderHorigeDezeRonde;}
 }

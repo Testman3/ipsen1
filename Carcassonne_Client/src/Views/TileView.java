@@ -36,7 +36,7 @@ public class TileView extends Pane {
 	 * @param scene
 	 * Geef de GameScene mee
 	 */
-	public TileView(int x, int y, GameScene scene){
+	TileView(int x, int y, GameScene scene){
 		minHeight(90);
 		minWidth(90);
 		maxHeight(90);
@@ -65,7 +65,7 @@ public class TileView extends Pane {
 	 * Deze functie haalt het image id op
 	 * @return het id van de imageview in de vorm van een String
 	 */
-	public String getimgId() {
+	String getimgId() {
 		return view.getId();
 	}
 
@@ -82,7 +82,7 @@ public class TileView extends Pane {
 	 * @param rotation
 	 * Geef een int mee om de gradatie van rotatie aan te geven
 	 */
-	public void setRotation(int rotation ){
+	void setRotation(int rotation){
 		view.setRotate(rotation);
 	}
 
@@ -91,13 +91,18 @@ public class TileView extends Pane {
 	 * @param Id
 	 * Geef het id van de kaart mee in de vorm van een String
 	 */
-	public void setKaartId(String Id) {
+	void setKaartId(String Id) {
 		kaartId = Id;
 		view.setId(kaartId);
 		System.out.println("Coord of tile " + getLayoutX() + " " + getLayoutY() );
 	}
 
-	public void plaatsHorige(Horige horige){
+	/**
+	 * Deze functie zorgt voor het neerzetten van de horige op een tile
+	 * @param horige
+	 * Geef de horige mee die geplaatst gaat worden
+	 */
+	void plaatsHorige(Horige horige){
 		Platform.runLater(() -> {
 			horigeView = new ImageView();
 			horigeView.setId(horige.getSpeler().getHorigeKleur());
@@ -118,7 +123,7 @@ public class TileView extends Pane {
 	 * @param horigenZijdes
 	 * Geef de zijden mee waarop een horige kan staan
 	 */
-	public void laatHorigePreviewZien(Horige.Posities[] horigenZijdes) {
+	void laatHorigePreviewZien(Horige.Posities[] horigenZijdes) {
 
 		Platform.runLater(() -> {
 			System.out.println("Horige views length " + horigenZijdes.length);

@@ -4,7 +4,6 @@ import Models.GameClient;
 import Models.Horige;
 import Models.RMIInterface;
 import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.rmi.RemoteException;
 
@@ -53,7 +52,9 @@ public class GameController {
 	}
 
 
-
+	/**
+	 * Deze functie zort ervoor dat de Filebrowser wordt geopend.
+	 */
 	public void saveFileBrowser(){
 		FileChooser fileChooser = new FileChooser();
 
@@ -71,7 +72,11 @@ public class GameController {
 		}
 	}
 
-
+	/**
+	 * roept de functie saveFile(path) aan.
+	 * @param path
+	 * Geef het path van de safefile mee in de vorm van een String
+	 */
 	public void getSavefile(String path){
 		try {
 			rmiStub.saveFile(path);

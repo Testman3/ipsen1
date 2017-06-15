@@ -14,14 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.*;
-import javafx.scene.transform.Affine;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -30,40 +23,32 @@ import java.util.ArrayList;
  */
 public class GameScene extends Scene {
 
-
-	int sceneHeight = (int) getHeight();
-	int sceneWidth = (int) getWidth();
-
-	MenuController controller;
-
-	public MenuController getController() { return controller;}
-	GameController gameController;
-
-	BorderPane mainPane;
-
-	Pane tilesPane;
-	HBox test;
-
-	TileView[][] tileViews;
-	HorigeView[] horigeViews;
-	SpelerView[] playerViews;
-
-
-	public ImageView ShowKaart;
-
-
-	String kaartPlaatsId;
+	private double xOffset;
+	private double yOffset;
+	private int sceneHeight = (int) getHeight();
+	private int sceneWidth = (int) getWidth();
+	private MenuController controller;
+	public MenuController getController() {
+		return controller;
+	}
+	public GameController gameController;
+	private BorderPane mainPane;
+	private Pane tilesPane;
+	private HBox test;
+	private TileView[][] tileViews;
+	private HorigeView[] horigeViews;
+	private SpelerView[] playerViews;
+	private ImageView ShowKaart;
+	private String kaartPlaatsId;
 	private double scale;
-
 	public RMIInterface RmiStub;
-
-	SmartLabel KaartenLeft;
-	Button menuButton;
+	private SmartLabel KaartenLeft;
+	private Button menuButton;
 
 	/**
 	 * Constructor van de GameScene
-	 * @param menuController
-	 * Geef MenuController mee
+	 *
+	 * @param menuController Geef MenuController mee
 	 */
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
@@ -119,10 +104,36 @@ public class GameScene extends Scene {
 		});
 
 
-		final Affine accumulatedScales = new Affine();
-		tilesPane.getTransforms().add(accumulatedScales);
+		tilesPane.setOnMousePressed(e -> {
+			xOffset = e.getX();
+			yOffset = e.getY();
+			e.consume();
+		});
 
-		//Half werkende zoom functie
+		tilesPane.setOnMouseDragged(e -> {
+			tilesPane.setTranslateX(e.getX() + tilesPane.getTranslateX() - xOffset);
+			tilesPane.setTranslateY(e.getY() + tilesPane.getTranslateY() - yOffset);
+
+//			if(tilesPane.getTranslateY() > controller.getGameStage().getMaxHeight()){
+//				tilesPane.setTranslateY(controller.getGameStage().getMaxHeight());
+//			}
+//
+//			if(tilesPane.getTranslateY() < controller.getGameStage().getMinHeight()){
+//				tilesPane.setTranslateY(controller.getGameStage().getMinHeight());
+//			}
+//
+//			if(tilesPane.getTranslateX() > controller.getGameStage().getMaxWidth()){
+//				tilesPane.setTranslateX(controller.getGameStage().getMaxWidth());
+//			}
+//
+//			if(tilesPane.getTranslateX() < controller.getGameStage().getMinWidth()){
+//				tilesPane.setTranslateX(controller.getGameStage().getMinWidth());
+//			}
+
+			e.consume();
+		});
+
+
 		setOnScroll(e -> {
 
 			e.consume();
@@ -136,29 +147,23 @@ public class GameScene extends Scene {
 							? 1.1
 							: 1 / 1.1;
 
-			accumulatedScales.appendScale(scaleFactor, scaleFactor, e.getX(), e.getY());
+			tilesPane.setScaleX(tilesPane.getScaleX() * scaleFactor);
+			tilesPane.setScaleY(tilesPane.getScaleY() * scaleFactor);
 
-
-			if (accumulatedScales.getMxx() < 1.0) {
-				System.out.println("BoundsX");
-				accumulatedScales.setMxx(1.0); //werkt niet
+			if (tilesPane.getScaleX() < 1.0) {
+				tilesPane.setScaleX(1.0);
 			}
 
-			if (accumulatedScales.getMyy() < 1.0) {
-				System.out.println("BoundsY");
-				accumulatedScales.setMyy(1.0); //werkt niet
+			if (tilesPane.getScaleY() < 1.0) {
+				tilesPane.setScaleY(1.0);
 			}
 
-			if (accumulatedScales.getMxx() > 6) {
-				System.out.println("BoundsX");
-				accumulatedScales.setMxx(6.0); //werkt niet
-
+			if (tilesPane.getScaleX() > 6.0) {
+				tilesPane.setScaleX(6.0);
 			}
 
-			if (accumulatedScales.getMyy() > 6) {
-				System.out.println("BoundsY");
-				accumulatedScales.setMyy(6.0); //werkt niet
-
+			if (tilesPane.getScaleY() > 6.0) {
+				tilesPane.setScaleY(6.0);
 			}
 
 		});
@@ -169,10 +174,9 @@ public class GameScene extends Scene {
 
 	/**
 	 * Plaatst previews om een tile heen, deze methode mag alleen gerunt worden nadat er een tile geplaatst is
-	 * @param x
-	 * x co-ordinaat
-	 * @param y
-	 * y co-ordinaat
+	 *
+	 * @param x x co-ordinaat
+	 * @param y y co-ordinaat
 	 */
 	private void addTilePreviews(int x, int y) {
 		addTilePreview(x - 1, y);
@@ -183,10 +187,9 @@ public class GameScene extends Scene {
 
 	/**
 	 * Plaatst 1 preview, deze methode mag niet zomaar gerunt worden
-	 * @param x
-	 * x co-ordinaat
-	 * @param y
-	 * y co-ordinaat
+	 *
+	 * @param x x co-ordinaat
+	 * @param y y co-ordinaat
 	 */
 	private void addTilePreview(int x, int y) {
 		if (x < 0 || y < 0) {
@@ -230,10 +233,10 @@ public class GameScene extends Scene {
 		button.setId("standardLabel");
 		onder.getChildren().add(button);
 		button.setOnAction(e -> {
-				gameController.klikDraaiKaart();
+			gameController.klikDraaiKaart();
 		});
 
-		 button = new Button("Beëindig beurt");
+		button = new Button("Beëindig beurt");
 		button.setId("standardLabel");
 		onder.getChildren().add(button);
 		button.setOnAction(e -> {
@@ -279,7 +282,7 @@ public class GameScene extends Scene {
 	 * Deze methode laat de kaart draaien
 	 */
 	public void DraaiKaart() {
-		if(ShowKaart.getId().equals("Kaartview")){
+		if (ShowKaart.getId().equals("Kaartview")) {
 			return;
 		}
 		ShowKaart.setRotate(ShowKaart.getRotate() + 90);
@@ -287,12 +290,10 @@ public class GameScene extends Scene {
 
 	/**
 	 * Deze functie plaatst de kaart
-	 * @param client
-	 * Placeholder
-	 * @param x
-	 * x co-ordinaat
-	 * @param y
-	 * y co-ordinaat
+	 *
+	 * @param client Placeholder
+	 * @param x      x co-ordinaat
+	 * @param y      y co-ordinaat
 	 */
 	public void plaatsKaart(GameClient client, int x, int y) {
 		ShowKaart.setId("Kaartview");
@@ -310,22 +311,22 @@ public class GameScene extends Scene {
 
 	/**
 	 * Deze functie laat de neergelegde kaart zien
-	 * @param client
-	 * Geef GameClient mee
+	 *
+	 * @param client Geef GameClient mee
 	 */
 	public void showKaart(GameClient client) {
-		if(client.kaartPlaatsId == null){
+		if (client.kaartPlaatsId == null) {
 			ShowKaart.setId("Kaartview");
 		} else
-		ShowKaart.setId(client.kaartPlaatsId);
+			ShowKaart.setId(client.kaartPlaatsId);
 	}
 
-	public void setSceneBlur(){
+	public void setSceneBlur() {
 		this.mainPane.setEffect(new GaussianBlur());
 		tilesPane.setEffect(new GaussianBlur());
 	}
 
-	public void hideSceneBlur(){
+	public void hideSceneBlur() {
 		this.mainPane.setEffect(null);
 		tilesPane.setEffect(null);
 	}
@@ -339,8 +340,8 @@ public class GameScene extends Scene {
 
 	/**
 	 * Deze functie zorgt ervoor dat de view wordt geüpdatet
-	 * @param client
-	 * Geef GameClient mee
+	 *
+	 * @param client Geef GameClient mee
 	 */
 	public void updateView(GameClient client) {
 		TileStump stump = null;
@@ -356,7 +357,7 @@ public class GameScene extends Scene {
 		tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
 		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 
-		if(stump.getGeplaatsteHorige() != null) {
+		if (stump.getGeplaatsteHorige() != null) {
 			tileViews[stump.getX()][stump.getY()].plaatsHorige(stump.getGeplaatsteHorige());
 			System.out.println("Horige is niet null!");
 		}

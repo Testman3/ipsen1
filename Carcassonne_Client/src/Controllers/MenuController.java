@@ -1,13 +1,9 @@
 package Controllers;
 
 import Views.*;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.File;
 
 /**
@@ -40,7 +36,6 @@ public class MenuController {
 		LobbyController lobbyController = new LobbyController();
 
 		this.gameStage = gameStage;
-		inGameMenuStage = new InGameMenuStage(this);
 		endGameScene = new EndGameScene(this);
 		gameScene = new GameScene(this);
 		lobbyScene = new LobbyScene(this, lobbyController);
@@ -48,6 +43,7 @@ public class MenuController {
 		preLobbyScene = new PreLobbyScene(this, lobbyController);
 		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
+		inGameMenuStage = new InGameMenuStage(this, gameScene);
 
 		setMenuViewScene();
 		//setGameScene();
@@ -151,7 +147,7 @@ public class MenuController {
 
 	/**
 	 * Deze functie switcht de scene naar de endgamescene
-	 * @return
+	 * @return endGameScene
 	 */
 	public EndGameScene getEndGameScene() {
 		return endGameScene;

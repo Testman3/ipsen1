@@ -44,17 +44,24 @@ public interface RMIInterface extends Remote {
 
 	/**
 	 * Deze functie geeft een ArrayList terug met de namen van alle spelers aanwezig in de ArrayList op de server
-	 * @return ArrayList<String>
+	 * @return ArrayList(String)
 	 * @throws RemoteException
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
 	public ArrayList<String> getPlayerList() throws RemoteException;
 
+	/**
+	 * Deze functie haalt de playerscores op
+	 * @return
+	 * Er wordt een arraylist(int) teruggegeven die de scores van alle spelers bevat
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public ArrayList<Integer> getPlayerScore() throws RemoteException;
 
 	/**
-	 *
-	 * @return ArrayList<Speler>
+	 * Deze functie vraagt een arraylist van spelers op
+	 * @return ArrayList(Speler)
 	 * @throws RemoteException
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
@@ -85,7 +92,7 @@ public interface RMIInterface extends Remote {
 	public boolean isGameStarted() throws RemoteException;
 
 	/**
-	 *
+	 * Deze functie zorgt voor het pakken van een kaart uit de stapel
  	 * @param spelerNaam
 	 * Geef de gebruikersnaam van de speler mee
 	 * @return ID van de kaart die gepakt is
@@ -95,7 +102,7 @@ public interface RMIInterface extends Remote {
 	public String pakKaart(String spelerNaam) throws RemoteException;
 
 	/**
-	 *
+	 * Deze functie zorgt voor het plaatsen van een kaart op het speelveld
 	 * @param x
 	 * Geef de X co-ordinaat mee waar de kaart op geplaatst moet worden
 	 * @param y
@@ -110,7 +117,12 @@ public interface RMIInterface extends Remote {
 
 	/**
 	 * Draait de kaart die de speler gepakt heeft met 90 graden
+	 * @param naam
+	 * Geef de naam van de speler mee in de vorm van een String
 	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 * @return
+	 * Geeft een true terug wanneer de kaart is gedraait, een false als dit niet is gelukt
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
 	public boolean draaiKaart(String naam) throws RemoteException;
@@ -140,9 +152,9 @@ public interface RMIInterface extends Remote {
 	public int getBeurt() throws RemoteException;
 
 	/**
-	 * Returnt hoeveel kaarten er nog in de pot zitten.
- 	 * @return
 	 * Geeft terug hoeveel kaarten er nog over zijn in de stapel
+	 * @return
+	 * Geeft een int terug met het aantal kaarten dat nog in de stapel zit
 	 * @throws RemoteException
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
@@ -150,15 +162,42 @@ public interface RMIInterface extends Remote {
 
 	/**
 	 * Opslaan van de game staat
+	 * @param path
+	 * Geef het path mee in de vorm van een String
+	 * @return
+	 * placeholder
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
 	public File saveFile(String path) throws RemoteException;
 
-
-
+	/**
+	 * Deze functie zorgt ervoor dat een horige geplaatst wordt op het speelbord
+	 * @param posities
+	 * Geef de positie mee
+	 * @return
+	 * Geeft true terug wanneer de horige succesvol geplaatst is, en false wanneer dit niet zo is
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public boolean plaatsHorige(Horige.Posities posities) throws RemoteException;
 
+	/**
+	 * Deze functie vraagt de positie op van een horige
+	 * @return
+	 * ArrayList met alle horige posities
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public 	Horige.Posities[] getHorigePosities() throws RemoteException;
 
+	/**
+	 * Deze functie zorgt ervoor dat de speler zijn beurt kan beeindigen
+	 * @param spelerNaam
+	 * Geef de spelernaam mee in de vorm van een String
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public void beeindigenBeurt(String spelerNaam) throws RemoteException;
 
 	public ArrayList<Point2D> getHorigeToRemove() throws RemoteException;

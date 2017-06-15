@@ -8,7 +8,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
@@ -19,7 +18,7 @@ import javafx.scene.media.AudioClip;
  * Deze class is verantwoordelijk voor de interacties tussen de lobby / prelobby en de RMI server
  */
 public class LobbyController {
-		AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
+		private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
 
 
 	private boolean ableToConnect = false;
@@ -97,9 +96,10 @@ public class LobbyController {
 
 	/**
 	 * Controleert of de opgegeven String een geldig IP format is
-	 *
 	 * @param ip
+	 * Geef het ip adres mee in de vorm van een String
 	 * @return
+	 * Geeft true terug als het ip valide is, en false als dit niet het geval is
 	 */
 	private boolean validateIP(final String ip) {
 		Pattern pattern;
@@ -113,7 +113,6 @@ public class LobbyController {
 		return matcher.matches();
 	}
 
-
 	/**
 	 * Deze functie wordt gebruikt bij het verbinding maken met de rmi server.
 	 *
@@ -122,11 +121,6 @@ public class LobbyController {
 	public boolean canConnect() {
 		if (ableToConnect) return true;
 		else return false;
-	}
-
-
-	public void gameStarten() {
-
 	}
 
 	public RMIInterface getRmiStub() {
