@@ -48,10 +48,17 @@ public interface RMIInterface extends Remote {
 	 */
 	public ArrayList<String> getPlayerList() throws RemoteException;
 
+	/**
+	 * Deze functie haalt de playerscores op
+	 * @return
+	 * Er wordt een arraylist(int) teruggegeven die de scores van alle spelers bevat
+	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public ArrayList<Integer> getPlayerScore() throws RemoteException;
 
 	/**
-	 *
+	 * Deze functie vraagt een arraylist van spelers op
 	 * @return ArrayList(Speler)
 	 * @throws RemoteException
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
