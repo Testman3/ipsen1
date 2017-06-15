@@ -1,6 +1,5 @@
 package Views;
 
-import Controllers.LobbyController;
 import Controllers.MenuController;
 import Models.RMIInterface;
 import Models.Speler;
@@ -14,7 +13,6 @@ import javafx.scene.layout.VBox;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
 
 public class EndGameScene extends Scene implements SceneInitialiser {
 
@@ -88,7 +86,6 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	private void setScoreboard(){
 
 		spelerObj = new ArrayList<>();
-
 
 		try {
 			spelerObj = RMIstub.getPlayerListObject();

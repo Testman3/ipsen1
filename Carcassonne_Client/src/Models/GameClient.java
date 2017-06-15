@@ -99,7 +99,7 @@ public class GameClient {
 				view.updateView(this);
 				beurt = RmiStub.getBeurt();
 			}
-			if (RmiStub.getKaartenLeft() <= 69) {
+			if (RmiStub.getKaartenLeft() <= 0) {
 				enableThread = false;
 
 				Platform.runLater(() -> {

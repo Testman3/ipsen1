@@ -14,7 +14,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.*;
+import javafx.scene.transform.Affine;
 
 import java.lang.reflect.Array;
 import java.rmi.RemoteException;
@@ -27,7 +29,11 @@ public class GameScene extends Scene {
 	int sceneWidth = (int) getWidth();
 
 	MenuController controller;
-	public MenuController getController() { return controller;}
+
+	public MenuController getController() {
+		return controller;
+	}
+
 	GameController gameController;
 
 	BorderPane mainPane;
@@ -61,7 +67,6 @@ public class GameScene extends Scene {
 		this.controller = menuController;
 
 
-
 		createTileGrid(100, 100);
 
 		init();
@@ -87,6 +92,8 @@ public class GameScene extends Scene {
 				horizontal.getChildren().add(tileView);
 			}
 		}
+
+
 		tilesPane.getChildren().add(verticaal);
 		tilesPane.setId("hallo");
 		//Verplaatsen over de map met W A S D keys, Speed is de snelheid dat je verplaatst.
@@ -102,29 +109,54 @@ public class GameScene extends Scene {
 				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
 			}
 			System.out.println("COORDS + " + verticaal.getLayoutX() + " " + verticaal.getLayoutY());
+			System.out.println("x: " + tilesPane.getScaleX() + " y: " + tilesPane.getScaleY());
 		});
 
-		setOnScroll(event -> {
-			if (event.getDeltaY() > 0) {
-				if (scale < 10) {
-					scale = verticaal.getScaleX() * 1.05;
-					verticaal.setScaleY(scale);
-					verticaal.setScaleX(scale);
-					verticaal.setLayoutX(verticaal.getLayoutX() / verticaal.getScaleX());
-					verticaal.setLayoutY(verticaal.getLayoutY() / verticaal.getScaleY());
-				}
-			}
-			if (event.getDeltaY() < 0) {
-				if (scale > 0.8) {
-					scale = verticaal.getScaleX() * 0.95;
-					verticaal.setScaleY(scale);
-					verticaal.setScaleX(scale);
-					verticaal.setLayoutX(verticaal.getLayoutX() / verticaal.getScaleX());
-					verticaal.setLayoutY(verticaal.getLayoutY() / verticaal.getScaleY());
 
-				}
+		final Affine accumulatedScales = new Affine();
+		tilesPane.getTransforms().add(accumulatedScales);
+
+		//Half werkende zoom functie
+		setOnScroll(e -> {
+
+			e.consume();
+
+			if (e.getDeltaY() == 0) {
+				return;
 			}
+
+			double scaleFactor =
+					(e.getDeltaY() > 0)
+							? 1.1
+							: 1 / 1.1;
+
+			accumulatedScales.appendScale(scaleFactor, scaleFactor, e.getX(), e.getY());
+
+
+			if (accumulatedScales.getMxx() < 1.0) {
+				System.out.println("BoundsX");
+				accumulatedScales.setMxx(1.0); //werkt niet
+			}
+
+			if (accumulatedScales.getMyy() < 1.0) {
+				System.out.println("BoundsY");
+				accumulatedScales.setMyy(1.0); //werkt niet
+			}
+
+			if (accumulatedScales.getMxx() > 6) {
+				System.out.println("BoundsX");
+				accumulatedScales.setMxx(6.0); //werkt niet
+
+			}
+
+			if (accumulatedScales.getMyy() > 6) {
+				System.out.println("BoundsY");
+				accumulatedScales.setMyy(6.0); //werkt niet
+
+			}
+
 		});
+
 
 	}
 
@@ -166,8 +198,8 @@ public class GameScene extends Scene {
 		tilesPane.getChildren().add(mainPane);
 		mainPane.setId("test");
 		mainPane.setPrefSize(1280, 720);
-		mainPane.setMaxSize(1280,720);
-		mainPane.setMinSize(1280,720);
+		mainPane.setMaxSize(1280, 720);
+		mainPane.setMinSize(1280, 720);
 		mainPane.setPickOnBounds(false);
 
 		VBox links = new VBox(5);
@@ -209,8 +241,8 @@ public class GameScene extends Scene {
 		playerViews = new SpelerView[5];
 		for (int i = 0; i < 5; i++) {
 			playerViews[i] = new SpelerView();
-			playerViews[i].setMinSize(150,70);
-			playerViews[i].setMaxSize(150,70);
+			playerViews[i].setMinSize(150, 70);
+			playerViews[i].setMaxSize(150, 70);
 			//playerViews[i].maxHeightProperty().bind(heightProperty().multiply(0.1));
 			//playerViews[i].maxWidthProperty().bind(widthProperty().multiply(0.1));
 			links.getChildren().add(playerViews[i]);
@@ -233,7 +265,7 @@ public class GameScene extends Scene {
 		KaartenLeft.setId("standardLabel");
 
 
-	//		mainPane.setCenter(ingamePane);
+		//		mainPane.setCenter(ingamePane);
 	}
 
 	public void plaatsKaart(GameClient client, String id, int x, int y) {
@@ -250,11 +282,12 @@ public class GameScene extends Scene {
 	public void showKaart(GameClient client) {
 		ShowKaart.setId(client.kaartPlaatsId);
 
-		
 
 	}
+
 	int kaartenOver = 0;
 	ArrayList<Speler> alleSpelers = null;
+
 	public void updateView(GameClient client) {
 		TileStump stump = null;
 
@@ -271,9 +304,9 @@ public class GameScene extends Scene {
 		addTilePreviews(stump.getX(), stump.getY());
 		System.out.println(stump.getX() + " " + stump.getY() + " " + stump.getRotation());
 		Platform.runLater(() -> {
-		KaartenLeft.setText("Kaarten over " + kaartenOver);
-			for (int i = 0; i < playerViews.length ; i++) {
-				if(i == alleSpelers.size()){
+			KaartenLeft.setText("Kaarten over " + kaartenOver);
+			for (int i = 0; i < playerViews.length; i++) {
+				if (i == alleSpelers.size()) {
 					return;
 				}
 				playerViews[i].setNaam(alleSpelers.get(i).getNaam());
