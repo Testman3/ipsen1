@@ -10,7 +10,6 @@ import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,10 +22,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * Deze class zorgt ervoor dat het daadwerkelijke speelbord goed wordt weergegeven.
+ */
 public class GameScene extends Scene {
 
 
