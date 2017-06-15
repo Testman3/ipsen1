@@ -288,7 +288,9 @@ public class GameScene extends Scene {
 	 * @param client
 	 * Placeholder
 	 * @param x
+	 * x co-ordinaat
 	 * @param y
+	 * y co-ordinaat
 	 */
 	public void plaatsKaart(GameClient client, int x, int y) {
 		ShowKaart.setId("Kaartview");
@@ -301,14 +303,23 @@ public class GameScene extends Scene {
 
 	}
 
+	/**
+	 * Deze functie laat de neergelegde kaart zien
+	 * @param client
+	 * Geef GameClient mee
+	 */
 	public void showKaart(GameClient client) {
 		ShowKaart.setId(client.kaartPlaatsId);
-
-		
-
 	}
+
 	int kaartenOver = 0;
 	ArrayList<Speler> alleSpelers = null;
+
+	/**
+	 * Deze functie zorgt ervoor dat de view wordt geüpdatet
+	 * @param client
+	 * Geef GameClient mee
+	 */
 	public void updateView(GameClient client) {
 		TileStump stump = null;
 
@@ -335,6 +346,5 @@ public class GameScene extends Scene {
 			}
 		});
 	}
-
 
 }

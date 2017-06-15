@@ -19,6 +19,9 @@ import javafx.scene.layout.VBox;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * Deze class zorgt voor een juiste weergave van de LobbyScene
+ */
 public class LobbyScene extends Scene implements SceneInitialiser {
 
 	private SmartButton leaveGame;
@@ -40,9 +43,16 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	MenuController controller;
 	LobbyController lobbyController;
 
-	Thread lobbyThread;
+	private Thread lobbyThread;
 	ArrayList<String> allenamen;
 
+	/**
+	 * Constructor van de LobbyScene
+	 * @param controller
+	 * Geef de MenuController mee
+	 * @param lobbyController
+	 * Geef de lobbyController mee
+	 */
 	public LobbyScene(MenuController controller, LobbyController lobbyController) {
 		super(new BorderPane(), 1280, 720);
 		lobbyPane = (BorderPane) this.getRoot();
@@ -143,6 +153,10 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 	}
 
+	/**
+	 * Deze functie wordt aangeroepen wanneer je deze scene inkomt. er worden een aantal variabelen goedgezet, en de
+	 * thread runt de Update functie elke 500 Ms
+	 */
 	public void Join() {
 		enableThread = true;
 		lobbyThread = new Thread(() -> {
@@ -163,7 +177,10 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 	boolean starten = false;
 
-	public void Update() {
+	/**
+	 * Deze functie update alle elementen in de lobby voor de client
+	 */
+	private void Update() {
 		allenamen = new ArrayList<String>();
 
 		try {
@@ -174,7 +191,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
-
 
 		Platform.runLater(() -> {
 			if (starten) {
@@ -216,6 +232,9 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		});
 	}
 
+	/**
+	 * Deze functie plaatst een startGame knop in de lobby voor de speler die de lobby leader is
+	 */
 	public static void setAbleToStartGame() {
 		knoppenBox.getChildren().add(startGame);
 	}
