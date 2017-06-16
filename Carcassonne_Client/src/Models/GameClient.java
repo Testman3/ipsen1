@@ -168,13 +168,12 @@ public class GameClient {
 				}
 			}
 
-			if (RmiStub.getKaartenLeft() <= 0) {
+			if (RmiStub.getisEindeSpel()) {
 				enableThread = false;
 
 				Platform.runLater(() -> {
 					view.getController().getEndGameScene().join(RmiStub);
 					view.getController().setEndGameScene();
-
 				});
 
 

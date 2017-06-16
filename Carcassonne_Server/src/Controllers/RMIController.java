@@ -160,4 +160,9 @@ public class RMIController implements RMIInterface {
 	public ArrayList<Point> getHorigeToRemove() throws RemoteException {
 		return serverManager.bordController.bord.getVerwijderHorigeDezeRonde();
 	}
+
+	@Override
+	public boolean getisEindeSpel() throws RemoteException {
+		return serverManager.bordController.getIsGameVoorbij();
+	}
 }
