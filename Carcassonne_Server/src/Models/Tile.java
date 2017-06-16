@@ -126,7 +126,7 @@ public class Tile {
 	public int getX(){
 		return x;
 	}
-
+	public boolean getKlooster(){return this.heeftKlooster;};
 	public int getY() {
 		return y;
 	}
@@ -136,7 +136,44 @@ public class Tile {
 	public String getKaartId() {
 		return imageID;
 	}
-	public 	Horige.Posities[] getHorigenZijdes() { return horigenZijdes; }
+
+	public Horige.Posities[] getHorigenZijdes() { return horigenZijdes; }
+
+	public boolean getHeeftBonus(){
+		return heeftBonus;
+	}
+
+	public Zijde getMiddenZijdes(){
+		return this.middenZijde;
+	}
+
+	public Zijde getNoordZijde() {
+		return noordZijde;
+	}
+
+	public Zijde getOostZijde() {
+		return oostZijde;
+	}
+
+	public Zijde getZuidZijde() {
+		return zuidZijde;
+	}
+
+	public Zijde getWestZijde() {
+		return westZijde;
+	}
+
+	public Zijde getMiddenZijde() {
+		return middenZijde;
+	}
+
+	public boolean isHeeftKlooster() {
+		return heeftKlooster;
+	}
+
+	public boolean isHeeftBonus() {
+		return heeftBonus;
+	}
+
 	public boolean getHeeftKlooster() { return heeftKlooster; }
-	public Zijde getMiddenZijde() { return middenZijde; }
 }
