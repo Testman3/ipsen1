@@ -18,10 +18,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.awt.*;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -69,6 +71,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
         this.menuController = controller;
         this.gameClient = gameClient;
         initGui();
+		initSettings();
     }
 
     @Override
@@ -121,54 +124,74 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
         //Functie InitAction aanroepen
         initAction();
-        initSettings();
     }
 
     private void initSettings(){
 
+		backgroud = new ImageView();
 		settingsPane = new StackPane();
-		settingsPane.getStylesheets().add("style.css");
-
-
 		buttonVBox = new VBox();
 		soundBox = new HBox(5);
 		spraakBox = new HBox(5);
 		fullscreenBox = new HBox(5);
-
 		soundCheckBox = new CheckBox();
 		spraakCheckBox = new CheckBox();
 		fullscreenCheckBox = new CheckBox();
-
-		soundCheckBox.setId("checkBox");
-		soundCheckBox.setSelected(true);
-		spraakCheckBox.setId("checkBox");
-		fullscreenCheckBox.setId("checkBox");
-
 		titel = new SmartLabel("Instellingen");
 		sounds = new SmartLabel("Geluid");
 		spraak = new SmartLabel("Spraakondersteuning");
 		fullscreen = new SmartLabel("Fullscreen");
 		backtoMenu = new SmartButton("Terug naar menu");
 
+		//Setup Css
+		settingsPane.getStylesheets().add("style.css");
+
+		//set Id
+		backgroud.setId("BackgroundMenu");
+		soundCheckBox.setId("checkBox");
+		spraakCheckBox.setId("checkBox");
+		fullscreenCheckBox.setId("checkBox");
 		titel.setId("title");
 		sounds.setId("standardLabel");
 		spraak.setId("standardLabel");
 		fullscreen.setId("standardLabel");
+		backtoMenu.setId("standardLabel");
 
-		soundBox.getChildren().addAll(sounds, soundCheckBox);
-		spraakBox.getChildren().addAll(spraak, spraakCheckBox);
-		fullscreenBox.getChildren().addAll(fullscreen, fullscreenCheckBox);
+		//set sound checkbox
+		System.out.println("geluid = " + SettingsScene.optieGeluid );
+		soundCheckBox.setSelected(SettingsScene.optieGeluid );
+		spraakCheckBox.setSelected(menuController.getSettingsScene().isOptieSpreken());
+		fullscreenCheckBox.setSelected(menuController.getSettingsScene().isFullScreen());
 
-		buttonVBox.getChildren().addAll(titel, soundBox, spraakBox, fullscreenBox, backtoMenu);
+		//Set Background Size
+		backgroud.setFitHeight(800);
+		backgroud.setFitWidth(600);
 
-		settingsPane.getChildren().add(buttonVBox);
-
+		//set Alignment
+		soundBox.setAlignment(Pos.CENTER);
+		spraakBox.setAlignment(Pos.CENTER);
+		fullscreenBox.setAlignment(Pos.CENTER);
+		buttonVBox.setAlignment(Pos.CENTER);
 		buttonVBox.setAlignment(Pos.CENTER);
 		soundBox.setAlignment(Pos.CENTER);
 		spraakBox.setAlignment(Pos.CENTER);
 		fullscreenBox.setAlignment(Pos.CENTER);
 
+		//add Children
+		soundBox.getChildren().addAll(sounds, soundCheckBox);
+		spraakBox.getChildren().addAll(spraak, spraakCheckBox);
+		fullscreenBox.getChildren().addAll(fullscreen, fullscreenCheckBox);
+		buttonVBox.getChildren().addAll(titel, soundBox, spraakBox, fullscreenBox, backtoMenu);
+		settingsPane.getChildren().addAll(backgroud, buttonVBox);
+
+		//Set Stackpane Background
+		settingsPane.setBackground(Background.EMPTY);
+
+		//Add to scene
 		settingsScene = new Scene(settingsPane);
+		settingsScene.setFill(null);
+
+		initActionSettings();
 
 	}
 
@@ -224,6 +247,30 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
         });
 
     }
+
+    public void initActionSettings(){
+
+    	//Geluid
+		soundCheckBox.setOnAction(event -> {
+			SettingsScene.optieGeluid = soundCheckBox.isSelected();
+		});
+
+		//Spraak
+		spraakCheckBox.setOnAction(event -> {
+			menuController.getSettingsScene().setOptieSpreken(soundCheckBox.isSelected());
+
+		});
+
+		//FullScreen
+		fullscreenCheckBox.setOnAction(event -> {
+			menuController.getSettingsScene().setFullScreen(this.fullscreenCheckBox.isSelected());
+		});
+
+    	//Terug naar menu
+    	backtoMenu.setOnAction(event -> {
+    		stage.setScene(menuScene);
+		});
+	}
 
 	/**
 	 * Haalt de menuStage op.

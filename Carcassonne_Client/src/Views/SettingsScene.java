@@ -130,4 +130,28 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 	}
 
+	public static boolean isOptieSpreken() {
+		return optieSpreken;
+	}
+
+	public static void setOptieSpreken(boolean optieSpreken) {
+		SettingsScene.optieSpreken = optieSpreken;
+	}
+
+	public static boolean isFullScreen() {
+		return fullScreen;
+	}
+
+	public static void setFullScreen(boolean fullScreen) {
+		SettingsScene.fullScreen = fullScreen;
+	}
+
+	public static boolean isOptieGeluid() {
+		return optieGeluid;
+	}
+
+	public static void setOptieGeluid(boolean optieGeluid) {
+		SettingsScene.optieGeluid = optieGeluid;
+	}
+
 }
