@@ -19,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -32,9 +33,11 @@ public class GameScene extends Scene {
 	private int sceneHeight = (int) getHeight();
 	private int sceneWidth = (int) getWidth();
 	private MenuController controller;
+
 	public MenuController getController() {
 		return controller;
 	}
+
 	public GameController gameController;
 	private BorderPane mainPane;
 	private Pane tilesPane;
@@ -50,7 +53,7 @@ public class GameScene extends Scene {
 	private Button menuButton;
 
 
-	private	Point laatstGeplaatstLocatie;
+	private Point laatstGeplaatstLocatie;
 
 	/**
 	 * Constructor van de GameScene
@@ -148,10 +151,7 @@ public class GameScene extends Scene {
 				return;
 			}
 
-			double scaleFactor =
-					(e.getDeltaY() > 0)
-							? 1.1
-							: 1 / 1.1;
+			double scaleFactor = (e.getDeltaY() > 0) ? 1.0 : (1 / 1.1);
 
 			tilesPane.setScaleX(tilesPane.getScaleX() * scaleFactor);
 			tilesPane.setScaleY(tilesPane.getScaleY() * scaleFactor);
@@ -173,10 +173,7 @@ public class GameScene extends Scene {
 			}
 
 		});
-
-
 	}
-
 
 	/**
 	 * Plaatst previews om een tile heen, deze methode mag alleen gerunt worden nadat er een tile geplaatst is
@@ -225,7 +222,7 @@ public class GameScene extends Scene {
 		HBox onder = new HBox();
 		onder.setPickOnBounds(false);
 		onder.getChildren().add(links);
-		onder.setPadding(new Insets(0, 0, 0, 0));
+
 
 		for (int i = 0; i < 7; i++) {
 			ImageView horige = new ImageView();
@@ -234,6 +231,7 @@ public class GameScene extends Scene {
 			horige.setId("Horige");
 			onder.getChildren().add(horige);
 		}
+
 
 		Button button = new Button("Draaien");
 		button.setId("standardLabel");
@@ -319,6 +317,7 @@ public class GameScene extends Scene {
 	public void verwijdwerHorigePreviews() {
 		tileViews[laatstGeplaatstLocatie.getX()][laatstGeplaatstLocatie.getY()].verwijderHorigePreviews();
 	}
+
 	/**
 	 * Deze functie laat de neergelegde kaart zien
 	 *
@@ -341,7 +340,7 @@ public class GameScene extends Scene {
 		tilesPane.setEffect(null);
 	}
 
-	public void removeHorige(int x, int y){
+	public void removeHorige(int x, int y) {
 		tileViews[x][y].verwijderHorige();
 	}
 

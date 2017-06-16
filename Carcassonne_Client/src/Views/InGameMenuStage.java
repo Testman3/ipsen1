@@ -160,8 +160,8 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		//set sound checkbox
 		System.out.println("geluid = " + SettingsScene.optieGeluid );
 		soundCheckBox.setSelected(SettingsScene.optieGeluid );
-		spraakCheckBox.setSelected(menuController.getSettingsScene().isOptieSpreken());
-		fullscreenCheckBox.setSelected(menuController.getSettingsScene().isFullScreen());
+		spraakCheckBox.setSelected(SettingsScene.optieSpreken);
+		fullscreenCheckBox.setSelected(SettingsScene.fullScreen);
 
 		//Set Background Size
 		backgroud.setFitHeight(800);
@@ -228,7 +228,11 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 					exitConfirmation.showAndWait().ifPresent(response -> {
 						if (response == ButtonType.OK) {
 							try {
+
 								gameClient.getRmiStub().leaveGame(gameClient.getSpelerNaam());
+
+								gameClient.getRmiStub().beeindigenBeurt(gameClient.getSpelerNaam());
+
 								gameClient.getRmiStub().removePlayer(gameClient.getSpelerNaam());
 								System.exit(0);
 							} catch (RemoteException e) {
@@ -257,13 +261,13 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
 		//Spraak
 		spraakCheckBox.setOnAction(event -> {
-			menuController.getSettingsScene().setOptieSpreken(soundCheckBox.isSelected());
+			SettingsScene.optieSpreken = spraakCheckBox.isSelected();
 
 		});
 
 		//FullScreen
 		fullscreenCheckBox.setOnAction(event -> {
-			menuController.getSettingsScene().setFullScreen(this.fullscreenCheckBox.isSelected());
+			SettingsScene.fullScreen = fullscreenCheckBox.isSelected();
 		});
 
     	//Terug naar menu
