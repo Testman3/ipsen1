@@ -173,6 +173,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	 */
 	private void Update() {
 		allenamen = new ArrayList<String>();
+		int playerNummer;
 
 		try {
 			allenamen = lobbyController.RMIstub.getPlayerList();
@@ -185,6 +186,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 		Platform.runLater(() -> {
 			if (starten) {
+				controller.getGameScene().setHorigeKleur(getplayerNummer());
+				controller.getGameScene().setHorigeKleur(getplayerNummer());
 				controller.setGameScene();
 				controller.getGameStage().setResizable(false);
 				controller.getGameStage().setMinHeight(720);
@@ -234,6 +237,16 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	 */
 	public static void setAbleToStartGame() {
 		knoppenBox.getChildren().add(startGame);
+	}
+
+	public int getplayerNummer() {
+		int playerNummer = 0;
+		for (int i = 0; i < allenamen.size(); i++) {
+			if (allenamen.get(i).equals(controller.getSpelernaam())) {
+				playerNummer = i;
+			}
+		}
+		return playerNummer;
 	}
 
 }
