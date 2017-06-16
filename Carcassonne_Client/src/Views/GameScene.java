@@ -62,7 +62,7 @@ public class GameScene extends Scene {
 	 */
 	public GameScene(MenuController menuController) {
 		//	super(new Pane(), 1280, 720);
-		super(new Pane(), 1280, 720);
+		super(new Pane(), 1260, 700);
 		getStylesheets().add("style.css");
 		tilesPane = (Pane) this.getRoot();
 
