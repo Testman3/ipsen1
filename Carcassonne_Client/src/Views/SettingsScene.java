@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
+
 import static Views.MenuViewScene.mediaPlayer;
 
 /**
@@ -42,8 +43,8 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 	/**
 	 * Constructor van SettingsScene
-	 * @param controller
-	 * Geef MenuController mee
+	 *
+	 * @param controller Geef MenuController mee
 	 */
 	public SettingsScene(MenuController controller) {
 		super(new BorderPane(), 1280, 720);
@@ -55,6 +56,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	}
 
 	public void initGui() {
+
 
 		backToHome = new SmartButton("Terug naar hoofdmenu");
 		backToHome.setId("standardLabel");
@@ -101,9 +103,15 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		spraakBox.setAlignment(Pos.CENTER);
 		fullscreenBox.setAlignment(Pos.CENTER);
 
-		initAction();;
+		optieSpreken = spraakCheckBox.isSelected();
+		fullScreen = fullscreenCheckBox.isSelected();
+		optieGeluid = soundCheckBox.isSelected();
+
+		initAction();
+		;
 
 	}
+
 	public void initAction() {
 
 		spraakCheckBox.setOnAction(e -> {
@@ -113,9 +121,9 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		soundCheckBox.setOnAction(e -> {
 			optieGeluid = soundCheckBox.isSelected();
 
-			if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid ){
+			if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid) {
 				mediaPlayer.play();
-			} else if (optieGeluid == false){
+			} else if (optieGeluid == false) {
 				mediaPlayer.stop();
 			}
 		});
