@@ -80,6 +80,7 @@ public class Tile {
 	public String getImageID() {
 		return imageID;
 	}
+
 	public void draaiKaart() {
 
 		Zijde noordZijdetmp = noordZijde;
@@ -176,4 +177,11 @@ public class Tile {
 	}
 
 	public boolean getHeeftKlooster() { return heeftKlooster; }
+
+	public Horige.Posities[] getHorigePositie(int counter){
+		for (int i = 0; 1 < horigenZijdes.length; i++){
+
+		}
+		return this.horigenZijdes;
+	}
 }

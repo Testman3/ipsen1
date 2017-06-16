@@ -1,7 +1,6 @@
 package Models;
 
 import commonFunctions.Point;
-import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 

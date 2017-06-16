@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class BordController {
 
 	PuntenTeller puntenTeller;
-	Stapel kaartenStapel;
+	public Stapel kaartenStapel;
 	public Bord bord;
 	private boolean gameVoorbij = false;
 

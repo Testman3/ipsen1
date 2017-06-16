@@ -22,6 +22,15 @@ public class Horige implements Serializable {
 		return speler;
 	}
 
+	public String getSpelerString(){
+		return speler.getNaam();
+	}
+
+
+	public String getPositieString(){
+		return positie.toString();
+	}
+
 	public enum Posities {
 
 		NOORD(40,0),
@@ -43,5 +52,6 @@ public class Horige implements Serializable {
 		public int getY() {
 			return y;
 		}
+
 	}
 }
