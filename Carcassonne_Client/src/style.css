@@ -34,9 +34,8 @@
     -fx-font-size: 10em;
 }
 #test{
-	-fx-background-image: url("Tet_Back_test.png");
-	-fx-background-position: 0, 0, 0, 0;
-	-fx-background-size: stretch;
+	-fx-background-image: url("UI720p.png");
+	-fx-background-size: 100%;
 }
 #Speler{
 -fx-image: url("Text_Back_Player.png");
