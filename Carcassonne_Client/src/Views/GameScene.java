@@ -7,6 +7,7 @@ import Models.RMIInterface;
 import Models.Speler;
 import Models.TileStump;
 import commonFunctions.Point;
+import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -33,11 +34,6 @@ public class GameScene extends Scene {
 	private int sceneHeight = (int) getHeight();
 	private int sceneWidth = (int) getWidth();
 	private MenuController controller;
-
-	public MenuController getController() {
-		return controller;
-	}
-
 	public GameController gameController;
 	private BorderPane mainPane;
 	private Pane tilesPane;
@@ -50,10 +46,12 @@ public class GameScene extends Scene {
 	private double scale;
 	public RMIInterface RmiStub;
 	private SmartLabel KaartenLeft;
-	private Button menuButton;
-
-
-	private Point laatstGeplaatstLocatie;
+	private SmartButton menuButton;
+	private	Point laatstGeplaatstLocatie;
+	private SmartButton eindigButton;
+	private SmartButton draaiButton;
+	private HBox onderkant;
+	private VBox links;
 
 	/**
 	 * Constructor van de GameScene
@@ -71,6 +69,110 @@ public class GameScene extends Scene {
 		createTileGrid(100, 100);
 
 		init();
+	}
+
+	private void init() {
+		// new shit
+		mainPane = new BorderPane();
+		links = new VBox(5);
+		onderkant = new HBox();
+		draaiButton = new SmartButton("Draaien");
+		eindigButton = new SmartButton("Beëindig beurt");
+		menuButton = new SmartButton("Menu");
+		playerViews = new SpelerView[5];
+		ShowKaart = new ImageView();
+		KaartenLeft = new SmartLabel("Kaarten over: 72");
+
+		// id
+		mainPane.setId("test");
+		draaiButton.setId("standardLabel");
+		eindigButton.setId("standardLabel");
+		menuButton.setId("standardLabel");
+		ShowKaart.setId("Kaartview");
+		KaartenLeft.setId("standardLabel");
+
+		//Size BorderPane
+		mainPane.setPrefSize(1280, 720);
+		mainPane.setMaxSize(1280, 720);
+		mainPane.setMinSize(1280, 720);
+
+		//Set PickOnBounds
+		mainPane.setPickOnBounds(false);
+		links.setPickOnBounds(false);
+		onderkant.setPickOnBounds(false);
+
+		// Set padding
+		onderkant.setPadding(new Insets(0, 0, 0, 0));
+
+		//Prop
+		menuButton.minHeightProperty().bind(heightProperty().multiply(0.2));
+		menuButton.minWidthProperty().bind(widthProperty().multiply(0.11));
+		ShowKaart.fitHeightProperty().bind(heightProperty().multiply(0.2));
+		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
+
+		//GetChilderen
+		links.getChildren().add(menuButton);
+
+		//Speler Borden
+		for (int i = 0; i < 5; i++) {
+			playerViews[i] = new SpelerView();
+			playerViews[i].setMinSize(150, 70);
+			playerViews[i].setMaxSize(150, 70);
+			//playerViews[i].maxHeightProperty().bind(heightProperty().multiply(0.1));
+			//playerViews[i].maxWidthProperty().bind(widthProperty().multiply(0.1));
+			links.getChildren().add(playerViews[i]);
+		}
+
+		links.getChildren().add(ShowKaart);
+		links.getChildren().add(KaartenLeft);
+		tilesPane.getChildren().add(mainPane);
+		onderkant.getChildren().add(links);
+
+		//Horige
+		for (int i = 0; i < 7; i++) {
+			ImageView horige = new ImageView();
+			horige.fitHeightProperty().bind(heightProperty().multiply(0.07));
+			horige.fitWidthProperty().bind(horige.fitHeightProperty());
+			horige.setId("Horige");
+			onderkant.getChildren().add(horige);
+		}
+
+		onderkant.getChildren().add(draaiButton);
+		onderkant.getChildren().add(eindigButton);
+
+
+
+
+		mainPane.setBottom(onderkant);
+
+
+
+
+
+
+
+
+		initAction();
+
+	}
+
+	public void initAction(){
+
+		draaiButton.setOnAction(e -> {
+			gameController.klikDraaiKaart();
+		});
+
+		eindigButton.setOnAction(e -> {
+			gameController.klikBeeindigbeurt();
+		});
+
+		ShowKaart.setOnMouseClicked(e -> {
+			gameController.klikPakKaart();
+		});
+
+		menuButton.setOnAction(event -> {
+			controller.showInGameMenu();
+		});
 	}
 
 	/**
@@ -111,8 +213,41 @@ public class GameScene extends Scene {
 			}
 		});
 
+		//Zoom Functie(Scrol event)
+		setOnScroll(e -> {
+			e.consume();
 
-		//Eventueel om te draggen. Werkt niet goed met grensen.
+			if (e.getDeltaY() == 0) {
+				return;
+			}
+
+			double scaleFactor = (e.getDeltaY() > 0) ? 1.0 : (1 / 1.1);
+
+			tilesPane.setScaleX(tilesPane.getScaleX() * scaleFactor);
+			tilesPane.setScaleY(tilesPane.getScaleY() * scaleFactor);
+
+			if (tilesPane.getScaleX() < 1.0) {
+				tilesPane.setScaleX(1.0);
+			}
+
+			if (tilesPane.getScaleY() < 1.0) {
+				tilesPane.setScaleY(1.0);
+			}
+
+			if (tilesPane.getScaleX() > 6.0) {
+				tilesPane.setScaleX(6.0);
+			}
+
+			if (tilesPane.getScaleY() > 6.0) {
+				tilesPane.setScaleY(6.0);
+			}
+
+		});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////Eventueel om te draggen. Werkt niet goed met grensen.////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*	tilesPane.setOnMousePressed(e -> {
 			xOffset = e.getX();
 			yOffset = e.getY();
@@ -143,36 +278,9 @@ public class GameScene extends Scene {
 		});
 */
 
-		setOnScroll(e -> {
-
-			e.consume();
-
-			if (e.getDeltaY() == 0) {
-				return;
-			}
-
-			double scaleFactor = (e.getDeltaY() > 0) ? 1.0 : (1 / 1.1);
-
-			tilesPane.setScaleX(tilesPane.getScaleX() * scaleFactor);
-			tilesPane.setScaleY(tilesPane.getScaleY() * scaleFactor);
-
-			if (tilesPane.getScaleX() < 1.0) {
-				tilesPane.setScaleX(1.0);
-			}
-
-			if (tilesPane.getScaleY() < 1.0) {
-				tilesPane.setScaleY(1.0);
-			}
-
-			if (tilesPane.getScaleX() > 6.0) {
-				tilesPane.setScaleX(6.0);
-			}
-
-			if (tilesPane.getScaleY() > 6.0) {
-				tilesPane.setScaleY(6.0);
-			}
-
-		});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 
 	/**
@@ -203,82 +311,6 @@ public class GameScene extends Scene {
 		if (tileViews[x][y].getimgId().contains("Empty")) {
 			tileViews[x][y].setKaartId("KaartPreview");
 		}
-
-	}
-
-	private void init() {
-
-		mainPane = new BorderPane();
-		tilesPane.getChildren().add(mainPane);
-		mainPane.setId("test");
-		mainPane.setPrefSize(1280, 720);
-		mainPane.setMaxSize(1280, 720);
-		mainPane.setMinSize(1280, 720);
-		mainPane.setPickOnBounds(false);
-
-		VBox links = new VBox(5);
-		links.setPickOnBounds(false);
-
-		HBox onder = new HBox();
-		onder.setPickOnBounds(false);
-		onder.getChildren().add(links);
-
-
-		for (int i = 0; i < 7; i++) {
-			ImageView horige = new ImageView();
-			horige.fitHeightProperty().bind(heightProperty().multiply(0.07));
-			horige.fitWidthProperty().bind(horige.fitHeightProperty());
-			horige.setId("Horige");
-			onder.getChildren().add(horige);
-		}
-
-
-		Button button = new Button("Draaien");
-		button.setId("standardLabel");
-		onder.getChildren().add(button);
-		button.setOnAction(e -> {
-			gameController.klikDraaiKaart();
-		});
-
-		button = new Button("Beëindig beurt");
-		button.setId("standardLabel");
-		onder.getChildren().add(button);
-		button.setOnAction(e -> {
-			gameController.klikBeeindigbeurt();
-		});
-
-
-		menuButton = new Button("Menu");
-		menuButton.minHeightProperty().bind(heightProperty().multiply(0.2));
-		menuButton.minWidthProperty().bind(widthProperty().multiply(0.11));
-		menuButton.setId("standardLabel");
-		links.getChildren().add(menuButton);
-
-		menuButton.setOnAction(event -> controller.showInGameMenu());
-
-		playerViews = new SpelerView[5];
-		for (int i = 0; i < 5; i++) {
-			playerViews[i] = new SpelerView();
-			playerViews[i].setMinSize(150, 70);
-			playerViews[i].setMaxSize(150, 70);
-			//playerViews[i].maxHeightProperty().bind(heightProperty().multiply(0.1));
-			//playerViews[i].maxWidthProperty().bind(widthProperty().multiply(0.1));
-			links.getChildren().add(playerViews[i]);
-		}
-
-		ShowKaart = new ImageView();
-		ShowKaart.fitHeightProperty().bind(heightProperty().multiply(0.2));
-		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
-		ShowKaart.setId("Kaartview");
-		links.getChildren().add(ShowKaart);
-		ShowKaart.setOnMouseClicked(e -> {
-			gameController.klikPakKaart();
-		});
-
-		mainPane.setBottom(onder);
-		KaartenLeft = new SmartLabel("Kaarten over: 72");
-		links.getChildren().add(KaartenLeft);
-		KaartenLeft.setId("standardLabel");
 
 	}
 
@@ -330,17 +362,7 @@ public class GameScene extends Scene {
 			ShowKaart.setId(client.kaartPlaatsId);
 	}
 
-	public void setSceneBlur() {
-		this.mainPane.setEffect(new GaussianBlur());
-		tilesPane.setEffect(new GaussianBlur());
-	}
-
-	public void hideSceneBlur() {
-		this.mainPane.setEffect(null);
-		tilesPane.setEffect(null);
-	}
-
-	public void removeHorige(int x, int y) {
+	public void removeHorige(int x, int y){
 		tileViews[x][y].verwijderHorige();
 	}
 
@@ -385,4 +407,17 @@ public class GameScene extends Scene {
 		});
 	}
 
+	public MenuController getController() {
+		return controller;
+	}
+
+	public void setSceneBlur() {
+		this.mainPane.setEffect(new GaussianBlur());
+		tilesPane.setEffect(new GaussianBlur());
+	}
+
+	public void hideSceneBlur() {
+		this.mainPane.setEffect(null);
+		tilesPane.setEffect(null);
+	}
 }
