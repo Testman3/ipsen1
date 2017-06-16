@@ -317,7 +317,6 @@ public class GameScene extends Scene {
 	}
 
 	public void verwijdwerHorigePreviews() {
-		System.out.println("Horige verwijderen @ " + laatstGeplaatstLocatie.getX() + " " + laatstGeplaatstLocatie.getY());
 		tileViews[laatstGeplaatstLocatie.getX()][laatstGeplaatstLocatie.getY()].verwijderHorigePreviews();
 	}
 	/**

@@ -15,6 +15,7 @@ public class BordController {
 	PuntenTeller puntenTeller;
 	Stapel kaartenStapel;
 	public Bord bord;
+	private boolean gameVoorbij = false;
 
 	/**
 	 * Maak een bordcontroller aan met een nieuw bord en een nieuwe kaarten stapel
@@ -121,6 +122,16 @@ public class BordController {
 	public void volgendeBeurt() {
 		puntenTeller.BerekenPunten(kaartenStapel.getTurnTile(), bord);
 		bord.geefSpelerBeurt();
+		isGameVoorbij();
+	}
 
+	public void isGameVoorbij() {
+		if(kaartenStapel.getKaartenOver() == 0){
+			gameVoorbij = true;
+		}
+	}
+
+	public boolean getIsGameVoorbij(){
+		return gameVoorbij;
 	}
 }

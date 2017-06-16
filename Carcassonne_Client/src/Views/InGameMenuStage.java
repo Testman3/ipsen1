@@ -9,17 +9,20 @@ import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 
 public class InGameMenuStage extends Stage implements SceneInitialiser{
@@ -33,6 +36,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private ImageView backgroud;
     private GameScene gameScene;
     private LobbyController lobbyController;
+    private AudioClip ding = new AudioClip(Paths.get("Sounds/ding.wav").toUri().toString());
 
     //settings
 	private StackPane settingsPane;
@@ -100,7 +104,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
         knoppen[0].setText("Spel opslaan");
         knoppen[1].setText("Instellingen");
         knoppen[2].setText("Handleiding");
-        knoppen[3].setText("Terug naar het hoofdmenu");
+        knoppen[3].setText("Spel afsluiten");
         knoppen[4].setText("Terug naar spel");
 
         allMenuItemsVBox.setAlignment(Pos.CENTER);
@@ -185,24 +189,29 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
             try {
                 Desktop.getDesktop().browse(handleidingDoc.toURI());
             } catch (IOException e1) {
-                System.out.println(e1);
+                System.out.println("");
             }
         });
 
-        //Terug naar hoofdMenu
+        //Spel afsluiten
 		knoppen[3].setOnAction(event -> {
 			Platform.runLater(() -> {
-				try {
-					lobbyController.getRmiStub().removePlayer(menuController.getSpelernaam());
-				} catch (RemoteException e) {
-					e.printStackTrace();
-				}
-				menuController.backToMainMenu();
-				menuController.hideInGameMenu();
+				Alert exitConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
 
+					ding.play();
+					exitConfirmation.showAndWait().ifPresent(response -> {
+						if (response == ButtonType.OK) {
+							try {
+								lobbyController.getRmiStub().removePlayer(menuController.getSpelernaam());
+								System.exit(0);
+							} catch (RemoteException e) {
+							e.printStackTrace();}
+						}
+						else if (response == ButtonType.CANCEL){
+							System.out.println("Canceled");
+						}
+					});
 			});
-
-
 		});
 
 		//Terug naar spel
