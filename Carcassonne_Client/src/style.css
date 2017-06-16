@@ -41,7 +41,7 @@
 -fx-image: url("Text_Back_Player.png");
 }
 #Kaartview{
-	-fx-image: url("Text_Back_Pot.png");
+	-fx-image: url("Text_Back_Pot_Met_Stapel.png");
 }
 
 #KaartenLeft{
