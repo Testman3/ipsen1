@@ -36,9 +36,17 @@ public class MenuController {
 
 		LobbyController lobbyController = new LobbyController();
 
+		int breedte = 1280;
+		int hoogte = 720;
+
+		if (System.getProperty("os.name").toLowerCase().contains("windows")){
+			breedte = 1260;
+			hoogte = 700;
+		}
+
 		this.gameStage = gameStage;
 		endGameScene = new EndGameScene(this);
-		gameScene = new GameScene(this);
+		gameScene = new GameScene(this, breedte, hoogte);
 		lobbyScene = new LobbyScene(this, lobbyController);
 		menuViewScene = new MenuViewScene(this);
 		preLobbyScene = new PreLobbyScene(this, lobbyController);

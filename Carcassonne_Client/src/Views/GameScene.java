@@ -63,9 +63,9 @@ public class GameScene extends Scene {
 	 *
 	 * @param menuController Geef MenuController mee
 	 */
-	public GameScene(MenuController menuController) {
+	public GameScene(MenuController menuController, int breedte, int hoogte) {
 		//	super(new Pane(), 1280, 720);
-		super(new Pane(), 1260, 700);
+		super(new Pane(), breedte, hoogte);
 		getStylesheets().add("style.css");
 		tilesPane = (Pane) this.getRoot();
 
