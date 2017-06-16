@@ -165,4 +165,10 @@ public class RMIController implements RMIInterface {
 	public boolean getisEindeSpel() throws RemoteException {
 		return serverManager.bordController.getIsGameVoorbij();
 	}
+
+	@Override
+	public void leaveGame(String naam) throws RemoteException {
+
+		serverManager.bordController.volgendeBeurtNaLeave(naam);
+	}
 }

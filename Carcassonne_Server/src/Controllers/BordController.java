@@ -125,6 +125,12 @@ public class BordController {
 		isGameVoorbij();
 	}
 
+	public void volgendeBeurtNaLeave(String naam){
+		if(bord.isSpelerBeurt(naam)){
+			bord.geefSpelerBeurt();
+		}
+
+	}
 	public void isGameVoorbij() {
 		if(kaartenStapel.getKaartenOver() == 0){
 			gameVoorbij = true;

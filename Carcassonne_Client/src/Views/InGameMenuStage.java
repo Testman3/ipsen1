@@ -11,16 +11,20 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 
 public class InGameMenuStage extends Stage implements SceneInitialiser{
@@ -34,6 +38,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private ImageView backgroud;
     private GameScene gameScene;
     private GameClient gameClient;
+    AudioClip ding = new AudioClip(Paths.get("Sounds/ding.wav").toUri().toString());
 
     //settings
 	private StackPane settingsPane;
@@ -193,13 +198,15 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
         //Spel afsluiten
 		knoppen[3].setOnAction(event -> {
 			Platform.runLater(() -> {
+
 				Alert exitConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
 
+				ding.play();
 					exitConfirmation.showAndWait().ifPresent(response -> {
 						if (response == ButtonType.OK) {
 							try {
-								gameClient.getRmiStub().beeindigenBeurt(menuController.getSpelernaam());
-								gameClient.getRmiStub().removePlayer(menuController.getSpelernaam());
+								gameClient.getRmiStub().leaveGame(gameClient.getSpelerNaam());
+								gameClient.getRmiStub().removePlayer(gameClient.getSpelerNaam());
 								System.exit(0);
 							} catch (RemoteException e) {
 							e.printStackTrace();}

@@ -191,6 +191,9 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				client.Join(controller.getSpelernaam());
 				client.setRmiStub(lobbyController.getRmiStub());
 				controller.getGameScene().gameController = Gamecontroller;
+				InGameMenuStage inGameMenuStage = new InGameMenuStage(controller, controller.getGameScene(), client);
+				controller.putIngameMenuInController(inGameMenuStage);
+				inGameMenuStage.hide();
 				enableThread = false;
 			}
 

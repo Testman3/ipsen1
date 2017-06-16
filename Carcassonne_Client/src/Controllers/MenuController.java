@@ -22,7 +22,6 @@ public class MenuController {
 	private SettingsScene settingsScene;
 	private CreditsScene creditsScene;
 	private InGameMenuStage inGameMenuStage;
-	private GameClient gameClient;
 
 	private String spelernaam;
 
@@ -45,13 +44,11 @@ public class MenuController {
 		preLobbyScene = new PreLobbyScene(this, lobbyController);
 		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
-		inGameMenuStage = new InGameMenuStage(this, gameScene, gameClient);
 
 		setMenuViewScene();
 		//setGameScene();
 		gameStage.setTitle("Carcassonne");
 		gameStage.getIcons().add(new Image("Afbeeldingen/gameIcon.png"));
-		this.inGameMenuStage.hide();
 		gameStage.show();
 		gameStage.setOnCloseRequest(e -> {
 			System.exit(0);
@@ -203,6 +200,7 @@ public class MenuController {
 		return creditsScene;
 	}
 
+	public void putIngameMenuInController(InGameMenuStage stage) {this.inGameMenuStage = stage;}
 	/**
 	 * Deze functie haalt de spelernaam op
 	 * @return spelernaam
