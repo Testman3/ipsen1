@@ -11,8 +11,8 @@ import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -52,6 +52,9 @@ public class GameScene extends Scene {
 	private SmartButton draaiButton;
 	private HBox onderkant;
 	private VBox links;
+	private VBox rest;
+	private HBox onderkantElement;
+	private HBox horigeBox;
 	Speler speler;
 
 
@@ -77,13 +80,17 @@ public class GameScene extends Scene {
 		// new shit
 		mainPane = new BorderPane();
 		links = new VBox(5);
-		onderkant = new HBox();
+		onderkant = new HBox(30);
 		draaiButton = new SmartButton("Draaien");
 		eindigButton = new SmartButton("Beëindig beurt");
 		menuButton = new SmartButton("Menu");
 		playerViews = new SpelerView[5];
 		ShowKaart = new ImageView();
+		horigeBox = new HBox(10);
 		KaartenLeft = new SmartLabel("Stapel: 72");
+		onderkantElement = new HBox(70);
+		rest = new VBox();
+
 
 		// id
 		mainPane.setId("test");
@@ -102,6 +109,8 @@ public class GameScene extends Scene {
 		mainPane.setPickOnBounds(false);
 		links.setPickOnBounds(false);
 		onderkant.setPickOnBounds(false);
+		rest.setPickOnBounds(false);
+		onderkantElement.setPickOnBounds(false);
 
 		// Set padding
 		onderkant.setPadding(new Insets(0, 0, 0, 0));
@@ -111,6 +120,10 @@ public class GameScene extends Scene {
 		menuButton.minWidthProperty().bind(widthProperty().multiply(0.11));
 		ShowKaart.fitHeightProperty().bind(heightProperty().multiply(0.2));
 		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
+
+		//setAlignment
+		rest.setAlignment(Pos.BOTTOM_CENTER);
+		onderkantElement.setAlignment(Pos.CENTER);
 
 		//GetChilderen
 		links.getChildren().add(menuButton);
@@ -128,22 +141,28 @@ public class GameScene extends Scene {
 		links.getChildren().add(ShowKaart);
 		links.getChildren().add(KaartenLeft);
 		tilesPane.getChildren().add(mainPane);
-		onderkant.getChildren().add(links);
 
 		//Horige
 		for (int i = 0; i < 7; i++) {
 			HorigeView horige = new HorigeView();
 			horige.fitHeightProperty().bind(heightProperty().multiply(0.07));
 			horige.fitWidthProperty().bind(horige.fitHeightProperty());
+			;
 			horige.setHorigeKleur("horigePaars");
-			onderkant.getChildren().add(horige);
+			horigeBox.getChildren().add(horige);
 		}
 
-		onderkant.getChildren().add(draaiButton);
-		onderkant.getChildren().add(eindigButton);
+		onderkantElement.getChildren().add(draaiButton);
+		onderkantElement.getChildren().add(horigeBox);
+		onderkantElement.getChildren().add(eindigButton);
+
+		rest.getChildren().add(onderkantElement);
+		onderkant.getChildren().add(links);
+		onderkant.getChildren().add(rest);
 
 
 		mainPane.setBottom(onderkant);
+
 
 
 		initAction();
