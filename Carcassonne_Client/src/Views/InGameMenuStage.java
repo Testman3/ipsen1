@@ -9,10 +9,11 @@ import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -32,6 +33,23 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private ImageView backgroud;
     private GameScene gameScene;
     private LobbyController lobbyController;
+
+    //settings
+	private StackPane settingsPane;
+    private Scene settingsScene;
+	private VBox buttonVBox;
+	private HBox soundBox;
+	private HBox spraakBox;
+	private HBox fullscreenBox;
+	private SmartLabel titelSettings;
+	private SmartLabel sounds;
+	private SmartLabel spraak;
+	private SmartLabel fullscreen;
+	private CheckBox soundCheckBox;
+	private CheckBox spraakCheckBox;
+	private CheckBox fullscreenCheckBox;
+	private SmartButton backtoMenu;
+
 
 	/**
 	 * Constructor van de ingamemenustage
@@ -97,7 +115,56 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
         //Functie InitAction aanroepen
         initAction();
+        initSettings();
     }
+
+    private void initSettings(){
+
+		settingsPane = new StackPane();
+		settingsPane.getStylesheets().add("style.css");
+
+
+		buttonVBox = new VBox();
+		soundBox = new HBox(5);
+		spraakBox = new HBox(5);
+		fullscreenBox = new HBox(5);
+
+		soundCheckBox = new CheckBox();
+		spraakCheckBox = new CheckBox();
+		fullscreenCheckBox = new CheckBox();
+
+		soundCheckBox.setId("checkBox");
+		soundCheckBox.setSelected(true);
+		spraakCheckBox.setId("checkBox");
+		fullscreenCheckBox.setId("checkBox");
+
+		titel = new SmartLabel("Instellingen");
+		sounds = new SmartLabel("Geluid");
+		spraak = new SmartLabel("Spraakondersteuning");
+		fullscreen = new SmartLabel("Fullscreen");
+		backtoMenu = new SmartButton("Terug naar menu");
+
+		titel.setId("title");
+		sounds.setId("standardLabel");
+		spraak.setId("standardLabel");
+		fullscreen.setId("standardLabel");
+
+		soundBox.getChildren().addAll(sounds, soundCheckBox);
+		spraakBox.getChildren().addAll(spraak, spraakCheckBox);
+		fullscreenBox.getChildren().addAll(fullscreen, fullscreenCheckBox);
+
+		buttonVBox.getChildren().addAll(titel, soundBox, spraakBox, fullscreenBox, backtoMenu);
+
+		settingsPane.getChildren().add(buttonVBox);
+
+		buttonVBox.setAlignment(Pos.CENTER);
+		soundBox.setAlignment(Pos.CENTER);
+		spraakBox.setAlignment(Pos.CENTER);
+		fullscreenBox.setAlignment(Pos.CENTER);
+
+		settingsScene = new Scene(settingsPane);
+
+	}
 
     @Override
     public void initAction(){
@@ -109,6 +176,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
 		//Instellingen
 		knoppen[1].setOnAction(event -> {
+			stage.setScene(settingsScene);
 		});
 
 		//Handleiding
