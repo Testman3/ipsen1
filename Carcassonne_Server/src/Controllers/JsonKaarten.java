@@ -89,11 +89,6 @@ public class JsonKaarten {
 			String imageId = (String) jsonNumber.get("image_id");
 			// Parse all json data of one card to a TegelData object
 
-			Zijde noordZijde = new Zijde(noordZijdeType, noordEinde);
-			Zijde oostZijde = new Zijde(oostZijdeType, oostEinde);
-			Zijde zuidZijde = new Zijde(zuidZijdeType, zuidEinde);
-			Zijde westZijde = new Zijde(westZijdeType, westEinde);
-
 			Number aantalKaarten = (Number) jsonNumber.get("aantalKaarten");
 
 			//get JsonArray horigePosities
@@ -114,8 +109,14 @@ public class JsonKaarten {
 			//Horige.Posities[] posities = Horige.Posities.valueOf((String)jsonNumber.get("horigePosities"));
 
 			for (int i = 0; i <  aantalKaarten.intValue(); i++){
+
+				Zijde noordZijde = new Zijde(noordZijdeType, noordEinde);
+				Zijde oostZijde = new Zijde(oostZijdeType, oostEinde);
+				Zijde zuidZijde = new Zijde(zuidZijdeType, zuidEinde);
+				Zijde westZijde = new Zijde(westZijdeType, westEinde);
+
 				Horige.Posities[] pos = new Horige.Posities[array.size()];
-				for (int j = 0; j < array.size() ; j++) {
+					for (int j = 0; j < array.size() ; j++) {
 					pos[j] = horigenPos[j];
 				}
 				Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus, pos );
@@ -126,20 +127,20 @@ public class JsonKaarten {
 				}
 			}
 
-			if (debug){
-				System.out.println("noord zijde: " + noordZijde);
-				System.out.println("oost zijde: " + oostZijde);
-				System.out.println("zuid zijde: " + zuidZijde);
-				System.out.println("west zijde: " + westZijde);
-				System.out.println("noord einde: " + noordEinde);
-				System.out.println("oost einde: " + oostEinde);
-				System.out.println("zuid einde: " + zuidEinde);
-				System.out.println("west einde: " + westEinde);
-				System.out.println("heeftKlooster:" + heeftKlooster);
-				System.out.println("heeftBonus:" + heeftBonus);
-				System.out.println("image_id: " + imageId);
-				System.out.println("\n");
-			}
+//			if (debug){
+//				System.out.println("noord zijde: " + noordZijde);
+//				System.out.println("oost zijde: " + oostZijde);
+//				System.out.println("zuid zijde: " + zuidZijde);
+//				System.out.println("west zijde: " + westZijde);
+//				System.out.println("noord einde: " + noordEinde);
+//				System.out.println("oost einde: " + oostEinde);
+//				System.out.println("zuid einde: " + zuidEinde);
+//				System.out.println("west einde: " + westEinde);
+//				System.out.println("heeftKlooster:" + heeftKlooster);
+//				System.out.println("heeftBonus:" + heeftBonus);
+//				System.out.println("image_id: " + imageId);
+//				System.out.println("\n");
+//			}
 
 		}
 		return alleKaarten;

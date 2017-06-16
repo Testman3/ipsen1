@@ -191,7 +191,7 @@ public class Bord {
 			System.out.println("Er ligt hier al een tile!");
 			return false;
 		}
-		
+
 		//Als de tile niet null is en de ZUIDZIJDE van de NOORDtile overeenkomt met de NOORDZIJDE van de turntile is de
 		//positie goed.
 		if(noord != null){

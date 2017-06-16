@@ -32,6 +32,15 @@ public class Zijde {
 		return horigeSpeler;
 	}
 
+	public ZijdeType getZijde(){
+		return zijde;
+	}
+
+	public boolean getIsEinde() {
+		return isEinde;
+	}
+
+
 	public ZijdeType getZijde() {
 		return zijde;
 	}
