@@ -203,4 +203,5 @@ public interface RMIInterface extends Remote {
 
 	public ArrayList<Point> getHorigeToRemove() throws RemoteException;
 
+	public boolean getisEindeSpel() throws RemoteException;
 }
