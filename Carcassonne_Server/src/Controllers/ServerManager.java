@@ -26,6 +26,9 @@ import java.util.ArrayList;
 public class ServerManager extends Application {
 	ServerManager manager;
 
+	Registry registry;
+	RMIInterface rmiSkeleton;
+
 	FileManager fileManager;
 
 	public static void main(String[] args) {
@@ -44,9 +47,9 @@ public class ServerManager extends Application {
 
 			System.out.println("Current Hostname/I.P Address: " + Inet4Address.getLocalHost());
 			RMIController RMIimlp = new RMIController(this);
-			RMIInterface rmiSkeleton = (RMIInterface) UnicastRemoteObject.exportObject(RMIimlp, 0);
+			rmiSkeleton = (RMIInterface) UnicastRemoteObject.exportObject(RMIimlp, 0);
 			System.out.println("rmiSkeleton created");
-			Registry registry = LocateRegistry.createRegistry(1099);
+			registry = LocateRegistry.createRegistry(1099);
 			System.out.println("RMI Registry starter");
 			registry.rebind("Lobby", rmiSkeleton);
 			System.out.println("rmiSkeleton bound");
@@ -92,6 +95,9 @@ public class ServerManager extends Application {
 		primaryStage.getIcons().add(new javafx.scene.image.Image("Afbeeldingen/serverIcon.png"));
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(event -> {
+
+			registry = null;
+			rmiSkeleton = null;
 			System.exit(0);
 		});
 		primaryStage.setTitle("Server command prompt");
