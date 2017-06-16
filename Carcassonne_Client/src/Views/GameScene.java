@@ -53,6 +53,7 @@ public class GameScene extends Scene {
 	private HBox onderkant;
 	private VBox links;
 
+
 	/**
 	 * Constructor van de GameScene
 	 *
@@ -81,7 +82,7 @@ public class GameScene extends Scene {
 		menuButton = new SmartButton("Menu");
 		playerViews = new SpelerView[5];
 		ShowKaart = new ImageView();
-		KaartenLeft = new SmartLabel("Kaarten over: 72");
+		KaartenLeft = new SmartLabel("Stapel: 72");
 
 		// id
 		mainPane.setId("test");
@@ -396,7 +397,7 @@ public class GameScene extends Scene {
 		addTilePreviews(stump.getX(), stump.getY());
 		System.out.println(stump.getX() + " " + stump.getY() + " " + stump.getRotation());
 		Platform.runLater(() -> {
-			KaartenLeft.setText("Kaarten over " + kaartenOver);
+			KaartenLeft.setText("Stapel: " + kaartenOver);
 			for (int i = 0; i < playerViews.length; i++) {
 				if (i == alleSpelers.size()) {
 					return;

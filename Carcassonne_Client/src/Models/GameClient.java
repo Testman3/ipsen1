@@ -1,10 +1,10 @@
 package Models;
 
-import Controllers.RMIController;
 import Views.GameScene;
 import commonFunctions.Point;
 import javafx.application.Platform;
 import javafx.scene.media.AudioClip;
+
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.ArrayList;

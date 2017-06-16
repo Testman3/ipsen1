@@ -4,7 +4,6 @@ import org.json.simple.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Speler implements Serializable {
 

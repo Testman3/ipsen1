@@ -31,4 +31,14 @@ public class Zijde {
 	public Horige getHorigeSpeler() {
 		return horigeSpeler;
 	}
+
+	public ZijdeType getZijde() {
+		return zijde;
+	}
+
+	public boolean isEinde() {
+		return isEinde;
+	}
+
+
 }

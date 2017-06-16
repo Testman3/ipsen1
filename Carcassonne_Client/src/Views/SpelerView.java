@@ -21,7 +21,7 @@ public class SpelerView extends StackPane {
 	 */
 	SpelerView(){
 
-	VBox texts = new VBox();
+	VBox texts = new VBox(0);
 	texts.setAlignment(Pos.CENTER);
 	text_Punten = new SmartLabel();
 	text_Punten.setPrefHeight(20);
@@ -30,8 +30,8 @@ public class SpelerView extends StackPane {
 	texts.getChildren().addAll(text_Naam,text_Punten);
 	achterkant = new ImageView();
 
-		text_Naam.setId("standardLabel");
-		text_Punten.setId("standardLabel");
+		text_Naam.setId("spelerInfo");
+		text_Punten.setId("spelerInfo");
 		achterkant.setId("Speler");
 		achterkant.fitHeightProperty().bind(this.heightProperty());
 		achterkant.fitWidthProperty().bind(this.widthProperty());
