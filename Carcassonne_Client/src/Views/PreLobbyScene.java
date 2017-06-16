@@ -2,7 +2,6 @@ package Views;
 
 
 import java.rmi.RemoteException;
-
 import commonFunctions.SceneInitialiser;
 import Controllers.LobbyController;
 import commonFunctions.SmartButton;
@@ -28,16 +27,12 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 	private MenuController controller;
 	private BorderPane mainPane;
 	private LobbyController lobbyController;
-
 	private TextField naamVeld;
 	private TextField ipVeld;
-
 	private VBox joinViewButtons;
-
 	private SmartButton addPlayer;
 	private SmartButton leaveGame;
 	private SmartButton backToHome;
-
 	private Label playersLabel;
 
 	/**

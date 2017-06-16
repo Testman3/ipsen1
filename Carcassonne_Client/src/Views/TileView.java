@@ -2,11 +2,8 @@ package Views;
 
 import Models.Horige;
 import javafx.application.Platform;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import java.rmi.RemoteException;
 
 /**
  * Deze class verzorgt de correcte weergave van alle Tiles
@@ -16,13 +13,11 @@ public class TileView extends Pane {
 	//The size of a tile in pixels
 	final int SIZE_X = 90;
 	final int SIZE_Y = 90;
-
-	GameScene scene;
-
-	String kaartId;
-
-	ImageView view;
-	ImageView horigeView;
+	private GameScene scene;
+	private String kaartId;
+	private ImageView view;
+	private ImageView horigeView;
+	ImageView[] horigePreviews;
 
 	int x;
 	int y;
@@ -115,6 +110,22 @@ public class TileView extends Pane {
 		});
 	}
 
+	public void verwijderHorige() {
+		System.out.println("HORIGE VERWIJDERD ========================== ");
+		Platform.runLater(() -> {
+			getChildren().remove(horigeView);
+		});
+		verwijderHorigePreviews();
+	}
+
+	public void verwijderHorigePreviews() {
+		if(horigePreviews == null){
+			return;
+		}
+		for (ImageView view : horigePreviews) {
+			getChildren().remove(view);
+		}
+	}
 	/**
 	 * Deze functie zorgt voor het laten zien van de horige preview op de kaarten
 	 * @param horigenZijdes
@@ -124,23 +135,21 @@ public class TileView extends Pane {
 
 		Platform.runLater(() -> {
 			System.out.println("Horige views length " + horigenZijdes.length);
-			ImageView[] horigeViews = new ImageView[horigenZijdes.length];
+			horigePreviews = new ImageView[horigenZijdes.length];
 
 			for (int i = 0; i < horigenZijdes.length; i++) {
-				horigeViews[i] = new ImageView();
-				horigeViews[i].setFitHeight(20);
-				horigeViews[i].setFitWidth(20);
-				horigeViews[i].setId("horigePreview");
+				horigePreviews[i] = new ImageView();
+				horigePreviews[i].setFitHeight(20);
+				horigePreviews[i].setFitWidth(20);
+				horigePreviews[i].setId("horigePreview");
 
-				getChildren().add(horigeViews[i]);
-				horigeViews[i].setLayoutX(horigenZijdes[i].getX());
-				horigeViews[i].setLayoutY(horigenZijdes[i].getY());
+				getChildren().add(horigePreviews[i]);
+				horigePreviews[i].setLayoutX(horigenZijdes[i].getX());
+				horigePreviews[i].setLayoutY(horigenZijdes[i].getY());
 
 				final Horige.Posities pos = horigenZijdes[i];
-				horigeViews[i].setOnMouseClicked(e ->{
-						for (ImageView horige: horigeViews) {
-							getChildren().remove(horige);
-						}
+				horigePreviews[i].setOnMouseClicked(e ->{
+						verwijderHorigePreviews();
 						System.out.println("Horige geplaatst door " + scene.gameController.getModel().spelerNaam);
 						scene.gameController.klikPlaatsHorige(pos);
 				});

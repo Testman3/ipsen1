@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class BordController {
 
+	PuntenTeller puntenTeller;
 	Stapel kaartenStapel;
 	public Bord bord;
 
@@ -20,7 +21,8 @@ public class BordController {
 	 * @param spelerList
 	 * Geef een ArrayList van alle spelers mee
 	 */
-	BordController(ArrayList<Speler> spelerList) {
+	public BordController(ArrayList<Speler> spelerList) {
+		puntenTeller = new PuntenTeller();
 		kaartenStapel = new Stapel();
 		bord = new Bord(spelerList);
 		bord.plaatsKaartCheat(5,5,kaartenStapel.getBeginTile());
@@ -82,7 +84,7 @@ public class BordController {
 	boolean plaatsHorige(Horige.Posities positie){
 		kaartenStapel.getTurnTile().plaatsHorige(positie, bord.getSpelerBeurt());
 		System.out.println("Horige wordt geplaatst - bordcontroller");
-		bord.geefSpelerBeurt();
+		volgendeBeurt();
 		return true;
 	}
 	/**
@@ -111,8 +113,14 @@ public class BordController {
 	 */
 	void beeindigBeurt(String spelernaam) {
 		if(bord.isSpelerBeurt(spelernaam)){
-			bord.geefSpelerBeurt();
 			System.out.println("==@@@@@@@@@@@@@@@@@@@Speler heeft beurt beindigt");
+			volgendeBeurt();
 		}
+	}
+
+	public void volgendeBeurt() {
+		puntenTeller.BerekenPunten(kaartenStapel.getTurnTile(), bord);
+		bord.geefSpelerBeurt();
+
 	}
 }

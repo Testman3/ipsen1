@@ -6,6 +6,7 @@ import Models.GameClient;
 import Models.RMIInterface;
 import Models.Speler;
 import Models.TileStump;
+import commonFunctions.Point;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -18,7 +19,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -27,41 +27,30 @@ import java.util.ArrayList;
  */
 public class GameScene extends Scene {
 
-
 	private double xOffset;
 	private double yOffset;
-
-	int sceneHeight = (int) getHeight();
-	int sceneWidth = (int) getWidth();
-
-	MenuController controller;
-
+	private int sceneHeight = (int) getHeight();
+	private int sceneWidth = (int) getWidth();
+	private MenuController controller;
 	public MenuController getController() {
 		return controller;
 	}
-
-	GameController gameController;
-
-	BorderPane mainPane;
-
-	Pane tilesPane;
-	HBox test;
-
-	TileView[][] tileViews;
-	HorigeView[] horigeViews;
-	SpelerView[] playerViews;
-
-
-	public ImageView ShowKaart;
-
-
-	String kaartPlaatsId;
+	public GameController gameController;
+	private BorderPane mainPane;
+	private Pane tilesPane;
+	private HBox test;
+	private TileView[][] tileViews;
+	private HorigeView[] horigeViews;
+	private SpelerView[] playerViews;
+	private ImageView ShowKaart;
+	private String kaartPlaatsId;
 	private double scale;
-
 	public RMIInterface RmiStub;
+	private SmartLabel KaartenLeft;
+	private Button menuButton;
 
-	SmartLabel KaartenLeft;
-	Button menuButton;
+
+	private	Point laatstGeplaatstLocatie;
 
 	/**
 	 * Constructor van de GameScene
@@ -117,24 +106,39 @@ public class GameScene extends Scene {
 			} else if (e.getCode() == KeyCode.P) { // Get data
 				gameController.saveFileBrowser();
 			}
-			System.out.println("COORDS + " + verticaal.getLayoutX() + " " + verticaal.getLayoutY());
-			System.out.println("x: " + tilesPane.getScaleX() + " y: " + tilesPane.getScaleY());
 		});
 
 
-		tilesPane.setOnMousePressed(e -> {
+		//Eventueel om te draggen. Werkt niet goed met grensen.
+	/*	tilesPane.setOnMousePressed(e -> {
 			xOffset = e.getX();
 			yOffset = e.getY();
-		});
-
-		tilesPane.setOnMouseDragged(e -> {
-			tilesPane.setTranslateX(e.getX() + tilesPane.getScaleX() - xOffset);
-			tilesPane.setTranslateY(e.getY() + tilesPane.getScaleY() - yOffset);
-
-
 			e.consume();
 		});
 
+		tilesPane.setOnMouseDragged(e -> {
+			tilesPane.setTranslateX(e.getX() + tilesPane.getTranslateX() - xOffset);
+			tilesPane.setTranslateY(e.getY() + tilesPane.getTranslateY() - yOffset);
+
+			if(tilesPane.getTranslateY() > controller.getGameStage().getMaxHeight()){
+				tilesPane.setTranslateY(controller.getGameStage().getMaxHeight());
+			}
+
+			if(tilesPane.getTranslateY() < controller.getGameStage().getMinHeight()){
+				tilesPane.setTranslateY(controller.getGameStage().getMinHeight());
+			}
+
+			if(tilesPane.getTranslateX() > controller.getGameStage().getMaxWidth()){
+				tilesPane.setTranslateX(controller.getGameStage().getMaxWidth());
+			}
+
+			if(tilesPane.getTranslateX() < controller.getGameStage().getMinWidth()){
+				tilesPane.setTranslateX(controller.getGameStage().getMinWidth());
+			}
+
+			e.consume();
+		});
+*/
 
 		setOnScroll(e -> {
 
@@ -301,6 +305,7 @@ public class GameScene extends Scene {
 		ShowKaart.setId("Kaartview");
 		try {
 			TileStump stump = client.getTile();
+			laatstGeplaatstLocatie = new Point(stump.getX(), stump.getY());
 			tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
 			tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 			tileViews[x][y].laatHorigePreviewZien(RmiStub.getHorigePosities());
@@ -311,6 +316,10 @@ public class GameScene extends Scene {
 
 	}
 
+	public void verwijdwerHorigePreviews() {
+		System.out.println("Horige verwijderen @ " + laatstGeplaatstLocatie.getX() + " " + laatstGeplaatstLocatie.getY());
+		tileViews[laatstGeplaatstLocatie.getX()][laatstGeplaatstLocatie.getY()].verwijderHorigePreviews();
+	}
 	/**
 	 * Deze functie laat de neergelegde kaart zien
 	 *
@@ -333,6 +342,10 @@ public class GameScene extends Scene {
 		tilesPane.setEffect(null);
 	}
 
+	public void removeHorige(int x, int y){
+		tileViews[x][y].verwijderHorige();
+	}
+
 	int kaartenOver = 0;
 	ArrayList<Speler> alleSpelers = null;
 
@@ -349,12 +362,12 @@ public class GameScene extends Scene {
 			stump = client.getTile();
 			alleSpelers = RmiStub.getPlayerListObject();
 			kaartenOver = RmiStub.getKaartenLeft();
+
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
 		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
-
 		if (stump.getGeplaatsteHorige() != null) {
 			tileViews[stump.getX()][stump.getY()].plaatsHorige(stump.getGeplaatsteHorige());
 			System.out.println("Horige is niet null!");

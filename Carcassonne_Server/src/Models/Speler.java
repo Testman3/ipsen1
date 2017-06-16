@@ -20,8 +20,6 @@ public class Speler implements Serializable {
 	private String horigeKleur;
 
 	public Speler(String naam){
-		Random rand = new Random();
-		punten = rand.nextInt(250);
 		this.naam = naam;
 
 		horigeBeschikbaar = new ArrayList<>();
@@ -67,6 +65,12 @@ public class Speler implements Serializable {
 		horigeGebruikt.remove(horige);
 		horigeBeschikbaar.add(horige);
 	}
+
+	/**
+	 * Geeft de speler punten
+	 * @param hoeveelheid de hoeveelheid punten die de speler verdient.
+	 */
+	public void geefPunten(int hoeveelheid) { punten += hoeveelheid;}
 
 	public void setNaam(String naam){
 		this.naam = naam;

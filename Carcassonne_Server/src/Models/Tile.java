@@ -136,6 +136,7 @@ public class Tile {
 	public String getKaartId() {
 		return imageID;
 	}
+
 	public Horige.Posities[] getHorigenZijdes() { return horigenZijdes; }
 
 	public boolean getHeeftBonus(){
@@ -173,4 +174,6 @@ public class Tile {
 	public boolean isHeeftBonus() {
 		return heeftBonus;
 	}
+
+	public boolean getHeeftKlooster() { return heeftKlooster; }
 }

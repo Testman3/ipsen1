@@ -15,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -28,23 +27,17 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	private static SmartButton startGame;
 	private Label[] spelers;
 	private boolean enableThread;
-
 	private VBox completeBox;
 	private static HBox knoppenBox;
-
 	private HBox box1;
-
 	private VBox horigenBox;
 	private VBox spelerBox;
-
 	private ImageView[] horigen;
-
 	private BorderPane lobbyPane;
-	MenuController controller;
-	LobbyController lobbyController;
-
+	private MenuController controller;
+	private LobbyController lobbyController;
 	private Thread lobbyThread;
-	ArrayList<String> allenamen;
+	private ArrayList<String> allenamen;
 
 	/**
 	 * Constructor van de LobbyScene
@@ -78,7 +71,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		horigen[1] = new ImageView("Horige_Blauw.png");
 		horigen[2] = new ImageView("Horige_Geel.png");
 		horigen[3] = new ImageView("Horige_Groen.png");
-		horigen[4] = new ImageView("Horige_Zwart.png");
+		horigen[4] = new ImageView("Horige_Paars.png");
 
 		knoppenBox = new HBox(60);
 		completeBox = new VBox();
@@ -101,7 +94,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		completeBox.getChildren().add(box1);
 		box1.setAlignment(Pos.CENTER);
 
-
 		leaveGame = new SmartButton("Leave Game");
 		leaveGame.setId("standardLabel");
 		startGame = new SmartButton("Start game");
@@ -114,7 +106,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		completeBox.setAlignment(Pos.CENTER);
 
 		lobbyPane.setCenter(completeBox);
-
 
 		initAction();
 

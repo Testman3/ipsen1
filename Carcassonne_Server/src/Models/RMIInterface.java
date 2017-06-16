@@ -1,5 +1,8 @@
 package Models;
 
+import commonFunctions.Point;
+import javafx.geometry.Point2D;
+
 import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -197,5 +200,7 @@ public interface RMIInterface extends Remote {
 	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
 	 */
 	public void beeindigenBeurt(String spelerNaam) throws RemoteException;
+
+	public ArrayList<Point> getHorigeToRemove() throws RemoteException;
 
 }

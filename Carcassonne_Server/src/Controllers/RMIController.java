@@ -1,6 +1,8 @@
 package Controllers;
 
 import Models.*;
+import commonFunctions.Point;
+import javafx.geometry.Point2D;
 
 import java.io.File;
 import java.rmi.RemoteException;
@@ -90,7 +92,6 @@ public class RMIController implements RMIInterface {
 
     @Override
 	public boolean isGameStarted() throws RemoteException {
-		System.out.println(ServerManager.gameStarted);
 		return ServerManager.gameStarted;
 
 	}
@@ -153,5 +154,10 @@ public class RMIController implements RMIInterface {
 	@Override
 	public void beeindigenBeurt(String spelerNaam) throws RemoteException {
 		serverManager.bordController.beeindigBeurt(spelerNaam);
+	}
+
+	@Override
+	public ArrayList<Point> getHorigeToRemove() throws RemoteException {
+		return serverManager.bordController.bord.getVerwijderHorigeDezeRonde();
 	}
 }

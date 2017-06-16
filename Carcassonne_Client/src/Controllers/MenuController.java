@@ -43,7 +43,7 @@ public class MenuController {
 		preLobbyScene = new PreLobbyScene(this, lobbyController);
 		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
-		inGameMenuStage = new InGameMenuStage(this, gameScene);
+		inGameMenuStage = new InGameMenuStage(this, gameScene, lobbyController);
 
 		setMenuViewScene();
 		//setGameScene();

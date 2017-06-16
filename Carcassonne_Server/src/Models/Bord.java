@@ -1,5 +1,8 @@
 package Models;
 
+import commonFunctions.Point;
+import javafx.geometry.Point2D;
+
 import java.util.ArrayList;
 
 /**
@@ -18,6 +21,8 @@ public class Bord {
 	private boolean debug = false;
 
 	private int gameBeurt = 1;
+
+	private ArrayList<Point> verwijderHorigeDezeRonde;
 
 	/**
 	 * Deze functie geeft aan hoeveel rondes er al zijn geweest
@@ -41,12 +46,17 @@ public class Bord {
 	 * Geef een ArrayList met alle spelers mee
 	 */
 	public Bord(ArrayList<Speler> spelerList) {
+		verwijderHorigeDezeRonde = new ArrayList<>();
 		alleSpelers = spelerList;
 		alleTiles = new Tile[100][100];
 		spelerBeurt = alleSpelers.get(0);
 		setSpelerKleuren();
 	}
 
+	public void verwijderHorige(Point point){
+		verwijderHorigeDezeRonde.add(point);
+		System.out.println("HORIGE " + point.getX() + " " + point.getY() + "zal verwijderd worden!");
+	}
 	/**
 	 * Geeft elke speler zijn eigen horige kleur.
 	 */
@@ -94,7 +104,6 @@ public class Bord {
 	 * @return True als de speler aan de beurt is, false als de speler niet aan de beurt is
 	 */
 	public boolean isSpelerBeurt(String spelerNaam) {
-		System.out.println("Speler naam " + spelerNaam + " Speler beurt " + spelerBeurt.getNaam());
 		return spelerBeurt.getNaam().equals(spelerNaam);
 	}
 
@@ -214,7 +223,6 @@ public class Bord {
 	 */
 	public ArrayList<Speler> getAlleSpelers() {
 //		System.out.println("GEKKE SPELERS: " + alleSpelers.toString());
-		System.out.println("Get alle spelers nu = " + alleSpelers);
 
 			if(debug) {
 				for (int i = 0; i < alleSpelers.size(); i++) {
@@ -232,4 +240,5 @@ public class Bord {
 		return this.alleTiles;
 	}
 
+	public ArrayList<Point> getVerwijderHorigeDezeRonde() { return verwijderHorigeDezeRonde;}
 }

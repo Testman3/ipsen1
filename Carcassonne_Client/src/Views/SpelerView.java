@@ -3,12 +3,9 @@ package Views;
 import commonFunctions.SmartLabel;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
-import java.util.Stack;
 
 /**
  * Deze class regelt de juiste weergave van de spelernamen en punten in de ui bij het spelbord
@@ -27,7 +24,9 @@ public class SpelerView extends StackPane {
 	VBox texts = new VBox();
 	texts.setAlignment(Pos.CENTER);
 	text_Punten = new SmartLabel();
+	text_Punten.setPrefHeight(20);
 	text_Naam = new SmartLabel();
+	text_Naam.setPrefHeight(20);
 	texts.getChildren().addAll(text_Naam,text_Punten);
 	achterkant = new ImageView();
 
