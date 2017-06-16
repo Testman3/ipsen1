@@ -186,6 +186,9 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		Platform.runLater(() -> {
 			if (starten) {
 				controller.setGameScene();
+				controller.getGameStage().setResizable(false);
+				controller.getGameStage().setMinHeight(720);
+				controller.getGameStage().setMinWidth(1280);
 				GameClient client = new GameClient(controller.getGameScene());
 				GameController Gamecontroller = new GameController(client);
 				client.Join(controller.getSpelernaam());

@@ -90,7 +90,7 @@ public class GameScene extends Scene {
 		}
 
 		tilesPane.getChildren().add(verticaal);
-		tilesPane.setId("hallo");
+		tilesPane.setId("spelBordBackground");
 
 		//Verplaatsen over de map met W A S D keys, Speed is de snelheid dat je verplaatst.
 		int speed = 20;

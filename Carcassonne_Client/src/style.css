@@ -35,7 +35,8 @@
 }
 #test{
 	-fx-background-image: url("Tet_Back_test.png");
-	-fx-background-size: cover;
+	-fx-background-position: 0, 0, 0, 0;
+	-fx-background-size: stretch;
 }
 #Speler{
 -fx-image: url("Text_Back_Player.png");
@@ -102,7 +103,7 @@
 #KaartTest{
 		-fx-image: url("Kaart_03.png");
 }
-#hallo{
+#spelBordBackground{
 -fx-background-image: url("TestenPLZ.jpg");
 }
 #KaartPreview{
