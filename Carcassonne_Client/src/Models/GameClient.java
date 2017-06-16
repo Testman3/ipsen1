@@ -159,7 +159,6 @@ public class GameClient {
 	public void Update() {
 
 		try {
-			System.out.println("RmiStub.getBeurt() = " + RmiStub.getBeurt());
 			if (beurt != RmiStub.getBeurt()) {
 				view.updateView(this);
 				kaartGepakt = false;
