@@ -92,6 +92,7 @@ public class MenuController {
 	 * Deze functie switcht de scene naar de gameScene
 	 */
 	public void setGameScene(){
+		//TODO bereken hier de hoogte en breedte afhankelijk van operating system
 		gameStage.setScene(gameScene);
 
 	//	gameStage.setFullScreen(SettingsScene.fullScreen);

@@ -135,6 +135,7 @@ public class GameScene extends Scene {
 			HorigeView horige = new HorigeView();
 			horige.fitHeightProperty().bind(heightProperty().multiply(0.07));
 			horige.fitWidthProperty().bind(horige.fitHeightProperty());
+			horige.setHorigeKleur("horigePaars");
 			onderkant.getChildren().add(horige);
 		}
 
