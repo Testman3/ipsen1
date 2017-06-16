@@ -1,5 +1,6 @@
 package Models;
 
+import Controllers.RMIController;
 import Views.GameScene;
 import commonFunctions.Point;
 import javafx.application.Platform;
@@ -146,6 +147,10 @@ public class GameClient {
 	public void setRmiStub(RMIInterface rmiController) {
 		RmiStub = rmiController;
 		view.RmiStub = rmiController;
+	}
+
+	public RMIInterface getRmiStub(){
+		return RmiStub;
 	}
 		/**
 		 * De client wordt elke x ms geīüpdatet, als de beurt op de server hoger is dan de beurt op de client betekent dat en

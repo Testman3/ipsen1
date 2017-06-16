@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.GameClient;
 import Views.*;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
@@ -21,6 +22,7 @@ public class MenuController {
 	private SettingsScene settingsScene;
 	private CreditsScene creditsScene;
 	private InGameMenuStage inGameMenuStage;
+	private GameClient gameClient;
 
 	private String spelernaam;
 
@@ -43,7 +45,7 @@ public class MenuController {
 		preLobbyScene = new PreLobbyScene(this, lobbyController);
 		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
-		inGameMenuStage = new InGameMenuStage(this, gameScene, lobbyController);
+		inGameMenuStage = new InGameMenuStage(this, gameScene, gameClient);
 
 		setMenuViewScene();
 		//setGameScene();

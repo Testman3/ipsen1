@@ -15,14 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.rmi.RemoteException;
 
 public class InGameMenuStage extends Stage implements SceneInitialiser{
@@ -35,8 +33,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private Scene menuScene;
     private ImageView backgroud;
     private GameScene gameScene;
-    private LobbyController lobbyController;
-    private AudioClip ding = new AudioClip(Paths.get("Sounds/ding.wav").toUri().toString());
+    private GameClient gameClient;
 
 	/**
 	 * Constructor van de ingamemenustage
@@ -45,10 +42,10 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 	 * @param scene
 	 * Geef GameScene mee
 	 */
-	public InGameMenuStage(MenuController controller, GameScene scene, LobbyController lobbyController){
+	public InGameMenuStage(MenuController controller, GameScene scene, GameClient gameClient){
     	this.gameScene = scene;
         this.menuController = controller;
-        this.lobbyController = lobbyController;
+        this.gameClient = gameClient;
         initGui();
     }
 
@@ -131,11 +128,11 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 			Platform.runLater(() -> {
 				Alert exitConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
 
-					ding.play();
 					exitConfirmation.showAndWait().ifPresent(response -> {
 						if (response == ButtonType.OK) {
 							try {
-								lobbyController.getRmiStub().removePlayer(menuController.getSpelernaam());
+								gameClient.getRmiStub().beeindigenBeurt(menuController.getSpelernaam());
+								gameClient.getRmiStub().removePlayer(menuController.getSpelernaam());
 								System.exit(0);
 							} catch (RemoteException e) {
 							e.printStackTrace();}

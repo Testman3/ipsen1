@@ -112,7 +112,7 @@ public class BordController {
 	 * @param spelernaam
 	 * Geef de spelernaam mee in de vorm van een String
 	 */
-	void beeindigBeurt(String spelernaam) {
+	public void beeindigBeurt(String spelernaam) {
 		if(bord.isSpelerBeurt(spelernaam)){
 			System.out.println("==@@@@@@@@@@@@@@@@@@@Speler heeft beurt beindigt");
 			volgendeBeurt();
