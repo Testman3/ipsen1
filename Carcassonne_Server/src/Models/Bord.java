@@ -59,7 +59,7 @@ public class Bord {
 	/**
 	 * Geeft elke speler zijn eigen horige kleur.
 	 */
-	private String[] spelerKleuren = {"horigeRood", "horigeBlauw", "horigeGeel", "horigeGroen", "horigePaars"};
+	private String[] spelerKleuren = {"horigeRood", "horigeBlauw", "horigeGroen", "horigeGeel", "horigePaars"};
 	public void setSpelerKleuren() {
 		for (int i = 0; i < alleSpelers.size(); i++) {
 			alleSpelers.get(i).setHorigeKleur(spelerKleuren[i]);
