@@ -234,4 +234,6 @@
 #horigePaars{
 -fx-image: url("Horige_Paars.png");
 }
+#horigeZwart{  -fx-image: url("Horige_Zwart.png");
+}
 
