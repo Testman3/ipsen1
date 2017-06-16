@@ -52,6 +52,7 @@ public class GameScene extends Scene {
 	private SmartButton draaiButton;
 	private HBox onderkant;
 	private VBox links;
+	Speler speler;
 
 
 	/**
@@ -131,10 +132,9 @@ public class GameScene extends Scene {
 
 		//Horige
 		for (int i = 0; i < 7; i++) {
-			ImageView horige = new ImageView();
+			HorigeView horige = new HorigeView();
 			horige.fitHeightProperty().bind(heightProperty().multiply(0.07));
 			horige.fitWidthProperty().bind(horige.fitHeightProperty());
-			horige.setId("Horige");
 			onderkant.getChildren().add(horige);
 		}
 
