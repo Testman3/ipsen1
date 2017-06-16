@@ -41,9 +41,6 @@ public class Zijde {
 	}
 
 
-	public ZijdeType getZijde() {
-		return zijde;
-	}
 
 	public boolean isEinde() {
 		return isEinde;

@@ -47,7 +47,7 @@ public class GameScene extends Scene {
 	public RMIInterface RmiStub;
 	private SmartLabel KaartenLeft;
 	private SmartButton menuButton;
-	private	Point laatstGeplaatstLocatie;
+	private Point laatstGeplaatstLocatie;
 	private SmartButton eindigButton;
 	private SmartButton draaiButton;
 	private HBox onderkant;
@@ -142,22 +142,14 @@ public class GameScene extends Scene {
 		onderkant.getChildren().add(eindigButton);
 
 
-
-
 		mainPane.setBottom(onderkant);
-
-
-
-
-
-
 
 
 		initAction();
 
 	}
 
-	public void initAction(){
+	public void initAction() {
 
 		draaiButton.setOnAction(e -> {
 			gameController.klikDraaiKaart();
@@ -174,7 +166,9 @@ public class GameScene extends Scene {
 		menuButton.setOnAction(event -> {
 			controller.showInGameMenu();
 		});
+
 	}
+
 
 	/**
 	 * Creates the tile grid in the game client
@@ -215,15 +209,16 @@ public class GameScene extends Scene {
 		});
 
 		//Zoom Functie(Scrol event)
-		setOnScroll(e -> {
+		tilesPane.setOnScroll(e -> {
+			System.out.println("Werkt");
 			e.consume();
 
 			if (e.getDeltaY() == 0) {
 				return;
 			}
 
-			double scaleFactor = (e.getDeltaY() > 0) ? 1.0 : (1 / 1.1);
-
+			double scaleFactor = (e.getDeltaY() > 0) ? 1.1 : (1 / 1.1);
+			
 			tilesPane.setScaleX(tilesPane.getScaleX() * scaleFactor);
 			tilesPane.setScaleY(tilesPane.getScaleY() * scaleFactor);
 
@@ -244,45 +239,8 @@ public class GameScene extends Scene {
 			}
 
 		});
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////Eventueel om te draggen. Werkt niet goed met grensen.////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*	tilesPane.setOnMousePressed(e -> {
-			xOffset = e.getX();
-			yOffset = e.getY();
-			e.consume();
-		});
-
-		tilesPane.setOnMouseDragged(e -> {
-			tilesPane.setTranslateX(e.getX() + tilesPane.getTranslateX() - xOffset);
-			tilesPane.setTranslateY(e.getY() + tilesPane.getTranslateY() - yOffset);
-
-			if(tilesPane.getTranslateY() > controller.getGameStage().getMaxHeight()){
-				tilesPane.setTranslateY(controller.getGameStage().getMaxHeight());
-			}
-
-			if(tilesPane.getTranslateY() < controller.getGameStage().getMinHeight()){
-				tilesPane.setTranslateY(controller.getGameStage().getMinHeight());
-			}
-
-			if(tilesPane.getTranslateX() > controller.getGameStage().getMaxWidth()){
-				tilesPane.setTranslateX(controller.getGameStage().getMaxWidth());
-			}
-
-			if(tilesPane.getTranslateX() < controller.getGameStage().getMinWidth()){
-				tilesPane.setTranslateX(controller.getGameStage().getMinWidth());
-			}
-
-			e.consume();
-		});
-*/
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
+
 
 	/**
 	 * Plaatst previews om een tile heen, deze methode mag alleen gerunt worden nadat er een tile geplaatst is
@@ -363,7 +321,7 @@ public class GameScene extends Scene {
 			ShowKaart.setId(client.kaartPlaatsId);
 	}
 
-	public void removeHorige(int x, int y){
+	public void removeHorige(int x, int y) {
 		tileViews[x][y].verwijderHorige();
 	}
 
