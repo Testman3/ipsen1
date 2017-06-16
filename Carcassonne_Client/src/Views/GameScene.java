@@ -90,6 +90,7 @@ public class GameScene extends Scene {
 		KaartenLeft = new SmartLabel("Stapel: 72");
 		onderkantElement = new HBox(70);
 		rest = new VBox();
+		horigeViews = new HorigeView[7];
 
 
 		// id
@@ -144,12 +145,11 @@ public class GameScene extends Scene {
 
 		//Horige
 		for (int i = 0; i < 7; i++) {
-			HorigeView horige = new HorigeView();
-			horige.fitHeightProperty().bind(heightProperty().multiply(0.07));
-			horige.fitWidthProperty().bind(horige.fitHeightProperty());
-			;
-			horige.setHorigeKleur("horigePaars");
-			horigeBox.getChildren().add(horige);
+			horigeViews[i] = new HorigeView();
+			horigeViews[i].setId("horigeZwart");
+			horigeViews[i].fitHeightProperty().bind(heightProperty().multiply(0.07));
+			horigeViews[i].fitWidthProperty().bind(horigeViews[i].fitHeightProperty());
+			horigeBox.getChildren().add(horigeViews[i]);
 		}
 
 		onderkantElement.getChildren().add(draaiButton);
@@ -398,5 +398,32 @@ public class GameScene extends Scene {
 	public void hideSceneBlur() {
 		this.mainPane.setEffect(null);
 		tilesPane.setEffect(null);
+	}
+
+	public void setHorigeKleur(int spelerNummer){
+		String spelerKleur;
+		switch (spelerNummer) {
+			case 0:
+				spelerKleur = "horigeRood";
+				break;
+			case 1:
+				spelerKleur = "horigeBlauw";
+				break;
+			case 2:
+				spelerKleur = "horigeGroen";
+				break;
+			case 3:
+				spelerKleur = "horigeGeel";
+				break;
+			case 4:
+				spelerKleur = "horigePaars";
+				break;
+			default: spelerKleur = "horigeZwart";
+		}
+
+		for (int i = 0; i< 7 ; i++){
+			horigeViews[i].setId(spelerKleur);
+		}
+
 	}
 }
