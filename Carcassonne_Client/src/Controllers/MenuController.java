@@ -2,6 +2,7 @@ package Controllers;
 
 import Views.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -36,9 +37,17 @@ public class MenuController {
 
 		LobbyController lobbyController = new LobbyController();
 
+		int breedte = 1280;
+		int hoogte = 720;
+
+		if (System.getProperty("os.name").toLowerCase().contains("windows")){
+			breedte = 1260;
+			hoogte = 710;
+		}
+
 		this.gameStage = gameStage;
 		endGameScene = new EndGameScene(this);
-		gameScene = new GameScene(this);
+		gameScene = new GameScene(this, breedte, hoogte);
 		lobbyScene = new LobbyScene(this, lobbyController);
 		menuViewScene = new MenuViewScene(this);
 		preLobbyScene = new PreLobbyScene(this, lobbyController);
@@ -92,10 +101,21 @@ public class MenuController {
 	 * Deze functie switcht de scene naar de gameScene
 	 */
 	public void setGameScene(){
+		//TODO bereken hier de hoogte en breedte afhankelijk van operating system
 		gameStage.setScene(gameScene);
+		if(SettingsScene.optieFullscreen) {
+			gameStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+			gameStage.setFullScreenExitHint(null);
+			gameStage.setFullScreen(true);
+			gameScene.mainPane.setMinSize(1920, 1080);
+			gameScene.getStylesheets().add("FullscreenStyle.css");
+			gameScene.getStylesheets().remove("style.css");
+			}
 
-	//	gameStage.setFullScreen(SettingsScene.fullScreen);
-	}
+		}
+
+	//	gameStage.setFullScreen(SettingsScene.optieFullscreen);
+
 
 	/**
 	 * Deze functie switcht de scene naar de lobbyscene
@@ -204,6 +224,11 @@ public class MenuController {
 		return creditsScene;
 	}
 
+	/**
+	 * Deze functie zet het ingame menu in de MenuController
+	 * @param stage
+	 * Geef de stage mee
+	 */
 	public void putIngameMenuInController(InGameMenuStage stage) {this.inGameMenuStage = stage;}
 	/**
 	 * Deze functie haalt de spelernaam op

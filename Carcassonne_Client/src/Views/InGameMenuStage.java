@@ -1,6 +1,5 @@
 package Views;
 
-import Controllers.LobbyController;
 import Controllers.MenuController;
 import Models.GameClient;
 import commonFunctions.SceneInitialiser;
@@ -18,12 +17,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.awt.*;
-import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -37,10 +34,10 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private VBox allMenuItemsVBox;
     private SmartLabel titel;
     private Scene menuScene;
-    private ImageView backgroud;
+    private ImageView background;
     private GameScene gameScene;
     private GameClient gameClient;
-    AudioClip ding = new AudioClip(Paths.get("Sounds/ding.wav").toUri().toString());
+    private AudioClip ding = new AudioClip(Paths.get("Sounds/ding.wav").toUri().toString());
 
     //settings
 	private StackPane settingsPane;
@@ -49,7 +46,6 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 	private HBox soundBox;
 	private HBox spraakBox;
 	private HBox fullscreenBox;
-	private SmartLabel titelSettings;
 	private SmartLabel sounds;
 	private SmartLabel spraak;
 	private SmartLabel fullscreen;
@@ -76,7 +72,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
     @Override
     public void initGui() {
-		backgroud = new ImageView();
+		background = new ImageView();
         menuPane = new StackPane();
         menuPane.setId("inGameMenu");
 		stage = new Stage(StageStyle.TRANSPARENT);
@@ -87,9 +83,9 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
         //Css toevoegen
         menuPane.getStylesheets().add("style.css");
 
-        backgroud.setFitHeight(800);
-        backgroud.setFitWidth(600);
-        backgroud.setId("BackgroundMenu");
+        background.setFitHeight(800);
+        background.setFitWidth(600);
+        background.setId("BackgroundMenu");
 
         //Tekst in titel zetten.
         titel = new SmartLabel("Menu");
@@ -114,7 +110,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
         allMenuItemsVBox.setAlignment(Pos.CENTER);
 		//Vbox toevoegen aan pane en background op empty
-        menuPane.getChildren().addAll(backgroud, allMenuItemsVBox);
+        menuPane.getChildren().addAll(background, allMenuItemsVBox);
 		menuPane.setBackground(Background.EMPTY);
 
 		//Toevoegen aan stage
@@ -126,9 +122,12 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
         initAction();
     }
 
-    private void initSettings(){
+	/**
+	 * Deze functie initialiseert alle elementen voor het settings menu
+	 */
+	private void initSettings(){
 
-		backgroud = new ImageView();
+		background = new ImageView();
 		settingsPane = new StackPane();
 		buttonVBox = new VBox();
 		soundBox = new HBox(5);
@@ -140,14 +139,14 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		titel = new SmartLabel("Instellingen");
 		sounds = new SmartLabel("Geluid");
 		spraak = new SmartLabel("Spraakondersteuning");
-		fullscreen = new SmartLabel("Fullscreen");
+		fullscreen = new SmartLabel("Fullscreen in-game");
 		backtoMenu = new SmartButton("Terug naar menu");
 
 		//Setup Css
 		settingsPane.getStylesheets().add("style.css");
 
 		//set Id
-		backgroud.setId("BackgroundMenu");
+		background.setId("BackgroundMenu");
 		soundCheckBox.setId("checkBox");
 		spraakCheckBox.setId("checkBox");
 		fullscreenCheckBox.setId("checkBox");
@@ -161,11 +160,11 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		System.out.println("geluid = " + SettingsScene.optieGeluid );
 		soundCheckBox.setSelected(SettingsScene.optieGeluid );
 		spraakCheckBox.setSelected(SettingsScene.optieSpreken);
-		fullscreenCheckBox.setSelected(SettingsScene.fullScreen);
+		fullscreenCheckBox.setSelected(SettingsScene.optieFullscreen);
 
 		//Set Background Size
-		backgroud.setFitHeight(800);
-		backgroud.setFitWidth(600);
+		background.setFitHeight(800);
+		background.setFitWidth(600);
 
 		//set Alignment
 		soundBox.setAlignment(Pos.CENTER);
@@ -182,7 +181,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		spraakBox.getChildren().addAll(spraak, spraakCheckBox);
 		fullscreenBox.getChildren().addAll(fullscreen, fullscreenCheckBox);
 		buttonVBox.getChildren().addAll(titel, soundBox, spraakBox, fullscreenBox, backtoMenu);
-		settingsPane.getChildren().addAll(backgroud, buttonVBox);
+		settingsPane.getChildren().addAll(background, buttonVBox);
 
 		//Set Stackpane Background
 		settingsPane.setBackground(Background.EMPTY);
@@ -192,7 +191,6 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		settingsScene.setFill(null);
 
 		initActionSettings();
-
 	}
 
     @Override
@@ -223,7 +221,11 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 			Platform.runLater(() -> {
 
 				Alert exitConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-
+				exitConfirmation.setTitle("Afsluitbevestiging");
+				exitConfirmation.setContentText("Weet u zeker dat u wilt afsluiten?");
+				exitConfirmation.setHeaderText("Afsluitbevestiging");
+				exitConfirmation.initModality(Modality.APPLICATION_MODAL);
+				exitConfirmation.initOwner(this.stage);
 				ding.play();
 					exitConfirmation.showAndWait().ifPresent(response -> {
 						if (response == ButtonType.OK) {
@@ -231,7 +233,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
 								gameClient.getRmiStub().leaveGame(gameClient.getSpelerNaam());
 
-								gameClient.getRmiStub().beeindigenBeurt(gameClient.getSpelerNaam());
+								gameClient.getRmiStub().leaveGame(gameClient.getSpelerNaam());
 
 								gameClient.getRmiStub().removePlayer(gameClient.getSpelerNaam());
 								System.exit(0);
@@ -252,7 +254,10 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
     }
 
-    public void initActionSettings(){
+	/**
+	 * Deze functie initialiseert alle actions voor het settingsmenu
+	 */
+	private void initActionSettings(){
 
     	//Geluid
 		soundCheckBox.setOnAction(event -> {
@@ -267,7 +272,9 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
 		//FullScreen
 		fullscreenCheckBox.setOnAction(event -> {
-			SettingsScene.fullScreen = fullscreenCheckBox.isSelected();
+			SettingsScene.optieFullscreen = fullscreenCheckBox.isSelected();
+			gameScene.switchFullScreenMode();
+
 		});
 
     	//Terug naar menu

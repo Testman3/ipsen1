@@ -10,11 +10,15 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -67,11 +71,11 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		spelers = new Label[5];
 
 		horigen = new ImageView[5];
-		horigen[0] = new ImageView("Horige_Rood.png");
-		horigen[1] = new ImageView("Horige_Blauw.png");
-		horigen[2] = new ImageView("Horige_Geel.png");
-		horigen[3] = new ImageView("Horige_Groen.png");
-		horigen[4] = new ImageView("Horige_Paars.png");
+		horigen[0] = new ImageView("Afbeeldingen/Horige_Rood.png");
+		horigen[1] = new ImageView("Afbeeldingen/Horige_Blauw.png");
+		horigen[2] = new ImageView("Afbeeldingen/Horige_Groen.png");
+		horigen[3] = new ImageView("Afbeeldingen/Horige_Geel.png");
+		horigen[4] = new ImageView("Afbeeldingen/Horige_Paars.png");
 
 		knoppenBox = new HBox(60);
 		completeBox = new VBox();
@@ -134,8 +138,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				System.out.println("Er ging iets mis met de RMI verbinding!");
 			}
 
 			controller.setPreLobbyScene();
@@ -157,8 +161,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+					System.out.println("Thread Interrupted Exception");
 				}
 			}
 		});
@@ -173,18 +177,28 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	 */
 	private void Update() {
 		allenamen = new ArrayList<String>();
+		int playerNummer;
 
 		try {
 			allenamen = lobbyController.RMIstub.getPlayerList();
 			if (lobbyController.RMIstub.isGameStarted()) {
 				starten = true;
 			}
+		} catch (NoSuchObjectException e2){
+			enableThread = false;
+			Platform.runLater(() -> {
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis met het server... Probeer de server opnieuw te sarten!", ButtonType.OK);
+			alert.showAndWait();
+			leaveGame.fire();
+			});
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
 
 		Platform.runLater(() -> {
 			if (starten) {
+				controller.getGameScene().setHorigeKleur(getplayerNummer());
+				controller.getGameScene().setHorigeKleur(getplayerNummer());
 				controller.setGameScene();
 				controller.getGameStage().setResizable(false);
 				controller.getGameStage().setMinHeight(720);
@@ -235,6 +249,16 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	public static void setAbleToStartGame() {
 		if(!knoppenBox.getChildren().contains(startGame))
 			knoppenBox.getChildren().add(startGame);
+	}
+
+	public int getplayerNummer() {
+		int playerNummer = 0;
+		for (int i = 0; i < allenamen.size(); i++) {
+			if (allenamen.get(i).equals(controller.getSpelernaam())) {
+				playerNummer = i;
+			}
+		}
+		return playerNummer;
 	}
 
 }

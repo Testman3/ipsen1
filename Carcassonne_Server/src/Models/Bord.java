@@ -67,7 +67,7 @@ public class Bord {
 	/**
 	 * Geeft elke speler zijn eigen horige kleur.
 	 */
-	private String[] spelerKleuren = {"horigeRood", "horigeBlauw", "horigeGeel", "horigeGroen", "horigePaars"};
+	private String[] spelerKleuren = {"horigeRood", "horigeBlauw", "horigeGroen", "horigeGeel", "horigePaars"};
 	public void setSpelerKleuren() {
 		for (int i = 0; i < alleSpelers.size(); i++) {
 			alleSpelers.get(i).setHorigeKleur(spelerKleuren[i]);
@@ -88,7 +88,6 @@ public class Bord {
 	 * Deze functie geeft de volgende speler de beurt
 	 */
 	public void geefSpelerBeurt() {
-		gameBeurt++;
 
 		spelerBeurt.setBeurt(false);
 
@@ -103,6 +102,7 @@ public class Bord {
 
 		spelerBeurt.setBeurt(true);
 		System.out.println("Speler beurt gegeven aan: " + spelerBeurt.getNaam());
+		gameBeurt++;
 	}
 	/**
 	 * returnt of de speler aan de beurt is

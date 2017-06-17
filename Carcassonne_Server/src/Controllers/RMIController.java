@@ -171,5 +171,6 @@ public class RMIController implements RMIInterface {
 	public void leaveGame(String naam) throws RemoteException {
 
 		serverManager.bordController.volgendeBeurtNaLeave(naam);
+
 	}
 }

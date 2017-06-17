@@ -98,7 +98,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 			try {
 				Desktop.getDesktop().browse(handleidingDoc.toURI());
 			} catch (IOException e1) {
-				System.out.println(e1);
+				System.out.println("File not Found");
 			}
 		});
 

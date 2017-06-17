@@ -12,18 +12,43 @@
     -fx-padding: 0;
     -fx-background-color: transparent;
     }
+
 #checkBox {
 }
 
 #spelerInfo{
 	-fx-font-size: 3em;
 	-fx-padding: -10px;
-
 }
 
+#spelerInfoHigh{
+	-fx-font-size: 3em;
+	-fx-padding: -10px;
+	 -fx-text-fill: #00ff00;
+}
+
+#horigeBox{
+	-fx-padding: 10px, 0px;
+}
+
+#menuKnop{
+	-fx-font-size: 4em;
+}
 
 #standardLabel {
     -fx-font-size: 4em;
+}
+
+#inGameKnoppen {
+	-fx-font-size: 4em;
+}
+
+#draaiImage{
+	-fx-image: url("Afbeeldingen/Texture_End_Turn.png");
+}
+
+#eindigBeurtImage{
+	-fx-image: url("Afbeeldingen/Texture_End_Turn.png");
 }
 
 #terugNaarMenu{
@@ -31,7 +56,7 @@
 }
 
 #credits {
-    -fx-padding: 14em 0 0 0;
+    -fx-padding: 20px;
     -fx-font-size: 7em;
 }
 
@@ -39,22 +64,22 @@
 	-fx-padding: 5em 0 0 0;
     -fx-font-size: 10em;
 }
-#test{
-	-fx-background-image: url("UI720p.png");
+#uiBackground{
+	-fx-background-image: url("Afbeeldingen/UiKasteel720P.png");
 	-fx-background-size: 100%;
 }
 #Speler{
--fx-image: url("Text_Back_Player.png");
+-fx-image: url("Afbeeldingen/Text_Back_Player.png");
 }
 #Kaartview{
-	-fx-image: url("Text_Back_Pot_Met_Stapel.png");
+	-fx-image: url("Afbeeldingen/Text_Back_Pot_Met_Stapel.png");
 }
 
 #KaartenLeft{
 	-fx-font-size: 30px;
 }
 #Horige {
--fx-image: url("Horige_Rood.png");
+-fx-image: url("Afbeeldingen/Horige_Rood.png");
 }
 
 #labelStyle{
@@ -106,20 +131,21 @@
 }
 
 #KaartTest{
-		-fx-image: url("Kaart_03.png");
+		-fx-image: url("Kaarten/Kaart_03.png");
 }
 #spelBordBackground{
--fx-background-image: url("TestenPLZ.jpg");
+-fx-background-image: url("Afbeeldingen/SpelbordBackground.jpg");
 }
 #KaartPreview{
-		-fx-image: url("Kaart_00.png");
+		-fx-image: url("Afbeeldingen/Kaart_Background.png");
 }
 
 #creditsLabel {
 	-fx-font-size: 3.5em;
+	-fx-padding: -10px;
 }
 #horigePreview {
-    -fx-image: url("Horige_Preview.png");
+    -fx-image: url("Afbeeldingen/Horige_Preview.png");
 }
 #Kaart_00{
 -fx-image: url("Kaarten/Kaart_00.png");
@@ -220,18 +246,20 @@
 -fx-image: url("Kaarten/Kaart_24.png");
 }
 #horigeRood{
--fx-image: url("Horige_Rood.png");
+-fx-image: url("Afbeeldingen/Horige_Rood.png");
 }
 #horigeBlauw{
--fx-image: url("Horige_Blauw.png");
+-fx-image: url("Afbeeldingen/Horige_Blauw.png");
 }
 #horigeGroen{
--fx-image: url("Horige_Groen.png");
+-fx-image: url("Afbeeldingen/Horige_Groen.png");
 }
 #horigeGeel{
--fx-image: url("Horige_Geel.png");
+-fx-image: url("Afbeeldingen/Horige_Geel.png");
 }
 #horigePaars{
--fx-image: url("Horige_Paars.png");
+-fx-image: url("Afbeeldingen/Horige_Paars.png");
+}
+#horigeZwart{  -fx-image: url("Afbeeldingen/Horige_Zwart.png");
 }
 

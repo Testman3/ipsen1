@@ -14,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import Controllers.MenuController;
-
 /**
  * Deze class zorgt voor een goede weergave van de PreLobbyScene
  */

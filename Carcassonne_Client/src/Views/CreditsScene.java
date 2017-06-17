@@ -8,6 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import commonFunctions.*;
 
+import javax.swing.text.html.ImageView;
+
 /**
  * Deze class zorgt ervoor dat de CreditsScene goed wordt weergegeven.
  */
@@ -15,18 +17,13 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 
 	//Setting vars
 	private MenuController controller;
-	private int maxButtonWidth = 800;
 	BorderPane mainPane;
-
 	private SmartButton backToHome;
+	private SmartLabel credits;
 	private SmartLabel[] labels = new SmartLabel[5];
+	private VBox alleElementen;
+	private VBox alleNamen;
 
-	private VBox creditText;
-	private VBox creditsNamen;
-	private VBox backToHomeButton;
-	private VBox alles;
-
-	private Label credits;
 
 	/**
 	 * Constructor van de creditsscene
@@ -45,17 +42,23 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 
 	@Override
 	public void initGui() {
+
+		alleElementen = new VBox(10);
+		alleNamen= new VBox(5);
+		alleElementen.setId("schild");
+
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
 
 		backToHome = new SmartButton("Terug naar Hoofdmenu");
-		backToHome.setMaxWidth(maxButtonWidth);
 		backToHome.setId("terugNaarMenu");
 
-		creditText = new VBox();
-		creditsNamen = new VBox(10);
-		backToHomeButton = new VBox();
-		alles = new VBox();
+		credits = new SmartLabel("Credits");
+		credits.setId("credits");
+
+
+
+
 
 		/*
 		 * 0 = Martijn 1 = Jusin 2 = Raymon 3 = Haitam 4 = Henk
@@ -64,7 +67,7 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 		for (int i = 0; i < labels.length; i++ ){
 			labels[i] = new SmartLabel();
 			labels[i].setId("creditsLabel");
-			creditsNamen.getChildren().add(labels[i]);
+			alleNamen.getChildren().add(labels[i]);
 		}
 
 		labels[0].setText("Martijn van Adrichem");
@@ -73,22 +76,18 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 		labels[3].setText("Haitam el Attar");
 		labels[4].setText("Henk van Overbeek");
 
-		credits = new SmartLabel();
-		credits.setText("Credits");
-		credits.setId("credits");
+		alleNamen.setAlignment(Pos.CENTER);
 
-		creditsNamen.setAlignment(Pos.CENTER);
-		backToHomeButton.setAlignment(Pos.CENTER);
 
-		creditText.getChildren().add(credits);
-		creditText.setAlignment(Pos.CENTER);
 
-		backToHomeButton.getChildren().add(backToHome);
+		alleElementen.getChildren().add(credits);
+		alleElementen.getChildren().add(alleNamen);
+		alleElementen.getChildren().add(backToHome);
+		alleElementen.setAlignment(Pos.CENTER);
 
-		alles.setId("schild");
-		alles.getChildren().setAll(creditText, creditsNamen, backToHomeButton);
 
-		mainPane.setCenter(alles);
+		mainPane.setCenter(alleElementen);
+
 
 		initAction();
 	}

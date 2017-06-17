@@ -14,21 +14,21 @@ public class SpelerView extends StackPane {
 
 	private SmartLabel text_Naam;
 	private SmartLabel text_Punten;
-	private  ImageView achterkant;
+	private ImageView achterkant;
 
 	/**
 	 * Constructor van SpelerView
 	 */
-	SpelerView(){
+	SpelerView() {
 
-	VBox texts = new VBox(0);
-	texts.setAlignment(Pos.CENTER);
-	text_Punten = new SmartLabel();
-	text_Punten.setPrefHeight(20);
-	text_Naam = new SmartLabel();
-	text_Naam.setPrefHeight(20);
-	texts.getChildren().addAll(text_Naam,text_Punten);
-	achterkant = new ImageView();
+		VBox texts = new VBox(0);
+		texts.setAlignment(Pos.CENTER);
+		text_Punten = new SmartLabel();
+		text_Punten.setPrefHeight(20);
+		text_Naam = new SmartLabel();
+		text_Naam.setPrefHeight(20);
+		texts.getChildren().addAll(text_Naam, text_Punten);
+		achterkant = new ImageView();
 
 		text_Naam.setId("spelerInfo");
 		text_Punten.setId("spelerInfo");
@@ -41,20 +41,29 @@ public class SpelerView extends StackPane {
 
 	/**
 	 * Deze functie stelt de spelernaam in
-	 * @param naam
-	 * Geef spelernaam mee in de vorm van een String
+	 *
+	 * @param naam Geef spelernaam mee in de vorm van een String
 	 */
-	void setNaam(String naam){
-	text_Naam.setText(naam);
+	void setNaam(String naam) {
+		text_Naam.setText(naam);
 	}
 
 	/**
 	 * Deze functie stelt het aantal punten in
-	 * @param punten
-	 * Geef een int mee met aantal punten
+	 *
+	 * @param punten Geef een int mee met aantal punten
 	 */
-	void setPunten(int punten){
+	void setPunten(String punten) {
 		text_Punten.setText(" " + punten);
 	}
 
+	public void setHighlighted() {
+		text_Naam.setId("spelerInfoHigh");
+		text_Punten.setId("spelerInfoHigh");
+	}
+
+	public void setUnHighlighted() {
+		text_Naam.setId("spelerInfo");
+		text_Punten.setId("spelerInfo");
+	}
 }

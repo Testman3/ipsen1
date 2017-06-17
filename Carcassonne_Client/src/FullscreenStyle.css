@@ -1,0 +1,194 @@
+@font-face{
+	font-family: EnchantedLand;
+	src: url(EnchantedLand.otf);
+}
+
+.root * {
+	-fx-font-family: "Enchanted Land";
+	-fx-text-fill: white;
+	-fx-stroke: black;
+}
+.button {
+	-fx-padding: 0;
+	-fx-background-color: transparent;
+}
+
+#uiBackground{
+	-fx-background-image: url("Afbeeldingen/UiKasteel.png");
+	-fx-background-size: 1920px;
+}
+
+#spelBordBackground{
+	-fx-background-image: url("Afbeeldingen/SpelbordBackground.jpg");
+}
+
+#menuKnop{
+	-fx-font-size: 4em;
+}
+
+#standardLabel {
+	-fx-font-size: 4em;
+}
+
+#inGameKnoppen {
+	-fx-font-size: 4em;
+}
+
+#draaiImage{
+	-fx-image: url("Afbeeldingen/Texture_End_Turn.png");
+}
+
+#eindigBeurtImage{
+	-fx-image: url("Afbeeldingen/Texture_End_Turn.png");
+}
+
+#Speler{
+	-fx-image: url("Afbeeldingen/Text_Back_Player.png");
+}
+
+#Kaartview{
+	-fx-image: url("Afbeeldingen/Text_Back_Pot_Met_Stapel.png");
+}
+
+#KaartenLeft{
+	-fx-font-size: 30px;
+}
+
+
+
+
+#horigePreview {
+	-fx-image: url("Afbeeldingen/Horige_Preview.png");
+}
+
+#spelerInfo{
+	-fx-font-size: 3em;
+	-fx-padding: -10px;
+}
+
+#spelerInfoHigh{
+	-fx-font-size: 3em;
+	-fx-padding: -10px;
+	-fx-text-fill: #00ff00;
+}
+
+#KaartPreview{
+	-fx-image: url("Afbeeldingen/Kaart_Background.png");
+}
+
+#Kaart_00{
+	-fx-image: url("Kaarten/Kaart_00.png");
+}
+
+#Kaart_01{
+	-fx-image: url("Kaarten/Kaart_01.png");
+}
+
+#Kaart_02{
+	-fx-image: url("Kaarten/Kaart_02.png");
+}
+
+#Kaart_03{
+	-fx-image: url("Kaarten/Kaart_03.png");
+}
+
+#Kaart_04{
+	-fx-image: url("Kaarten/Kaart_04.png");
+}
+
+#Kaart_05{
+	-fx-image: url("Kaarten/Kaart_05.png");
+}
+
+#Kaart_06{
+	-fx-image: url("Kaarten/Kaart_06.png");
+}
+
+#Kaart_07{
+	-fx-image: url("Kaarten/Kaart_07.png");
+}
+
+#Kaart_08{
+	-fx-image: url("Kaarten/Kaart_08.png");
+}
+
+#Kaart_09{
+	-fx-image: url("Kaarten/Kaart_09.png");
+}
+
+#Kaart_10{
+	-fx-image: url("Kaarten/Kaart_10.png");
+}
+
+#Kaart_11{
+	-fx-image: url("Kaarten/Kaart_11.png");
+}
+
+#Kaart_12{
+	-fx-image: url("Kaarten/Kaart_12.png");
+}
+
+#Kaart_13{
+	-fx-image: url("Kaarten/Kaart_13.png");
+}
+
+#Kaart_14{
+	-fx-image: url("Kaarten/Kaart_14.png");
+}
+
+#Kaart_15{
+	-fx-image: url("Kaarten/Kaart_15.png");
+}
+
+#Kaart_16{
+	-fx-image: url("Kaarten/Kaart_16.png");
+}
+
+#Kaart_17{
+	-fx-image: url("Kaarten/Kaart_17.png");
+}
+
+#Kaart_18{
+	-fx-image: url("Kaarten/Kaart_18.png");
+}
+
+#Kaart_19{
+	-fx-image: url("Kaarten/Kaart_19.png");
+}
+
+#Kaart_20{
+	-fx-image: url("Kaarten/Kaart_20.png");
+}
+
+#Kaart_21{
+	-fx-image: url("Kaarten/Kaart_21.png");
+}
+
+#Kaart_22{
+	-fx-image: url("Kaarten/Kaart_22.png");
+}
+
+#Kaart_23{
+	-fx-image: url("Kaarten/Kaart_23.png");
+}
+#Kaart_24{
+	-fx-image: url("Kaarten/Kaart_24.png");
+}
+
+#horigeRood{
+	-fx-image: url("Afbeeldingen/Horige_Rood.png");
+}
+#horigeBlauw{
+	-fx-image: url("Afbeeldingen/Horige_Blauw.png");
+}
+#horigeGroen{
+	-fx-image: url("Afbeeldingen/Horige_Groen.png");
+}
+#horigeGeel{
+	-fx-image: url("Afbeeldingen/Horige_Geel.png");
+}
+#horigePaars{
+	-fx-image: url("Afbeeldingen/Horige_Paars.png");
+}
+#horigeZwart{  -fx-image: url("Afbeeldingen/Horige_Zwart.png");
+}
