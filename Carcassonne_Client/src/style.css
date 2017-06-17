@@ -64,7 +64,7 @@
 	-fx-padding: 5em 0 0 0;
     -fx-font-size: 10em;
 }
-#test{
+#uiBackground{
 	-fx-background-image: url("Afbeeldingen/UiKasteel720P.png");
 	-fx-background-size: 100%;
 }

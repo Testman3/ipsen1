@@ -100,7 +100,7 @@ public class GameScene extends Scene {
 		eindigBeurtImage = new ImageView();
 		
 		// id
-		mainPane.setId("test");
+		mainPane.setId("uiBackground");
 		draaiButton.setId("inGameKnoppen");
 		draaiImage.setId("draaiImage");
 		eindigBeurtImage.setId("eindigBeurtImage");
