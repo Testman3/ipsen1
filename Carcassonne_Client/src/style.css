@@ -142,6 +142,7 @@
 
 #creditsLabel {
 	-fx-font-size: 3.5em;
+	-fx-padding: -10px;
 }
 #horigePreview {
     -fx-image: url("Afbeeldingen/Horige_Preview.png");
