@@ -95,9 +95,7 @@ public class GameScene extends Scene {
 		eindigBeurtBackground = new StackPane();
 		draaiImage = new ImageView();
 		eindigBeurtImage = new ImageView();
-
-
-
+		
 		// id
 		mainPane.setId("test");
 		draaiButton.setId("inGameKnoppen");
@@ -107,6 +105,8 @@ public class GameScene extends Scene {
 		menuButton.setId("menuKnop");
 		ShowKaart.setId("Kaartview");
 		KaartenLeft.setId("standardLabel");
+		horigeBox.setId("horigeBox");
+		links.setId("gameLinks");
 
 		//setup Menubutton
 		//menuButton.setAlignment(Pos.BOTTOM_CENTER);
@@ -143,8 +143,10 @@ public class GameScene extends Scene {
 		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
 
 		//setAlignment
+		links.setAlignment(Pos.CENTER);
 		rest.setAlignment(Pos.BOTTOM_CENTER);
 		onderkantElement.setAlignment(Pos.CENTER);
+		horigeBox.setAlignment(Pos.BOTTOM_CENTER);
 
 		//GetChilderen
 		draaiBackground.getChildren().addAll(draaiImage, draaiButton);
@@ -177,15 +179,11 @@ public class GameScene extends Scene {
 		onderkantElement.getChildren().add(draaiBackground);
 		onderkantElement.getChildren().add(horigeBox);
 		onderkantElement.getChildren().add(eindigBeurtBackground);
-
 		rest.getChildren().add(onderkantElement);
 		onderkant.getChildren().add(links);
 		onderkant.getChildren().add(rest);
 
-
 		mainPane.setBottom(onderkant);
-
-
 
 		initAction();
 

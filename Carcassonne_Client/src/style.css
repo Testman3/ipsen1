@@ -22,6 +22,10 @@
 
 }
 
+#horigeBox{
+	-fx-padding: 10px, 0px;
+}
+
 #menuKnop{
 	-fx-font-size: 4em;
 }
