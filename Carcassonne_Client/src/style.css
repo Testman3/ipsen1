@@ -21,6 +21,11 @@
 	-fx-padding: -10px;
 
 }
+#spelerInfoHigh{
+	-fx-font-size: 3em;
+	-fx-padding: -10px;
+	 -fx-text-fill: #00ff00;
+}
 
 #horigeBox{
 	-fx-padding: 10px, 0px;

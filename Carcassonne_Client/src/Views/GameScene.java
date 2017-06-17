@@ -398,10 +398,19 @@ public class GameScene extends Scene {
 			KaartenLeft.setText("Stapel: " + kaartenOver);
 			for (int i = 0; i < playerViews.length; i++) {
 				if (i == alleSpelers.size()) {
+					playerViews[i].setNaam("");
+					playerViews[i].setPunten("");
 					return;
 				}
+				if(alleSpelers.get(i).getNaam().equals(client.getSpelerBeurt())){
+					playerViews[i].setHighlighted();
+				} else {
+					playerViews[i].setUnHighlighted();
+				}
 				playerViews[i].setNaam(alleSpelers.get(i).getNaam());
-				playerViews[i].setPunten(alleSpelers.get(i).getPunten());
+				playerViews[i].setPunten("" + alleSpelers.get(i).getPunten());
+
+
 			}
 		});
 	}
@@ -418,6 +427,10 @@ public class GameScene extends Scene {
 	public void hideSceneBlur() {
 		this.mainPane.setEffect(null);
 		tilesPane.setEffect(null);
+	}
+
+	public void setPlayerBeurtKleur() {
+
 	}
 
 	public void setHorigeKleur(int spelerNummer){

@@ -80,7 +80,6 @@ public class Bord {
 	 * Deze functie geeft de volgende speler de beurt
 	 */
 	public void geefSpelerBeurt() {
-		gameBeurt++;
 
 		spelerBeurt.setBeurt(false);
 
@@ -95,6 +94,7 @@ public class Bord {
 
 		spelerBeurt.setBeurt(true);
 		System.out.println("Speler beurt gegeven aan: " + spelerBeurt.getNaam());
+		gameBeurt++;
 	}
 	/**
 	 * returnt of de speler aan de beurt is

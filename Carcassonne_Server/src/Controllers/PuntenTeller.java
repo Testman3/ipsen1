@@ -10,14 +10,20 @@ import java.util.Arrays;
 import Models.Zijde.ZijdeType;
 
 /**
- * Created by Marti on 15-6-2017.
+ * Deze class zorgt voor het berekenen van alle punten
  */
 public class PuntenTeller {
 
+	/**
+	 * Deze functie berekent punten
+	 * @param tile
+	 * Geef de gewenste tile mee
+	 * @param bord
+	 * Geef het bord mee
+	 */
 	public void BerekenPunten(Tile tile, Bord bord){
 		System.out.println("=================================BEREKENEN PUNTEN======================");
 		ArrayList<Tile> alleBuren = new ArrayList<>();
-
 
 		//Kijk om je heen, zit er ergens een klooster?
 		int x = tile.getX();
@@ -62,13 +68,16 @@ public class PuntenTeller {
 				berekenWegen(tile, bord);
 		}
 
-
-
 		System.out.println("==========================EINDE BEREKENEN PUNTEN==============================");
 	}
 
-
-
+	/**
+	 * Deze functie berekent de punten voor kloosters
+	 * @param tile
+	 * Geef de gewenste tile mee
+	 * @param bord
+	 * Geef het bord mee
+	 */
 	public void BerekenKloosters(Tile tile, Bord bord) {
 
 		if(tile.getMiddenZijde().getHorigeSpeler() == null ){
@@ -109,12 +118,18 @@ public class PuntenTeller {
 	}
 
 
-
+	/**
+	 * Deze funcite berekent de punten voor wegen
+	 * @param tile
+	 * Geef de gewenste tile mee
+	 * @param bord
+	 * Geef het bord mee
+	 */
 	public void berekenWegen(Tile tile, Bord bord) {
 		ArrayList<Tile> wegNetwerk = new ArrayList<>();
 		ArrayList<Horige> horigeInNetwerk = new ArrayList<Horige>();
 		int eindes = 0;
-		berekenWeg(tile, bord, wegNetwerk, eindes);
+		berekenWeg(tile, bord, wegNetwerk, horigeInNetwerk, eindes);
 
 		for (int i = 0; i < wegNetwerk.size(); i++) {
 			if(wegNetwerk.get(i).getGeplaatsteHorigePositie() != null){
@@ -129,6 +144,17 @@ public class PuntenTeller {
 		}
 	}
 
+	/**
+	 * Deze functie berekend wat een weg is
+	 * @param tile
+	 * Geef de tile mee
+	 * @param bord
+	 * Geef het bord mee
+	 * @param netwerk
+	 * Geef een arraylist van tiles mee
+	 * @param eindes
+	 * Geef het aantal eindes mee
+	 */
 	public void berekenWeg(Tile tile, Bord bord, ArrayList<Tile> netwerk, int eindes){
 
 		if(netwerk.contains(tile)){
@@ -148,7 +174,7 @@ public class PuntenTeller {
 		if(tile.getNoordZijde().getZijde() == ZijdeType.WEG) {
 			if(!tile.getNoordZijde().getIsEinde()){
 				Tile nextTile = bord.getTile(tile.getX(),tile.getY() - 1);
-				berekenWeg(nextTile,bord,  netwerk, eindes);
+				berekenWeg(nextTile,bord,  netwerk, horige, eindes);
 			} else {
 				eindes++;
 				return;
@@ -156,8 +182,11 @@ public class PuntenTeller {
 		}
 		if(tile.getOostZijde().getZijde() == ZijdeType.WEG) {
 			if(!tile.getOostZijde().getIsEinde()){
+				if(tile.getOostZijde().getHorigeSpeler() != null){
+					addHorigeToNetwork(horige, tile.getOostZijde().getHorigeSpeler());
+				}
 				Tile nextTile = bord.getTile(tile.getX() + 1,tile.getY() );
-				berekenWeg(nextTile,bord,netwerk, eindes);
+				berekenWeg(nextTile,bord,  netwerk, horige, eindes);
 			} else {
 				eindes++;
 				return;
@@ -166,7 +195,7 @@ public class PuntenTeller {
 		if(tile.getZuidZijde().getZijde() == ZijdeType.WEG) {
 			if(!tile.getZuidZijde().getIsEinde()){
 				Tile nextTile = bord.getTile(tile.getX(),tile.getY() + 1);
-				berekenWeg(nextTile,bord,netwerk, eindes);
+				berekenWeg(nextTile,bord,  netwerk, horige, eindes);
 			} else {
 				eindes++;
 				return;
@@ -175,40 +204,13 @@ public class PuntenTeller {
 		if(tile.getWestZijde().getZijde() == ZijdeType.WEG) {
 			if(!tile.getWestZijde().getIsEinde()){
 				Tile nextTile = bord.getTile(tile.getX() - 1 ,tile.getY());
-				berekenWeg(nextTile,bord,netwerk, eindes);
+				berekenWeg(nextTile,bord,  netwerk, horige, eindes);
 			} else {
 				eindes++;
 				return;
 			}
 		}
 	}
-
-//	public void berekenZijde(Tile tile,Bord bord, entryZijde zijde,  ArrayList<Tile> netwerk, int eindes){
-//		if(zijde == entryZijde.NOORD && ) {
-//			if(!tile.getNoordZijde().getIsEinde()){
-//				Tile nextTile = bord.getTile(tile.getX(),tile.getY() - 1);
-//				berekenWeg(nextTile,bord,netwerk, eindes);
-//			} else eindes++;
-//		}
-//		if(tile.getOostZijde().getZijde() == ZijdeType.WEG) {
-//			if(!tile.getOostZijde().getIsEinde()){
-//				Tile nextTile = bord.getTile(tile.getX() + 1,tile.getY() );
-//				berekenWeg(nextTile,bord,netwerk, eindes);
-//			} else eindes++;
-//		}
-//		if(tile.getZuidZijde().getZijde() == ZijdeType.WEG) {
-//			if(!tile.getZuidZijde().getIsEinde()){
-//				Tile nextTile = bord.getTile(tile.getX(),tile.getY() + 1);
-//				berekenWeg(nextTile,bord,netwerk, eindes);
-//			} else eindes++;
-//		}
-//		if(tile.getWestZijde().getZijde() == ZijdeType.WEG) {
-//			if(!tile.getWestZijde().getIsEinde()){
-//				Tile nextTile = bord.getTile(tile.getX() - 1 ,tile.getY());
-//				berekenWeg(nextTile,bord,netwerk, eindes);
-//			} else eindes++;
-//		}
-//	}
 
 	public void addToNetwork(ArrayList<Tile> netwerk, Tile tile){
 		if(tile==null){
@@ -222,7 +224,24 @@ public class PuntenTeller {
 
 	}
 
+	public void addHorigeToNetwork(ArrayList<Horige> Horige, Horige horige){
+		if(horige == null){
+			return;
+		}
+		if(!Horige.contains(horige)){
+			System.out.println("Tile zit al in het netwerk");
+			Horige.add(horige);
+		}
+	}
 
+
+	/**
+	 * Deze functie geeft de punten aan de speler
+	 * @param speler
+	 * Geef de speler mee die de punten moet krijgen
+	 * @param hoeveelheid
+	 * Geef de hoeveelheid punten mee die de speler moet krijgen
+	 */
 	public void geefPunten(Speler speler, int hoeveelheid){
 		speler.geefPunten(hoeveelheid);
 		System.out.println("Punten gegeven aan speler " + speler.getNaam() + " ( " + speler.getPunten() + " punten)");

@@ -40,8 +40,6 @@ public class Zijde {
 		return isEinde;
 	}
 
-
-
 	public boolean isEinde() {
 		return isEinde;
 	}
