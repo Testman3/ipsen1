@@ -41,7 +41,7 @@ public class MenuController {
 
 		if (System.getProperty("os.name").toLowerCase().contains("windows")){
 			breedte = 1260;
-			hoogte = 700;
+			hoogte = 710;
 		}
 
 		this.gameStage = gameStage;
