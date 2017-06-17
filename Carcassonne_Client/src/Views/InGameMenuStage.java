@@ -1,6 +1,5 @@
 package Views;
 
-import Controllers.LobbyController;
 import Controllers.MenuController;
 import Models.GameClient;
 import commonFunctions.SceneInitialiser;
@@ -18,12 +17,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.awt.*;
-import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -37,10 +34,10 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     private VBox allMenuItemsVBox;
     private SmartLabel titel;
     private Scene menuScene;
-    private ImageView backgroud;
+    private ImageView background;
     private GameScene gameScene;
     private GameClient gameClient;
-    AudioClip ding = new AudioClip(Paths.get("Sounds/ding.wav").toUri().toString());
+    private AudioClip ding = new AudioClip(Paths.get("Sounds/ding.wav").toUri().toString());
 
     //settings
 	private StackPane settingsPane;
@@ -49,7 +46,6 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 	private HBox soundBox;
 	private HBox spraakBox;
 	private HBox fullscreenBox;
-	private SmartLabel titelSettings;
 	private SmartLabel sounds;
 	private SmartLabel spraak;
 	private SmartLabel fullscreen;
@@ -76,7 +72,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
     @Override
     public void initGui() {
-		backgroud = new ImageView();
+		background = new ImageView();
         menuPane = new StackPane();
         menuPane.setId("inGameMenu");
 		stage = new Stage(StageStyle.TRANSPARENT);
@@ -87,9 +83,9 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
         //Css toevoegen
         menuPane.getStylesheets().add("style.css");
 
-        backgroud.setFitHeight(800);
-        backgroud.setFitWidth(600);
-        backgroud.setId("BackgroundMenu");
+        background.setFitHeight(800);
+        background.setFitWidth(600);
+        background.setId("BackgroundMenu");
 
         //Tekst in titel zetten.
         titel = new SmartLabel("Menu");
@@ -114,7 +110,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
         allMenuItemsVBox.setAlignment(Pos.CENTER);
 		//Vbox toevoegen aan pane en background op empty
-        menuPane.getChildren().addAll(backgroud, allMenuItemsVBox);
+        menuPane.getChildren().addAll(background, allMenuItemsVBox);
 		menuPane.setBackground(Background.EMPTY);
 
 		//Toevoegen aan stage
@@ -128,7 +124,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
     private void initSettings(){
 
-		backgroud = new ImageView();
+		background = new ImageView();
 		settingsPane = new StackPane();
 		buttonVBox = new VBox();
 		soundBox = new HBox(5);
@@ -147,7 +143,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		settingsPane.getStylesheets().add("style.css");
 
 		//set Id
-		backgroud.setId("BackgroundMenu");
+		background.setId("BackgroundMenu");
 		soundCheckBox.setId("checkBox");
 		spraakCheckBox.setId("checkBox");
 		fullscreenCheckBox.setId("checkBox");
@@ -164,8 +160,8 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		fullscreenCheckBox.setSelected(SettingsScene.fullScreen);
 
 		//Set Background Size
-		backgroud.setFitHeight(800);
-		backgroud.setFitWidth(600);
+		background.setFitHeight(800);
+		background.setFitWidth(600);
 
 		//set Alignment
 		soundBox.setAlignment(Pos.CENTER);
@@ -182,7 +178,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		spraakBox.getChildren().addAll(spraak, spraakCheckBox);
 		fullscreenBox.getChildren().addAll(fullscreen, fullscreenCheckBox);
 		buttonVBox.getChildren().addAll(titel, soundBox, spraakBox, fullscreenBox, backtoMenu);
-		settingsPane.getChildren().addAll(backgroud, buttonVBox);
+		settingsPane.getChildren().addAll(background, buttonVBox);
 
 		//Set Stackpane Background
 		settingsPane.setBackground(Background.EMPTY);
@@ -252,7 +248,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
     }
 
-    public void initActionSettings(){
+    private void initActionSettings(){
 
     	//Geluid
 		soundCheckBox.setOnAction(event -> {
