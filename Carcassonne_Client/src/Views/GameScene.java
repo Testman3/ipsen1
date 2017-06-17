@@ -37,6 +37,7 @@ public class GameScene extends Scene {
 	private HBox test;
 	private TileView[][] tileViews;
 	private HorigeView[] horigeViews;
+	private HorigeView[] horigeViewsInvisible;
 	private SpelerView[] playerViews;
 	private ImageView ShowKaart;
 	private String kaartPlaatsId;
@@ -315,6 +316,12 @@ public class GameScene extends Scene {
 
 	}
 
+	public void setHorigeInvis() {
+	}
+
+	public void setHorigeVisible() {
+
+	}
 	/**
 	 * Deze methode laat de kaart draaien
 	 */

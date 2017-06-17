@@ -17,11 +17,11 @@ public class HorigeView extends ImageView {
 
 
 	public void setVisible(){
-
+		setVisible(true);
 	}
 
 	public void setInvisible(){
-
+		setVisible(false);
 	}
 
 	public void setHorigeKleur(String spelerKleur) {

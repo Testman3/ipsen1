@@ -10,11 +10,15 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -180,6 +184,13 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			if (lobbyController.RMIstub.isGameStarted()) {
 				starten = true;
 			}
+		} catch (NoSuchObjectException e2){
+			enableThread = false;
+			Platform.runLater(() -> {
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis met het server... Probeer de server opnieuw te sarten!", ButtonType.OK);
+			alert.showAndWait();
+			leaveGame.fire();
+			});
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
