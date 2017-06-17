@@ -207,7 +207,13 @@ public class GameScene extends Scene {
 			controller.showInGameMenu();
 		});
 
-	}
+		setOnKeyPressed(event -> {
+			if(event.getCode() == KeyCode.ESCAPE){
+				controller.showInGameMenu();
+			}
+			});
+		}
+
 
 
 	/**
