@@ -244,6 +244,8 @@ public class FileManager {
 			boolean oostEinde  = (boolean) jsonNumber.get("oostEinde");
 			boolean zuidEinde  = (boolean) jsonNumber.get("zuidEinde");
 			boolean westEinde  = (boolean) jsonNumber.get("westEinde");
+			// Rotation
+			int rotation = ((Number)jsonNumber.get("y")).intValue();
 			// Imageid
 			String imageId = (String) jsonNumber.get("imageId");
 			// Heeft klooster
@@ -357,6 +359,7 @@ public class FileManager {
 			allLoadedTiles[x][y].setHeeftKlooster(heeftKlooster);
 			allLoadedTiles[x][y].setHeeftBonus(heeftBonus);
 			allLoadedTiles[x][y].setHorigenZijdes(horigenPos);
+			allLoadedTiles[x][y].setRotation(rotation);
 			if(heeftKlooster){
 				allLoadedTiles[x][y].setMiddenZijde(new Zijde(Zijde.ZijdeType.KLOOSTER, true));
 			}

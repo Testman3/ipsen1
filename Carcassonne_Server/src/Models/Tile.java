@@ -148,10 +148,6 @@ public class Tile {
 		return heeftBonus;
 	}
 
-	public Zijde getMiddenZijdes(){
-		return this.middenZijde;
-	}
-
 	public Zijde getNoordZijde() {
 		return noordZijde;
 	}
@@ -170,14 +166,6 @@ public class Tile {
 
 	public Zijde getMiddenZijde() {
 		return middenZijde;
-	}
-
-	public boolean isHeeftKlooster() {
-		return heeftKlooster;
-	}
-
-	public boolean isHeeftBonus() {
-		return heeftBonus;
 	}
 
 	public boolean getHeeftKlooster() { return heeftKlooster; }
