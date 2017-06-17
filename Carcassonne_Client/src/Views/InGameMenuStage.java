@@ -139,7 +139,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		titel = new SmartLabel("Instellingen");
 		sounds = new SmartLabel("Geluid");
 		spraak = new SmartLabel("Spraakondersteuning");
-		fullscreen = new SmartLabel("Fullscreen");
+		fullscreen = new SmartLabel("Fullscreen in-game");
 		backtoMenu = new SmartButton("Terug naar menu");
 
 		//Setup Css
@@ -273,6 +273,8 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		//FullScreen
 		fullscreenCheckBox.setOnAction(event -> {
 			SettingsScene.fullScreen = fullscreenCheckBox.isSelected();
+			gameScene.switchFullScreenMode();
+
 		});
 
     	//Terug naar menu

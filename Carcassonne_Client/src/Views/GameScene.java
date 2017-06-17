@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 
 import java.rmi.RemoteException;
@@ -463,5 +464,16 @@ public class GameScene extends Scene {
 			horigeViews[i].setId(spelerKleur);
 		}
 
+	}
+
+	public void switchFullScreenMode(){
+	if (SettingsScene.fullScreen){
+		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+		controller.getGameStage().setFullScreenExitHint(null);
+		controller.getGameStage().setFullScreen(true);
+	}
+	else if(!SettingsScene.fullScreen){
+		controller.getGameStage().setFullScreen(false);
+	}
 	}
 }
