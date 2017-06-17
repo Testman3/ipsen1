@@ -221,7 +221,8 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 			Platform.runLater(() -> {
 
 				Alert exitConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-
+				exitConfirmation.initModality(Modality.APPLICATION_MODAL);
+				exitConfirmation.initOwner(this.stage);
 				ding.play();
 					exitConfirmation.showAndWait().ifPresent(response -> {
 						if (response == ButtonType.OK) {
