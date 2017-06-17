@@ -59,6 +59,8 @@ public class GameScene extends Scene {
 	private ImageView draaiImage;
 	private ImageView eindigBeurtImage;
 	Speler speler;
+	private int breedte;
+	private int hoogte;
 
 
 	/**
@@ -70,6 +72,8 @@ public class GameScene extends Scene {
 		//	super(new Pane(), 1280, 720);
 		super(new Pane(), breedte, hoogte);
 		getStylesheets().add("style.css");
+		this.breedte = breedte;
+		this.hoogte = hoogte;
 
 
 		tilesPane = (Pane) this.getRoot();
@@ -472,11 +476,13 @@ public class GameScene extends Scene {
 		controller.getGameStage().setFullScreenExitHint(null);
 		controller.getGameStage().setFullScreen(SettingsScene.fullScreen);
 		if (SettingsScene.fullScreen == true){
+			mainPane.setMinSize(1920, 1080);
 			getStylesheets().add("FullscreenStyle.css");
 			getStylesheets().remove("style.css");
 		}else {
 			getStylesheets().add("style.css");
 			getStylesheets().remove("FullscreenStyle.css");
+			mainPane.setMinSize(breedte, hoogte);
 		}
 	}
 }
