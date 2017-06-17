@@ -3,6 +3,7 @@ package Controllers;
 import Models.GameClient;
 import Views.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
@@ -102,6 +103,11 @@ public class MenuController {
 	public void setGameScene(){
 		//TODO bereken hier de hoogte en breedte afhankelijk van operating system
 		gameStage.setScene(gameScene);
+		if(SettingsScene.fullScreen) {
+			gameStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+			gameStage.setFullScreenExitHint(null);
+			gameStage.setFullScreen(true);
+		}
 
 	//	gameStage.setFullScreen(SettingsScene.fullScreen);
 	}

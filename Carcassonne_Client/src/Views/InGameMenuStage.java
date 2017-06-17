@@ -139,7 +139,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		titel = new SmartLabel("Instellingen");
 		sounds = new SmartLabel("Geluid");
 		spraak = new SmartLabel("Spraakondersteuning");
-		fullscreen = new SmartLabel("Fullscreen");
+		fullscreen = new SmartLabel("Fullscreen in-game");
 		backtoMenu = new SmartButton("Terug naar menu");
 
 		//Setup Css
@@ -221,7 +221,11 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 			Platform.runLater(() -> {
 
 				Alert exitConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-
+				exitConfirmation.setTitle("Afsluitbevestiging");
+				exitConfirmation.setContentText("Weet u zeker dat u wilt afsluiten?");
+				exitConfirmation.setHeaderText("Afsluitbevestiging");
+				exitConfirmation.initModality(Modality.APPLICATION_MODAL);
+				exitConfirmation.initOwner(this.stage);
 				ding.play();
 					exitConfirmation.showAndWait().ifPresent(response -> {
 						if (response == ButtonType.OK) {
@@ -229,7 +233,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
 								gameClient.getRmiStub().leaveGame(gameClient.getSpelerNaam());
 
-								gameClient.getRmiStub().beeindigenBeurt(gameClient.getSpelerNaam());
+								gameClient.getRmiStub().leaveGame(gameClient.getSpelerNaam());
 
 								gameClient.getRmiStub().removePlayer(gameClient.getSpelerNaam());
 								System.exit(0);
@@ -269,6 +273,8 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		//FullScreen
 		fullscreenCheckBox.setOnAction(event -> {
 			SettingsScene.fullScreen = fullscreenCheckBox.isSelected();
+			gameScene.switchFullScreenMode();
+
 		});
 
     	//Terug naar menu

@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 
 import java.rmi.RemoteException;
@@ -69,6 +70,8 @@ public class GameScene extends Scene {
 		//	super(new Pane(), 1280, 720);
 		super(new Pane(), breedte, hoogte);
 		getStylesheets().add("style.css");
+
+
 		tilesPane = (Pane) this.getRoot();
 
 		this.controller = menuController;
@@ -80,7 +83,7 @@ public class GameScene extends Scene {
 	private void init() {
 		// new shit
 		mainPane = new BorderPane();
-		links = new VBox(5);
+		links = new VBox(6);
 		onderkant = new HBox(20);
 		draaiButton = new SmartButton("Draaien");
 		eindigButton = new SmartButton("Beëindig beurt");
@@ -96,11 +99,9 @@ public class GameScene extends Scene {
 		eindigBeurtBackground = new StackPane();
 		draaiImage = new ImageView();
 		eindigBeurtImage = new ImageView();
-
-
-
+		
 		// id
-		mainPane.setId("test");
+		mainPane.setId("uiBackground");
 		draaiButton.setId("inGameKnoppen");
 		draaiImage.setId("draaiImage");
 		eindigBeurtImage.setId("eindigBeurtImage");
@@ -108,11 +109,12 @@ public class GameScene extends Scene {
 		menuButton.setId("menuKnop");
 		ShowKaart.setId("Kaartview");
 		KaartenLeft.setId("standardLabel");
+		horigeBox.setId("horigeBox");
+		links.setId("gameLinks");
 
 		//setup Menubutton
-		//menuButton.setAlignment(Pos.BOTTOM_CENTER);
-		//menuButton.setMaxSize(100, 100);
-		//menuButton.setPrefSize(100, 100);
+		menuButton.setAlignment(Pos.BOTTOM_CENTER);
+
 
 		//Size BorderPane
 		mainPane.setPrefSize(1280, 720);
@@ -144,8 +146,10 @@ public class GameScene extends Scene {
 		ShowKaart.fitWidthProperty().bind(widthProperty().multiply(0.11));
 
 		//setAlignment
+		links.setAlignment(Pos.CENTER);
 		rest.setAlignment(Pos.BOTTOM_CENTER);
 		onderkantElement.setAlignment(Pos.CENTER);
+		horigeBox.setAlignment(Pos.BOTTOM_CENTER);
 
 		//GetChilderen
 		draaiBackground.getChildren().addAll(draaiImage, draaiButton);
@@ -178,15 +182,11 @@ public class GameScene extends Scene {
 		onderkantElement.getChildren().add(draaiBackground);
 		onderkantElement.getChildren().add(horigeBox);
 		onderkantElement.getChildren().add(eindigBeurtBackground);
-
 		rest.getChildren().add(onderkantElement);
 		onderkant.getChildren().add(links);
 		onderkant.getChildren().add(rest);
 
-
 		mainPane.setBottom(onderkant);
-
-
 
 		initAction();
 
@@ -210,7 +210,13 @@ public class GameScene extends Scene {
 			controller.showInGameMenu();
 		});
 
-	}
+		setOnKeyPressed(event -> {
+			if(event.getCode() == KeyCode.ESCAPE){
+				controller.showInGameMenu();
+			}
+			});
+		}
+
 
 
 	/**
@@ -467,5 +473,18 @@ public class GameScene extends Scene {
 			horigeViews[i].setId(spelerKleur);
 		}
 
+	}
+
+	public void switchFullScreenMode(){
+		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+		controller.getGameStage().setFullScreenExitHint(null);
+		controller.getGameStage().setFullScreen(SettingsScene.fullScreen);
+		if (SettingsScene.fullScreen == true){
+			getStylesheets().add("FullscreenStyle.css");
+			getStylesheets().remove("style.css");
+		}else {
+			getStylesheets().add("style.css");
+			getStylesheets().remove("FullscreenStyle.css");
+		}
 	}
 }

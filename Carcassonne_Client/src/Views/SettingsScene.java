@@ -38,7 +38,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 	//De drie beschikbare menu opties
 	public static boolean optieSpreken = false;
-	static boolean fullScreen = false;
+	public static boolean fullScreen = false;
 	static boolean optieGeluid = false;
 
 	/**
@@ -83,7 +83,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		titel = new Label("Instellingen");
 		sounds = new SmartLabel("Geluid");
 		spraak = new SmartLabel("Spraakondersteuning");
-		fullscreen = new SmartLabel("Fullscreen");
+		fullscreen = new SmartLabel("Fullscreen in-game");
 
 		titel.setId("title");
 		sounds.setId("standardLabel");
