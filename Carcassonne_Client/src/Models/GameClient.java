@@ -22,6 +22,8 @@ public class GameClient {
 	public String spelerNaam;
 	public String kaartPlaatsId = "";
 
+	String spelerBeurt;
+
 	//String spelerBeurt = "";
 	int beurt = 0;
 
@@ -176,6 +178,7 @@ public class GameClient {
 				kaartGeplaatst = false;
 				beurt = RmiStub.getBeurt();
 				verwijderHorige = RmiStub.getHorigeToRemove();
+				spelerBeurt = RmiStub.getPlayerBeurt();
 			}
 
 			if(verwijderHorige != null) {
@@ -226,6 +229,8 @@ public class GameClient {
 	 * @return spelerNaam
 	 * Geeft de spelernaam terug in de vorm van een String
 	 */
+	public String getSpelerBeurt() { return spelerBeurt; }
+
 	public String getSpelerNaam(){
 	return spelerNaam;
 	}
