@@ -221,6 +221,9 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 			Platform.runLater(() -> {
 
 				Alert exitConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+				exitConfirmation.setTitle("Afsluitbevestiging");
+				exitConfirmation.setContentText("Weet u zeker dat u wilt afsluiten?");
+				exitConfirmation.setHeaderText("Afsluitbevestiging");
 				exitConfirmation.initModality(Modality.APPLICATION_MODAL);
 				exitConfirmation.initOwner(this.stage);
 				ding.play();
