@@ -209,6 +209,11 @@ public class MenuController {
 		return creditsScene;
 	}
 
+	/**
+	 * Deze functie zet het ingame menu in de MenuController
+	 * @param stage
+	 * Geef de stage mee
+	 */
 	public void putIngameMenuInController(InGameMenuStage stage) {this.inGameMenuStage = stage;}
 	/**
 	 * Deze functie haalt de spelernaam op

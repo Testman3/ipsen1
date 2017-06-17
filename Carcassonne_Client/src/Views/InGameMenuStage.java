@@ -122,7 +122,10 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
         initAction();
     }
 
-    private void initSettings(){
+	/**
+	 * Deze functie initialiseert alle elementen voor het settings menu
+	 */
+	private void initSettings(){
 
 		background = new ImageView();
 		settingsPane = new StackPane();
@@ -188,7 +191,6 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		settingsScene.setFill(null);
 
 		initActionSettings();
-
 	}
 
     @Override
@@ -248,7 +250,10 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
     }
 
-    private void initActionSettings(){
+	/**
+	 * Deze functie initialiseert alle actions voor het settingsmenu
+	 */
+	private void initActionSettings(){
 
     	//Geluid
 		soundCheckBox.setOnAction(event -> {

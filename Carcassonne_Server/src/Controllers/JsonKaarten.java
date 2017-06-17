@@ -43,16 +43,13 @@ public class JsonKaarten {
 			System.out.println(reader.getAbsolutePath());
 			obj = parser.parse(new FileReader(reader));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("FileNotFound");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("IO");
+			System.out.println("IO Error");
 			e.printStackTrace();
 		} catch (org.json.simple.parser.ParseException e) {
-			System.out.println("I have no clue what this is");
-			// TODO Auto-generated catch block
+			System.out.println("This shouldn't have happened");
 			e.printStackTrace();
 		}
 

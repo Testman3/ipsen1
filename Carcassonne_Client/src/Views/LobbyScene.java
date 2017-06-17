@@ -134,8 +134,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				System.out.println("Er ging iets mis met de RMI verbinding!");
 			}
 
 			controller.setPreLobbyScene();
@@ -157,8 +157,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+					System.out.println("Thread Interrupted Exception");
 				}
 			}
 		});

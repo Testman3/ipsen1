@@ -31,17 +31,19 @@ public class GameClient {
 	private boolean kaartGeplaatst = false;
 	private ArrayList<Point> verwijderHorige;
 
-
+	/**
+	 * Constructor van GameClient
+	 * @param view
+	 * Geef de GameScene mee als view
+	 */
 	public GameClient(GameScene view) {
 		this.view = view;
-
 	}
-
 
 	/**
 	 * Deze functie MOET gerunt worden als de speler de game joint, dit start de thread en set de spelernaam.
-	 *
-	 * @param spelerNaam Geef de spelernaam mee in de vorm van een String
+	 * @param spelerNaam
+	 * Geef de spelernaam mee in de vorm van een String
 	 */
 	public void Join(String spelerNaam) {
 		this.spelerNaam = spelerNaam;
@@ -52,15 +54,17 @@ public class GameClient {
 				try {
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+					System.out.println("Thread Interrupted Exception");
 				}
 			}
 		});
 		gameThread.start();
-
 	}
 
+	/**
+	 * Deze functie zorgt ervoor dat de beurt van de speler beeindigt wordt
+	 */
 	public void beeindigBeurt() {
 		if(kaartGeplaatst == true){
 			try {
@@ -96,7 +100,6 @@ public class GameClient {
 
 	/**
 	 * Plaats de kaart in de view
-	 *
 	 * @param x coordinaat
 	 * @param y coordinaat
 	 */
@@ -114,7 +117,10 @@ public class GameClient {
 			e1.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Deze functie zorgt voor het draaien van een kaart
+	 */
 	public void draaiKaart() {
 		try {
 		if(RmiStub.draaiKaart(spelerNaam)){
@@ -123,7 +129,6 @@ public class GameClient {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -149,9 +154,15 @@ public class GameClient {
 		view.RmiStub = rmiController;
 	}
 
+	/**
+	 * Deze functie geeft de RMIStub terug
+	 * @return RmiStub
+	 * De RMIStub wordt teruggegeven
+	 */
 	public RMIInterface getRmiStub(){
 		return RmiStub;
 	}
+
 		/**
 		 * De client wordt elke x ms geīüpdatet, als de beurt op de server hoger is dan de beurt op de client betekent dat en
 		 * speler klaar is met zijn beurt, en het spelbord geüpdatet moet worden.
@@ -210,8 +221,11 @@ public class GameClient {
 	 */
 	public GameScene getGameScene(){return view;}
 
-
-
+	/**
+	 * Deze functie geeft de spelernaam terug
+	 * @return spelerNaam
+	 * Geeft de spelernaam terug in de vorm van een String
+	 */
 	public String getSpelerNaam(){
 	return spelerNaam;
 	}
