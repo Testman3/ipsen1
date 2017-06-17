@@ -69,6 +69,8 @@ public class GameScene extends Scene {
 		//	super(new Pane(), 1280, 720);
 		super(new Pane(), breedte, hoogte);
 		getStylesheets().add("style.css");
+
+
 		tilesPane = (Pane) this.getRoot();
 
 		this.controller = menuController;
@@ -467,13 +469,15 @@ public class GameScene extends Scene {
 	}
 
 	public void switchFullScreenMode(){
-	if (SettingsScene.fullScreen){
 		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 		controller.getGameStage().setFullScreenExitHint(null);
-		controller.getGameStage().setFullScreen(true);
-	}
-	else if(!SettingsScene.fullScreen){
-		controller.getGameStage().setFullScreen(false);
-	}
+		controller.getGameStage().setFullScreen(SettingsScene.fullScreen);
+		if (SettingsScene.fullScreen == true){
+			getStylesheets().add("FullscreenStyle.css");
+			getStylesheets().remove("style.css");
+		}else {
+			getStylesheets().add("style.css");
+			getStylesheets().remove("FullscreenStyle.css");
+		}
 	}
 }
