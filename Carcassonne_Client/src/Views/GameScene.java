@@ -209,15 +209,7 @@ public class GameScene extends Scene {
 		menuButton.setOnAction(event -> {
 			controller.showInGameMenu();
 		});
-
-		setOnKeyPressed(event -> {
-			if(event.getCode() == KeyCode.ESCAPE){
-				controller.showInGameMenu();
-			}
-			});
-		}
-
-
+	}
 
 	/**
 	 * Creates the tile grid in the game client
