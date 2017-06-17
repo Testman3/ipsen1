@@ -79,7 +79,7 @@ public class GameScene extends Scene {
 	private void init() {
 		// new shit
 		mainPane = new BorderPane();
-		links = new VBox(5);
+		links = new VBox(6);
 		onderkant = new HBox(20);
 		draaiButton = new SmartButton("Draaien");
 		eindigButton = new SmartButton("Beëindig beurt");
@@ -109,9 +109,8 @@ public class GameScene extends Scene {
 		links.setId("gameLinks");
 
 		//setup Menubutton
-		//menuButton.setAlignment(Pos.BOTTOM_CENTER);
-		//menuButton.setMaxSize(100, 100);
-		//menuButton.setPrefSize(100, 100);
+		menuButton.setAlignment(Pos.BOTTOM_CENTER);
+
 
 		//Size BorderPane
 		mainPane.setPrefSize(1280, 720);
