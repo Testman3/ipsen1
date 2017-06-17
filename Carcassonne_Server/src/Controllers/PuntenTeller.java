@@ -155,7 +155,7 @@ public class PuntenTeller {
 	 * @param eindes
 	 * Geef het aantal eindes mee
 	 */
-	public void berekenWeg(Tile tile, Bord bord, ArrayList<Tile> netwerk, int eindes){
+	public void berekenWeg(Tile tile, Bord bord, ArrayList<Tile> netwerk, ArrayList<Horige> horige, int eindes){
 
 		if(netwerk.contains(tile)){
 			return;
