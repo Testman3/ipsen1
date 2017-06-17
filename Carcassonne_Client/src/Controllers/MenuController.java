@@ -1,6 +1,5 @@
 package Controllers;
 
-import Models.GameClient;
 import Views.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
@@ -103,14 +102,19 @@ public class MenuController {
 	public void setGameScene(){
 		//TODO bereken hier de hoogte en breedte afhankelijk van operating system
 		gameStage.setScene(gameScene);
-		if(SettingsScene.fullScreen) {
+		if(SettingsScene.optieFullscreen) {
 			gameStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 			gameStage.setFullScreenExitHint(null);
 			gameStage.setFullScreen(true);
+			gameScene.mainPane.setMinSize(1920, 1080);
+			gameScene.getStylesheets().add("FullscreenStyle.css");
+			gameScene.getStylesheets().remove("style.css");
+			}
+
 		}
 
-	//	gameStage.setFullScreen(SettingsScene.fullScreen);
-	}
+	//	gameStage.setFullScreen(SettingsScene.optieFullscreen);
+
 
 	/**
 	 * Deze functie switcht de scene naar de lobbyscene

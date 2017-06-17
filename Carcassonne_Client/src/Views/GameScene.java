@@ -27,13 +27,9 @@ import java.util.ArrayList;
  */
 public class GameScene extends Scene {
 
-	private double xOffset;
-	private double yOffset;
-	private int sceneHeight = (int) getHeight();
-	private int sceneWidth = (int) getWidth();
 	private MenuController controller;
 	public GameController gameController;
-	private BorderPane mainPane;
+	public BorderPane mainPane;
 	private Pane tilesPane;
 	private HBox test;
 	private TileView[][] tileViews;
@@ -58,7 +54,6 @@ public class GameScene extends Scene {
 	private StackPane eindigBeurtBackground;
 	private ImageView draaiImage;
 	private ImageView eindigBeurtImage;
-	Speler speler;
 	private int breedte;
 	private int hoogte;
 
@@ -74,7 +69,6 @@ public class GameScene extends Scene {
 		getStylesheets().add("style.css");
 		this.breedte = breedte;
 		this.hoogte = hoogte;
-
 
 		tilesPane = (Pane) this.getRoot();
 
@@ -474,8 +468,8 @@ public class GameScene extends Scene {
 	public void switchFullScreenMode(){
 		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 		controller.getGameStage().setFullScreenExitHint(null);
-		controller.getGameStage().setFullScreen(SettingsScene.fullScreen);
-		if (SettingsScene.fullScreen == true){
+		controller.getGameStage().setFullScreen(SettingsScene.optieFullscreen);
+		if (SettingsScene.optieFullscreen == true){
 			mainPane.setMinSize(1920, 1080);
 			getStylesheets().add("FullscreenStyle.css");
 			getStylesheets().remove("style.css");

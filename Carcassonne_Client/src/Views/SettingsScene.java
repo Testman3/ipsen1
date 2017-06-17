@@ -38,7 +38,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 	//De drie beschikbare menu opties
 	public static boolean optieSpreken = false;
-	public static boolean fullScreen = false;
+	public static boolean optieFullscreen = false;
 	static boolean optieGeluid = false;
 
 	/**
@@ -104,7 +104,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		fullscreenBox.setAlignment(Pos.CENTER);
 
 		optieSpreken = spraakCheckBox.isSelected();
-		fullScreen = fullscreenCheckBox.isSelected();
+		optieFullscreen = fullscreenCheckBox.isSelected();
 		optieGeluid = soundCheckBox.isSelected();
 
 		initAction();
@@ -129,7 +129,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		});
 
 		fullscreenCheckBox.setOnAction(e -> {
-			fullScreen = fullscreenCheckBox.isSelected();
+			optieFullscreen = fullscreenCheckBox.isSelected();
 		});
 
 		backToHome.setOnAction(e -> {
