@@ -24,6 +24,10 @@ public class Tile {
 
 	Horige.Posities[] horigenZijdes;
 
+	public Tile(){
+
+	}
+
 	public Tile(String imageId, Zijde noordZijde, Zijde oostZijde, Zijde zuidZijde, Zijde westZijde, boolean heeftKlooster, boolean heeftBonus, Horige.Posities[] horigen) {
 		this.imageID = imageId;
 		this.noordZijde = noordZijde;
@@ -183,5 +187,54 @@ public class Tile {
 
 		}
 		return this.horigenZijdes;
+	}
+
+
+	public void setImageID(String imageID) {
+		this.imageID = imageID;
+	}
+
+	public void setNoordZijde(Zijde noordZijde) {
+		this.noordZijde = noordZijde;
+	}
+
+	public void setOostZijde(Zijde oostZijde) {
+		this.oostZijde = oostZijde;
+	}
+
+	public void setZuidZijde(Zijde zuidZijde) {
+		this.zuidZijde = zuidZijde;
+	}
+
+	public void setWestZijde(Zijde westZijde) {
+		this.westZijde = westZijde;
+	}
+
+	public void setMiddenZijde(Zijde middenZijde) {
+		this.middenZijde = middenZijde;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public void setRotation(int rotation) {
+		this.rotation = rotation;
+	}
+
+	public void setHeeftKlooster(boolean heeftKlooster) {
+		this.heeftKlooster = heeftKlooster;
+	}
+
+	public void setHeeftBonus(boolean heeftBonus) {
+		this.heeftBonus = heeftBonus;
+	}
+
+	public void setHorigenZijdes(Horige.Posities[] horigenZijdes) {
+		this.horigenZijdes = horigenZijdes;
 	}
 }

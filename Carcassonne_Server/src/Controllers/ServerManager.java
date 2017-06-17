@@ -1,13 +1,10 @@
 package Controllers;
 
-import Models.FileManager;
-import Models.RMIInterface;
-import Models.Speler;
+import Models.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -62,6 +59,11 @@ public class ServerManager extends Application {
 
 	public void startGame(ArrayList<Speler> spelerList) {
 		bordController = new BordController(spelerList);
+		gameStarted = true;
+	}
+
+	public void startGame(ArrayList<Speler> spelerList, Tile[][] tiles) {
+		bordController = new BordController(spelerList, tiles);
 		gameStarted = true;
 	}
 

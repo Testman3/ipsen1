@@ -1,8 +1,6 @@
 package Models;
 
 import Controllers.ServerManager;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -35,13 +33,13 @@ public class FileManager {
 		JSONArray spelerInJSON = new JSONArray();
 		// Get alle Spelers
 		ArrayList<Speler> spelerLijst = manager.bordController.bord.getAlleSpelers();
-
 		for (int i = 0; i < spelerLijst.size() ; i++) {
 			JSONObject speler = new JSONObject();
 			speler.put("spelerNaam", spelerLijst.get(i).getNaam());
 			speler.put("beurt", spelerLijst.get(i).getBeurt());
 			speler.put("punten", spelerLijst.get(i).getPunten());
-
+			speler.put("beschikbareHorige", spelerLijst.get(i).getBeschikbareHorigeInt());
+			speler.put("gebruikteHorige", spelerLijst.get(i).getGebruikteHorigeInt());
 			spelerInJSON.add(speler);
 		}
 		return spelerInJSON;
@@ -51,9 +49,9 @@ public class FileManager {
 		Tile[][] alleTiles = manager.bordController.bord.getAlleTiles();
 		JSONArray alleKaartenBijElkaar = new JSONArray();
 
-		for(int Y= 0; Y < 100; Y++){
+		for(int Y = 0; Y < 100; Y++){
 			//y
-			for(int X =0; X < 100; X++){
+			for(int X = 0; X < 100; X++){
 				if( alleTiles[X][Y] != null) {
 					JSONObject kaarten = new JSONObject();
 					kaarten.put("isLeeg", false);
@@ -66,30 +64,36 @@ public class FileManager {
 					kaarten.put("noordEinde", alleTiles[X][Y].getNoordZijde().isEinde());
 					if(alleTiles[X][Y].getNoordZijde().getHorigeSpeler() != null) {
 						kaarten.put("noordZijdeHorige", alleTiles[X][Y].getNoordZijde().getHorigeSpeler().getSpelerString());
+						kaarten.put("noordZijdeHorigePos", alleTiles[X][Y].getNoordZijde().getHorigeSpeler().getPositieString());
 					}
 					// Oost Zijde
 					kaarten.put("oostZijde", alleTiles[X][Y].getOostZijde().getZijde().toString());
 					kaarten.put("oostEinde", alleTiles[X][Y].getOostZijde().isEinde());
 					if(alleTiles[X][Y].getOostZijde().getHorigeSpeler() != null) {
 						kaarten.put("oostZijdeHorige", alleTiles[X][Y].getOostZijde().getHorigeSpeler().getSpelerString());
+						kaarten.put("oostZijdeHorigePos", alleTiles[X][Y].getOostZijde().getHorigeSpeler().getPositieString());
 					}
 					// Zuid Zijde
 					kaarten.put("zuidZijde", alleTiles[X][Y].getZuidZijde().getZijde().toString());
 					kaarten.put("zuidEinde", alleTiles[X][Y].getZuidZijde().isEinde());
 					if(alleTiles[X][Y].getZuidZijde().getHorigeSpeler() != null) {
 						kaarten.put("zuidZijdeHorige", alleTiles[X][Y].getZuidZijde().getHorigeSpeler().getSpelerString());
+						kaarten.put("zuidZijdeHorigePos", alleTiles[X][Y].getZuidZijde().getHorigeSpeler().getPositieString());
+
 					}
 					// West zijde
 					kaarten.put("westZijde", alleTiles[X][Y].getWestZijde().getZijde().toString());
 					kaarten.put("westEinde", alleTiles[X][Y].getWestZijde().isEinde());
 					if(alleTiles[X][Y].getWestZijde().getHorigeSpeler() != null) {
 						kaarten.put("westZijdeHorige", alleTiles[X][Y].getWestZijde().getHorigeSpeler().getSpelerString());
+						kaarten.put("westZijdeHorigePos", alleTiles[X][Y].getWestZijde().getHorigeSpeler().getPositieString());
 					}
 
 					// Midden zijde
 					if(alleTiles[X][Y].getMiddenZijde() != null) {
 						kaarten.put("middenZijde", alleTiles[X][Y].getMiddenZijde().getZijde().toString());
 						kaarten.put("middenZijdeHorige", alleTiles[X][Y].getMiddenZijde().getHorigeSpeler().getSpelerString());
+						kaarten.put("middenZijdeHorigePos", alleTiles[X][Y].getMiddenZijde().getHorigeSpeler().getPositieString());
 					} else {
 						kaarten.put("middenZijde", false);
 						kaarten.put("middenZijdeHorige", false);
@@ -113,10 +117,6 @@ public class FileManager {
 					}
 
 					kaarten.put("horigePosities", JSONHorigeArr);
-					alleKaartenBijElkaar.add(kaarten);
-				} else {
-					JSONObject kaarten = new JSONObject();
-					kaarten.put("isLeeg", true);
 					alleKaartenBijElkaar.add(kaarten);
 				}
 			}
@@ -163,7 +163,7 @@ public class FileManager {
 			stapelKaartenJSON.add(kaart);
 
 		}
-	return stapelKaartenJSON;
+		return stapelKaartenJSON;
 	}
 
 	public File createFile(String naam, JSONObject object){
@@ -187,50 +187,200 @@ public class FileManager {
 		}
 		return null;
 	}
-	public static void loadGame(File load) {
-		Alert alert;
-		ArrayList<Speler> spelerLijst = new ArrayList<Speler>();
+
+	public static Tile[][] loadGame(File load) {
+		System.out.println("Load Game");
+
+
+		Tile [][] tiles = new Tile[100][100];
+
 		JSONParser parser = new JSONParser();
 		Object obj = null;
 
-		try {
-			// Get file json file (selected in filebrowser)
-			obj = parser.parse(new FileReader(load));
-			System.out.println("File Geladen");
-
-			JSONObject jsonObject = (JSONObject) obj;
-
-			// Get array in json file
-			JSONArray numbers = (JSONArray) jsonObject.get("Spelers");
-
-			for (Object number : numbers) {
-				// Make json object
-				JSONObject jsonNumber = (JSONObject) number;
-
-				boolean isAanDeBeurt = (boolean) jsonNumber.get("Beurt");
-				String naam = (String) jsonNumber.get("Spelernaam");
-				Number punten = (Number) jsonNumber.get("Punten");
-				int puntenInt = punten.intValue();
-
-				Speler speler = new Speler(naam, isAanDeBeurt, puntenInt);
-				spelerLijst.add(speler);
-			}
-			System(spelerLijst);
+		try{
+			File reader = load;
+			System.out.println(reader.getAbsolutePath());
+			obj = parser.parse(new FileReader(reader));
 		} catch (FileNotFoundException e) {
-			alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
-			alert.showAndWait();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("FileNotFound");
 		} catch (IOException e) {
-			alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
-			alert.showAndWait();
+			// TODO Auto-generated catch block
+			System.out.println("IO");
+			e.printStackTrace();
 		} catch (org.json.simple.parser.ParseException e) {
-			alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis gegaan!", ButtonType.OK);
-			alert.showAndWait();
-		} catch (NullPointerException e) {
-
+			System.out.println("I have no clue what this is");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
-		// Convert the json file (String) to a JsonObject
+		JSONObject jsonObject = (JSONObject) obj;
 
+
+		JSONArray bordKaarten = (JSONArray) jsonObject.get("Kaarten");
+		JSONArray JSONSpelers = (JSONArray) jsonObject.get("Spelers");
+
+		ArrayList<Speler> alleSpelers = getAlleSpelers(JSONSpelers);
+		Tile[][] loadedBordTiles;
+
+		loadedBordTiles = loadBordKaartenJSON(bordKaarten, alleSpelers);
+		return loadedBordTiles;
+	}
+
+	private static Tile[][] loadBordKaartenJSON(JSONArray bordKaarten, ArrayList<Speler> alleSpelers){
+
+
+		Tile[][] allLoadedTiles = new Tile[100][100];
+
+		for(Object number : bordKaarten){
+			JSONObject jsonNumber = (JSONObject) number;
+			// Zijde x en y
+			int x = ((Number)jsonNumber.get("x")).intValue();
+			System.out.println("x num: " + x);
+			int y = ((Number)jsonNumber.get("y")).intValue();
+			//Zijde einde
+			boolean noordEinde = (boolean) jsonNumber.get("noordEinde");
+			boolean oostEinde  = (boolean) jsonNumber.get("oostEinde");
+			boolean zuidEinde  = (boolean) jsonNumber.get("zuidEinde");
+			boolean westEinde  = (boolean) jsonNumber.get("westEinde");
+			// Imageid
+			String imageId = (String) jsonNumber.get("imageId");
+			// Heeft klooster
+			boolean heeftKlooster = (boolean) jsonNumber.get("heeftKlooster");
+			// Get JsonArray horigePosities
+			JSONArray horigeJSON = (JSONArray) jsonNumber.get("horigePosities");
+
+			//Zijde type - NOORD
+			Zijde.ZijdeType noordZijdeType = Zijde.ZijdeType.valueOf((String) jsonNumber.get("noordZijde"));
+			Zijde noordZijde = new Zijde(noordZijdeType, noordEinde);
+
+			// OOST
+			Zijde.ZijdeType oostZijdeType = Zijde.ZijdeType.valueOf((String) jsonNumber.get("oostZijde"));
+			Zijde oostZijde  = new Zijde(oostZijdeType, oostEinde);
+
+			//ZUID
+			Zijde.ZijdeType zuidZijdeType = Zijde.ZijdeType.valueOf((String) jsonNumber.get("zuidZijde"));
+			Zijde zuidZijde  = new Zijde(zuidZijdeType, zuidEinde );
+
+			//WEST
+			Zijde.ZijdeType westZijdeType = Zijde.ZijdeType.valueOf((String) jsonNumber.get("westZijde"));
+			Zijde westZijde  = new Zijde(westZijdeType, westEinde);
+
+			// Midden
+//			Zijde.ZijdeType middenZijde = Zijde.ZijdeType.valueOf((String) jsonNumber.get("middenZijde"));
+
+			Speler speler = new Speler();
+
+			for(Speler d : alleSpelers){
+//				System.out.println("NOORD: " + (String) jsonNumber.get("noordZijdeHorige"));
+//				System.out.println("OOST: " + (String) jsonNumber.get("oostZijdeHorige"));
+//				System.out.println("ZUID: " + (String) jsonNumber.get("zuidZijdeHorige"));
+//				System.out.println("WEST: " + (String) jsonNumber.get("westZijdeHorige"));
+
+				if(jsonNumber.get("noordZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("noordZijdeHorige"))) {
+					speler = new Speler(d.getNaam(), d.getBeurt(), d.getPunten());
+					System.out.println("Speler Hor:" + speler.getNaam());
+				}
+				if(jsonNumber.get("oostZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("oostZijdeHorige"))) {
+					speler = new Speler(d.getNaam(), d.getBeurt(), d.getPunten());
+					System.out.println("Speler Hor:" + speler.getNaam());
+				}
+				if(jsonNumber.get("zuidZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("zuidZijdeHorige"))) {
+					speler = new Speler(d.getNaam(), d.getBeurt(), d.getPunten());
+					System.out.println("Speler Hor:" + speler.getNaam());
+				}
+				if(jsonNumber.get("westZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("westZijdeHorige"))) {
+					speler = new Speler(d.getNaam(), d.getBeurt(), d.getPunten());
+					System.out.println("Speler Hor:" + speler.getNaam());
+				}
+			}
+
+			// Alle horigen
+			Horige horigen = new Horige();
+
+			//get JsonArray horigePosities
+			JSONArray horigenArray = (JSONArray) jsonNumber.get("horigePosities");
+
+			//new array
+			String[] positie = new String[horigenArray.size()];
+			Horige.Posities[] horigenPos = new Horige.Posities[horigenArray.size()];
+
+			//all data to array
+			for (int i = 0; i < horigenArray.size() ; i++) {
+				positie[i] = (String)horigenArray.get(i);
+
+				horigenPos[i] = Horige.Posities.valueOf((String)horigenArray.get(i));
+				System.out.println("Kaart ENUM: " + horigenPos[i]);
+			}
+
+			//horige positie
+			if(jsonNumber.get("noordZijdeHorige") != null){
+				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("noordZijdeHorigePos")));
+				horigen.setSpeler(speler);
+				noordZijde = new Zijde(noordZijdeType, noordEinde, horigen);
+				System.out.println("noordZijdeHorige: " + jsonNumber.get("noordZijdeHorige"));
+			}
+			if(jsonNumber.get("oostZijdeHorige") != null){
+				System.out.println("Oostzijde Horige: " + jsonNumber.get("oostZijdeHorige"));
+				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("oostZijdeHorigePos")));
+				horigen.setSpeler(speler);
+				oostZijde = new Zijde(oostZijdeType, oostEinde, horigen);
+			}
+			if(jsonNumber.get("zuidZijdeHorige") != null){
+				System.out.println("zuidZijdeHorige: " + jsonNumber.get("zuidZijdeHorige"));
+				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("zuidZijdeHorigePos")));
+				horigen.setSpeler(speler);
+				zuidZijde = new Zijde(zuidZijdeType, zuidEinde, horigen);
+			}
+			if(jsonNumber.get("westZijdeHorige") != null){
+				System.out.println("westZijdeHorige: " + jsonNumber.get("westZijdeHorige"));
+				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("westZijdeHorigePos")));
+				horigen.setSpeler(speler);
+				westZijde = new Zijde(westZijdeType, westEinde, horigen);
+			}
+
+			boolean heeftBonus = (boolean)jsonNumber.get("heeftBonus");
+
+			System.out.println("allLoadedTiles.length = " + allLoadedTiles.length);
+
+			allLoadedTiles[x][y] = new Tile();
+
+			//add to bord kaarten
+			allLoadedTiles[x][y].setImageID(imageId);
+			allLoadedTiles[x][y].setX(x);
+			allLoadedTiles[x][y].setY(y);
+			allLoadedTiles[x][y].setNoordZijde(noordZijde);
+			allLoadedTiles[x][y].setOostZijde(oostZijde);
+			allLoadedTiles[x][y].setZuidZijde(zuidZijde);
+			allLoadedTiles[x][y].setWestZijde(westZijde);
+			allLoadedTiles[x][y].setHeeftKlooster(heeftKlooster);
+			allLoadedTiles[x][y].setHeeftBonus(heeftBonus);
+			allLoadedTiles[x][y].setHorigenZijdes(horigenPos);
+			if(heeftKlooster){
+				allLoadedTiles[x][y].setMiddenZijde(new Zijde(Zijde.ZijdeType.KLOOSTER, true));
+			}
+
+		}
+		System.out.println("Klaar met loaden kaarten");
+
+		return allLoadedTiles;
+	}
+
+	public static ArrayList<Speler> getAlleSpelers(JSONArray JSONSpelers){
+		ArrayList<Speler> alleSpelers = new ArrayList<>();
+		for(Object number : JSONSpelers) {
+			JSONObject jsonNumber = (JSONObject) number;
+			// Speler gegevens
+			String naam = (String) jsonNumber.get("spelerNaam");
+			int punten = ((Number)jsonNumber.get("punten")).intValue();
+			boolean beurt = (boolean) jsonNumber.get("beurt");
+			int beschHorige = ((Number)jsonNumber.get("beschikbareHorige")).intValue();
+			int gebrHorige = ((Number)jsonNumber.get("gebruikteHorige")).intValue();
+			//add speler
+			alleSpelers.add(new Speler(naam,punten,beurt,beschHorige,gebrHorige));
+		}
+		return alleSpelers;
 	}
 
 	//Test voor spelerlijst(load)

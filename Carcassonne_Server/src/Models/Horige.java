@@ -7,6 +7,10 @@ public class Horige implements Serializable {
 	Speler speler;
 	Posities positie;
 
+	public Horige(){
+
+	}
+
 	public Horige(Speler speler){
 		this.speler = speler;
 	}
@@ -14,6 +18,11 @@ public class Horige implements Serializable {
 	public void setPositie(Posities positie){
 		this.positie = positie;
 	}
+
+	public void setSpeler(Speler speler){
+		this.speler = speler;
+	}
+
 
 	public Posities getPositie() {
 		return positie;

@@ -233,7 +233,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	 * Deze functie plaatst een startGame knop in de lobby voor de speler die de lobby leader is
 	 */
 	public static void setAbleToStartGame() {
-		knoppenBox.getChildren().add(startGame);
+		if(!knoppenBox.getChildren().contains(startGame))
+			knoppenBox.getChildren().add(startGame);
 	}
 
 }

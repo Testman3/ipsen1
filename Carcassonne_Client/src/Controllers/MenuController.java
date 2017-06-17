@@ -1,10 +1,10 @@
 package Controllers;
 
-import Models.GameClient;
 import Views.*;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 
 /**
@@ -117,7 +117,11 @@ public class MenuController {
 	 */
 	public void setPreLobbyScene(){
 		gameStage.setScene(preLobbyScene);
+	}
 
+	public void setPreLobbySceneSaveGame(){
+		openFileBrowser();
+		gameStage.setScene(preLobbyScene);
 	}
 
 	/**

@@ -22,8 +22,13 @@ public class Zijde {
 		this.isEinde = isEinde;
 	}
 
-	public void setHorigeSpeler(Horige horige){
+	public Zijde(ZijdeType zijde, boolean isEinde, Horige horigeSpeler){
+		this.zijde = zijde;
+		this.isEinde = isEinde;
+		this.horigeSpeler = horigeSpeler;
+	}
 
+	public void setHorigeSpeler(Horige horige){
 		this.horigeSpeler = horige;
 
 	}
@@ -38,11 +43,6 @@ public class Zijde {
 
 	public boolean getIsEinde() {
 		return isEinde;
-	}
-
-
-	public ZijdeType getZijde() {
-		return zijde;
 	}
 
 	public boolean isEinde() {
