@@ -12,6 +12,7 @@
     -fx-padding: 0;
     -fx-background-color: transparent;
     }
+
 #checkBox {
 }
 
@@ -21,9 +22,24 @@
 
 }
 
+#menuKnop{
+	-fx-font-size: 4em;
+}
 
 #standardLabel {
     -fx-font-size: 4em;
+}
+
+#inGameKnoppen {
+	-fx-font-size: 4em;
+}
+
+#draaiImage{
+	-fx-image: url("Afbeeldingen/Texture_End_Turn.png");
+}
+
+#eindigBeurtImage{
+	-fx-image: url("Afbeeldingen/Texture_End_Turn.png");
 }
 
 #terugNaarMenu{
@@ -31,7 +47,7 @@
 }
 
 #credits {
-    -fx-padding: 14em 0 0 0;
+    -fx-padding: 20px;
     -fx-font-size: 7em;
 }
 

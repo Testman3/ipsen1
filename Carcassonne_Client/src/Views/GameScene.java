@@ -16,10 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -55,6 +52,10 @@ public class GameScene extends Scene {
 	private VBox rest;
 	private HBox onderkantElement;
 	private HBox horigeBox;
+	private StackPane draaiBackground;
+	private StackPane eindigBeurtBackground;
+	private ImageView draaiImage;
+	private ImageView eindigBeurtImage;
 	Speler speler;
 
 
@@ -70,7 +71,6 @@ public class GameScene extends Scene {
 		tilesPane = (Pane) this.getRoot();
 
 		this.controller = menuController;
-
 		createTileGrid(100, 100);
 
 		init();
@@ -80,7 +80,7 @@ public class GameScene extends Scene {
 		// new shit
 		mainPane = new BorderPane();
 		links = new VBox(5);
-		onderkant = new HBox(30);
+		onderkant = new HBox(20);
 		draaiButton = new SmartButton("Draaien");
 		eindigButton = new SmartButton("Beëindig beurt");
 		menuButton = new SmartButton("Menu");
@@ -88,23 +88,43 @@ public class GameScene extends Scene {
 		ShowKaart = new ImageView();
 		horigeBox = new HBox(10);
 		KaartenLeft = new SmartLabel("Stapel: 72");
-		onderkantElement = new HBox(70);
+		onderkantElement = new HBox(100);
 		rest = new VBox();
 		horigeViews = new HorigeView[7];
+		draaiBackground = new StackPane();
+		eindigBeurtBackground = new StackPane();
+		draaiImage = new ImageView();
+		eindigBeurtImage = new ImageView();
+
 
 
 		// id
 		mainPane.setId("test");
-		draaiButton.setId("standardLabel");
-		eindigButton.setId("standardLabel");
-		menuButton.setId("standardLabel");
+		draaiButton.setId("inGameKnoppen");
+		draaiImage.setId("draaiImage");
+		eindigBeurtImage.setId("eindigBeurtImage");
+		eindigButton.setId("inGameKnoppen");
+		menuButton.setId("menuKnop");
 		ShowKaart.setId("Kaartview");
 		KaartenLeft.setId("standardLabel");
+
+		//setup Menubutton
+		//menuButton.setAlignment(Pos.BOTTOM_CENTER);
+		//menuButton.setMaxSize(100, 100);
+		//menuButton.setPrefSize(100, 100);
 
 		//Size BorderPane
 		mainPane.setPrefSize(1280, 720);
 		mainPane.setMaxSize(1280, 720);
 		mainPane.setMinSize(1280, 720);
+
+		//size draaiButton
+		draaiImage.setFitHeight(65);
+		draaiImage.setFitWidth(200);
+
+		//size eindigButton
+		eindigBeurtImage.setFitHeight(65);
+		eindigBeurtImage.setFitWidth(265);
 
 		//Set PickOnBounds
 		mainPane.setPickOnBounds(false);
@@ -127,6 +147,8 @@ public class GameScene extends Scene {
 		onderkantElement.setAlignment(Pos.CENTER);
 
 		//GetChilderen
+		draaiBackground.getChildren().addAll(draaiImage, draaiButton);
+		eindigBeurtBackground.getChildren().addAll(eindigBeurtImage, eindigButton);
 		links.getChildren().add(menuButton);
 
 		//Speler Borden
@@ -152,9 +174,9 @@ public class GameScene extends Scene {
 			horigeBox.getChildren().add(horigeViews[i]);
 		}
 
-		onderkantElement.getChildren().add(draaiButton);
+		onderkantElement.getChildren().add(draaiBackground);
 		onderkantElement.getChildren().add(horigeBox);
-		onderkantElement.getChildren().add(eindigButton);
+		onderkantElement.getChildren().add(eindigBeurtBackground);
 
 		rest.getChildren().add(onderkantElement);
 		onderkant.getChildren().add(links);
