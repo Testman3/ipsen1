@@ -173,4 +173,9 @@ public class RMIController implements RMIInterface {
 		serverManager.bordController.volgendeBeurtNaLeave(naam);
 
 	}
+
+	@Override
+	public int getAvailableHorige(String naam) throws RemoteException {
+		return serverManager.bordController.bord.getSpelerHorige(naam);
+	}
 }
