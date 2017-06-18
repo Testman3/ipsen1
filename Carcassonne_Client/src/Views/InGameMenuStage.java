@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,6 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
+
+import static Views.MenuViewScene.mediaPlayer;
 
 public class InGameMenuStage extends Stage implements SceneInitialiser{
 	private StackPane menuPane;
@@ -262,6 +265,11 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
     	//Geluid
 		soundCheckBox.setOnAction(event -> {
 			SettingsScene.optieGeluid = soundCheckBox.isSelected();
+			if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid) {
+				mediaPlayer.play();
+			} else if (SettingsScene.optieGeluid == false) {
+				mediaPlayer.stop();
+			}
 		});
 
 		//Spraak
