@@ -113,6 +113,9 @@ public class MenuController {
 			double schermBreedte = screenSize.getWidth();
 			double schermHoogte = screenSize.getHeight();
 
+			gameStage.setWidth(schermBreedte);
+			gameStage.setHeight(schermHoogte);
+
 			gameScene.mainPane.setMinSize(schermBreedte, schermHoogte);
 			gameScene.getStylesheets().add("FullscreenStyle.css");
 			gameScene.getStylesheets().remove("style.css");
