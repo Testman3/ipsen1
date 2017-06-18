@@ -35,6 +35,7 @@ public class GameClient {
 	private ArrayList<Point> verwijderHorige;
 
 	public static AudioClip turnSound = new AudioClip(Paths.get("Sounds/battleHorn.mp3").toUri().toString());
+	private AudioClip getCard = new AudioClip(Paths.get("Sounds/Shuffling_Cards.mp3").toUri().toString());
 
 	private int aantalHorigeBeschikbaar;
 
@@ -98,6 +99,7 @@ public class GameClient {
 				kaartGepakt = true;
 				kaartPlaatsId = id;
 				view.showKaart(this);
+				getCard.play();
 				return;
 			}
 
