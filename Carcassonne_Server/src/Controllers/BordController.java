@@ -136,7 +136,7 @@ public class BordController {
 
 	}
 	public void isGameVoorbij() {
-		if(kaartenStapel.getKaartenOver() == 0){
+		if(kaartenStapel.getKaartenOver() == 70){
 			gameVoorbij = true;
 		}
 	}

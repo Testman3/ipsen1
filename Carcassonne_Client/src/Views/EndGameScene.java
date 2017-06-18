@@ -10,6 +10,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -27,6 +31,8 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	private SmartButton exit;
 	private ArrayList<Speler> spelerObj;
 	private Boolean setScorebord = false;
+	private Media victoryMusic = new Media(Paths.get("Sounds/JellyfishJam.mp3").toUri().toString());
+	private MediaPlayer musicPlayer = new MediaPlayer(victoryMusic);
 
 	/**
 	 * Constructor van de EndGameScene
@@ -97,6 +103,10 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		if (setScorebord == false)
 		try {
 			spelerObj = RMIstub.getPlayerListObject();
+			musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+			musicPlayer.setVolume(0.25);
+			musicPlayer.setRate(1.15);
+			musicPlayer.play();
 
 		} catch (RemoteException e) {
 			e.printStackTrace();
