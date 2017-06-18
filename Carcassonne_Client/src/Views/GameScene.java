@@ -412,7 +412,6 @@ public class GameScene extends Scene {
 				playerViews[i].setNaam(alleSpelers.get(i).getNaam());
 				playerViews[i].setPunten("" + alleSpelers.get(i).getPunten());
 
-
 			}
 		});
 	}
@@ -474,7 +473,7 @@ public class GameScene extends Scene {
 	}
 
 	public void setHorigeReturned(){
-		for (int i = 7; i > 0; i--){
+		for (int i = 6; i > -1; i--){
 			if (horigeViews[i].getId().equals("horigeUsed")) {
 				horigeViews[i].setId(spelerKleur);
 				break; }
