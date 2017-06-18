@@ -1,6 +1,7 @@
 package Models;
 
 import Views.GameScene;
+import Views.SettingsScene;
 import commonFunctions.Point;
 import javafx.application.Platform;
 import javafx.scene.media.AudioClip;
@@ -34,6 +35,9 @@ public class GameClient {
 	private ArrayList<Point> verwijderHorige;
 
 	private AudioClip turnSound = new AudioClip(Paths.get("Sounds/battleHorn.mp3").toUri().toString());
+
+	private int aantalHorigeBeschikbaar;
+
 
 	/**
 	 * Constructor van GameClient
@@ -182,11 +186,13 @@ public class GameClient {
 				beurt = RmiStub.getBeurt();
 				verwijderHorige = RmiStub.getHorigeToRemove();
 				spelerBeurt = RmiStub.getPlayerBeurt();
-
+				aantalHorigeBeschikbaar = RmiStub.getAvailableHorige(spelerNaam);
+				System.out.println(aantalHorigeBeschikbaar);
+			if(SettingsScene.optieGeluid) {
 				if (spelerBeurt.equals(spelerNaam)) {
 					turnSound.play();
 				}
-
+			}
 			}
 
 
