@@ -189,15 +189,18 @@ public class GameClient {
 
 				verwijderHorige = RmiStub.getHorigeToRemove();
 
+				//Één van deze is nuttig
 				view.updateView(this);
 
 				spelerBeurt = RmiStub.getPlayerBeurt();
 				aantalHorigeBeschikbaar = RmiStub.getAvailableHorige(spelerNaam);
 
+				//Één van deze is nuttig
 				view.updateView(this);
 
 				System.out.println(aantalHorigeBeschikbaar);
 
+				//Één van deze is nuttig
 				view.updateView(this);
 
 			if(SettingsScene.optieGeluid) {
@@ -208,6 +211,7 @@ public class GameClient {
 				}
 			}
 			}
+			//Één van deze is nuttig
 			view.updateView(this);
 
 
@@ -217,6 +221,7 @@ public class GameClient {
 				}
 			}
 
+			//Één van deze is nuttig
 			view.updateView(this);
 
 			if (RmiStub.getisEindeSpel()) {
@@ -227,6 +232,7 @@ public class GameClient {
 					view.getController().setEndGameScene();
 				});
 
+				//Één van deze is nuttig
 				view.updateView(this);
 
 			}
