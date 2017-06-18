@@ -50,16 +50,16 @@ public class PuntenTeller {
 		}
 
 		if (tile.getNoordZijde().getZijde() == ZijdeType.WEG && tile.getNoordZijde().getIsEinde()) {
-			berekenWegen(tile, bord, entryPoint.NOORD);
-		}
-		if (tile.getOostZijde().getZijde() == ZijdeType.WEG && tile.getOostZijde().getIsEinde()) {
-			berekenWegen(tile, bord, entryPoint.OOST);
-		}
-		if (tile.getZuidZijde().getZijde() == ZijdeType.WEG && tile.getZuidZijde().getIsEinde()) {
 			berekenWegen(tile, bord, entryPoint.ZUID);
 		}
-		if (tile.getWestZijde().getZijde() == ZijdeType.WEG && tile.getWestZijde().getIsEinde()) {
+		if (tile.getOostZijde().getZijde() == ZijdeType.WEG && tile.getOostZijde().getIsEinde()) {
 			berekenWegen(tile, bord, entryPoint.WEST);
+		}
+		if (tile.getZuidZijde().getZijde() == ZijdeType.WEG && tile.getZuidZijde().getIsEinde()) {
+			berekenWegen(tile, bord, entryPoint.NOORD);
+		}
+		if (tile.getWestZijde().getZijde() == ZijdeType.WEG && tile.getWestZijde().getIsEinde()) {
+			berekenWegen(tile, bord, entryPoint.OOST);
 		}
 		if (tile.getNoordZijde().getZijde() == ZijdeType.WEG && !tile.getNoordZijde().getIsEinde() ||
 				tile.getOostZijde().getZijde() == ZijdeType.WEG && !tile.getOostZijde().getIsEinde() ||
@@ -139,6 +139,7 @@ public class PuntenTeller {
 		}
 		*/
 		if(eindes >= 2 || startTileFoundTwice) {
+			System.out.println("Genoeg eindes gevonden!");
 			ArrayList<Speler> puntenSpelers = calculateplayerWithMostHorige(bord, horigeInNetwerk);
 			for (int h = 0; h < puntenSpelers.size(); h++) {
 				geefPunten(horigeInNetwerk.get(h).getSpeler(), wegNetwerk.size());
@@ -174,6 +175,7 @@ public class PuntenTeller {
 		}
 
 		if (netwerk.contains(tile)) {
+			startTileFoundTwice = true;
 			return;
 		}
 
@@ -187,11 +189,10 @@ public class PuntenTeller {
 		if (entry == entryPoint.NOORD) {
 			if (tile.getZuidZijde().isEinde()) {
 				eindes++;
-				if (tile.getZuidZijde().getHorigeSpeler() != null) {
-					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
-					Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
-					berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
-				}
+				if (tile.getZuidZijde().getHorigeSpeler() != null)
+						addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
+					Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
+					berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getZuidZijde().getHorigeSpeler() != null) {
@@ -225,8 +226,8 @@ public class PuntenTeller {
 				eindes++;
 				if (tile.getWestZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getWestZijde().getHorigeSpeler());
-				Tile nextTile = bord.getTile(tile.getX() + 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.OOST, bord, netwerk, horige);
+				Tile nextTile = bord.getTile(tile.getX() - 1, tile.getY());
+				berekenWeg(nextTile, entryPoint.WEST, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getWestZijde().getHorigeSpeler() != null) {
@@ -258,11 +259,10 @@ public class PuntenTeller {
 		if (entry == entryPoint.ZUID) {
 			if (tile.getNoordZijde().isEinde()) {
 				eindes++;
-				if (tile.getNoordZijde().getHorigeSpeler() != null) {
-					addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
-					Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
-					berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
-				}
+				if (tile.getNoordZijde().getHorigeSpeler() != null)
+						addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
+					Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
+					berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getNoordZijde().getHorigeSpeler() != null) {
@@ -272,7 +272,7 @@ public class PuntenTeller {
 			if (tile.getOostZijde().getZijde() == ZijdeType.WEG) {
 				if (tile.getOostZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getOostZijde().getHorigeSpeler());
-				Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
+				Tile nextTile = bord.getTile(tile.getX() + 1, tile.getY());
 				berekenWeg(nextTile, entryPoint.OOST, bord, netwerk, horige);
 				return;
 
@@ -280,13 +280,13 @@ public class PuntenTeller {
 				if (tile.getZuidZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
-				berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
+				berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
 				return;
 
 			} else if (tile.getWestZijde().getZijde() == ZijdeType.WEG) {
 				if (tile.getWestZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getWestZijde().getHorigeSpeler());
-				Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
+				Tile nextTile = bord.getTile(tile.getX() - 1, tile.getY());
 				berekenWeg(nextTile, entryPoint.WEST, bord, netwerk, horige);
 				return;
 			}
@@ -296,8 +296,8 @@ public class PuntenTeller {
 				eindes++;
 				if (tile.getOostZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getOostZijde().getHorigeSpeler());
-				Tile nextTile = bord.getTile(tile.getX() - 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.WEST, bord, netwerk, horige);
+				Tile nextTile = bord.getTile(tile.getX() + 1, tile.getY());
+				berekenWeg(nextTile, entryPoint.OOST, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getOostZijde().getHorigeSpeler() != null) {
@@ -308,7 +308,7 @@ public class PuntenTeller {
 				if (tile.getZuidZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
-				berekenWeg(nextTile, entryPoint.OOST, bord, netwerk, horige);
+				berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
 				return;
 
 			} else if (tile.getNoordZijde().getZijde() == ZijdeType.WEG) {
@@ -338,7 +338,7 @@ public class PuntenTeller {
 				System.out.println("biep1");
 			}
 			if (tile.getNoordZijde().getZijde() == ZijdeType.WEG) {
-				if (tile.getOostZijde().isEinde()) eindes++;
+				if (tile.getNoordZijde().isEinde()) eindes++;
 				if (tile.getNoordZijde().getHorigeSpeler() != null) {
 					addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
 				}
@@ -348,7 +348,7 @@ public class PuntenTeller {
 
 			}
 			if (tile.getZuidZijde().getZijde() == ZijdeType.WEG) {
-				if (tile.getOostZijde().isEinde()) eindes++;
+				if (tile.getZuidZijde().isEinde()) eindes++;
 				if (tile.getZuidZijde().getHorigeSpeler() != null) {
 					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
 				}
@@ -358,7 +358,7 @@ public class PuntenTeller {
 
 			}
 			if (tile.getWestZijde().getZijde() == ZijdeType.WEG) {
-				if (tile.getOostZijde().isEinde()) eindes++;
+				if (tile.getWestZijde().isEinde()) eindes++;
 				if (tile.getWestZijde().getHorigeSpeler() != null) {
 					addHorigeToNetwork(horige, tile.getWestZijde().getHorigeSpeler());
 				}
