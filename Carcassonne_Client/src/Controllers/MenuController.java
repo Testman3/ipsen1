@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 
 /**
@@ -107,7 +108,12 @@ public class MenuController {
 			gameStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 			gameStage.setFullScreenExitHint(null);
 			gameStage.setFullScreen(true);
-			gameScene.mainPane.setMinSize(1920, 1080);
+
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			double schermBreedte = screenSize.getWidth();
+			double schermHoogte = screenSize.getHeight();
+
+			gameScene.mainPane.setMinSize(schermBreedte, schermHoogte);
 			gameScene.getStylesheets().add("FullscreenStyle.css");
 			gameScene.getStylesheets().remove("style.css");
 			}

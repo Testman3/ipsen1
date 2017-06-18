@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 
+import java.awt.*;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -472,7 +473,11 @@ public class GameScene extends Scene {
 		controller.getGameStage().setFullScreenExitHint(null);
 		controller.getGameStage().setFullScreen(SettingsScene.optieFullscreen);
 		if (SettingsScene.optieFullscreen == true){
-			mainPane.setMinSize(1920, 1080);
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			double schermBreedte = screenSize.getWidth();
+			double schermHoogte = screenSize.getHeight();
+
+			mainPane.setMinSize(schermBreedte, schermHoogte);
 			getStylesheets().add("FullscreenStyle.css");
 			getStylesheets().remove("style.css");
 		}else {
