@@ -18,10 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
 
 import java.awt.*;
-import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -101,7 +99,7 @@ public class GameScene extends Scene {
 		eindigBeurtBackground = new StackPane();
 		draaiImage = new ImageView();
 		eindigBeurtImage = new ImageView();
-		
+
 		// id
 		mainPane.setId("uiBackground");
 		draaiButton.setId("inGameKnoppen");
@@ -261,7 +259,7 @@ public class GameScene extends Scene {
 			}
 
 			double scaleFactor = (e.getDeltaY() > 0) ? 1.1 : (1 / 1.1);
-			
+
 			tilesPane.setScaleX(tilesPane.getScaleX() * scaleFactor);
 			tilesPane.setScaleY(tilesPane.getScaleY() * scaleFactor);
 
@@ -406,13 +404,14 @@ public class GameScene extends Scene {
 					playerViews[i].setPunten("");
 					return;
 				}
-				if (alleSpelers.get(i).getNaam().equals(client.getSpelerBeurt())) {
+				if(alleSpelers.get(i).getNaam().equals(client.getSpelerBeurt())){
 					playerViews[i].setHighlighted();
 				} else {
 					playerViews[i].setUnHighlighted();
 				}
 				playerViews[i].setNaam(alleSpelers.get(i).getNaam());
 				playerViews[i].setPunten("" + alleSpelers.get(i).getPunten());
+
 
 			}
 		});
@@ -475,7 +474,7 @@ public class GameScene extends Scene {
 	}
 
 	public void setHorigeReturned(){
-		for (int i = 6; i > -1; i--){
+		for (int i = 7; i > 0; i--){
 			if (horigeViews[i].getId().equals("horigeUsed")) {
 				horigeViews[i].setId(spelerKleur);
 				break; }
