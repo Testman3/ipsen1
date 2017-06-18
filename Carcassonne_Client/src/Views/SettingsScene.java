@@ -39,7 +39,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	//De drie beschikbare menu opties
 	public static boolean optieSpreken = false;
 	public static boolean optieFullscreen = false;
-	public static boolean optieGeluid = false;
+	static boolean optieGeluid = true;
 
 	/**
 	 * Constructor van SettingsScene
