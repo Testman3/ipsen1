@@ -184,10 +184,22 @@ public class GameClient {
 				kaartGepakt = false;
 				kaartGeplaatst = false;
 				beurt = RmiStub.getBeurt();
+
+
+
 				verwijderHorige = RmiStub.getHorigeToRemove();
+
+				view.updateView(this);
+
 				spelerBeurt = RmiStub.getPlayerBeurt();
 				aantalHorigeBeschikbaar = RmiStub.getAvailableHorige(spelerNaam);
+
+				view.updateView(this);
+
 				System.out.println(aantalHorigeBeschikbaar);
+
+				view.updateView(this);
+
 			if(SettingsScene.optieGeluid) {
 				if (spelerBeurt.equals(spelerNaam)) {
 					turnSound.setVolume(0.5);
@@ -196,6 +208,7 @@ public class GameClient {
 				}
 			}
 			}
+			view.updateView(this);
 
 
 			if(verwijderHorige != null) {
@@ -203,6 +216,8 @@ public class GameClient {
 					view.removeHorige(point.getX(), point.getY());
 				}
 			}
+
+			view.updateView(this);
 
 			if (RmiStub.getisEindeSpel()) {
 				enableThread = false;
@@ -212,11 +227,13 @@ public class GameClient {
 					view.getController().setEndGameScene();
 				});
 
+				view.updateView(this);
 
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	/**

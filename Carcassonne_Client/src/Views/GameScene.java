@@ -427,7 +427,6 @@ public class GameScene extends Scene {
 				playerViews[i].setNaam(alleSpelers.get(i).getNaam());
 				playerViews[i].setPunten("" + alleSpelers.get(i).getPunten());
 
-
 			}
 		});
 
@@ -435,8 +434,11 @@ public class GameScene extends Scene {
 		//Switch horigeid wanneer er één is toegevoegd aan de beschikbaarlijst van de speler//
 		// Gebeurt nu 1 zet te laat															//
 		//////////////////////////////////////////////////////////////////////////////////////
+		System.out.println("client.getAantalHorigeBeschikbaar() = " + client.getAantalHorigeBeschikbaar());
+
 		if (client.getAantalHorigeBeschikbaar() > tempHorigenBeschikbaar){
-			for(int i = 0; i < (horigeViews.length) - 1; i++){
+			System.out.println("tempHorigenBeschikbaar = " + tempHorigenBeschikbaar);
+			for(int i = 0; i < (horigeViews.length) ; i++){
 				if (horigeViews[i].getId().equals("horigeUsed") && !firstRun){
 					horigeViews[i].setId(spelerKleur);
 					i = horigeViews.length;
@@ -447,7 +449,6 @@ public class GameScene extends Scene {
 
 		}
 		tempHorigenBeschikbaar = client.getAantalHorigeBeschikbaar();
-
 
 	}
 
