@@ -194,7 +194,6 @@ public class GameClient {
 				for (Point point : verwijderHorige) {
 					view.removeHorige(point.getX(), point.getY());
 				}
-				getGameScene().setHorigeReturned();
 			}
 
 			if (RmiStub.getisEindeSpel()) {
