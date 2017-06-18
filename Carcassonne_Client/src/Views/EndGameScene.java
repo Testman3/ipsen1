@@ -10,8 +10,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import static Views.MenuViewScene.mediaPlayer;
+import static Models.GameClient.turnSound;
 
 /**
  * Deze class zorgt ervoor dat de EndGameScene goed wordt weergegeven.
@@ -27,6 +33,11 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	private SmartButton exit;
 	private ArrayList<Speler> spelerObj;
 	private Boolean setScorebord = false;
+	private Media victoryMusic = new Media(Paths.get("Sounds/JellyfishJam.mp3").toUri().toString());
+	private MediaPlayer musicPlayer = new MediaPlayer(victoryMusic);
+	private Media lossMusic = new Media(Paths.get("Sounds/YouLost.mp3").toUri().toString());
+	private MediaPlayer lossMusicPlayer = new MediaPlayer(lossMusic);
+
 
 	/**
 	 * Constructor van de EndGameScene
@@ -68,6 +79,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 		mainPane.setCenter(allesContainer);
 
+
 		initAction();
 
 	}
@@ -75,7 +87,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	@Override
 	public void initAction() {
 		exit.setOnAction(e -> {
-			controller.backToMainMenu();
+			System.exit(0);
 		});
 
 	}
@@ -89,6 +101,23 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		RMIstub = stub;
 		setScoreboard();
 	}
+
+	public void music(){
+		if (controller.getSpelernaam().equals(spelerObj.get(0).getNaam()) && SettingsScene.optieGeluid){
+			turnSound.stop();
+			mediaPlayer.stop();
+			musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+			musicPlayer.setVolume(0.25);
+			musicPlayer.setRate(1.15);
+			musicPlayer.play();
+		}else if (SettingsScene.optieGeluid){
+			turnSound.stop();
+			mediaPlayer.stop();
+			lossMusicPlayer.play();
+		}
+		}
+
+
 
 	/**
 	 * Deze functie zorgt ervoor dat de spelers worden gesorteerd op score, waarna ze op het scherm zullen verschijnen.
@@ -127,6 +156,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 			spelers[i].setText((i + 1) + ". " + spelerObj.get(i).getNaam() + "  " + spelerObj.get(i).getPunten());
 		}
 		setScorebord = true;
+		music();
 
 	}
 
