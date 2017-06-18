@@ -57,6 +57,7 @@ public class GameScene extends Scene {
 	private ImageView eindigBeurtImage;
 	private int breedte;
 	private int hoogte;
+	private String spelerKleur;
 
 
 	/**
@@ -313,12 +314,6 @@ public class GameScene extends Scene {
 
 	}
 
-	public void setHorigeInvis() {
-	}
-
-	public void setHorigeVisible() {
-
-	}
 	/**
 	 * Deze methode laat de kaart draaien
 	 */
@@ -442,7 +437,6 @@ public class GameScene extends Scene {
 	}
 
 	public void setHorigeKleur(int spelerNummer){
-		String spelerKleur;
 		switch (spelerNummer) {
 			case 0:
 				spelerKleur = "horigeRood";
@@ -465,7 +459,26 @@ public class GameScene extends Scene {
 		for (int i = 0; i< 7 ; i++){
 			horigeViews[i].setId(spelerKleur);
 		}
+	}
 
+	/**
+	 * Deze functie zorgt ervoor dat een horige de used texture gebruikt in de ui wanneer hij is geplaatst
+	 */
+	public void setHorigeUsed(){
+		for (int i = 0; i < 7; i++){
+			if (!horigeViews[i].getId().equals("horigeUsed")){
+				horigeViews[i].setId("horigeUsed");
+				break;
+			}
+		}
+	}
+
+	public void setHorigeReturned(){
+		for (int i = 7; i > 0; i--){
+			if (horigeViews[i].getId().equals("horigeUsed")) {
+				horigeViews[i].setId(spelerKleur);
+				break; }
+			}
 	}
 
 	public void switchFullScreenMode(){
