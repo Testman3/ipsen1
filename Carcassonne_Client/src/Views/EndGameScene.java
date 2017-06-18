@@ -16,6 +16,8 @@ import javafx.scene.media.MediaPlayer;
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import static Views.MenuViewScene.mediaPlayer;
+import static Models.GameClient.turnSound;
 
 /**
  * Deze class zorgt ervoor dat de EndGameScene goed wordt weergegeven.
@@ -33,6 +35,9 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	private Boolean setScorebord = false;
 	private Media victoryMusic = new Media(Paths.get("Sounds/JellyfishJam.mp3").toUri().toString());
 	private MediaPlayer musicPlayer = new MediaPlayer(victoryMusic);
+	private Media lossMusic = new Media(Paths.get("Sounds/YouLost.mp3").toUri().toString());
+	private MediaPlayer lossMusicPlayer = new MediaPlayer(lossMusic);
+
 
 	/**
 	 * Constructor van de EndGameScene
@@ -98,13 +103,17 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	}
 
 	public void music(){
-		if (controller.getSpelernaam().equals(spelerObj.get(0).getNaam())){
+		if (controller.getSpelernaam().equals(spelerObj.get(0).getNaam()) && SettingsScene.optieGeluid){
+			turnSound.stop();
+			mediaPlayer.stop();
 			musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 			musicPlayer.setVolume(0.25);
 			musicPlayer.setRate(1.15);
 			musicPlayer.play();
-		}else{
-			System.out.println("niet gewonnen");
+		}else if (SettingsScene.optieGeluid){
+			turnSound.stop();
+			mediaPlayer.stop();
+			lossMusicPlayer.play();
 		}
 		}
 
