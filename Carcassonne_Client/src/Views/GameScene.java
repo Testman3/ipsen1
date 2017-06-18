@@ -473,13 +473,9 @@ public class GameScene extends Scene {
 		controller.getGameStage().setFullScreenExitHint(null);
 		controller.getGameStage().setFullScreen(SettingsScene.optieFullscreen);
 		if (SettingsScene.optieFullscreen == true){
-			System.out.println(Toolkit.getDefaultToolkit().getScreenResolution());
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			double schermBreedte = screenSize.getWidth();
 			double schermHoogte = screenSize.getHeight();
-
-			controller.getGameStage().setWidth(schermBreedte);
-			controller.getGameStage().setHeight(schermHoogte);
 
 			mainPane.setMinSize(schermBreedte, schermHoogte);
 			getStylesheets().add("FullscreenStyle.css");
