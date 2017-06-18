@@ -582,7 +582,7 @@ public class GameScene extends Scene {
 				horigeViews[3].setId(spelerKleur);
 				horigeViews[4].setId(spelerKleur);
 				horigeViews[5].setId(spelerKleur);
-				horigeViews[6].setId("horigeUseds");
+				horigeViews[6].setId("horigeUsed");
 				break;
 			case 7:
 				horigeViews[0].setId(spelerKleur);
