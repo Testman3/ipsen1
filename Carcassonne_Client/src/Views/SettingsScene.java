@@ -39,7 +39,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 	//De drie beschikbare menu opties
 	public static boolean optieSpreken = false;
 	public static boolean optieFullscreen = false;
-	public static boolean optieGeluid = false;
+	public static boolean optieGeluid = true;
 
 	/**
 	 * Constructor van SettingsScene
@@ -122,6 +122,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 			optieGeluid = soundCheckBox.isSelected();
 
 			if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid) {
+				mediaPlayer.setVolume(0.2);
 				mediaPlayer.play();
 			} else if (optieGeluid == false) {
 				mediaPlayer.stop();
