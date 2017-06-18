@@ -1,13 +1,10 @@
 package commonFunctions;
 
 import Controllers.ClientManager;
-import Controllers.MenuController;
-import com.sun.security.ntlm.Client;
-import com.sun.speech.freetts.*;
-
 import Views.SettingsScene;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 import javafx.beans.value.WritableValue;
-import javafx.css.PseudoClass;
 import javafx.css.StyleableProperty;
 import javafx.scene.AccessibleRole;
 import javafx.scene.control.Label;

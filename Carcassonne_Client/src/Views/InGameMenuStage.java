@@ -160,7 +160,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		System.out.println("geluid = " + SettingsScene.optieGeluid );
 		soundCheckBox.setSelected(SettingsScene.optieGeluid );
 		spraakCheckBox.setSelected(SettingsScene.optieSpreken);
-		fullscreenCheckBox.setSelected(SettingsScene.fullScreen);
+		fullscreenCheckBox.setSelected(SettingsScene.optieFullscreen);
 
 		//Set Background Size
 		background.setFitHeight(800);
@@ -272,7 +272,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 
 		//FullScreen
 		fullscreenCheckBox.setOnAction(event -> {
-			SettingsScene.fullScreen = fullscreenCheckBox.isSelected();
+			SettingsScene.optieFullscreen = fullscreenCheckBox.isSelected();
 			gameScene.switchFullScreenMode();
 
 		});

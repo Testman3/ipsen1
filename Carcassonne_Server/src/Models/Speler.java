@@ -18,6 +18,10 @@ public class Speler implements Serializable {
 
 	private String horigeKleur;
 
+	public Speler(){
+
+	}
+
 	public Speler(String naam){
 		this.naam = naam;
 
@@ -27,7 +31,15 @@ public class Speler implements Serializable {
 		for (int i = 0; i < 7 ; i++) {
 			horigeBeschikbaar.add(new Horige(this));
 		}
+	}
 
+	// Overload voor saven game
+	public Speler(String naam, int punten, boolean beurt, int horigeBeschikbaar, int horigeGebruikt){
+		this.naam = naam;
+		this.punten = punten;
+		this.beurt = beurt;
+		this.horigeBeschikbaar = new ArrayList<Horige>(horigeBeschikbaar);
+		this.horigeGebruikt = new ArrayList<Horige>(horigeGebruikt);
 	}
 
 	public Speler(String naam, boolean beurt, int punten){
@@ -39,6 +51,7 @@ public class Speler implements Serializable {
 	public String getHorigeKleur(){
 		return horigeKleur;
 	}
+
 	public void setHorigeKleur(String kleur){
 		this.horigeKleur = kleur;
 	}
@@ -51,7 +64,6 @@ public class Speler implements Serializable {
 		horigeBeschikbaar.remove(pak);
 		horigeGebruikt.add(pak);
 		return pak;
-
 	}
 
 	public void getHorigeTerug(Horige horige) {
@@ -93,6 +105,14 @@ public class Speler implements Serializable {
 
 	public int getPunten(){
 		return this.punten;
+	}
+
+	public int getBeschikbareHorigeInt(){
+		return this.horigeBeschikbaar.size();
+	}
+
+	public int getGebruikteHorigeInt(){
+		return this.horigeGebruikt.size();
 	}
 
 	// Return alle variables van speler

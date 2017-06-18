@@ -1,5 +1,11 @@
 package Controllers;
 
+import Models.RMIInterface;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.media.AudioClip;
+
 import java.nio.file.Paths;
 import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
@@ -9,16 +15,11 @@ import java.rmi.registry.Registry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
-import Models.RMIInterface;
-import javafx.scene.media.AudioClip;
-
 /**
  * Deze class is verantwoordelijk voor de interacties tussen de lobby / prelobby en de RMI server
  */
 public class LobbyController {
+
 	private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
 
 
@@ -41,58 +42,53 @@ public class LobbyController {
 			alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
 			errorSound.play();
 			alert.showAndWait();
-		} else {
-			System.out.println("Getting access to the registry");
-			Registry registry;
+			return;
+		}
 
-			try {
-				registry = LocateRegistry.getRegistry(ip);
-				System.out.println("Getting the Lobby stub from registry");
-				RMIstub = (RMIInterface) registry.lookup("Lobby");
-				ableToConnect = true;
-			} catch (ConnectException e) {
-				alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
-				ableToConnect = false;
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			} catch (NotBoundException e) {
-				alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
-				ableToConnect = false;
-			}
+		System.out.println("Getting access to the registry");
+		Registry registry;
+		try {
+			registry = LocateRegistry.getRegistry(ip);
+			System.out.println("Getting the Lobby stub from registry");
+			RMIstub = (RMIInterface) registry.lookup("Lobby");
+			ableToConnect = true;
+		} catch (ConnectException e) {
+			alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
+			errorSound.play();
+			alert.showAndWait();
+			ableToConnect = false;
+			return;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
+			errorSound.play();
+			alert.showAndWait();
+			ableToConnect = false;
+			return;
+		}
 
-			if (controleerNaam(naam)) {
-				alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
-				naam = "";
-				RMIstub = null;
-				registry = null;
-				ableToConnect = false;
-				return;
-			} else {
-				System.out.println("Joining the game as " + naam);
-			}
-
-			if (getRmiStub().isGameStarted()) {
-				ableToConnect = false;
-				alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
-				return;
-			}
-
-			if (getRmiStub().getPlayerList().size() == 5) {
-				ableToConnect = false;
-				alert = new Alert(AlertType.ERROR, "De lobby zit vol!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
-			}
-
-
+		if (controleerNaam(naam)) {
+			alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
+			errorSound.play();
+			alert.showAndWait();
+			naam = "";
+			RMIstub = null;
+			registry = null;
+			ableToConnect = false;
+			return;
+		} else if (getRmiStub().isGameStarted()) {
+			ableToConnect = false;
+			alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
+			errorSound.play();
+			alert.showAndWait();
+			return;
+		} else if (getRmiStub().getPlayerList().size() == 5) {
+			ableToConnect = false;
+			alert = new Alert(AlertType.ERROR, "De lobby zit vol!", ButtonType.OK);
+			errorSound.play();
+			alert.showAndWait();
+			return;
 		}
 
 	}
@@ -107,6 +103,7 @@ public class LobbyController {
 		try {
 			naamCheck = RMIstub.checkContains(naam);
 		} catch (RemoteException e) {
+
 		}
 		return naamCheck;
 	}
@@ -135,8 +132,10 @@ public class LobbyController {
 	 * @return true / false
 	 */
 	public boolean canConnect() {
-		if (ableToConnect) return true;
-		else return false;
+		if (ableToConnect) {
+			return true;
+		}
+		return false;
 	}
 
 	public RMIInterface getRmiStub() {

@@ -1,9 +1,6 @@
 package Controllers;
 
-import Models.Horige;
-import Models.Speler;
-import Models.Stapel;
-import Models.Bord;
+import Models.*;
 
 import java.util.ArrayList;
 
@@ -26,6 +23,13 @@ public class BordController {
 		puntenTeller = new PuntenTeller();
 		kaartenStapel = new Stapel();
 		bord = new Bord(spelerList);
+		bord.plaatsKaartCheat(5,5,kaartenStapel.getBeginTile());
+	}
+
+	public BordController(ArrayList<Speler> spelerList, Tile[][] tiles){
+		puntenTeller = new PuntenTeller();
+		kaartenStapel = new Stapel();
+		bord = new Bord(spelerList, tiles);
 		bord.plaatsKaartCheat(5,5,kaartenStapel.getBeginTile());
 	}
 

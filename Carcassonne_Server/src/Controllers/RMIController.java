@@ -81,12 +81,14 @@ public class RMIController implements RMIInterface {
 		serverManager.startGame(alleSpelers);
 	}
 
-    @Override
-    public void startenGame(File jsonFile) throws RemoteException {
-		//File Loaden
+	// Overload file laden
+	@Override
+	public void startenGame(File jsonFile) throws RemoteException {
+		// File Loaden
 		File importedFile = jsonFile;
 		// File inhoud lezen
-		FileManager.loadGame(jsonFile);
+		Tile[][] alleKaarten = FileManager.loadGame(importedFile);
+		serverManager.startGame(alleSpelers, alleKaarten);
     }
 
     @Override

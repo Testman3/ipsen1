@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 
+import java.awt.*;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -27,13 +28,9 @@ import java.util.ArrayList;
  */
 public class GameScene extends Scene {
 
-	private double xOffset;
-	private double yOffset;
-	private int sceneHeight = (int) getHeight();
-	private int sceneWidth = (int) getWidth();
 	private MenuController controller;
 	public GameController gameController;
-	private BorderPane mainPane;
+	public BorderPane mainPane;
 	private Pane tilesPane;
 	private HBox test;
 	private TileView[][] tileViews;
@@ -58,7 +55,8 @@ public class GameScene extends Scene {
 	private StackPane eindigBeurtBackground;
 	private ImageView draaiImage;
 	private ImageView eindigBeurtImage;
-	Speler speler;
+	private int breedte;
+	private int hoogte;
 
 
 	/**
@@ -70,7 +68,8 @@ public class GameScene extends Scene {
 		//	super(new Pane(), 1280, 720);
 		super(new Pane(), breedte, hoogte);
 		getStylesheets().add("style.css");
-
+		this.breedte = breedte;
+		this.hoogte = hoogte;
 
 		tilesPane = (Pane) this.getRoot();
 
@@ -209,15 +208,7 @@ public class GameScene extends Scene {
 		menuButton.setOnAction(event -> {
 			controller.showInGameMenu();
 		});
-
-		setOnKeyPressed(event -> {
-			if(event.getCode() == KeyCode.ESCAPE){
-				controller.showInGameMenu();
-			}
-			});
-		}
-
-
+	}
 
 	/**
 	 * Creates the tile grid in the game client
@@ -400,6 +391,7 @@ public class GameScene extends Scene {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+
 		tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
 		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 		if (stump.getGeplaatsteHorige() != null) {
@@ -435,8 +427,9 @@ public class GameScene extends Scene {
 	}
 
 	public void setSceneBlur() {
-		this.mainPane.setEffect(new GaussianBlur());
-		tilesPane.setEffect(new GaussianBlur());
+		GaussianBlur blur = new GaussianBlur();
+		this.mainPane.setEffect(blur);
+		tilesPane.setEffect(blur);
 	}
 
 	public void hideSceneBlur() {
@@ -478,13 +471,19 @@ public class GameScene extends Scene {
 	public void switchFullScreenMode(){
 		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 		controller.getGameStage().setFullScreenExitHint(null);
-		controller.getGameStage().setFullScreen(SettingsScene.fullScreen);
-		if (SettingsScene.fullScreen == true){
+		controller.getGameStage().setFullScreen(SettingsScene.optieFullscreen);
+		if (SettingsScene.optieFullscreen == true){
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			double schermBreedte = screenSize.getWidth();
+			double schermHoogte = screenSize.getHeight();
+
+			mainPane.setMinSize(schermBreedte, schermHoogte);
 			getStylesheets().add("FullscreenStyle.css");
 			getStylesheets().remove("style.css");
 		}else {
 			getStylesheets().add("style.css");
 			getStylesheets().remove("FullscreenStyle.css");
+			mainPane.setMinSize(breedte, hoogte);
 		}
 	}
 }

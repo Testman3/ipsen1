@@ -52,6 +52,14 @@ public class Bord {
 		setSpelerKleuren();
 	}
 
+	public Bord(ArrayList<Speler> spelerList, Tile[][] bordKaarten) {
+		verwijderHorigeDezeRonde = new ArrayList<>();
+		alleSpelers = spelerList;
+		alleTiles = bordKaarten;
+		spelerBeurt = alleSpelers.get(0);
+		setSpelerKleuren();
+	}
+
 	public void verwijderHorige(Point point){
 		verwijderHorigeDezeRonde.add(point);
 		System.out.println("HORIGE " + point.getX() + " " + point.getY() + "zal verwijderd worden!");

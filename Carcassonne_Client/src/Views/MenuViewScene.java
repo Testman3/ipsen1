@@ -84,7 +84,8 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 
 		knoppen[1].setText("Laden spel");
 		knoppen[1].setOnAction(e -> {
-//			MenuController.loadedFile = controller.openFileBrowser();
+			controller.setPreLobbyScene();
+			controller.loadedFile = controller.openFileBrowser();
 		});
 
 		// Maakt een variabele aan die naar het handleiding document verwijst,
