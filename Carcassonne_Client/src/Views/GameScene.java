@@ -18,8 +18,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 
 import java.awt.*;
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -404,14 +406,13 @@ public class GameScene extends Scene {
 					playerViews[i].setPunten("");
 					return;
 				}
-				if(alleSpelers.get(i).getNaam().equals(client.getSpelerBeurt())){
+				if (alleSpelers.get(i).getNaam().equals(client.getSpelerBeurt())) {
 					playerViews[i].setHighlighted();
 				} else {
 					playerViews[i].setUnHighlighted();
 				}
 				playerViews[i].setNaam(alleSpelers.get(i).getNaam());
 				playerViews[i].setPunten("" + alleSpelers.get(i).getPunten());
-
 
 			}
 		});

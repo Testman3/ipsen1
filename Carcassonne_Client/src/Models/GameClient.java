@@ -33,6 +33,8 @@ public class GameClient {
 	private boolean kaartGeplaatst = false;
 	private ArrayList<Point> verwijderHorige;
 
+	private AudioClip turnSound = new AudioClip(Paths.get("Sounds/battleHorn.mp3").toUri().toString());
+
 	/**
 	 * Constructor van GameClient
 	 * @param view
@@ -180,7 +182,13 @@ public class GameClient {
 				beurt = RmiStub.getBeurt();
 				verwijderHorige = RmiStub.getHorigeToRemove();
 				spelerBeurt = RmiStub.getPlayerBeurt();
+
+				if (spelerBeurt.equals(spelerNaam)) {
+					turnSound.play();
+				}
+
 			}
+
 
 			if(verwijderHorige != null) {
 				for (Point point : verwijderHorige) {
