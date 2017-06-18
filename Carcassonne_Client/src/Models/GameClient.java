@@ -190,6 +190,7 @@ public class GameClient {
 				System.out.println(aantalHorigeBeschikbaar);
 			if(SettingsScene.optieGeluid) {
 				if (spelerBeurt.equals(spelerNaam)) {
+					turnSound.setVolume(0.5);
 					turnSound.play();
 				}
 			}
