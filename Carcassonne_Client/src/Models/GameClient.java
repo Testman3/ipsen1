@@ -34,7 +34,7 @@ public class GameClient {
 	private boolean kaartGeplaatst = false;
 	private ArrayList<Point> verwijderHorige;
 
-	private AudioClip turnSound = new AudioClip(Paths.get("Sounds/battleHorn.mp3").toUri().toString());
+	public static AudioClip turnSound = new AudioClip(Paths.get("Sounds/battleHorn.mp3").toUri().toString());
 
 	private int aantalHorigeBeschikbaar;
 
@@ -147,7 +147,6 @@ public class GameClient {
 	public void plaatsHorige(Horige.Posities posities) {
 		try {
 			RmiStub.plaatsHorige(posities);
-			getGameScene().setHorigeUsed();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -192,6 +191,7 @@ public class GameClient {
 				if (spelerBeurt.equals(spelerNaam)) {
 					turnSound.setVolume(0.5);
 					turnSound.play();
+
 				}
 			}
 			}
@@ -249,6 +249,10 @@ public class GameClient {
 
 	public String getSpelerNaam(){
 	return spelerNaam;
+	}
+
+	public int getAantalHorigeBeschikbaar() {
+		return aantalHorigeBeschikbaar;
 	}
 }
 
