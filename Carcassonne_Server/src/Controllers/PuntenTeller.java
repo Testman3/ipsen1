@@ -139,8 +139,12 @@ public class PuntenTeller {
 		}
 		*/
 		if(eindes >= 2 || startTileFoundTwice) {
-			System.out.println("Genoeg eindes gevonden!");
-			ArrayList<Speler> puntenSpelers = calculateplayerWithMostHorige(bord, horigeInNetwerk);
+			if(startTileFoundTwice) {
+				System.out.println("start tile 2x gevonden !!!!!");
+			}if(eindes >= 2){
+				System.out.println("Genoeg eindes gevonden!" + eindes );
+			}
+				ArrayList<Speler> puntenSpelers = calculateplayerWithMostHorige(bord, horigeInNetwerk);
 			for (int h = 0; h < puntenSpelers.size(); h++) {
 				geefPunten(horigeInNetwerk.get(h).getSpeler(), wegNetwerk.size());
 				System.out.println("Speler " + horigeInNetwerk.get(h).getSpeler() + "  heeft voor het afmaken van een weg " + wegNetwerk.size() + " punten geschreven");
@@ -175,7 +179,9 @@ public class PuntenTeller {
 		}
 
 		if (netwerk.contains(tile)) {
-			startTileFoundTwice = true;
+			if(tile==startTile){
+				startTileFoundTwice = true;
+			}
 			return;
 		}
 
@@ -329,7 +335,10 @@ public class PuntenTeller {
 		if (entry == entryPoint.GEEN) {
 
 			if (tile.getOostZijde().getZijde() == ZijdeType.WEG) {
-				if (tile.getOostZijde().isEinde()) eindes++;
+				if (tile.getOostZijde().isEinde()) {
+					System.out.println("Einde gevonden");
+					eindes++;
+				}
 				if (tile.getOostZijde().getHorigeSpeler() != null) {
 					addHorigeToNetwork(horige, tile.getOostZijde().getHorigeSpeler());
 				}
@@ -338,7 +347,10 @@ public class PuntenTeller {
 				System.out.println("biep1");
 			}
 			if (tile.getNoordZijde().getZijde() == ZijdeType.WEG) {
-				if (tile.getNoordZijde().isEinde()) eindes++;
+				if (tile.getNoordZijde().isEinde()) {
+					System.out.println("Einde gevonden");
+					eindes++;
+				}
 				if (tile.getNoordZijde().getHorigeSpeler() != null) {
 					addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
 				}
@@ -348,7 +360,10 @@ public class PuntenTeller {
 
 			}
 			if (tile.getZuidZijde().getZijde() == ZijdeType.WEG) {
-				if (tile.getZuidZijde().isEinde()) eindes++;
+				if (tile.getZuidZijde().isEinde()) {
+					System.out.println("Einde gevonden");
+					eindes++;
+				}
 				if (tile.getZuidZijde().getHorigeSpeler() != null) {
 					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
 				}
@@ -358,7 +373,10 @@ public class PuntenTeller {
 
 			}
 			if (tile.getWestZijde().getZijde() == ZijdeType.WEG) {
-				if (tile.getWestZijde().isEinde()) eindes++;
+				if (tile.getWestZijde().isEinde()) {
+					System.out.println("Einde gevonden");
+					eindes++;
+				}
 				if (tile.getWestZijde().getHorigeSpeler() != null) {
 					addHorigeToNetwork(horige, tile.getWestZijde().getHorigeSpeler());
 				}
