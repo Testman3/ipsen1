@@ -192,3 +192,6 @@
 }
 #horigeZwart{  -fx-image: url("Afbeeldingen/Horige_Zwart.png");
 }
+#horigeUsed{
+	-fx-image: url("Afbeeldingen/Horige_Used.png");
+}
