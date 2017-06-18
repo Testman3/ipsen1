@@ -26,8 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
-
 import static Views.MenuViewScene.mediaPlayer;
+import static Models.GameClient.turnSound;
 
 public class InGameMenuStage extends Stage implements SceneInitialiser{
 	private StackPane menuPane;
@@ -270,6 +270,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 				mediaPlayer.play();
 			} else if (SettingsScene.optieGeluid == false) {
 				mediaPlayer.stop();
+				turnSound.stop();
 			}
 		});
 

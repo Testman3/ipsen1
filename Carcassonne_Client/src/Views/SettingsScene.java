@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 
 import static Views.MenuViewScene.mediaPlayer;
+import static Models.GameClient.turnSound;
 
 /**
  * Deze class zorgt voor een correcte weergave van de SettingsScene
@@ -126,6 +127,8 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 				mediaPlayer.play();
 			} else if (optieGeluid == false) {
 				mediaPlayer.stop();
+				turnSound.stop();
+
 			}
 		});
 
