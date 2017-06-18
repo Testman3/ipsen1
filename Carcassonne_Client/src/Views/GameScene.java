@@ -58,6 +58,8 @@ public class GameScene extends Scene {
 	private int breedte;
 	private int hoogte;
 	private String spelerKleur;
+	private int tempHorigenBeschikbaar = 7;
+	private boolean firstRun = true;
 
 	private double xOffset;
 	private double yOffset;
@@ -428,6 +430,25 @@ public class GameScene extends Scene {
 
 			}
 		});
+
+		//////////////////////////////////////////////////////////////////////////////////////
+		//Switch horigeid wanneer er één is toegevoegd aan de beschikbaarlijst van de speler//
+		// Gebeurt nu 1 zet te laat															//
+		//////////////////////////////////////////////////////////////////////////////////////
+		if (client.getAantalHorigeBeschikbaar() > tempHorigenBeschikbaar){
+			for(int i = 0; i < (horigeViews.length) - 1; i++){
+				if (horigeViews[i].getId().equals("horigeUsed") && !firstRun){
+					horigeViews[i].setId(spelerKleur);
+					i = horigeViews.length;
+
+				}
+				firstRun = false;
+			}
+
+		}
+		tempHorigenBeschikbaar = client.getAantalHorigeBeschikbaar();
+
+
 	}
 
 	public MenuController getController() {

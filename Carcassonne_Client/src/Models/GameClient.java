@@ -255,5 +255,6 @@ public class GameClient {
 	public int getAantalHorigeBeschikbaar() {
 		return aantalHorigeBeschikbaar;
 	}
+
 }
 
