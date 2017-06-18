@@ -60,6 +60,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 	public void initAction(){
 			mediaPlayer.setCycleCount(INDEFINITE);
 		if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid ){
+			mediaPlayer.setVolume(0.2);
 			mediaPlayer.play();
 		}
 

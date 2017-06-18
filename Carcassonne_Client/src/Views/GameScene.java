@@ -59,6 +59,9 @@ public class GameScene extends Scene {
 	private int hoogte;
 	private String spelerKleur;
 
+	private double xOffset;
+	private double yOffset;
+
 
 	/**
 	 * Constructor van de GameScene
@@ -244,9 +247,19 @@ public class GameScene extends Scene {
 				verticaal.setLayoutY(verticaal.getLayoutY() - speed);
 			} else if (e.getCode() == KeyCode.D) {
 				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
-			} else if (e.getCode() == KeyCode.P) { // Get data
-				gameController.saveFileBrowser();
 			}
+		});
+
+		verticaal.setOnMousePressed(e -> {
+			xOffset = e.getX();
+			yOffset = e.getY();
+			e.consume();
+		});
+
+		verticaal.setOnMouseDragged(e -> {
+			verticaal.setLayoutX(e.getSceneX() - xOffset);
+			verticaal.setLayoutY(e.getSceneY() - yOffset);
+			e.consume();
 		});
 
 		//Zoom Functie(Scrol event)
@@ -477,8 +490,9 @@ public class GameScene extends Scene {
 		for (int i = 7; i > 0; i--){
 			if (horigeViews[i].getId().equals("horigeUsed")) {
 				horigeViews[i].setId(spelerKleur);
-				break; }
+				break;
 			}
+		}
 	}
 
 	public void switchFullScreenMode(){
