@@ -266,7 +266,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		soundCheckBox.setOnAction(event -> {
 			SettingsScene.optieGeluid = soundCheckBox.isSelected();
 			if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid) {
-				mediaPlayer.setVolume(0.2);
+				mediaPlayer.setVolume(0.75);
 				mediaPlayer.play();
 			} else if (SettingsScene.optieGeluid == false) {
 				mediaPlayer.stop();

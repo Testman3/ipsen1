@@ -26,6 +26,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	private SmartLabel[] spelers;
 	private SmartButton exit;
 	private ArrayList<Speler> spelerObj;
+	private Boolean setScorebord = false;
 
 	/**
 	 * Constructor van de EndGameScene
@@ -93,9 +94,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	 * Deze functie zorgt ervoor dat de spelers worden gesorteerd op score, waarna ze op het scherm zullen verschijnen.
 	 */
 	private void setScoreboard(){
-
-		spelerObj = new ArrayList<>();
-
+		if (setScorebord == false)
 		try {
 			spelerObj = RMIstub.getPlayerListObject();
 
@@ -127,6 +126,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		for(int i = 0; i < spelerObj.size(); i++){
 			spelers[i].setText((i + 1) + ". " + spelerObj.get(i).getNaam() + "  " + spelerObj.get(i).getPunten());
 		}
+		setScorebord = true;
 
 	}
 
