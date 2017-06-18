@@ -92,7 +92,6 @@ public class FileManager {
 					// Midden zijde
 					if(alleTiles[X][Y].getMiddenZijde() != null) {
 						kaarten.put("middenZijde", alleTiles[X][Y].getMiddenZijde().getZijde().toString());
-						kaarten.put("middenZijdeHorige", alleTiles[X][Y].getMiddenZijde().getHorigeSpeler().getSpelerString());
 						kaarten.put("middenZijdeHorigePos", alleTiles[X][Y].getMiddenZijde().getHorigeSpeler().getPositieString());
 					} else {
 						kaarten.put("middenZijde", false);
@@ -188,7 +187,7 @@ public class FileManager {
 		return null;
 	}
 
-	public static Tile[][] loadGame(File load) {
+	private static JSONObject loadGame(File load) {
 		System.out.println("Load Game");
 
 
@@ -215,21 +214,16 @@ public class FileManager {
 			e.printStackTrace();
 		}
 
-		JSONObject jsonObject = (JSONObject) obj;
+		return (JSONObject) obj;
+	}
 
+	public static Tile[][] loadBordKaartenJSON(File load){
+		JSONObject jsonObject = loadGame(load);
 
 		JSONArray bordKaarten = (JSONArray) jsonObject.get("Kaarten");
 		JSONArray JSONSpelers = (JSONArray) jsonObject.get("Spelers");
 
 		ArrayList<Speler> alleSpelers = getAlleSpelers(JSONSpelers);
-		Tile[][] loadedBordTiles;
-
-		loadedBordTiles = loadBordKaartenJSON(bordKaarten, alleSpelers);
-		return loadedBordTiles;
-	}
-
-	private static Tile[][] loadBordKaartenJSON(JSONArray bordKaarten, ArrayList<Speler> alleSpelers){
-
 
 		Tile[][] allLoadedTiles = new Tile[100][100];
 
@@ -371,6 +365,26 @@ public class FileManager {
 	}
 
 	public static ArrayList<Speler> getAlleSpelers(JSONArray JSONSpelers){
+		ArrayList<Speler> alleSpelers = new ArrayList<>();
+		for(Object number : JSONSpelers) {
+			JSONObject jsonNumber = (JSONObject) number;
+			// Speler gegevens
+			String naam = (String) jsonNumber.get("spelerNaam");
+			int punten = ((Number)jsonNumber.get("punten")).intValue();
+			boolean beurt = (boolean) jsonNumber.get("beurt");
+			int beschHorige = ((Number)jsonNumber.get("beschikbareHorige")).intValue();
+			int gebrHorige = ((Number)jsonNumber.get("gebruikteHorige")).intValue();
+			//add speler
+			alleSpelers.add(new Speler(naam,punten,beurt,beschHorige,gebrHorige));
+		}
+		return alleSpelers;
+	}
+
+	public static ArrayList<Speler> loadAlleSpelersJSON(File load){
+		JSONObject jsonObject = loadGame(load);
+
+		JSONArray JSONSpelers = (JSONArray) jsonObject.get("Spelers");
+
 		ArrayList<Speler> alleSpelers = new ArrayList<>();
 		for(Object number : JSONSpelers) {
 			JSONObject jsonNumber = (JSONObject) number;

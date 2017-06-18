@@ -122,7 +122,7 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 			optieGeluid = soundCheckBox.isSelected();
 
 			if (!mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING) && SettingsScene.optieGeluid) {
-				mediaPlayer.setVolume(0.2);
+				mediaPlayer.setVolume(0.75);
 				mediaPlayer.play();
 			} else if (optieGeluid == false) {
 				mediaPlayer.stop();
