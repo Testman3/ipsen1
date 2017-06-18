@@ -230,13 +230,14 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			//Als dit het geval is wordt de start game knop toegevoegd aan de hbox in de lobbyscene
 			try {
 				if (lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !knoppenBox.getChildren().contains(startGame)) {
-
+					System.out.println("READY OM TE BEGINNEN");
 					setAbleToStartGame();
 				}
 
 				//Als de gekoppelde speler niet meer op de eerste plaats staat maar nog wel de startgame knop heeft
 				//verwijderen we de startgame knop voor de gekoppelde speler uit de hbox in lobbyscene
 				else if (!lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && knoppenBox.getChildren().contains(startGame)) {
+					System.out.println("NIET READY!");
 					knoppenBox.getChildren().remove(startGame);
 				}
 			}catch (java.rmi.RemoteException e1){e1.printStackTrace();}

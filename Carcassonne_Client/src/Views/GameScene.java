@@ -390,6 +390,7 @@ public class GameScene extends Scene {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+
 		tileViews[stump.getX()][stump.getY()].setRotation(stump.getRotation());
 		tileViews[stump.getX()][stump.getY()].setKaartId(stump.getId());
 		if (stump.getGeplaatsteHorige() != null) {
@@ -425,8 +426,9 @@ public class GameScene extends Scene {
 	}
 
 	public void setSceneBlur() {
-		this.mainPane.setEffect(new GaussianBlur());
-		tilesPane.setEffect(new GaussianBlur());
+		GaussianBlur blur = new GaussianBlur();
+		this.mainPane.setEffect(blur);
+		tilesPane.setEffect(blur);
 	}
 
 	public void hideSceneBlur() {
