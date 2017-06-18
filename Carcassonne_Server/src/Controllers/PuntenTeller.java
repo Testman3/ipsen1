@@ -432,9 +432,6 @@ public class PuntenTeller {
 			if (startTileFoundTwice) {
 				System.out.println("start tile 2x gevonden !!!!!");
 			}
-			if (eindes >= 2) {
-				System.out.println("Genoeg eindes gevonden!" + eindes);
-			}
 			ArrayList<Speler> puntenSpelers = calculateplayerWithMostHorige(bord, horigeInNetwerk);
 			for (int h = 0; h < puntenSpelers.size(); h++) {
 				geefPunten(horigeInNetwerk.get(h).getSpeler(), wegNetwerk.size() * 2);
@@ -463,9 +460,6 @@ public class PuntenTeller {
 		}
 
 		if (netwerk.contains(tile)) {
-			if (tile == startTile) {
-				startTileFoundTwice = true;
-			}
 			return;
 		}
 
@@ -474,10 +468,6 @@ public class PuntenTeller {
 		addToNetwork(netwerk, tile);
 		if(tile.getHeeftBonus()){
 			netwerk.add(tile);
-		}
-
-		if (eindes == 2) {
-			return;
 		}
 
 		if (entry == entryPoint.NOORD) {
