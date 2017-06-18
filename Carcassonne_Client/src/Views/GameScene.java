@@ -429,27 +429,6 @@ public class GameScene extends Scene {
 
 			}
 		});
-
-		//////////////////////////////////////////////////////////////////////////////////////
-		//Switch horigeid wanneer er één is toegevoegd aan de beschikbaarlijst van de speler//
-		// Gebeurt nu 1 zet te laat															//
-		//////////////////////////////////////////////////////////////////////////////////////
-		System.out.println("client.getAantalHorigeBeschikbaar() = " + client.getAantalHorigeBeschikbaar());
-
-		if (client.getAantalHorigeBeschikbaar() > tempHorigenBeschikbaar){
-			System.out.println("tempHorigenBeschikbaar = " + tempHorigenBeschikbaar);
-			for(int i = 0; i < (horigeViews.length) ; i++){
-				if (horigeViews[i].getId().equals("horigeUsed") && !firstRun){
-					horigeViews[i].setId(spelerKleur);
-					i = horigeViews.length;
-
-				}
-				firstRun = false;
-			}
-
-		}
-		tempHorigenBeschikbaar = client.getAantalHorigeBeschikbaar();
-
 	}
 
 	public MenuController getController() {
@@ -534,5 +513,30 @@ public class GameScene extends Scene {
 			getStylesheets().remove("FullscreenStyle.css");
 			mainPane.setMinSize(breedte, hoogte);
 		}
+	}
+
+	/**
+	 * Deze functie zorgt ervoor dat de horigen in de UI worden geüpdatet aan de hand van
+	 * hoeveel je er tot je beschikking hebt
+	 * @param client
+	 * Geef de GameClient mee
+	 */
+	public void updateHorigenInUi(GameClient client){
+		//////////////////////////////////////////////////////////////////////////////////////
+		//Switch horigeid wanneer er één is toegevoegd aan de beschikbaarlijst van de speler//
+		// Gebeurt nu 1 zet te laat															//
+		//////////////////////////////////////////////////////////////////////////////////////
+		if (client.getAantalHorigeBeschikbaar() > tempHorigenBeschikbaar){
+			for(int i = 0; i < (horigeViews.length) ; i++){
+				if (horigeViews[i].getId().equals("horigeUsed") && !firstRun){
+					horigeViews[i].setId(spelerKleur);
+					i = horigeViews.length;
+
+				}
+				firstRun = false;
+			}
+
+		}
+		tempHorigenBeschikbaar = client.getAantalHorigeBeschikbaar();
 	}
 }

@@ -184,45 +184,25 @@ public class GameClient {
 				kaartGepakt = false;
 				kaartGeplaatst = false;
 				beurt = RmiStub.getBeurt();
-
-
-
 				verwijderHorige = RmiStub.getHorigeToRemove();
-
-				//Één van deze is nuttig
-				view.updateView(this);
-
 				spelerBeurt = RmiStub.getPlayerBeurt();
 				aantalHorigeBeschikbaar = RmiStub.getAvailableHorige(spelerNaam);
 
-				//Één van deze is nuttig
-				view.updateView(this);
-
 				System.out.println(aantalHorigeBeschikbaar);
-
-				//Één van deze is nuttig
-				view.updateView(this);
 
 			if(SettingsScene.optieGeluid) {
 				if (spelerBeurt.equals(spelerNaam)) {
 					turnSound.setVolume(0.5);
 					turnSound.play();
-
 				}
 			}
 			}
-			//Één van deze is nuttig
-			view.updateView(this);
-
 
 			if(verwijderHorige != null) {
 				for (Point point : verwijderHorige) {
 					view.removeHorige(point.getX(), point.getY());
 				}
 			}
-
-			//Één van deze is nuttig
-			view.updateView(this);
 
 			if (RmiStub.getisEindeSpel()) {
 				enableThread = false;
@@ -240,6 +220,8 @@ public class GameClient {
 			e.printStackTrace();
 		}
 
+		getGameScene().updateHorigenInUi(this);
+		//System.out.println("Horigen in UI geüpdatet");
 	}
 
 	/**
