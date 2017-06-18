@@ -258,7 +258,7 @@ public class GameScene extends Scene {
 			e.consume();
 		});
 
-		setOnMouseDragged(e -> {
+		verticaal.setOnMouseDragged(e -> {
 			verticaal.setLayoutX(e.getSceneX() - xOffset);
 			verticaal.setLayoutY(e.getSceneY() - yOffset);
 			e.consume();
