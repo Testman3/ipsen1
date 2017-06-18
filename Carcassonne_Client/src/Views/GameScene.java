@@ -313,12 +313,6 @@ public class GameScene extends Scene {
 
 	}
 
-	public void setHorigeInvis() {
-	}
-
-	public void setHorigeVisible() {
-
-	}
 	/**
 	 * Deze methode laat de kaart draaien
 	 */
@@ -465,7 +459,15 @@ public class GameScene extends Scene {
 		for (int i = 0; i< 7 ; i++){
 			horigeViews[i].setId(spelerKleur);
 		}
+	}
 
+	public void setHorigeUsed(){
+		for (int i = 0; i < 7; i++){
+			if (!horigeViews[i].getId().equals("horigeUsed")){
+				horigeViews[i].setId("horigeUsed");
+				break;
+			}
+		}
 	}
 
 	public void switchFullScreenMode(){

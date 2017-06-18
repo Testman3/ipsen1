@@ -141,6 +141,7 @@ public class GameClient {
 	public void plaatsHorige(Horige.Posities posities) {
 		try {
 			RmiStub.plaatsHorige(posities);
+			getGameScene().setHorigeUsed();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
