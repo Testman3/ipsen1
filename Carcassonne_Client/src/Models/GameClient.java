@@ -231,6 +231,7 @@ public class GameClient {
 	 * @return
 	 * Geeft laatst geplaatste kaart terug mits hij verbinding kan maken met de server. anders geeft hij null terug.
 	 * @throws RemoteException
+	 * RemoteException wordt gegooid wanneer er iets fout is met de RMI verbinding
 	 */
 	public TileStump getTile() throws RemoteException {
 		try {

@@ -58,7 +58,6 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 
 	public void initGui() {
 
-
 		backToHome = new SmartButton("Terug naar hoofdmenu");
 		backToHome.setId("standardLabel");
 
@@ -109,7 +108,6 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 		optieGeluid = soundCheckBox.isSelected();
 
 		initAction();
-		;
 
 	}
 
@@ -128,7 +126,6 @@ public class SettingsScene extends Scene implements SceneInitialiser {
 			} else if (optieGeluid == false) {
 				mediaPlayer.stop();
 				turnSound.stop();
-
 			}
 		});
 
