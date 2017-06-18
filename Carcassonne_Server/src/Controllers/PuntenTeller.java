@@ -88,7 +88,7 @@ public class PuntenTeller {
 			berekenKastelen(tile, bord, entryPoint.GEEN);
 		}
 
-			System.out.println("==========================EINDE BEREKENEN PUNTEN==============================");
+		System.out.println("==========================EINDE BEREKENEN PUNTEN==============================");
 	}
 
 	/**
@@ -130,7 +130,6 @@ public class PuntenTeller {
 	}
 
 
-
 	/**
 	 * Deze funcite berekent de punten voor wegen
 	 *
@@ -158,13 +157,14 @@ public class PuntenTeller {
 			}
 		}
 		*/
-		if(eindes >= 2 || startTileFoundTwice) {
-			if(startTileFoundTwice) {
+		if (eindes >= 2 || startTileFoundTwice) {
+			if (startTileFoundTwice) {
 				System.out.println("start tile 2x gevonden !!!!!");
-			}if(eindes >= 2){
-				System.out.println("Genoeg eindes gevonden!" + eindes );
 			}
-				ArrayList<Speler> puntenSpelers = calculateplayerWithMostHorige(bord, horigeInNetwerk);
+			if (eindes >= 2) {
+				System.out.println("Genoeg eindes gevonden!" + eindes);
+			}
+			ArrayList<Speler> puntenSpelers = calculateplayerWithMostHorige(bord, horigeInNetwerk);
 			for (int h = 0; h < puntenSpelers.size(); h++) {
 				geefPunten(horigeInNetwerk.get(h).getSpeler(), wegNetwerk.size());
 				System.out.println("Speler " + horigeInNetwerk.get(h).getSpeler() + "  heeft voor het afmaken van een weg " + wegNetwerk.size() + " punten geschreven");
@@ -183,6 +183,7 @@ public class PuntenTeller {
 		WEST,
 		GEEN
 	}
+
 	/**
 	 * Deze functie berekend wat een weg is
 	 *
@@ -198,7 +199,7 @@ public class PuntenTeller {
 		}
 
 		if (netwerk.contains(tile)) {
-			if(tile==startTile){
+			if (tile == startTile) {
 				startTileFoundTwice = true;
 			}
 			return;
@@ -215,9 +216,9 @@ public class PuntenTeller {
 			if (tile.getZuidZijde().isEinde()) {
 				eindes++;
 				if (tile.getZuidZijde().getHorigeSpeler() != null)
-						addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
-					Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
-					berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
+					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
+				Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
+				berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getZuidZijde().getHorigeSpeler() != null) {
@@ -285,9 +286,9 @@ public class PuntenTeller {
 			if (tile.getNoordZijde().isEinde()) {
 				eindes++;
 				if (tile.getNoordZijde().getHorigeSpeler() != null)
-						addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
-					Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
-					berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
+					addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
+				Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
+				berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getNoordZijde().getHorigeSpeler() != null) {
@@ -406,6 +407,8 @@ public class PuntenTeller {
 		}
 	}
 
+	boolean kasteelRond = true;
+
 	////EINDE BEREKENEN WEGN/////
 	public void berekenKastelen(Tile tile, Bord bord, entryPoint entry) {
 		ArrayList<Tile> wegNetwerk = new ArrayList<>();
@@ -413,8 +416,9 @@ public class PuntenTeller {
 		eindes = 0;
 		startTile = tile;
 		startTileFoundTwice = false;
+		kasteelRond = true;
 
-		berekenWeg(tile, entry, bord, wegNetwerk, horigeInNetwerk);
+		berekenKasteel(tile, entry, bord, wegNetwerk, horigeInNetwerk);
 
 		/*
 		for (int i = 0; i < wegNetwerk.size(); i++) {
@@ -424,16 +428,17 @@ public class PuntenTeller {
 			}
 		}
 		*/
-		if(eindes >= 2 || startTileFoundTwice) {
-			if(startTileFoundTwice) {
+		if (kasteelRond || startTileFoundTwice) {
+			if (startTileFoundTwice) {
 				System.out.println("start tile 2x gevonden !!!!!");
-			}if(eindes >= 2){
-				System.out.println("Genoeg eindes gevonden!" + eindes );
+			}
+			if (eindes >= 2) {
+				System.out.println("Genoeg eindes gevonden!" + eindes);
 			}
 			ArrayList<Speler> puntenSpelers = calculateplayerWithMostHorige(bord, horigeInNetwerk);
 			for (int h = 0; h < puntenSpelers.size(); h++) {
 				geefPunten(horigeInNetwerk.get(h).getSpeler(), wegNetwerk.size() * 2);
-				System.out.println("Speler " + horigeInNetwerk.get(h).getSpeler() + "  heeft voor het afmaken van een kasteel " + wegNetwerk.size()  * 2 + " punten geschreven");
+				System.out.println("Speler " + horigeInNetwerk.get(h).getSpeler() + "  heeft voor het afmaken van een kasteel " + wegNetwerk.size() * 2 + " punten geschreven");
 
 			}
 
@@ -453,18 +458,23 @@ public class PuntenTeller {
 	public void berekenKasteel(Tile tile, entryPoint entry, Bord bord, ArrayList<Tile> netwerk, ArrayList<Horige> horige) {
 
 		if (tile == null) {
+			kasteelRond = false;
 			return;
 		}
 
 		if (netwerk.contains(tile)) {
-			if(tile==startTile){
+			if (tile == startTile) {
 				startTileFoundTwice = true;
 			}
 			return;
 		}
 
 		System.out.println("Bereken Kasteel " + tile.getX() + " " + tile.getY() + " met entry point " + entry.toString());
+		System.out.println("enum kasteel " + tile.getOostZijde().getZijde().toString());
 		addToNetwork(netwerk, tile);
+		if(tile.getHeeftBonus()){
+			netwerk.add(tile);
+		}
 
 		if (eindes == 2) {
 			return;
@@ -476,7 +486,7 @@ public class PuntenTeller {
 				if (tile.getZuidZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
-				berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.ZUID, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getZuidZijde().getHorigeSpeler() != null) {
@@ -487,19 +497,21 @@ public class PuntenTeller {
 				if (tile.getOostZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getOostZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX() + 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.OOST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.OOST, bord, netwerk, horige);
 
-			} else if (tile.getNoordZijde().getZijde() == ZijdeType.KASTEEL) {
+			}
+			if (tile.getNoordZijde().getZijde() == ZijdeType.KASTEEL) {
 				if (tile.getNoordZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
-				berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.NOORD, bord, netwerk, horige);
 
-			} else if (tile.getWestZijde().getZijde() == ZijdeType.KASTEEL) {
+			}
+			if (tile.getWestZijde().getZijde() == ZijdeType.KASTEEL) {
 				if (tile.getWestZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getWestZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX() - 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.WEST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.WEST, bord, netwerk, horige);
 			}
 		}
 		if (entry == entryPoint.OOST) {
@@ -508,7 +520,7 @@ public class PuntenTeller {
 				if (tile.getWestZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getWestZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX() - 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.WEST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.WEST, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getWestZijde().getHorigeSpeler() != null) {
@@ -519,19 +531,21 @@ public class PuntenTeller {
 				if (tile.getOostZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getOostZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX() + 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.OOST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.OOST, bord, netwerk, horige);
 
-			} else if (tile.getNoordZijde().getZijde() == ZijdeType.KASTEEL) {
+			}
+			if (tile.getNoordZijde().getZijde() == ZijdeType.KASTEEL) {
 				if (tile.getNoordZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
-				berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.NOORD, bord, netwerk, horige);
 
-			} else if (tile.getZuidZijde().getZijde() == ZijdeType.KASTEEL) {
+			}
+			if (tile.getZuidZijde().getZijde() == ZijdeType.KASTEEL) {
 				if (tile.getZuidZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
-				berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.ZUID, bord, netwerk, horige);
 			}
 		}
 		if (entry == entryPoint.ZUID) {
@@ -540,7 +554,7 @@ public class PuntenTeller {
 				if (tile.getNoordZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
-				berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.NOORD, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getNoordZijde().getHorigeSpeler() != null) {
@@ -551,19 +565,21 @@ public class PuntenTeller {
 				if (tile.getOostZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getOostZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX() + 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.OOST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.OOST, bord, netwerk, horige);
 
-			} else if (tile.getZuidZijde().getZijde() == ZijdeType.KASTEEL) {
+			}
+			if (tile.getZuidZijde().getZijde() == ZijdeType.KASTEEL) {
 				if (tile.getZuidZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
-				berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.ZUID, bord, netwerk, horige);
 
-			} else if (tile.getWestZijde().getZijde() == ZijdeType.KASTEEL) {
+			}
+			if (tile.getWestZijde().getZijde() == ZijdeType.KASTEEL) {
 				if (tile.getWestZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getWestZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX() - 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.WEST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.WEST, bord, netwerk, horige);
 			}
 		}
 		if (entry == entryPoint.WEST) {
@@ -572,7 +588,7 @@ public class PuntenTeller {
 				if (tile.getOostZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getOostZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX() + 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.OOST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.OOST, bord, netwerk, horige);
 				return;
 			} else {
 				if (tile.getOostZijde().getHorigeSpeler() != null) {
@@ -583,19 +599,21 @@ public class PuntenTeller {
 				if (tile.getZuidZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
-				berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.ZUID, bord, netwerk, horige);
 
-			} else if (tile.getNoordZijde().getZijde() == ZijdeType.KASTEEL) {
+			}
+			if (tile.getNoordZijde().getZijde() == ZijdeType.KASTEEL) {
 				if (tile.getNoordZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
-				berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.NOORD, bord, netwerk, horige);
 
-			} else if (tile.getWestZijde().getZijde() == ZijdeType.KASTEEL) {
+			}
+			if (tile.getWestZijde().getZijde() == ZijdeType.KASTEEL) {
 				if (tile.getWestZijde().getHorigeSpeler() != null)
 					addHorigeToNetwork(horige, tile.getWestZijde().getHorigeSpeler());
 				Tile nextTile = bord.getTile(tile.getX() - 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.WEST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.WEST, bord, netwerk, horige);
 			}
 		}
 		if (entry == entryPoint.GEEN) {
@@ -609,7 +627,7 @@ public class PuntenTeller {
 					addHorigeToNetwork(horige, tile.getOostZijde().getHorigeSpeler());
 				}
 				Tile nextTile = bord.getTile(tile.getX() + 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.OOST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.OOST, bord, netwerk, horige);
 				System.out.println("biep1");
 			}
 			if (tile.getNoordZijde().getZijde() == ZijdeType.KASTEEL) {
@@ -621,7 +639,7 @@ public class PuntenTeller {
 					addHorigeToNetwork(horige, tile.getNoordZijde().getHorigeSpeler());
 				}
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() - 1);
-				berekenWeg(nextTile, entryPoint.NOORD, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.NOORD, bord, netwerk, horige);
 				System.out.println("biep2");
 
 			}
@@ -634,7 +652,7 @@ public class PuntenTeller {
 					addHorigeToNetwork(horige, tile.getZuidZijde().getHorigeSpeler());
 				}
 				Tile nextTile = bord.getTile(tile.getX(), tile.getY() + 1);
-				berekenWeg(nextTile, entryPoint.ZUID, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.ZUID, bord, netwerk, horige);
 				System.out.println("biep3");
 
 			}
@@ -647,11 +665,12 @@ public class PuntenTeller {
 					addHorigeToNetwork(horige, tile.getWestZijde().getHorigeSpeler());
 				}
 				Tile nextTile = bord.getTile(tile.getX() - 1, tile.getY());
-				berekenWeg(nextTile, entryPoint.WEST, bord, netwerk, horige);
+				berekenKasteel(nextTile, entryPoint.WEST, bord, netwerk, horige);
 				System.out.println("biep4");
 			}
 		}
 	}
+
 	public void addToNetwork(ArrayList<Tile> netwerk, Tile tile) {
 		if (tile == null) {
 			return;
@@ -660,6 +679,8 @@ public class PuntenTeller {
 			System.out.println("Tile zit al in het netwerk!");
 			return;
 		}
+
+
 		netwerk.add(tile);
 		System.out.println("Tile " + tile.getX() + " " + tile.getY() + "toegevoegd aan netwerk");
 
@@ -684,7 +705,7 @@ public class PuntenTeller {
 			spelersToHorigen[i] = new spelerToHorige(alleSpelers.get(i));
 		}
 
-		for (Horige horige:networkHorige) {
+		for (Horige horige : networkHorige) {
 			for (int i = 0; i < spelersToHorigen.length; i++) {
 				if (spelersToHorigen[i].speler.getNaam().equals(horige.getSpeler().getNaam())) {
 					spelersToHorigen[i].aantalHorige++;
@@ -694,14 +715,14 @@ public class PuntenTeller {
 
 		int meesteHorige = 1;
 
-		for (spelerToHorige sth:spelersToHorigen){
-			if(sth.aantalHorige > meesteHorige)
+		for (spelerToHorige sth : spelersToHorigen) {
+			if (sth.aantalHorige > meesteHorige)
 				meesteHorige = sth.aantalHorige;
 		}
 		ArrayList<Speler> spelersDiePuntenKrijgen = new ArrayList<>();
 
-		for (spelerToHorige sth:spelersToHorigen){
-			if(sth.aantalHorige == meesteHorige){
+		for (spelerToHorige sth : spelersToHorigen) {
+			if (sth.aantalHorige == meesteHorige) {
 				spelersDiePuntenKrijgen.add(sth.speler);
 			}
 
@@ -711,30 +732,29 @@ public class PuntenTeller {
 	}
 
 
-
 	/**
 	 * Deze functie geeft de punten aan de speler
-	 * @param speler
-	 * Geef de speler mee die de punten moet krijgen
-	 * @param hoeveelheid
-	 * Geef de hoeveelheid punten mee die de speler moet krijgen
+	 *
+	 * @param speler      Geef de speler mee die de punten moet krijgen
+	 * @param hoeveelheid Geef de hoeveelheid punten mee die de speler moet krijgen
 	 */
-	public void geefPunten(Speler speler, int hoeveelheid){
+	public void geefPunten(Speler speler, int hoeveelheid) {
 		speler.geefPunten(hoeveelheid);
 		System.out.println("Punten gegeven aan speler " + speler.getNaam() + " ( " + speler.getPunten() + " punten)");
 	}
 
 }
- class spelerToHorige {
+
+class spelerToHorige {
 	public Speler speler;
 	public int aantalHorige = 0;
 
-	public spelerToHorige(Speler speler){
+	public spelerToHorige(Speler speler) {
 		this.speler = speler;
 	}
 
 	@Override
-	 public boolean equals(Object other){
+	public boolean equals(Object other) {
 		Speler speler = (Speler) other;
 		return this.speler == speler;
 	}
