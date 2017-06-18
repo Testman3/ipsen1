@@ -74,6 +74,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 		mainPane.setCenter(allesContainer);
 
+
 		initAction();
 
 	}
@@ -81,7 +82,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 	@Override
 	public void initAction() {
 		exit.setOnAction(e -> {
-			controller.backToMainMenu();
+			System.exit(0);
 		});
 
 	}
@@ -96,6 +97,19 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		setScoreboard();
 	}
 
+	public void music(){
+		if (controller.getSpelernaam().equals(spelerObj.get(0).getNaam())){
+			musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+			musicPlayer.setVolume(0.25);
+			musicPlayer.setRate(1.15);
+			musicPlayer.play();
+		}else{
+			System.out.println("niet gewonnen");
+		}
+		}
+
+
+
 	/**
 	 * Deze functie zorgt ervoor dat de spelers worden gesorteerd op score, waarna ze op het scherm zullen verschijnen.
 	 */
@@ -103,10 +117,6 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		if (setScorebord == false)
 		try {
 			spelerObj = RMIstub.getPlayerListObject();
-			musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-			musicPlayer.setVolume(0.25);
-			musicPlayer.setRate(1.15);
-			musicPlayer.play();
 
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -137,6 +147,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 			spelers[i].setText((i + 1) + ". " + spelerObj.get(i).getNaam() + "  " + spelerObj.get(i).getPunten());
 		}
 		setScorebord = true;
+		music();
 
 	}
 
