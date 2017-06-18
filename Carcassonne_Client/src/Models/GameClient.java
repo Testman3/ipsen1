@@ -72,7 +72,6 @@ public class GameClient {
 			try {
 				RmiStub.beeindigenBeurt(spelerNaam);
 				view.verwijdwerHorigePreviews();
-				getGameScene().playBeurtSound();
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}

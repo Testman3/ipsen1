@@ -18,12 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
-import java.applet.AudioClip;
 import java.awt.*;
-import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -61,7 +57,6 @@ public class GameScene extends Scene {
 	private ImageView eindigBeurtImage;
 	private int breedte;
 	private int hoogte;
-
 
 
 	/**
@@ -204,7 +199,6 @@ public class GameScene extends Scene {
 
 		eindigButton.setOnAction(e -> {
 			gameController.klikBeeindigbeurt();
-
 		});
 
 		ShowKaart.setOnMouseClicked(e -> {
@@ -492,20 +486,6 @@ public class GameScene extends Scene {
 			getStylesheets().add("style.css");
 			getStylesheets().remove("FullscreenStyle.css");
 			mainPane.setMinSize(breedte, hoogte);
-		}
-	}
-
-	public void playBeurtSound(){
-		try {
-			if(RmiStub.getPlayerBeurt().equals(controller.getSpelernaam())){
-				Media battleHorn = new Media(Paths.get("Sounds/battleHorn.mp3").toUri().toString());
-				MediaPlayer beurt = new MediaPlayer(battleHorn);
-				beurt.play();
-				}
-
-
-		} catch (RemoteException e) {
-			e.printStackTrace();
 		}
 	}
 }
