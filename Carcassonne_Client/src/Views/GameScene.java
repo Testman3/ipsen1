@@ -478,23 +478,15 @@ public class GameScene extends Scene {
 	/**
 	 * Deze functie zorgt ervoor dat een horige de used texture gebruikt in de ui wanneer hij is geplaatst
 	 */
-	public void setHorigeUsed(){
-		for (int i = 0; i < 7; i++){
-			if (!horigeViews[i].getId().equals("horigeUsed")){
-				horigeViews[i].setId("horigeUsed");
-				break;
-			}
-		}
-	}
+//	public void setHorigeUsed(){
+//		for (int i = 0; i < 7; i++){
+//			if (!horigeViews[i].getId().equals("horigeUsed")){
+//				horigeViews[i].setId("horigeUsed");
+//				break;
+//			}
+//		}
+//	}
 
-	public void setHorigeReturned(){
-		for (int i = 7; i > 0; i--){
-			if (horigeViews[i].getId().equals("horigeUsed")) {
-				horigeViews[i].setId(spelerKleur);
-				break;
-			}
-		}
-	}
 
 	public void switchFullScreenMode(){
 		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -523,20 +515,99 @@ public class GameScene extends Scene {
 	 */
 	public void updateHorigenInUi(GameClient client){
 		//////////////////////////////////////////////////////////////////////////////////////
-		//Switch horigeid wanneer er één is toegevoegd aan de beschikbaarlijst van de speler//
-		// Gebeurt nu 1 zet te laat															//
+		//Switch om horigen weer te geven in de ui											//
 		//////////////////////////////////////////////////////////////////////////////////////
-		if (client.getAantalHorigeBeschikbaar() > tempHorigenBeschikbaar){
-			for(int i = 0; i < (horigeViews.length) ; i++){
-				if (horigeViews[i].getId().equals("horigeUsed") && !firstRun){
-					horigeViews[i].setId(spelerKleur);
-					i = horigeViews.length;
+		int horigenSwitch = (client.getAantalHorigeBeschikbaar());
+		System.out.println("Case: " + horigenSwitch);
 
-				}
-				firstRun = false;
-			}
-
+		switch(horigenSwitch){
+			case 0:
+				horigeViews[0].setId("horigeUsed");
+				horigeViews[1].setId("horigeUsed");
+				horigeViews[2].setId("horigeUsed");
+				horigeViews[3].setId("horigeUsed");
+				horigeViews[4].setId("horigeUsed");
+				horigeViews[5].setId("horigeUsed");
+				horigeViews[6].setId("horigeUsed");
+				break;
+			case 1:
+				horigeViews[0].setId(spelerKleur);
+				horigeViews[1].setId("horigeUsed");
+				horigeViews[2].setId("horigeUsed");
+				horigeViews[3].setId("horigeUsed");
+				horigeViews[4].setId("horigeUsed");
+				horigeViews[5].setId("horigeUsed");
+				horigeViews[6].setId("horigeUsed");
+				break;
+			case 2:
+				horigeViews[0].setId(spelerKleur);
+				horigeViews[1].setId(spelerKleur);
+				horigeViews[2].setId("horigeUsed");
+				horigeViews[3].setId("horigeUsed");
+				horigeViews[4].setId("horigeUsed");
+				horigeViews[5].setId("horigeUsed");
+				horigeViews[6].setId("horigeUsed");
+				break;
+			case 3:
+				horigeViews[0].setId(spelerKleur);
+				horigeViews[1].setId(spelerKleur);
+				horigeViews[2].setId(spelerKleur);
+				horigeViews[3].setId("horigeUsed");
+				horigeViews[4].setId("horigeUsed");
+				horigeViews[5].setId("horigeUsed");
+				horigeViews[6].setId("horigeUsed");
+				break;
+			case 4:
+				horigeViews[0].setId(spelerKleur);
+				horigeViews[1].setId(spelerKleur);
+				horigeViews[2].setId(spelerKleur);
+				horigeViews[3].setId(spelerKleur);
+				horigeViews[4].setId("horigeUsed");
+				horigeViews[5].setId("horigeUsed");
+				horigeViews[6].setId("horigeUsed");
+				break;
+			case 5:
+				horigeViews[0].setId(spelerKleur);
+				horigeViews[1].setId(spelerKleur);
+				horigeViews[2].setId(spelerKleur);
+				horigeViews[3].setId(spelerKleur);
+				horigeViews[4].setId(spelerKleur);
+				horigeViews[5].setId("horigeUsed");
+				horigeViews[6].setId("horigeUsed");
+				break;
+			case 6:
+				horigeViews[0].setId(spelerKleur);
+				horigeViews[1].setId(spelerKleur);
+				horigeViews[2].setId(spelerKleur);
+				horigeViews[3].setId(spelerKleur);
+				horigeViews[4].setId(spelerKleur);
+				horigeViews[5].setId(spelerKleur);
+				horigeViews[6].setId("horigeUseds");
+				break;
+			case 7:
+				horigeViews[0].setId(spelerKleur);
+				horigeViews[1].setId(spelerKleur);
+				horigeViews[2].setId(spelerKleur);
+				horigeViews[3].setId(spelerKleur);
+				horigeViews[4].setId(spelerKleur);
+				horigeViews[5].setId(spelerKleur);
+				horigeViews[6].setId(spelerKleur);
+				break;
 		}
-		tempHorigenBeschikbaar = client.getAantalHorigeBeschikbaar();
+
+
+//
+//		if (client.getAantalHorigeBeschikbaar() > tempHorigenBeschikbaar){
+//			for(int i = 0; i < (horigeViews.length) ; i++){
+//				if (horigeViews[i].getId().equals("horigeUsed") && !firstRun){
+//					horigeViews[i].setId(spelerKleur);
+//					i = horigeViews.length;
+//
+//				}
+//				firstRun = false;
+//			}
+//
+//		}
+//		tempHorigenBeschikbaar = client.getAantalHorigeBeschikbaar();
 	}
 }
