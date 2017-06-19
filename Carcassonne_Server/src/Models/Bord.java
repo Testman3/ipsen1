@@ -170,6 +170,11 @@ public class Bord {
 		laatstGeplaatst = tile;
 		tile.plaats(x, y);
 		System.out.println("=========================== CHEAT KAART GEPLAATST OP X 5 Y 5 ");
+		System.out.println("Noord zijde " + tile.getNoordZijde());
+		System.out.println("Oost zijde " + tile.getOostZijde());
+		System.out.println("Zuid zijde " + tile.getZuidZijde());
+		System.out.println("West zijde " + tile.getWestZijde());
+
 	}
 
 	/**
