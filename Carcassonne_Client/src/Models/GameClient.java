@@ -12,21 +12,19 @@ import java.util.ArrayList;
 
 public class GameClient {
 
-	AudioClip meepMerp = new AudioClip(Paths.get("Sounds/meepMerp.mp3").toUri().toString());
-
-	GameScene view;
-
-	Thread gameThread;
+	private AudioClip meepMerp = new AudioClip(Paths.get("Sounds/meepMerp.mp3").toUri().toString());
+	private GameScene view;
+	private Thread gameThread;
 
 	private boolean enableThread = true;
 
 	public String spelerNaam;
 	public String kaartPlaatsId = "";
 
-	String spelerBeurt;
+	private String spelerBeurt;
 
 	//String spelerBeurt = "";
-	int beurt = 0;
+	private int beurt = 0;
 
 	public RMIInterface RmiStub;
 
@@ -38,7 +36,6 @@ public class GameClient {
 	private AudioClip getCard = new AudioClip(Paths.get("Sounds/Shuffling_Cards.mp3").toUri().toString());
 
 	private int aantalHorigeBeschikbaar;
-
 
 	/**
 	 * Constructor van GameClient
@@ -189,7 +186,7 @@ public class GameClient {
 		 * De client wordt elke x ms geīüpdatet, als de beurt op de server hoger is dan de beurt op de client betekent dat en
 		 * speler klaar is met zijn beurt, en het spelbord geüpdatet moet worden.
 		 */
-	public void Update() {
+	private void Update() {
 
 		try {
 			if (beurt != RmiStub.getBeurt()) {
@@ -253,7 +250,7 @@ public class GameClient {
 		}
 	}
 
-	public TileStump[] getTileLoad() throws RemoteException {
+	private TileStump[] getTileLoad() throws RemoteException {
 		try {
 			return RmiStub.getPlacedKaartList();
 		} catch (RemoteException e) {
