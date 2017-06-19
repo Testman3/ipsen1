@@ -60,6 +60,7 @@ public class GameScene extends Scene {
 	private String spelerKleur;
 	private int tempHorigenBeschikbaar = 7;
 	private boolean firstRun = true;
+	private VBox verticaal;
 
 	private double xOffset;
 	private double yOffset;
@@ -222,7 +223,7 @@ public class GameScene extends Scene {
 	 */
 	private void createTileGrid(int sizeX, int sizeY) {
 		tileViews = new TileView[sizeX][sizeY];
-		VBox verticaal = new VBox();
+		verticaal = new VBox();
 		for (int y = 0; y < sizeY; y++) {
 			HBox horizontal = new HBox();
 			verticaal.getChildren().add(horizontal);
@@ -589,5 +590,9 @@ public class GameScene extends Scene {
 				break;
 		}
 
+	}
+
+	public VBox getVerticaal() {
+		return verticaal;
 	}
 }
