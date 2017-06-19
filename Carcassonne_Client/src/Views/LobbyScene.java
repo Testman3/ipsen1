@@ -17,7 +17,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 
+import java.nio.file.Paths;
 import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	private LobbyController lobbyController;
 	private Thread lobbyThread;
 	private ArrayList<String> allenamen;
+	private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
 
 	/**
 	 * Constructor van de LobbyScene
@@ -187,6 +190,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		} catch (NoSuchObjectException e2){
 			enableThread = false;
 			Platform.runLater(() -> {
+				errorSound.play();
 			Alert alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis met het server... Probeer de server opnieuw te sarten!", ButtonType.OK);
 			alert.showAndWait();
 			leaveGame.fire();
