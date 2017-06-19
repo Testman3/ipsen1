@@ -115,11 +115,11 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		lobbyPane.setCenter(completeBox);
 
 		initAction();
-
 	}
 
 	public void initAction() {
 
+		//Action voor de Start Game knop
 		startGame.setOnAction(e -> {
 			try {
 				if(controller.loadedFile == null) {
@@ -129,10 +129,11 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				}
 
 			} catch (RemoteException e1) {
-				e1.printStackTrace();
+				System.out.println("Er ging iets mis met de RMI verbinding!");
 			}
 		});
 
+		//Action voor de Leave Game knop
 		leaveGame.setOnAction(e -> {
 
 			try {
@@ -160,28 +161,23 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		lobbyThread = new Thread(() -> {
 			while (enableThread == true) {
 				Update();
-				System.out.println("Running...");
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
 					System.out.println("Thread Interrupted Exception");
 				}
 			}
 		});
 		lobbyThread.start();
-
 	}
 
-	boolean starten = false;
+	private boolean starten = false;
 
 	/**
 	 * Deze functie update alle elementen in de lobby voor de client
 	 */
 	private void Update() {
 		allenamen = new ArrayList<String>();
-		int playerNummer;
-
 		try {
 			allenamen = lobbyController.RMIstub.getPlayerList();
 			if (lobbyController.RMIstub.isGameStarted()) {
@@ -256,7 +252,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			knoppenBox.getChildren().add(startGame);
 	}
 
-	public int getplayerNummer() {
+	private int getplayerNummer() {
 		int playerNummer = 0;
 		for (int i = 0; i < allenamen.size(); i++) {
 			if (allenamen.get(i).equals(controller.getSpelernaam())) {

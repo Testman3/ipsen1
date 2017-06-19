@@ -14,8 +14,7 @@ import java.io.File;
  */
 public class MenuController {
 
-	Stage gameStage;
-
+	private Stage gameStage;
 	private EndGameScene endGameScene;
 	private GameScene gameScene;
 	private LobbyScene lobbyScene;
@@ -24,9 +23,7 @@ public class MenuController {
 	private SettingsScene settingsScene;
 	private CreditsScene creditsScene;
 	private InGameMenuStage inGameMenuStage;
-
 	private String spelernaam;
-
 	public File loadedFile;
 
 	/**
@@ -65,7 +62,6 @@ public class MenuController {
 		});
 	}
 
-
 	/**
 	 * Button action method om de speler terug in het hoofdmenu te krijgen
 	 */
@@ -102,7 +98,6 @@ public class MenuController {
 	 * Deze functie switcht de scene naar de gameScene
 	 */
 	public void setGameScene(){
-		//TODO bereken hier de hoogte en breedte afhankelijk van operating system
 		gameStage.setScene(gameScene);
 		if(SettingsScene.optieFullscreen) {
 			gameStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -117,11 +112,7 @@ public class MenuController {
 			gameScene.getStylesheets().add("FullscreenStyle.css");
 			gameScene.getStylesheets().remove("style.css");
 			}
-
 		}
-
-	//	gameStage.setFullScreen(SettingsScene.optieFullscreen);
-
 
 	/**
 	 * Deze functie switcht de scene naar de lobbyscene
