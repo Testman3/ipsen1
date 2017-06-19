@@ -172,6 +172,11 @@ public class Bord {
 		laatstGeplaatst = tile;
 		tile.plaats(x, y);
 		System.out.println("=========================== CHEAT KAART GEPLAATST OP X 5 Y 5 ");
+		System.out.println("Noord" + tile.getNoordZijde().getZijde().toString());
+		System.out.println("Oost" + tile.getOostZijde().getZijde().toString());
+		System.out.println("Zuid" + tile.getZuidZijde().getZijde().toString());
+		System.out.println("West" + tile.getWestZijde().getZijde().toString());
+
 	}
 
 	public void plaatsLoadKaart(Tile[][] tiles){

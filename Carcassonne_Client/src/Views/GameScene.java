@@ -531,7 +531,7 @@ public class GameScene extends Scene {
 	 */
 	public void updateHorigenInUi(GameClient client){
 		int horigenSwitch = (client.getAantalHorigeBeschikbaar());
-		System.out.println("Case: " + horigenSwitch + " horigen om neer te zetten");
+		//System.out.println("Case: " + horigenSwitch + " horigen om neer te zetten");
 
 		switch(horigenSwitch){
 			case 0:
