@@ -132,6 +132,11 @@ public interface RMIInterface extends Remote {
 	 */
 	public TileStump getPlacedKaart() throws RemoteException;
 
+	public TileStump[] getPlacedKaartList() throws RemoteException;
+
+	public boolean getLoadedGame() throws RemoteException;
+
+
 	/**
 	 * Geeft een int van welke beurt het spel op dit moment is
 	 *

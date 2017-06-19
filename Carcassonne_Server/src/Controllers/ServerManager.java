@@ -33,6 +33,8 @@ public class ServerManager extends Application {
 	}
 
 	public static boolean gameStarted = false;
+	public static boolean gameLoaded = false;
+
 	public BordController bordController;
 
 	/**
@@ -60,9 +62,11 @@ public class ServerManager extends Application {
 	public void startGame(ArrayList<Speler> spelerList) {
 		bordController = new BordController(spelerList);
 		gameStarted = true;
+		gameLoaded = false;
 	}
 
 	public void startGame(ArrayList<Speler> spelerList, Tile[][] tiles) {
+		gameLoaded = true;
 		bordController = new BordController(spelerList, tiles);
 		gameStarted = true;
 	}
