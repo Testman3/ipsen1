@@ -52,6 +52,9 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		initGui();
 	}
 
+	/**
+	 * Initialiseert alle grafische elementen
+	 */
 	@Override
 	public void initGui() {
 		mainPane.getStylesheets().add("style.css");
@@ -84,6 +87,10 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 	}
 
+	/**
+	 * Initialiseert de functionaliteit van de grafische elementen
+	 * Zorgt ervoor zodra je de applicatie sluit, dat dit op de correctie manier gebeurd.
+	 */
 	@Override
 	public void initAction() {
 		exit.setOnAction(e -> {
@@ -102,6 +109,10 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		setScoreboard();
 	}
 
+	/**
+	 * Deze functie controleert of de speler gewonnen heeft (speler index 0 in de array) en
+	 * speelt de muziek af die bij de winnaar hoort.
+	 */
 	public void music(){
 		if (controller.getSpelernaam().equals(spelerObj.get(0).getNaam()) && SettingsScene.optieGeluid){
 			turnSound.stop();

@@ -7,12 +7,20 @@ import java.io.Serializable;
  */
 public class TileStump implements Serializable {
 
-	int x;
-	int y;
-	String id;
-	int rotation;
-	Horige horige;
+	private int x;
+	private int y;
+	private String id;
+	private int rotation;
+	private Horige horige;
 
+	/**
+	 * Constructor van TileStump
+	 * @param x x-coordinaat van de tile
+	 * @param y y-coordinaat van de tile
+	 * @param id de css-tileId
+	 * @param rotation de rotatie van de tile
+	 * @param horige
+	 */
 	public TileStump(int x, int y, String id, int rotation, Horige horige){
 		this.x = x;
 		this.y = y;

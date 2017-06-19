@@ -68,27 +68,35 @@ public class LobbyController {
 			return;
 		}
 
-		if (controleerNaam(naam)) {
-			alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
-			naam = "";
-			RMIstub = null;
-			registry = null;
+		if(naam.length() > 20){
 			ableToConnect = false;
-			return;
-		} else if (getRmiStub().isGameStarted()) {
-			ableToConnect = true; //moet weer naar false
-			alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
+			alert = new Alert(AlertType.ERROR, "Deze naam is te lang!", ButtonType.OK);
 			errorSound.play();
 			alert.showAndWait();
 			return;
-		} else if (getRmiStub().getPlayerList().size() == 5) {
-			ableToConnect = false;
-			alert = new Alert(AlertType.ERROR, "De lobby zit vol!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
-			return;
+		} else {
+			if (controleerNaam(naam)) {
+				alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
+				errorSound.play();
+				alert.showAndWait();
+				naam = "";
+				RMIstub = null;
+				registry = null;
+				ableToConnect = false;
+				return;
+			} else if (getRmiStub().isGameStarted()) {
+				ableToConnect = true; //moet weer naar false
+				alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
+				errorSound.play();
+				alert.showAndWait();
+				return;
+			} else if (getRmiStub().getPlayerList().size() == 5) {
+				ableToConnect = false;
+				alert = new Alert(AlertType.ERROR, "De lobby zit vol!", ButtonType.OK);
+				errorSound.play();
+				alert.showAndWait();
+				return;
+			}
 		}
 
 	}
