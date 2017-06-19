@@ -21,8 +21,7 @@ import java.util.regex.Pattern;
 public class LobbyController {
 
 	private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
-
-
+	private Alert alert;
 	private boolean ableToConnect = false;
 
 	public RMIInterface RMIstub;
@@ -35,8 +34,6 @@ public class LobbyController {
 	 * @throws RemoteException RemoteException wordt gegooid wanneer er een fout zit in de verbinding met RMI
 	 */
 	public void connectToServer(String ip, String naam) throws RemoteException {
-
-		Alert alert;
 
 		if (!validateIP(ip)) {
 			alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
@@ -103,7 +100,7 @@ public class LobbyController {
 		try {
 			naamCheck = RMIstub.checkContains(naam);
 		} catch (RemoteException e) {
-
+			System.out.println("Er is een RMI error opgetreden!");
 		}
 		return naamCheck;
 	}

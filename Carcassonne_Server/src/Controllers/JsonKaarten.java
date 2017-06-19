@@ -37,7 +37,6 @@ public class JsonKaarten {
 		// Debugging info (overwrite in future with debugging function)
 		boolean debug = false;
 
-
 		try {
 			// Get file json file (in map json)
 			File reader = new File("lib/alleGoeieKaarten.json");
