@@ -114,10 +114,14 @@ public class TileView extends Pane {
 	public void verwijderHorige() {
 		Platform.runLater(() -> {
 			//getChildren().remove(horigeView);
-			System.out.println("" + this.getChildren());
-			//TODO FIX THIS SHIT
+			try {
+				//System.out.println("" + this.getChildren());
+				//TODO FIX THIS SHIT
 				//this.getChildren().get(0).setId("");
-			this.getChildren().remove(1);
+				this.getChildren().remove(1);
+			}catch (java.lang.IndexOutOfBoundsException e){
+				//Doe niks wanneer de fout wordt opgevangen
+			}
 		});
 		verwijderHorigePreviews();
 	}
