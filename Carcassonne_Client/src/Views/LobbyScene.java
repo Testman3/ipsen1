@@ -203,6 +203,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				controller.getGameStage().setResizable(false);
 				controller.getGameStage().setMinHeight(720);
 				controller.getGameStage().setMinWidth(1280);
+				controller.getGameScene().getVerticaal().setLayoutX(-3850);
+				controller.getGameScene().getVerticaal().setLayoutY(-4250);
 				GameClient client = new GameClient(controller.getGameScene());
 				GameController Gamecontroller = new GameController(client);
 				client.setRmiStub(lobbyController.getRmiStub());
