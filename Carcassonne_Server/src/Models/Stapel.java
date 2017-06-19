@@ -10,35 +10,45 @@ import java.util.Collections;
  */
 public class Stapel {
 
-	ArrayList<Tile> kaartenOver;
+	Tile[] kaartenOver;
 
 	Tile beginTile;
 
 	//De tile die deze beurt getrokken is
 	Tile turnTile;
 
+	int kaartenGepakt = 0;
+
 	public Stapel(){
-		kaartenOver = JsonKaarten.getAllKaarten();
-		beginTile = kaartenOver.get(7);
-		System.out.println(kaartenOver.size());
-		Collections.shuffle(kaartenOver);
+		ArrayList<Tile> kaartenOverList = JsonKaarten.getAllKaarten();
+		Collections.shuffle(kaartenOverList);
+		kaartenOver = new Tile[kaartenOverList.size()];
+		kaartenOver = kaartenOverList.toArray(kaartenOver);
+
+		beginTile = kaartenOverList.get(7);
+		System.out.println(kaartenOverList.size());
 	}
 
 	public Stapel(ArrayList<Tile> kaartenOver){
-		this.kaartenOver = kaartenOver;
-		this.beginTile = kaartenOver.get(7);
-		System.out.println("Saved kaarten over: " + kaartenOver.size());
-		Collections.shuffle(kaartenOver);
+		ArrayList<Tile> kaartenOverList = JsonKaarten.getAllKaarten();
+
+		beginTile = kaartenOverList.get(7);
+		System.out.println(kaartenOverList.size());
+		Collections.shuffle(kaartenOverList);
+		System.out.println("Saved kaarten over: " + kaartenOverList.size());
+
 	}
 
 
 	public int getKaartenOver() {
-		return kaartenOver.size();
+		return kaartenOver.length;
 	}
 
 	public void pakKaart(){
-		turnTile = kaartenOver.get(0);
-		kaartenOver.remove(0);
+		turnTile = kaartenOver[kaartenGepakt];
+		kaartenOver[kaartenGepakt] = null;
+		kaartenGepakt++;
+
 	}
 
 	public Tile getTurnTile() {
