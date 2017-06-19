@@ -15,7 +15,7 @@ import Models.Zijde.ZijdeType;
 public class PuntenTeller {
 
 	/**
-	 * Deze functie berekent punten
+	 * berekent alle mogelijke complete kastelen,kloosters en wegen om een imput tile
 	 *
 	 * @param tile Geef de gewenste tile mee
 	 * @param bord Geef het bord mee
@@ -49,7 +49,8 @@ public class PuntenTeller {
 			}
 		}
 		System.out.println("==============BEREKENEN WEGEN============");
-
+		//Check of de input tile een weg is en of het een kruispunt is, als het een kruispunt is moet je
+		//elke zijde apart berekenen.
 		if (tile.getNoordZijde().getZijde() == ZijdeType.WEG && tile.getNoordZijde().getIsEinde()) {
 			berekenWegen(tile, bord, entryPoint.ZUID);
 		}
@@ -92,7 +93,8 @@ public class PuntenTeller {
 	}
 
 	/**
-	 * Deze functie berekent de punten voor kloosters
+	 * Deze functie berekent of een klooster af is gebouwd (9 tiles om de klooster heen)
+	 * als dit zo is dan krijgt de speler (als hij een horige op het klooster heeft) 9 punten
 	 *
 	 * @param tile Geef de gewenste tile mee
 	 * @param bord Geef het bord mee
@@ -131,7 +133,7 @@ public class PuntenTeller {
 
 
 	/**
-	 * Deze funcite berekent de punten voor wegen
+	 * Berekent een complete weg en houdt alles bij
 	 *
 	 * @param tile Geef de gewenste tile mee
 	 * @param bord Geef het bord mee
@@ -194,14 +196,14 @@ public class PuntenTeller {
 	}
 
 	/**
-	 * Deze functie berekend wat een weg is
-	 *
+	 * Kijkt of er aan de weg een andere weg zit (en of de weg dus een doorlopend geheel is)
+	 * Deze functie mag niet gerunt worden (Alleen via berekenWegen)
 	 * @param tile    Geef de tile mee
 	 * @param bord    Geef het bord mee
 	 * @param netwerk Geef een arraylist van tiles mee
-	 * @param eindes  Geef het aantal eindes mee
+	 * @param horige  geef een arraylist van horige die al in het netwerk zitten mee
 	 */
-	public void berekenWeg(Tile tile, entryPoint entry, Bord bord, ArrayList<Tile> netwerk, ArrayList<Horige> horige) {
+	private void berekenWeg(Tile tile, entryPoint entry, Bord bord, ArrayList<Tile> netwerk, ArrayList<Horige> horige) {
 
 		if (tile == null) {
 			wegRond = false;
@@ -421,6 +423,13 @@ public class PuntenTeller {
 	boolean kasteelRond = true;
 
 	////EINDE BEREKENEN WEGN/////
+
+	/**
+	 * Berekent  en houdt bij kastelen
+	 * @param tile
+	 * @param bord
+	 * @param entry
+	 */
 	public void berekenKastelen(Tile tile, Bord bord, entryPoint entry) {
 		ArrayList<Tile> wegNetwerk = new ArrayList<>();
 		ArrayList<Horige> horigeInNetwerk = new ArrayList<Horige>();
@@ -458,14 +467,14 @@ public class PuntenTeller {
 	}
 
 	/**
-	 * Deze functie berekend wat een weg is
-	 *
+	 * Berekent of er aan de zijdes van een kasteel andere kasteeldelen zitten
+	 * Deze functie mag niet gerunt worden (Alleen via berekenKastelen)
 	 * @param tile    Geef de tile mee
 	 * @param bord    Geef het bord mee
 	 * @param netwerk Geef een arraylist van tiles mee
-	 * @param eindes  Geef het aantal eindes mee
+	 * @param horige  geef een arraylist van horige in het netwerk mee
 	 */
-	public void berekenKasteel(Tile tile, entryPoint entry, Bord bord, ArrayList<Tile> netwerk, ArrayList<Horige> horige) {
+	private void berekenKasteel(Tile tile, entryPoint entry, Bord bord, ArrayList<Tile> netwerk, ArrayList<Horige> horige) {
 
 		if (tile == null) {
 			kasteelRond = false;
@@ -674,6 +683,11 @@ public class PuntenTeller {
 		}
 	}
 
+	/**
+	 * Voegt een tile toe aan het gegeven netwerk
+	 * @param netwerk Het netwerk waar de tile aan toegevoegd moet worden
+	 * @param tile De tile die toegevoegd moet worden.
+	 */
 	public void addToNetwork(ArrayList<Tile> netwerk, Tile tile) {
 		if (tile == null) {
 			return;
@@ -689,6 +703,12 @@ public class PuntenTeller {
 
 	}
 
+	/**
+	 * Voegt de horige toe aan het netwerk
+	 * @param Horige het netwerk waar de horige aan moet worden gegeven
+	 * @param horige De horige die toegevoegd moet worden
+	 * @param tile De tile waar de horige op staat
+	 */
 	public void addHorigeToNetwork(ArrayList<Horige> Horige, Horige horige, Tile tile ) {
 		if (horige == null) {
 			return;
@@ -701,6 +721,12 @@ public class PuntenTeller {
 
 	}
 
+	/**
+	 * Berekent welke speler de meeste horige op een netwerk heeft staan
+ 	 * @param bord
+	 * @param networkHorige het netwerk horige
+	 * @return een lijst van spelers die de punten krijgen (meerdere als ze evenveel horige hebben) 
+	 */
 	public ArrayList<Speler> calculateplayerWithMostHorige(Bord bord, ArrayList<Horige> networkHorige) {
 		ArrayList<Speler> alleSpelers = bord.getAlleSpelers();
 		spelerToHorige[] spelersToHorigen = new spelerToHorige[alleSpelers.size()];
