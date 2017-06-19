@@ -92,7 +92,9 @@ public class FileManager {
 					// Midden zijde
 					if(alleTiles[X][Y].getMiddenZijde() != null) {
 						kaarten.put("middenZijde", alleTiles[X][Y].getMiddenZijde().getZijde().toString());
-						kaarten.put("middenZijdeHorigePos", alleTiles[X][Y].getMiddenZijde().getHorigeSpeler().getPositieString());
+						if(alleTiles[X][Y].getMiddenZijde().getHorigeSpeler() != null) {
+							kaarten.put("middenZijdeHorigePos", alleTiles[X][Y].getMiddenZijde().getHorigeSpeler().getPositieString());
+						}
 					} else {
 						kaarten.put("middenZijde", false);
 						kaarten.put("middenZijdeHorige", false);

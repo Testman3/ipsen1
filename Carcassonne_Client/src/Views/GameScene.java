@@ -63,8 +63,7 @@ public class GameScene extends Scene {
 
 	private double xOffset;
 	private double yOffset;
-
-
+	
 	/**
 	 * Constructor van de GameScene
 	 *
@@ -119,7 +118,6 @@ public class GameScene extends Scene {
 
 		//setup Menubutton
 		menuButton.setAlignment(Pos.BOTTOM_CENTER);
-
 
 		//Size BorderPane
 		mainPane.setPrefSize(1280, 720);
@@ -197,7 +195,7 @@ public class GameScene extends Scene {
 
 	}
 
-	public void initAction() {
+	private void initAction() {
 
 		draaiButton.setOnAction(e -> {
 			gameController.klikDraaiKaart();
@@ -218,7 +216,6 @@ public class GameScene extends Scene {
 
 	/**
 	 * Creates the tile grid in the game client
-	 *
 	 * @param sizeX the x size of the grid (x amount of tiles)
 	 * @param sizeY the y size of the grid (y amount of tiles)
 	 */
@@ -341,7 +338,6 @@ public class GameScene extends Scene {
 
 	/**
 	 * Deze functie plaatst de kaart
-	 *
 	 * @param client Placeholder
 	 * @param x      x co-ordinaat
 	 * @param y      y co-ordinaat
@@ -361,6 +357,9 @@ public class GameScene extends Scene {
 
 	}
 
+	/**
+	 * Deze functie zorgt ervoor dat de grijze preview horigen verwijderd worden wanneer aangeroepen
+	 */
 	public void verwijdwerHorigePreviews() {
 		tileViews[laatstGeplaatstLocatie.getX()][laatstGeplaatstLocatie.getY()].verwijderHorigePreviews();
 	}
@@ -377,6 +376,13 @@ public class GameScene extends Scene {
 			ShowKaart.setId(client.kaartPlaatsId);
 	}
 
+	/**
+	 * Deze functie verwijderd de zichbare horige van de tile wanneer aangeroepen
+	 * @param x
+	 * x co-ordinaat van de horige
+	 * @param y
+	 * y co-ordinaat van de horige
+	 */
 	public void removeHorige(int x, int y) {
 		tileViews[x][y].verwijderHorige();
 	}
@@ -395,7 +401,6 @@ public class GameScene extends Scene {
 
 	/**
 	 * Deze functie zorgt ervoor dat de view wordt geüpdatet
-	 *
 	 * @param client Geef GameClient mee
 	 */
 	public void updateView(GameClient client) {
@@ -440,25 +445,37 @@ public class GameScene extends Scene {
 		});
 	}
 
+	/**
+	 * Deze functie maakt het mogelijk om de menucontroller op te halen
+	 * @return
+	 * MenuController
+	 */
 	public MenuController getController() {
 		return controller;
 	}
 
+	/**
+	 * Maakt de scene blurry wanneer het ingame menu zichtbaar is
+	 */
 	public void setSceneBlur() {
 		GaussianBlur blur = new GaussianBlur();
 		this.mainPane.setEffect(blur);
 		tilesPane.setEffect(blur);
 	}
 
+	/**
+	 * Verbergt de blur wanneer het ingame menu weer gesloten is
+	 */
 	public void hideSceneBlur() {
 		this.mainPane.setEffect(null);
 		tilesPane.setEffect(null);
 	}
 
-	public void setPlayerBeurtKleur() {
-
-	}
-
+	/**
+	 * Deze functie stelt de horigekleur in de ui in afhankelijk van welke speler je betn
+	 * @param spelerNummer
+	 * Geef het spelernummer mee om de kleur te kunnen bepalen
+	 */
 	public void setHorigeKleur(int spelerNummer){
 		switch (spelerNummer) {
 			case 0:
@@ -485,23 +502,13 @@ public class GameScene extends Scene {
 	}
 
 	/**
-	 * Deze functie zorgt ervoor dat een horige de used texture gebruikt in de ui wanneer hij is geplaatst
+	 * Deze functie laat het programma wisselen tussen fullscreen en windowed mode
 	 */
-//	public void setHorigeUsed(){
-//		for (int i = 0; i < 7; i++){
-//			if (!horigeViews[i].getId().equals("horigeUsed")){
-//				horigeViews[i].setId("horigeUsed");
-//				break;
-//			}
-//		}
-//	}
-
-
 	public void switchFullScreenMode(){
 		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 		controller.getGameStage().setFullScreenExitHint(null);
 		controller.getGameStage().setFullScreen(SettingsScene.optieFullscreen);
-		if (SettingsScene.optieFullscreen == true){
+		if (SettingsScene.optieFullscreen){
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			double schermBreedte = screenSize.getWidth();
 			double schermHoogte = screenSize.getHeight();
@@ -520,12 +527,9 @@ public class GameScene extends Scene {
 	 * Deze functie zorgt ervoor dat de horigen in de UI worden geüpdatet aan de hand van
 	 * hoeveel je er tot je beschikking hebt
 	 * @param client
-	 * Geef de GameClient mee
+	 * Geef de GameClient mee om het aantal beschikbare horigen op te kunnen haleb
 	 */
 	public void updateHorigenInUi(GameClient client){
-		//////////////////////////////////////////////////////////////////////////////////////
-		//Switch om horigen weer te geven in de ui											//
-		//////////////////////////////////////////////////////////////////////////////////////
 		int horigenSwitch = (client.getAantalHorigeBeschikbaar());
 		//System.out.println("Case: " + horigenSwitch + " horigen om neer te zetten");
 
@@ -604,19 +608,5 @@ public class GameScene extends Scene {
 				break;
 		}
 
-
-//
-//		if (client.getAantalHorigeBeschikbaar() > tempHorigenBeschikbaar){
-//			for(int i = 0; i < (horigeViews.length) ; i++){
-//				if (horigeViews[i].getId().equals("horigeUsed") && !firstRun){
-//					horigeViews[i].setId(spelerKleur);
-//					i = horigeViews.length;
-//
-//				}
-//				firstRun = false;
-//			}
-//
-//		}
-//		tempHorigenBeschikbaar = client.getAantalHorigeBeschikbaar();
 	}
 }
