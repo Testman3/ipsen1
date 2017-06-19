@@ -239,7 +239,7 @@ public class FileManager {
 			boolean zuidEinde  = (boolean) jsonNumber.get("zuidEinde");
 			boolean westEinde  = (boolean) jsonNumber.get("westEinde");
 			// Rotation
-			int rotation = ((Number)jsonNumber.get("y")).intValue();
+			int rotation = ((Number)jsonNumber.get("rotation")).intValue();
 			// Imageid
 			String imageId = (String) jsonNumber.get("imageId");
 			// Heeft klooster

@@ -68,7 +68,19 @@ public class GameClient {
 				}
 			}
 		});
+		try {
+			if(RmiStub.getLoadedGame()) {
+                try {
+                    view.loadAlleTiles(getTileLoad());
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		gameThread.start();
+
 	}
 
 	/**
@@ -149,7 +161,6 @@ public class GameClient {
 	public void plaatsHorige(Horige.Posities posities) {
 		try {
 			RmiStub.plaatsHorige(posities);
-			getGameScene().setHorigeUsed();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -236,6 +247,15 @@ public class GameClient {
 	public TileStump getTile() throws RemoteException {
 		try {
 			return RmiStub.getPlacedKaart();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public TileStump[] getTileLoad() throws RemoteException {
+		try {
+			return RmiStub.getPlacedKaartList();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

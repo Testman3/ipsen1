@@ -17,6 +17,8 @@ public class Bord {
 
 	private Tile laatstGeplaatst;
 
+	public ArrayList<Tile> placedTiles;
+
 	private boolean debug = false;
 
 	private int gameBeurt = 1;
@@ -172,6 +174,21 @@ public class Bord {
 		System.out.println("=========================== CHEAT KAART GEPLAATST OP X 5 Y 5 ");
 	}
 
+	public void plaatsLoadKaart(Tile[][] tiles){
+		placedTiles = new ArrayList<Tile>();
+		for(int x = 0; 100 > x; x++){
+			for(int y = 0; 100 > y; y++){
+				if(tiles[x][y] != null) {
+					System.out.println("Zien Tiles: " + alleTiles[x][y].getX());
+					alleTiles[x][y] = tiles[x][y];
+					laatstGeplaatst = tiles[x][y];
+					tiles[x][y].plaats(tiles[x][y].getX(), tiles[x][y].getY());
+					placedTiles.add(tiles[x][y]);
+				}
+			}
+		}
+	}
+
 	/**
 	 * Checkt of de kaart past op de plek waar de speler hem wil plaatsen
 	 *
@@ -265,4 +282,8 @@ public class Bord {
 	}
 
 	public ArrayList<Point> getVerwijderHorigeDezeRonde() { return verwijderHorigeDezeRonde;}
+
+	public ArrayList<Tile> getPlacedTiles(){
+		return this.placedTiles;
+	}
 }

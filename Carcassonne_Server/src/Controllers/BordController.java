@@ -30,7 +30,17 @@ public class BordController {
 		puntenTeller = new PuntenTeller();
 		kaartenStapel = new Stapel();
 		bord = new Bord(spelerList, tiles);
-		bord.plaatsKaartCheat(5,5,kaartenStapel.getBeginTile());
+		System.out.println("VUL BORD");
+		bord.plaatsLoadKaart(tiles);
+//		for(int x = 0; 100 < x; x++){
+//			for(int y = 0; 100 < y; y++){
+//				if(tiles[x][y].getImageID() != null) {
+//					System.out.println("Zien Tiles: " + tiles[x][y].getX());
+//					tiles[x][y] = tiles[x][y];
+//					bord.plaatsKaartCheat(tiles[x][y].getX(),tiles[x][y].getY(),tiles[x][y]);
+//				}
+//			}
+//		}
 	}
 
 	/**
