@@ -389,6 +389,9 @@ public class GameScene extends Scene {
 			System.out.println("tileStump[i].getRotation() = " + tileStump[i].getRotation());
 			tileViews[tileStump[i].getX()][tileStump[i].getY()].setRotation(tileStump[i].getRotation());
 			tileViews[tileStump[i].getX()][tileStump[i].getY()].setKaartId(tileStump[i].getId());
+			if(tileStump[i].getGeplaatsteHorige() != null){
+				tileViews[tileStump[i].getX()][tileStump[i].getY()].plaatsHorige(tileStump[i].getGeplaatsteHorige());
+			}
 			addTilePreviews(tileStump[i].getX(), tileStump[i].getY());
 		}
 	}
