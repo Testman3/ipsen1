@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -40,7 +39,7 @@ public class JsonKaarten {
 
 		try {
 			// Get file json file (in map json)
-			File reader = new File("lib/alleGoeieKaarten.json");
+			File reader = new File("json/alleGoeieKaarten.json");
 			System.out.println(reader.getAbsolutePath());
 			obj = parser.parse(new FileReader(reader));
 		} catch (FileNotFoundException e) {
