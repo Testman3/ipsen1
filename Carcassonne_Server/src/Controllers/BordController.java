@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class BordController {
 
-	private PuntenTeller puntenTeller;
+	PuntenTeller puntenTeller;
 	public Stapel kaartenStapel;
 	public Bord bord;
 	private boolean gameVoorbij = false;
@@ -133,7 +133,7 @@ public class BordController {
 		}
 	}
 
-	private void volgendeBeurt() {
+	public void volgendeBeurt() {
 		puntenTeller.BerekenPunten(kaartenStapel.getTurnTile(), bord);
 		bord.geefSpelerBeurt();
 		isGameVoorbij();
@@ -145,7 +145,7 @@ public class BordController {
 		}
 
 	}
-	private void isGameVoorbij() {
+	public void isGameVoorbij() {
 		if(kaartenStapel.getKaartenOver() == 0){
 			gameVoorbij = true;
 		}
