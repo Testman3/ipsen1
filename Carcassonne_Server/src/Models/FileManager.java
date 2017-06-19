@@ -16,7 +16,11 @@ public class FileManager {
 		this.manager = manager;
 	}
 
-	//Maak JSON object aan van save game
+	/**
+	 * Maak JSON object aan van save game
+	 * @param String fileName
+	 * Geef het path van de safe file mee in de vorm van een String
+	 */
 	public File saveGame(String naam) {
 		//JSON OB - save all data inside
 		JSONObject object = new JSONObject();
@@ -29,6 +33,10 @@ public class FileManager {
 		return createFile(naam, object);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	private JSONArray saveAlleSpelersJSON(){
 		JSONArray spelerInJSON = new JSONArray();
 		// Get alle Spelers
@@ -45,6 +53,10 @@ public class FileManager {
 		return spelerInJSON;
 	}
 
+	/**
+	 * alle kaarten op het bord convert naar JSON array
+	 * @return Json array met alle kaarten op het bord
+	 */
 	private JSONArray saveAlleKaartenJSON() {
 		Tile[][] alleTiles = manager.bordController.bord.getAlleTiles();
 		JSONArray alleKaartenBijElkaar = new JSONArray();
@@ -123,6 +135,10 @@ public class FileManager {
 		return alleKaartenBijElkaar;
 	}
 
+	/**
+	 * stapel kaarten naar json converten
+	 * @return Return stapel in json vorm (JSONArray)
+	 */
 	private JSONArray saveStapelKaartenJSON(){
 		JSONArray stapelKaartenJSON = new JSONArray();
 		ArrayList<Tile> currentStapel = manager.bordController.kaartenStapel.kaartenOver;
@@ -165,6 +181,11 @@ public class FileManager {
 		return stapelKaartenJSON;
 	}
 
+	/**
+	 * Maak file aan van met een JSONobject erin
+	 * @param String file name, JSONObject object
+	 * @return Return file met JSON erin
+	 */
 	public File createFile(String naam, JSONObject object){
 
 		try {
@@ -187,6 +208,11 @@ public class FileManager {
 		return null;
 	}
 
+	/**
+	 * Laden file en return JSONObject
+	 * @param File load json file
+	 * @return Return JSONObject
+	 */
 	private static JSONObject loadGame(File load) {
 		System.out.println("Load Game");
 
@@ -217,6 +243,11 @@ public class FileManager {
 		return (JSONObject) obj;
 	}
 
+	/**
+	 * lezen file en maak tile kaarten
+	 * @param File json file
+	 * @return return Tile[][]
+	 */
 	public static Tile[][] loadBordKaartenJSON(File load){
 		JSONObject jsonObject = loadGame(load);
 
@@ -364,6 +395,11 @@ public class FileManager {
 		return allLoadedTiles;
 	}
 
+	/**
+	 * JSONArray
+	 * @param JSONArray JSONSpelers (spelers in JSON format)
+	 * @return return ArrayList Speler
+	 */
 	public static ArrayList<Speler> getAlleSpelers(JSONArray JSONSpelers){
 		ArrayList<Speler> alleSpelers = new ArrayList<>();
 		for(Object number : JSONSpelers) {
@@ -380,6 +416,11 @@ public class FileManager {
 		return alleSpelers;
 	}
 
+	/**
+	 * JSONArray
+	 * @param File JSONSpelers in een file (spelers in JSON format)
+	 * @return return ArrayList Speler
+	 */
 	public static ArrayList<Speler> loadAlleSpelersJSON(File load){
 		JSONObject jsonObject = loadGame(load);
 
@@ -398,60 +439,6 @@ public class FileManager {
 			alleSpelers.add(new Speler(naam,punten,beurt,beschHorige,gebrHorige));
 		}
 		return alleSpelers;
-	}
-
-	//Test voor spelerlijst(load)
-	public static void System(ArrayList<Speler> spelerlijst) {
-		for (int j = 0; j < spelerlijst.size(); j++) {
-			System.out.println("Naam: " + spelerlijst.get(j).getNaam());
-			System.out.println("Punten: " + spelerlijst.get(j).getPunten());
-			System.out.println("beurt: " + spelerlijst.get(j).getBeurt());
-			System.out.println();
-		}
-	}
-
-	//Return JsonObject met alle spel data TEST!!! (maken file met alle spelers) - niet nodig maar handig voor later
-	public static JSONObject getAll() {
-
-		//Aanmaken van spelerlijst voor test
-		ArrayList<Speler> spelerlijst = new ArrayList<Speler>();
-
-		//Toevoegen Spelers voor test
-		spelerlijst.add(new Speler("Raymon", false, 100));
-		spelerlijst.add(new Speler("Henk", false, 120));
-		spelerlijst.add(new Speler("Justin", false, 140));
-		spelerlijst.add(new Speler("Haitam", false, 160));
-		spelerlijst.add(new Speler("Martijn", true, 180));
-
-		//Json objecten
-		JSONObject gameData = new JSONObject();
-
-		JSONArray Spelers = new JSONArray();
-
-
-		//loop voor toevoegen spelers van spelerlijst
-		for (int i = 0; i < spelerlijst.size(); i++) {
-
-			JSONObject Speler = new JSONObject();
-
-			//toevoegen spelernaam  aan Speler json object
-			Speler.put("Spelernaam", spelerlijst.get(i).getNaam());
-
-			//toevoegen Punten  aan Speler json object
-			Speler.put("Punten", spelerlijst.get(i).getPunten());
-
-			//toevoegen Beurt aan Speler json object
-			Speler.put("Beurt", spelerlijst.get(i).getBeurt());
-
-			//toevoegen aan Array
-			Spelers.add(Speler);
-		}
-
-		//Array spelers toevoegen aan object voor print
-		gameData.put("Spelers", Spelers);
-
-		//Jsonobject return
-		return gameData;
 	}
 
 }
