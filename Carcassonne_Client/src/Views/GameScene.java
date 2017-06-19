@@ -60,6 +60,7 @@ public class GameScene extends Scene {
 	private String spelerKleur;
 	private int tempHorigenBeschikbaar = 7;
 	private boolean firstRun = true;
+	private VBox verticaal;
 
 	private double xOffset;
 	private double yOffset;
@@ -84,6 +85,9 @@ public class GameScene extends Scene {
 		init();
 	}
 
+	/**
+	 * Initialiseert de grafische elementen van de scene
+	 */
 	private void init() {
 		// new shit
 		mainPane = new BorderPane();
@@ -222,7 +226,7 @@ public class GameScene extends Scene {
 	 */
 	private void createTileGrid(int sizeX, int sizeY) {
 		tileViews = new TileView[sizeX][sizeY];
-		VBox verticaal = new VBox();
+		verticaal = new VBox();
 		for (int y = 0; y < sizeY; y++) {
 			HBox horizontal = new HBox();
 			verticaal.getChildren().add(horizontal);
@@ -263,7 +267,7 @@ public class GameScene extends Scene {
 		});
 
 		//Zoom Functie(Scrol event)
-		tilesPane.setOnScroll(e -> {
+		verticaal.setOnScroll(e -> {
 			System.out.println("Werkt");
 			e.consume();
 
@@ -356,6 +360,9 @@ public class GameScene extends Scene {
 
 	}
 
+	/**
+	 * Deze functie verwijdert de horige previews op 't moment dat een horige is geplaatst.
+	 */
 	public void verwijdwerHorigePreviews() {
 		tileViews[laatstGeplaatstLocatie.getX()][laatstGeplaatstLocatie.getY()].verwijderHorigePreviews();
 	}
@@ -372,6 +379,11 @@ public class GameScene extends Scene {
 			ShowKaart.setId(client.kaartPlaatsId);
 	}
 
+	/**
+	 * Verwijdert de horige van het speelveld op 't moment dat er punten verdient zijn.
+	 * @param x	x-coordinaat op de tile van horige
+	 * @param y	y-coordinaat op de tile van horige
+	 */
 	public void removeHorige(int x, int y) {
 		tileViews[x][y].verwijderHorige();
 	}
@@ -379,6 +391,10 @@ public class GameScene extends Scene {
 	private int kaartenOver = 0;
 	private ArrayList<Speler> alleSpelers = null;
 
+	/**
+	 * Laadt alle tiles
+	 * @param tileStump Array van tiles
+	 */
 	public void loadAlleTiles(TileStump[] tileStump){
 		for (int i = 0; i < tileStump.length; i++) {
 			System.out.println("tileStump[i].getRotation() = " + tileStump[i].getRotation());
@@ -442,21 +458,28 @@ public class GameScene extends Scene {
 		return controller;
 	}
 
+	/**
+	 * Zet de gamescene in een blur, op het moment dat het pauze menu wordt geopend.
+	 */
 	public void setSceneBlur() {
 		GaussianBlur blur = new GaussianBlur();
 		this.mainPane.setEffect(blur);
 		tilesPane.setEffect(blur);
 	}
 
+	/**
+	 *  Haalt de blur uit de gamescene weer weg, op 't moment dat het pauze menu wordt gesloten.
+	 */
 	public void hideSceneBlur() {
 		this.mainPane.setEffect(null);
 		tilesPane.setEffect(null);
 	}
 
-	public void setPlayerBeurtKleur() {
 
-	}
-
+	/**
+	 * Geeft spelers een horige kleur
+	 * @param spelerNummer Specifieke speler
+	 */
 	public void setHorigeKleur(int spelerNummer){
 		switch (spelerNummer) {
 			case 0:
@@ -482,6 +505,9 @@ public class GameScene extends Scene {
 		}
 	}
 
+	/**
+	 *  Switcht naar volledig scherm
+	 */
 	public void switchFullScreenMode(){
 		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 		controller.getGameStage().setFullScreenExitHint(null);
@@ -512,7 +538,6 @@ public class GameScene extends Scene {
 		//Switch om horigen weer te geven in de ui											//
 		//////////////////////////////////////////////////////////////////////////////////////
 		int horigenSwitch = (client.getAantalHorigeBeschikbaar());
-		//System.out.println("Case: " + horigenSwitch + " horigen om neer te zetten");
 
 		switch(horigenSwitch){
 			case 0:
@@ -589,5 +614,9 @@ public class GameScene extends Scene {
 				break;
 		}
 
+	}
+
+	public VBox getVerticaal() {
+		return verticaal;
 	}
 }

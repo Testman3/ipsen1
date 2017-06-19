@@ -28,6 +28,10 @@ public class ServerManager extends Application {
 
 	FileManager fileManager;
 
+	/**
+	 * Dit is de main methode :)
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -59,18 +63,37 @@ public class ServerManager extends Application {
 		}
 	}
 
+	/**
+	 * Deze functie maakt een nieuwe BordController aan en zet de gameStarted op true
+	 * @param spelerList
+	 * Geef een arrayList mee met speler objecten.
+	 */
 	public void startGame(ArrayList<Speler> spelerList) {
 		bordController = new BordController(spelerList);
 		gameStarted = true;
 		gameLoaded = false;
 	}
 
+	/**
+	 * Deze Functie maakt een nieuwe bordController aan en zet gameStarted en gameLoaded op true
+	 * @param spelerList
+	 * Geef een arrayList mee met speler objecten.
+	 * @param tiles
+	 * Geef een 2-dimensionale array mee met de type Tile.
+	 */
 	public void startGame(ArrayList<Speler> spelerList, Tile[][] tiles) {
 		gameLoaded = true;
 		bordController = new BordController(spelerList, tiles);
 		gameStarted = true;
 	}
 
+	/**
+	 * Deze functie laat de applicatie zien.
+	 * @param primaryStage
+	 * Geef een Stage mee.
+	 * @throws Exception
+	 * Weten we niet
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 

@@ -24,7 +24,7 @@ public class BordController {
 		puntenTeller = new PuntenTeller();
 		kaartenStapel = new Stapel();
 		bord = new Bord(spelerList);
-		bord.plaatsKaartCheat(5,5,kaartenStapel.getBeginTile());
+		bord.plaatsKaartCheat(50,50,kaartenStapel.getBeginTile());
 	}
 
 	public BordController(ArrayList<Speler> spelerList, Tile[][] tiles){

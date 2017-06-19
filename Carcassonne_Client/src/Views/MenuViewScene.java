@@ -93,7 +93,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		// wanneer je op de handleiding knop drukt wordt het html doc geopend
 		// in het default programma voor het openen van .html
 
-		File handleidingDoc = new File("Handleiding.html");
+		File handleidingDoc = new File("lib/Handleiding.html");
 		knoppen[2].setText("Spelregels");
 		knoppen[2].setOnAction(e -> {
 			try {
