@@ -119,6 +119,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 	public void initAction() {
 
+		//Action voor de Start Game knop
 		startGame.setOnAction(e -> {
 			try {
 				if(controller.loadedFile == null) {
@@ -128,10 +129,11 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				}
 
 			} catch (RemoteException e1) {
-				e1.printStackTrace();
+				System.out.println("Er ging iets mis met de RMI verbinding!");
 			}
 		});
 
+		//Action voor de Leave Game knop
 		leaveGame.setOnAction(e -> {
 
 			try {
@@ -159,17 +161,14 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		lobbyThread = new Thread(() -> {
 			while (enableThread == true) {
 				Update();
-				System.out.println("Running...");
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
 					System.out.println("Thread Interrupted Exception");
 				}
 			}
 		});
 		lobbyThread.start();
-
 	}
 
 	private boolean starten = false;
@@ -179,8 +178,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	 */
 	private void Update() {
 		allenamen = new ArrayList<String>();
-		int playerNummer;
-
 		try {
 			allenamen = lobbyController.RMIstub.getPlayerList();
 			if (lobbyController.RMIstub.isGameStarted()) {

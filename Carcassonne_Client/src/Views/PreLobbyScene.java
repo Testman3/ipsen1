@@ -90,9 +90,12 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 
 	@Override
 	public void initAction() {
+		//Action voor de Terug naar Hoogdmenu knop
 		backToHome.setOnAction(e -> {
 			controller.backToMainMenu();
 		});
+
+		//Action voor de Join game knop
 		addPlayer.setOnAction((ActionEvent e) -> {
 			try {
 				lobbyController.connectToServer(ipVeld.getText(), naamVeld.getText());
