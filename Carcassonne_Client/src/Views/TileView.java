@@ -1,6 +1,7 @@
 package Views;
 
 import Models.Horige;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -112,7 +113,10 @@ public class TileView extends Pane {
 
 	public void verwijderHorige() {
 		Platform.runLater(() -> {
-			getChildren().remove(horigeView);
+			//getChildren().remove(horigeView);
+			System.out.println("" + this.getChildren());
+			//TODO FIX THIS SHIT
+				this.getChildren().get(0).setId("");
 		});
 		verwijderHorigePreviews();
 	}
