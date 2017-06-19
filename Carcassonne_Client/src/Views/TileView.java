@@ -104,7 +104,7 @@ public class TileView extends Pane {
 			horigeView.setId(horige.getSpeler().getHorigeKleur());
 			horigeView.setFitHeight(20);
 			horigeView.setFitWidth(20);
-			getChildren().add(horigeView);
+			getChildren().add( horigeView);
 			horigeView.setLayoutX(horige.getPositie().getX());
 			horigeView.setLayoutY(horige.getPositie().getY());
 			System.out.println("Dit wordt gerunt!");
@@ -116,7 +116,8 @@ public class TileView extends Pane {
 			//getChildren().remove(horigeView);
 			System.out.println("" + this.getChildren());
 			//TODO FIX THIS SHIT
-				this.getChildren().get(0).setId("");
+				//this.getChildren().get(0).setId("");
+			this.getChildren().remove(1);
 		});
 		verwijderHorigePreviews();
 	}
