@@ -92,7 +92,9 @@ public class FileManager {
 					// Midden zijde
 					if(alleTiles[X][Y].getMiddenZijde() != null) {
 						kaarten.put("middenZijde", alleTiles[X][Y].getMiddenZijde().getZijde().toString());
-						kaarten.put("middenZijdeHorigePos", alleTiles[X][Y].getMiddenZijde().getHorigeSpeler().getPositieString());
+						if(alleTiles[X][Y].getMiddenZijde().getHorigeSpeler() != null) {
+							kaarten.put("middenZijdeHorigePos", alleTiles[X][Y].getMiddenZijde().getHorigeSpeler().getPositieString());
+						}
 					} else {
 						kaarten.put("middenZijde", false);
 						kaarten.put("middenZijdeHorige", false);
@@ -118,40 +120,39 @@ public class FileManager {
 					kaarten.put("horigePosities", JSONHorigeArr);
 					alleKaartenBijElkaar.add(kaarten);
 				}
-			}
-		}
+			}		}
 		return alleKaartenBijElkaar;
 	}
 
 	private JSONArray saveStapelKaartenJSON(){
 		JSONArray stapelKaartenJSON = new JSONArray();
-		ArrayList<Tile> currentStapel = manager.bordController.kaartenStapel.kaartenOver;
+		Tile[] currentStapel = manager.bordController.kaartenStapel.kaartenOver;
 
-		for(int i = 0; i < currentStapel.size(); i++){
+		for(int i = 0; i < currentStapel.length; i++){
 			JSONObject kaart = new JSONObject();
 
 			// Zijdes
 			// Noord
-			kaart.put("noordZijde", currentStapel.get(i).getNoordZijde().getZijde().toString());
-			kaart.put("noordEinde", currentStapel.get(i).getNoordZijde().isEinde());
+			kaart.put("noordZijde", currentStapel[i].getNoordZijde().getZijde().toString());
+			kaart.put("noordEinde", currentStapel[i].getNoordZijde().isEinde());
 			// Oost
-			kaart.put("oostZijde", currentStapel.get(i).getOostZijde().getZijde().toString());
-			kaart.put("oostEinde", currentStapel.get(i).getOostZijde().isEinde());
+			kaart.put("oostZijde", currentStapel[i].getOostZijde().getZijde().toString());
+			kaart.put("oostEinde", currentStapel[i].getOostZijde().isEinde());
 			// Zuid
-			kaart.put("zuidZuid", currentStapel.get(i).getZuidZijde().getZijde().toString());
-			kaart.put("zuidZuid", currentStapel.get(i).getZuidZijde().isEinde());
+			kaart.put("zuidZuid", currentStapel[i].getZuidZijde().getZijde().toString());
+			kaart.put("zuidZuid", currentStapel[i].getZuidZijde().isEinde());
 			// West
-			kaart.put("westZuid", currentStapel.get(i).getWestZijde().getZijde().toString());
-			kaart.put("westZuid", currentStapel.get(i).getWestZijde().isEinde());
+			kaart.put("westZuid", currentStapel[i].getWestZijde().getZijde().toString());
+			kaart.put("westZuid", currentStapel[i].getWestZijde().isEinde());
 			// Heeft klooster
-			kaart.put("heeftKlooster", currentStapel.get(i).getHeeftKlooster());
+			kaart.put("heeftKlooster", currentStapel[i].getHeeftKlooster());
 			// Heeft bonus
-			kaart.put("heeftBonus", currentStapel.get(i).getHeeftBonus());
+			kaart.put("heeftBonus", currentStapel[i].getHeeftBonus());
 			// Image id
-			kaart.put("image_id", currentStapel.get(i).getImageID());
+			kaart.put("image_id", currentStapel[i].getImageID());
 
 			// Horige Positie (enum to string)
-			Horige.Posities[] horigePosities = currentStapel.get(i).getHorigenZijdes();
+			Horige.Posities[] horigePosities = currentStapel[i].getHorigenZijdes();
 			JSONArray JSONHorigeArr = new JSONArray();
 
 			for(int h = 0; h < horigePosities.length; h++){
