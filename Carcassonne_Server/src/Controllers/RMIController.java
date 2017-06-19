@@ -128,6 +128,28 @@ public class RMIController implements RMIInterface {
 		);
 	}
 
+	//
+	public TileStump[] getPlacedKaartList() throws RemoteException {
+		ArrayList<Tile> tile = serverManager.bordController.bord.getPlacedTiles();
+		TileStump[] tileStumpLoad = new TileStump[tile.size()];
+		for (int i = 0; i < tile.size(); i++) {
+			tileStumpLoad[i] = new TileStump(
+					tile.get(i).getX(),
+					tile.get(i).getY(),
+					tile.get(i).getKaartId(),
+					tile.get(i).getRotation(),
+					tile.get(i).getGeplaatsteHorigePositie()
+			);
+		}
+		return tileStumpLoad;
+	}
+
+	public boolean getLoadedGame(){
+		return ServerManager.gameLoaded;
+	}
+
+
+
 	@Override
 	public int getBeurt() throws RemoteException {
 		return serverManager.bordController.bord.gameBeurt();

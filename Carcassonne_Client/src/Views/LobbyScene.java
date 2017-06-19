@@ -205,8 +205,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				controller.getGameStage().setMinWidth(1280);
 				GameClient client = new GameClient(controller.getGameScene());
 				GameController Gamecontroller = new GameController(client);
-				client.Join(controller.getSpelernaam());
 				client.setRmiStub(lobbyController.getRmiStub());
+				client.Join(controller.getSpelernaam());
 				controller.getGameScene().gameController = Gamecontroller;
 				InGameMenuStage inGameMenuStage = new InGameMenuStage(controller, controller.getGameScene(), client);
 				controller.putIngameMenuInController(inGameMenuStage);

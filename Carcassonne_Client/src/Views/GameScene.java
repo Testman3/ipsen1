@@ -384,6 +384,15 @@ public class GameScene extends Scene {
 	int kaartenOver = 0;
 	ArrayList<Speler> alleSpelers = null;
 
+	public void loadAlleTiles(TileStump[] tileStump){
+		for (int i = 0; i < tileStump.length; i++) {
+			System.out.println("tileStump[i].getRotation() = " + tileStump[i].getRotation());
+			tileViews[tileStump[i].getX()][tileStump[i].getY()].setRotation(tileStump[i].getRotation());
+			tileViews[tileStump[i].getX()][tileStump[i].getY()].setKaartId(tileStump[i].getId());
+			addTilePreviews(tileStump[i].getX(), tileStump[i].getY());
+		}
+	}
+
 	/**
 	 * Deze functie zorgt ervoor dat de view wordt geüpdatet
 	 *
