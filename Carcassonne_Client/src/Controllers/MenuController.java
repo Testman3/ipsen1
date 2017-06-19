@@ -41,7 +41,6 @@ public class MenuController {
 		int breedte = 1280;
 		int hoogte = 720;
 
-		//Als je os windows is wordt de grootte van het gamevenster iets aangepast, zodat de ui goed wordt weergegeven
 		if (System.getProperty("os.name").toLowerCase().contains("windows")){
 			breedte = 1260;
 			hoogte = 710;
@@ -57,6 +56,7 @@ public class MenuController {
 		creditsScene = new CreditsScene(this);
 
 		setMenuViewScene();
+		//setGameScene();
 		gameStage.setTitle("Carcassonne");
 		gameStage.getIcons().add(new Image("Afbeeldingen/gameIcon.png"));
 		gameStage.show();
@@ -102,6 +102,7 @@ public class MenuController {
 	 * Deze functie switcht de scene naar de gameScene
 	 */
 	public void setGameScene(){
+		//TODO bereken hier de hoogte en breedte afhankelijk van operating system
 		gameStage.setScene(gameScene);
 		if(SettingsScene.optieFullscreen) {
 			gameStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -118,6 +119,9 @@ public class MenuController {
 			}
 
 		}
+
+	//	gameStage.setFullScreen(SettingsScene.optieFullscreen);
+
 
 	/**
 	 * Deze functie switcht de scene naar de lobbyscene
@@ -255,10 +259,8 @@ public class MenuController {
 	 */
 	public File openFileBrowser(){
 		FileChooser fileChooser = new FileChooser();
-
 		//title of window
 		fileChooser.setTitle("Laadgame");
-
 		//extension filter json
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Carcassonne", "*.json"));
 

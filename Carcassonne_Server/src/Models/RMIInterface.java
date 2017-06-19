@@ -193,15 +193,6 @@ public interface RMIInterface extends Remote {
 
 	public void leaveGame(String naam) throws RemoteException;
 
-	/**
-	 * Deze functie geeft het aantal beschikbare horigen terug
-	 * @param naam
-	 * Geef de spelernaam bezig
-	 * @return
-	 * Geeft een int terug met de aantal beschikbare horigen
-	 * @throws RemoteException
-	 * RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
-	 */
 	public int getAvailableHorige(String naam) throws RemoteException;
 }
 
