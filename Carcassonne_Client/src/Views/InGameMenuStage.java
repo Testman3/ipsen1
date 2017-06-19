@@ -210,7 +210,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 		});
 
 		//Handleiding
-        File handleidingDoc = new File("Handleiding.html");
+        File handleidingDoc = new File("lib/Handleiding.html");
         knoppen[2].setOnAction(event -> {
             try {
                 Desktop.getDesktop().browse(handleidingDoc.toURI());
