@@ -111,7 +111,6 @@ public class TileView extends Pane {
 	}
 
 	public void verwijderHorige() {
-		System.out.println("HORIGE VERWIJDERD ========================== ");
 		Platform.runLater(() -> {
 			getChildren().remove(horigeView);
 		});
