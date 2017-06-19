@@ -527,7 +527,7 @@ public class GameScene extends Scene {
 		//Switch om horigen weer te geven in de ui											//
 		//////////////////////////////////////////////////////////////////////////////////////
 		int horigenSwitch = (client.getAantalHorigeBeschikbaar());
-		System.out.println("Case: " + horigenSwitch + " horigen om neer te zetten");
+		//System.out.println("Case: " + horigenSwitch + " horigen om neer te zetten");
 
 		switch(horigenSwitch){
 			case 0:
