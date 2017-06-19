@@ -49,6 +49,7 @@ public class SmartButton extends Button {
 		});
 
 		initialize();
+
 	}
 
 	public SmartButton() {

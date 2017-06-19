@@ -81,6 +81,11 @@ public class Tile {
 		return null;
 	}
 
+	public void resetRotation() {
+		while(rotation != 0){
+			draaiKaart();
+		}
+	}
 	public String getImageID() {
 		return imageID;
 	}

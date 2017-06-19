@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.*;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import java.util.ArrayList;
 
@@ -50,10 +51,23 @@ public class BordController {
 	 * @return Wanneer de speler aan de beurt is krijgt hij de imageview van de volgende kaart in de stapel
 	 * wanneer de speler niet aan de beurt is krijgt hij geen imageview terug van de volgende kaart
 	 */
-	String pakKaartvanStapel(String spelerNaam) {
+	public String pakKaartvanStapel(String spelerNaam) {
 		if (bord.isSpelerBeurt(spelerNaam)) {
 			kaartenStapel.pakKaart();
-			return kaartenStapel.getTurnTile().getImageID();
+			if (bord.isKaartPlaatsbaar(kaartenStapel.getTurnTile())) {
+				return kaartenStapel.getTurnTile().getImageID();
+			}
+			System.out.println("**************************************************************************************************");
+			System.out.println("**************************************************************************************************");
+			System.out.println("**************************************************************************************************");
+			System.out.println("Er is een onplaatsbare kaart gevonden! namelijk kaar ID " + kaartenStapel.getTurnTile().getImageID());
+			System.out.println("**************************************************************************************************");
+			System.out.println("**************************************************************************************************");
+			System.out.println("**************************************************************************************************");
+
+			kaartenStapel.stopLaatsteKaartTerug();
+			return pakKaartvanStapel(spelerNaam);
+
 		}
 		return null;
 	}

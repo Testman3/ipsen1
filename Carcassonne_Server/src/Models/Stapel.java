@@ -41,6 +41,10 @@ public class Stapel {
 		kaartenOver.remove(0);
 	}
 
+	public void stopLaatsteKaartTerug() {
+		kaartenOver.add(turnTile);
+
+	}
 	public Tile getTurnTile() {
 		return turnTile;
 	}

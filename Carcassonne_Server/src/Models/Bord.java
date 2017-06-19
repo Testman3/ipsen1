@@ -64,6 +64,46 @@ public class Bord {
 		setSpelerKleuren();
 	}
 
+
+
+	public boolean isKaartPlaatsbaar(Tile tile){
+
+		for (int x = 0; x < 100; x++) {
+			for (int y = 0; y < 100; y++) {
+
+				if(getTile(x, y - 1) == null && getTile(x + 1, y) == null && getTile(x, y + 1) == null &&  getTile(x - 1, y) == null){
+					continue;
+				}
+
+
+				System.out.println("RUNNING isKaartPlaatsbaar");
+
+				if(checkKaartFit(x,y,tile)) {
+					tile.resetRotation();
+					return true;
+				}
+				tile.draaiKaart();
+				if(checkKaartFit(x,y,tile)) {
+					tile.resetRotation();
+					return true;
+				}
+				tile.draaiKaart();
+				if(checkKaartFit(x,y,tile)){
+					tile.resetRotation();
+					return true;
+				}
+
+				tile.draaiKaart();
+				if(checkKaartFit(x,y,tile)) {
+					tile.resetRotation();
+					return true;
+				}
+
+			}
+		}
+		return false;
+	}
+
 	public void verwijderHorige(Point point) {
 		verwijderHorigeDezeRonde.add(point);
 		System.out.println("HORIGE " + point.getX() + " " + point.getY() + "zal verwijderd worden!");
@@ -131,7 +171,7 @@ public class Bord {
 	 */
 	public Tile getTile(int x, int y) {
 
-		if (x < 0 || y < 0 || x > 100 || y > 100) {
+		if (x < 0 || y < 0 || x >= 100 || y >= 100) {
 			return null;
 		}
 		return alleTiles[x][y];
@@ -214,7 +254,6 @@ public class Bord {
 		//Dit zou in principe nooit een probleem moeten zijn, maar deze check zit er voor
 		//de zekerheid.
 		if (noord == null && oost == null && zuid == null && west == null) {
-			System.out.println("Kaart is in de middle of nowhere geplaatst");
 			//Tile is geplaatst op een plek met geen grenzende tiles
 			return false;
 		}

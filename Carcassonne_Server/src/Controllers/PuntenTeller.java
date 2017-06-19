@@ -725,7 +725,7 @@ public class PuntenTeller {
 	 * Berekent welke speler de meeste horige op een netwerk heeft staan
  	 * @param bord
 	 * @param networkHorige het netwerk horige
-	 * @return een lijst van spelers die de punten krijgen (meerdere als ze evenveel horige hebben) 
+	 * @return een lijst van spelers die de punten krijgen (meerdere als ze evenveel horige hebben)
 	 */
 	public ArrayList<Speler> calculateplayerWithMostHorige(Bord bord, ArrayList<Horige> networkHorige) {
 		ArrayList<Speler> alleSpelers = bord.getAlleSpelers();
