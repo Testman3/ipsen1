@@ -64,7 +64,6 @@ public class GameScene extends Scene {
 	private double xOffset;
 	private double yOffset;
 
-
 	/**
 	 * Constructor van de GameScene
 	 *
@@ -119,7 +118,6 @@ public class GameScene extends Scene {
 
 		//setup Menubutton
 		menuButton.setAlignment(Pos.BOTTOM_CENTER);
-
 
 		//Size BorderPane
 		mainPane.setPrefSize(1280, 720);
@@ -197,7 +195,7 @@ public class GameScene extends Scene {
 
 	}
 
-	public void initAction() {
+	private void initAction() {
 
 		draaiButton.setOnAction(e -> {
 			gameController.klikDraaiKaart();
@@ -297,10 +295,8 @@ public class GameScene extends Scene {
 		});
 	}
 
-
 	/**
 	 * Plaatst previews om een tile heen, deze methode mag alleen gerunt worden nadat er een tile geplaatst is
-	 *
 	 * @param x x co-ordinaat
 	 * @param y y co-ordinaat
 	 */
@@ -313,7 +309,6 @@ public class GameScene extends Scene {
 
 	/**
 	 * Plaatst 1 preview, deze methode mag niet zomaar gerunt worden
-	 *
 	 * @param x x co-ordinaat
 	 * @param y y co-ordinaat
 	 */
@@ -381,8 +376,8 @@ public class GameScene extends Scene {
 		tileViews[x][y].verwijderHorige();
 	}
 
-	int kaartenOver = 0;
-	ArrayList<Speler> alleSpelers = null;
+	private int kaartenOver = 0;
+	private ArrayList<Speler> alleSpelers = null;
 
 	public void loadAlleTiles(TileStump[] tileStump){
 		for (int i = 0; i < tileStump.length; i++) {
@@ -483,19 +478,6 @@ public class GameScene extends Scene {
 			horigeViews[i].setId(spelerKleur);
 		}
 	}
-
-	/**
-	 * Deze functie zorgt ervoor dat een horige de used texture gebruikt in de ui wanneer hij is geplaatst
-	 */
-//	public void setHorigeUsed(){
-//		for (int i = 0; i < 7; i++){
-//			if (!horigeViews[i].getId().equals("horigeUsed")){
-//				horigeViews[i].setId("horigeUsed");
-//				break;
-//			}
-//		}
-//	}
-
 
 	public void switchFullScreenMode(){
 		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -604,19 +586,5 @@ public class GameScene extends Scene {
 				break;
 		}
 
-
-//
-//		if (client.getAantalHorigeBeschikbaar() > tempHorigenBeschikbaar){
-//			for(int i = 0; i < (horigeViews.length) ; i++){
-//				if (horigeViews[i].getId().equals("horigeUsed") && !firstRun){
-//					horigeViews[i].setId(spelerKleur);
-//					i = horigeViews.length;
-//
-//				}
-//				firstRun = false;
-//			}
-//
-//		}
-//		tempHorigenBeschikbaar = client.getAantalHorigeBeschikbaar();
 	}
 }

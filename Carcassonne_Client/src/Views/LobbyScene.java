@@ -115,7 +115,6 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		lobbyPane.setCenter(completeBox);
 
 		initAction();
-
 	}
 
 	public void initAction() {
@@ -173,7 +172,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 	}
 
-	boolean starten = false;
+	private boolean starten = false;
 
 	/**
 	 * Deze functie update alle elementen in de lobby voor de client
@@ -256,7 +255,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			knoppenBox.getChildren().add(startGame);
 	}
 
-	public int getplayerNummer() {
+	private int getplayerNummer() {
 		int playerNummer = 0;
 		for (int i = 0; i < allenamen.size(); i++) {
 			if (allenamen.get(i).equals(controller.getSpelernaam())) {
