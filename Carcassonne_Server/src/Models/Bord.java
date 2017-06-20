@@ -46,7 +46,7 @@ public class Bord {
 	/**
 	 * Deze constructor zorgt ervoor dat het bord met alle plaatsen voor tiles wordt aangemaakt
 	 *
-	 * @param spelerList Geef een ArrayList met alle spelers mee
+	 * @param spelerList Geeft een ArrayList met alle spelers mee
 	 */
 	public Bord(ArrayList<Speler> spelerList) {
 		verwijderHorigeDezeRonde = new ArrayList<>();
@@ -56,6 +56,12 @@ public class Bord {
 		setSpelerKleuren();
 	}
 
+	/**
+	 * Overload constructor voor het laden van een game
+	 *
+	 * @param spelerList  Geeft een ArrayLists van alle spelers mee
+	 * @param bordKaarten Geeft de kaarten van het bord mee
+	 */
 	public Bord(ArrayList<Speler> spelerList, Tile[][] bordKaarten) {
 		verwijderHorigeDezeRonde = new ArrayList<>();
 		alleSpelers = spelerList;
@@ -64,37 +70,40 @@ public class Bord {
 		setSpelerKleuren();
 	}
 
-
-
-	public boolean isKaartPlaatsbaar(Tile tile){
+	/**
+	 * Controleert of kaart plaatsbaar is
+	 * @param tile Specifieke tile die geplaatst moet worden
+	 * @return true als plaatsbaar, false als niet plaatsbaar
+	 */
+	public boolean isKaartPlaatsbaar(Tile tile) {
 
 		for (int x = 0; x < 100; x++) {
 			for (int y = 0; y < 100; y++) {
 
-				if(getTile(x, y - 1) == null && getTile(x + 1, y) == null && getTile(x, y + 1) == null &&  getTile(x - 1, y) == null){
+				if (getTile(x, y - 1) == null && getTile(x + 1, y) == null && getTile(x, y + 1) == null && getTile(x - 1, y) == null) {
 					continue;
 				}
 
 
 				System.out.println("RUNNING isKaartPlaatsbaar");
 
-				if(checkKaartFit(x,y,tile)) {
+				if (checkKaartFit(x, y, tile)) {
 					tile.resetRotation();
 					return true;
 				}
 				tile.draaiKaart();
-				if(checkKaartFit(x,y,tile)) {
+				if (checkKaartFit(x, y, tile)) {
 					tile.resetRotation();
 					return true;
 				}
 				tile.draaiKaart();
-				if(checkKaartFit(x,y,tile)){
+				if (checkKaartFit(x, y, tile)) {
 					tile.resetRotation();
 					return true;
 				}
 
 				tile.draaiKaart();
-				if(checkKaartFit(x,y,tile)) {
+				if (checkKaartFit(x, y, tile)) {
 					tile.resetRotation();
 					return true;
 				}
@@ -104,18 +113,23 @@ public class Bord {
 		return false;
 	}
 
+	/**
+	 * Verwijdert een horige indien punten behaalt.
+	 * @param point Plek op de tile
+	 */
 	public void verwijderHorige(Point point) {
 		verwijderHorigeDezeRonde.add(point);
 		getTile(point.getX(), point.getY()).removeHorige();
 		System.out.println("HORIGE " + point.getX() + " " + point.getY() + "zal verwijderd worden!");
 	}
 
+
+	private String[] spelerKleuren = {"horigeRood", "horigeBlauw", "horigeGroen", "horigeGeel", "horigePaars"};
+
 	/**
 	 * Geeft elke speler zijn eigen horige kleur.
 	 */
-	private String[] spelerKleuren = {"horigeRood", "horigeBlauw", "horigeGroen", "horigeGeel", "horigePaars"};
-
-	public void setSpelerKleuren() {
+	private void setSpelerKleuren() {
 		System.out.println(" Goeie shit COLOR ");
 		for (int i = 0; i < alleSpelers.size(); i++) {
 			alleSpelers.get(i).setHorigeKleur(spelerKleuren[i]);
@@ -221,11 +235,15 @@ public class Bord {
 
 	}
 
-	public void plaatsLoadKaart(Tile[][] tiles){
+	/**
+	 * Plaatst alle kaarten die geladen worden uit de json file op het bord.
+	 * @param tiles
+	 */
+	public void plaatsLoadKaart(Tile[][] tiles) {
 		placedTiles = new ArrayList<Tile>();
-		for(int x = 0; 100 > x; x++){
-			for(int y = 0; 100 > y; y++){
-				if(tiles[x][y] != null) {
+		for (int x = 0; 100 > x; x++) {
+			for (int y = 0; 100 > y; y++) {
+				if (tiles[x][y] != null) {
 					System.out.println("Zien Tiles: " + alleTiles[x][y].getX());
 					alleTiles[x][y] = tiles[x][y];
 					laatstGeplaatst = tiles[x][y];
@@ -306,30 +324,32 @@ public class Bord {
 
 	/**
 	 * Deze functie geeft een arraylist met alle spelers terug
+	 *
 	 * @return ArrayList met alle spelers
 	 */
 	public ArrayList<Speler> getAlleSpelers() {
-//		System.out.println("GEKKE SPELERS: " + alleSpelers.toString());
-
-			if(debug) {
-				for (int i = 0; i < alleSpelers.size(); i++) {
-					System.out.println("NIFFO- NAAM: " + alleSpelers.get(i).getNaam());
-				}
+		if (debug) {
+			for (int i = 0; i < alleSpelers.size(); i++) {
+				System.out.println("NIFFO- NAAM: " + alleSpelers.get(i).getNaam());
 			}
+		}
 		return alleSpelers;
 	}
 
 	/**
 	 * Return alle tiles in array als Tile
+	 *
 	 * @return ArrayList met alle tiles (als Tile)
 	 */
-	public Tile[][] getAlleTiles(){
+	Tile[][] getAlleTiles() {
 		return this.alleTiles;
 	}
 
-	public ArrayList<Point> getVerwijderHorigeDezeRonde() { return verwijderHorigeDezeRonde;}
+	public ArrayList<Point> getVerwijderHorigeDezeRonde() {
+		return verwijderHorigeDezeRonde;
+	}
 
-	public ArrayList<Tile> getPlacedTiles(){
+	public ArrayList<Tile> getPlacedTiles() {
 		return this.placedTiles;
 	}
 }
