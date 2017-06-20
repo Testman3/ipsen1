@@ -51,6 +51,7 @@ public class FileManager {
 			speler.put("punten", spelerLijst.get(i).getPunten());
 			speler.put("beschikbareHorige", spelerLijst.get(i).getBeschikbareHorigeInt());
 			speler.put("gebruikteHorige", spelerLijst.get(i).getGebruikteHorigeInt());
+			speler.put("horigeKleur", spelerLijst.get(i).getHorigeKleur());
 			spelerInJSON.add(speler);
 		}
 		return spelerInJSON;
@@ -418,8 +419,9 @@ public class FileManager {
 			boolean beurt = (boolean) jsonNumber.get("beurt");
 			int beschHorige = ((Number)jsonNumber.get("beschikbareHorige")).intValue();
 			int gebrHorige = ((Number)jsonNumber.get("gebruikteHorige")).intValue();
+			String horigeKleur = (String) jsonNumber.get("horigeKleur");
 			//add speler
-			Speler speler = new Speler(naam,punten,beurt,beschHorige,gebrHorige);
+			Speler speler = new Speler(naam, punten, beurt, beschHorige, gebrHorige, horigeKleur);
 			alleSpelers.add(speler);
 			Spelers.put(speler.getNaam(),speler);
 			System.out.println("================================SPELER " + Spelers.get(speler.getNaam()).getNaam());
@@ -446,8 +448,10 @@ public class FileManager {
 			boolean beurt = (boolean) jsonNumber.get("beurt");
 			int beschHorige = ((Number)jsonNumber.get("beschikbareHorige")).intValue();
 			int gebrHorige = ((Number)jsonNumber.get("gebruikteHorige")).intValue();
+			String horigeKleur = (String) jsonNumber.get("horigeKleur");
+
 			//add speler
-			alleSpelers.add(new Speler(naam,punten,beurt,beschHorige,gebrHorige));
+			alleSpelers.add(new Speler(naam,punten,beurt,beschHorige,gebrHorige,horigeKleur));
 		}
 		return alleSpelers;
 	}
