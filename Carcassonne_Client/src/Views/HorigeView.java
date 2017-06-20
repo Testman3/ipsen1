@@ -11,19 +11,18 @@ import java.nio.file.Paths;
 public class HorigeView extends ImageView {
 	int arrayListPositie;
 
-	public HorigeView(){
+	/**
+	 * Lege contructor, HorigeView wordt eigenlijk alleen gebruikt als image container dmv het toewijzen van een
+	 * id voor CSS
+	 */
+	HorigeView(){
 	}
 
-
-
-	public void setVisible(){
-		setVisible(true);
-	}
-
-	public void setInvisible(){
-		setVisible(false);
-	}
-
+	/**
+	 * Deze functie wordt niet gebruikt geloof ik
+	 * @param spelerKleur
+	 * Geef de spelerkleur mee in de vorm van een String
+	 */
 	public void setHorigeKleur(String spelerKleur) {
 		switch (spelerKleur) {
 

@@ -7,6 +7,7 @@ import Models.RMIInterface;
 import Models.Speler;
 import Models.TileStump;
 import commonFunctions.Point;
+import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
 import javafx.application.Platform;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 /**
  * Deze class zorgt ervoor dat het daadwerkelijke speelbord goed wordt weergegeven.
  */
-public class GameScene extends Scene {
+public class GameScene extends Scene implements SceneInitialiser{
 
 	private MenuController controller;
 	public GameController gameController;
@@ -67,7 +68,6 @@ public class GameScene extends Scene {
 
 	/**
 	 * Constructor van de GameScene
-	 *
 	 * @param menuController Geef MenuController mee
 	 */
 	public GameScene(MenuController menuController, int breedte, int hoogte) {
@@ -82,13 +82,13 @@ public class GameScene extends Scene {
 		this.controller = menuController;
 		createTileGrid(100, 100);
 
-		init();
+		initGui();
 	}
 
 	/**
 	 * Initialiseert de grafische elementen van de scene
 	 */
-	private void init() {
+	public void initGui() {
 		// new shit
 		mainPane = new BorderPane();
 		links = new VBox(6);
@@ -199,7 +199,7 @@ public class GameScene extends Scene {
 
 	}
 
-	private void initAction() {
+	public void initAction() {
 
 		draaiButton.setOnAction(e -> {
 			gameController.klikDraaiKaart();
