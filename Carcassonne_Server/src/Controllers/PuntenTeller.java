@@ -171,7 +171,7 @@ public class PuntenTeller {
 			}
 			ArrayList<Speler> puntenSpelers = calculateplayerWithMostHorige(bord, horigeInNetwerk);
 			for (int h = 0; h < puntenSpelers.size(); h++) {
-				geefPunten(horigeInNetwerk.get(h).getSpeler(), wegNetwerk.size());
+				geefPunten(puntenSpelers.get(h), wegNetwerk.size());
 				System.out.println("Speler " + horigeInNetwerk.get(h).getSpeler() + "  heeft voor het afmaken van een weg " + wegNetwerk.size() + " punten geschreven");
 
 			}
@@ -426,9 +426,9 @@ public class PuntenTeller {
 
 	/**
 	 * Berekent  en houdt bij kastelen
-	 * @param tile
-	 * @param bord
-	 * @param entry
+	 * @param tile de tile die je mee moet geven
+	 * @param bord het bord
+	 * @param entry de entrypoint
 	 */
 	public void berekenKastelen(Tile tile, Bord bord, entryPoint entry) {
 		ArrayList<Tile> wegNetwerk = new ArrayList<>();
@@ -454,7 +454,7 @@ public class PuntenTeller {
 			}
 			ArrayList<Speler> puntenSpelers = calculateplayerWithMostHorige(bord, horigeInNetwerk);
 			for (int h = 0; h < puntenSpelers.size(); h++) {
-				geefPunten(horigeInNetwerk.get(h).getSpeler(), wegNetwerk.size() * 2);
+				geefPunten(puntenSpelers.get(h), wegNetwerk.size() * 2);
 				System.out.println("Speler " + horigeInNetwerk.get(h).getSpeler() + "  heeft voor het afmaken van een kasteel " + wegNetwerk.size() * 2 + " punten geschreven");
 			}
 
@@ -726,7 +726,7 @@ public class PuntenTeller {
 
 	/**
 	 * Berekent welke speler de meeste horige op een netwerk heeft staan
- 	 * @param bord
+ 	 * @param bord het bord
 	 * @param networkHorige het netwerk horige
 	 * @return een lijst van spelers die de punten krijgen (meerdere als ze evenveel horige hebben)
 	 */
