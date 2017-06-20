@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by Marti on 8-6-2017.
+ * Stapel klass met standaard gevuld met 72 kaarten
  */
 public class Stapel {
 
