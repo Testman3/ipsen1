@@ -190,8 +190,9 @@ public class GameClient {
 		 * speler klaar is met zijn beurt, en het spelbord geüpdatet moet worden.
 		 */
 	public void Update() {
-
+		Platform.runLater(() -> {
 		try {
+
 			if (beurt != RmiStub.getBeurt()) {
 				view.updateView(this);
 				kaartGepakt = false;
@@ -235,6 +236,7 @@ public class GameClient {
 
 		getGameScene().updateHorigenInUi(this);
 		//System.out.println("Horigen in UI geüpdatet");
+		});
 	}
 
 	/**
