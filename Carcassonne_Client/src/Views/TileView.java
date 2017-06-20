@@ -111,6 +111,9 @@ public class TileView extends Pane {
 		});
 	}
 
+	/**
+	 * Deze functie zorgt voor het verwijderen van een horige.
+	 */
 	public void verwijderHorige() {
 		Platform.runLater(() -> {
 			//getChildren().remove(horigeView);
@@ -126,6 +129,9 @@ public class TileView extends Pane {
 		verwijderHorigePreviews();
 	}
 
+	/**
+	 * Deze functie zorgt dat de horige Preview wordt verwijdered.
+	 */
 	public void verwijderHorigePreviews() {
 		if(horigePreviews == null){
 			return;
