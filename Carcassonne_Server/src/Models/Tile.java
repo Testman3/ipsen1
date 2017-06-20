@@ -230,4 +230,11 @@ public class Tile {
 	public void setHorigenZijdes(Horige.Posities[] horigenZijdes) {
 		this.horigenZijdes = horigenZijdes;
 	}
+
+	public void removeHorige() {
+		noordZijde.setHorigeSpeler(null);
+		oostZijde.setHorigeSpeler(null);
+		zuidZijde.setHorigeSpeler(null);
+		westZijde.setHorigeSpeler(null);
+	}
 }

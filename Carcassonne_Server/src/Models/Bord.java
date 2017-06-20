@@ -106,6 +106,7 @@ public class Bord {
 
 	public void verwijderHorige(Point point) {
 		verwijderHorigeDezeRonde.add(point);
+		getTile(point.getX(), point.getY()).removeHorige();
 		System.out.println("HORIGE " + point.getX() + " " + point.getY() + "zal verwijderd worden!");
 	}
 
