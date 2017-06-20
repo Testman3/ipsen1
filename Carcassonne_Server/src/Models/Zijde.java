@@ -1,8 +1,5 @@
 package Models;
 
-/**
- * Created by Marti on 8-6-2017.
- */
 public class Zijde {
 
 	public enum ZijdeType {
@@ -17,11 +14,22 @@ public class Zijde {
 	boolean isEinde;
 	Horige horigeSpeler;
 
+	/**
+	 * Maak Zijde aan
+	 * @param zijde ZijdeType object,
+	 * @param isEinde boolean,
+	 */
 	public Zijde(ZijdeType zijde, boolean isEinde){
 		this.zijde = zijde;
 		this.isEinde = isEinde;
 	}
 
+	/**
+	 * Maak Zijde aan
+	 * @param zijde ZijdeType object,
+	 * @param isEinde boolean,
+	 * @param horigeSpeler Horige object
+	 */
 	public Zijde(ZijdeType zijde, boolean isEinde, Horige horigeSpeler){
 		this.zijde = zijde;
 		this.isEinde = isEinde;

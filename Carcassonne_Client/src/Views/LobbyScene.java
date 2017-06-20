@@ -232,7 +232,8 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			//Als dit het geval is wordt de start game knop toegevoegd aan de hbox in de lobbyscene
 			try {
 				if (lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !knoppenBox.getChildren().contains(startGame)
-						&& lobbyController.getRmiStub().getPlayerList().size() > 1) {
+						)// <-- moet in deze if: && lobbyController.getRmiStub().getPlayerList().size() > 1
+				{
 					System.out.println("READY OM TE BEGINNEN");
 					setAbleToStartGame();
 

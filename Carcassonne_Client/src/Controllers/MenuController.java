@@ -229,7 +229,7 @@ public class MenuController {
 	public void putIngameMenuInController(InGameMenuStage stage) {this.inGameMenuStage = stage;}
 	/**
 	 * Deze functie haalt de spelernaam op
-	 * @return spelernaam
+	 * @return String spelernaam
 	 */
 	public String getSpelernaam() {
 		return spelernaam;

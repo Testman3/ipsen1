@@ -22,6 +22,10 @@ public class Speler implements Serializable {
 
 	}
 
+	/**
+	 * Maak speler aan
+	 * @param naam spelernaam String
+	 */
 	public Speler(String naam){
 		this.naam = naam;
 
@@ -34,6 +38,15 @@ public class Speler implements Serializable {
 	}
 
 	// Overload voor saven game
+	/**
+	 * Maak speler
+	 * @param naam ZijdeType object
+	 * @param punten aantal punten
+	 * @param beurt spelerbeurt boolean
+	 * @param horigeBeschikbaar horigeGebruikt beschikbaar int
+	 * @param horigeGebruikt horigeGebruikt aantal int
+	 * @param horigeKleur horigekleur String
+	 */
 	public Speler(String naam, int punten, boolean beurt, int horigeBeschikbaar, int horigeGebruikt, String horigeKleur){
 		this.naam = naam;
 		this.punten = punten;
@@ -57,6 +70,10 @@ public class Speler implements Serializable {
 		this.horigeKleur = kleur;
 	}
 
+	/**
+	 * Krijg beschikbare horige
+	 * @return Return file met JSON erin
+	 */
 	public Horige getBeschikbareHorige() {
 		if(horigeBeschikbaar.isEmpty()){
 			return null;
@@ -67,6 +84,10 @@ public class Speler implements Serializable {
 		return pak;
 	}
 
+	/**
+	 * Return speler horige
+	 * @param horige horige
+	 */
 	public void getHorigeTerug(Horige horige) {
 		if(!horigeGebruikt.contains(horige)){
 			System.out.println("LET OP ============================================================= LET OP ");

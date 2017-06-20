@@ -26,7 +26,6 @@ public class Stapel {
 
 	public Stapel(ArrayList<Tile> kaartenOver){
 		this.kaartenOver = kaartenOver;
-		this.beginTile = kaartenOver.get(7);
 		System.out.println("Saved kaarten over: " + kaartenOver.size());
 		Collections.shuffle(kaartenOver);
 	}

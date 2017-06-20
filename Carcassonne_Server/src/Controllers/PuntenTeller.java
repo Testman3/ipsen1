@@ -20,7 +20,7 @@ public class PuntenTeller {
 	 * @param tile Geef de gewenste tile mee
 	 * @param bord Geef het bord mee
 	 */
-	public void BerekenPunten(Tile tile, Bord bord) {
+	void BerekenPunten(Tile tile, Bord bord) {
 		bord.getVerwijderHorigeDezeRonde().clear();
 		System.out.println("=================================BEREKENEN PUNTEN======================");
 		ArrayList<Tile> alleBuren = new ArrayList<>();
@@ -99,7 +99,7 @@ public class PuntenTeller {
 	 * @param tile Geef de gewenste tile mee
 	 * @param bord Geef het bord mee
 	 */
-	public void BerekenKloosters(Tile tile, Bord bord) {
+	private void BerekenKloosters(Tile tile, Bord bord) {
 
 		if (tile.getMiddenZijde().getHorigeSpeler() == null) {
 			System.out.println("Geen horige op tile " + tile.getX() + " " + tile.getY());
@@ -131,21 +131,19 @@ public class PuntenTeller {
 
 	}
 
+	private int eindes = 0;
+	private Tile startTile;
+	private boolean startTileFoundTwice = false;
+	private ArrayList<Point> horigePoints;
+
+	private boolean wegRond = true;
 
 	/**
 	 * Berekent een complete weg en houdt alles bij
-	 *
 	 * @param tile Geef de gewenste tile mee
 	 * @param bord Geef het bord mee
 	 */
-	int eindes = 0;
-	Tile startTile;
-	boolean startTileFoundTwice = false;
-	ArrayList<Point> horigePoints;
-
-	boolean wegRond = true;
-
-	public void berekenWegen(Tile tile, Bord bord, entryPoint entry) {
+	private void berekenWegen(Tile tile, Bord bord, entryPoint entry) {
 		ArrayList<Tile> wegNetwerk = new ArrayList<>();
 		ArrayList<Horige> horigeInNetwerk = new ArrayList<Horige>();
 		eindes = 0;
@@ -420,17 +418,17 @@ public class PuntenTeller {
 		}
 	}
 
-	boolean kasteelRond = true;
+	private boolean kasteelRond = true;
 
-	////EINDE BEREKENEN WEGN/////
+	////EINDE BEREKENEN WEGEN/////
 
 	/**
 	 * Berekent  en houdt bij kastelen
-	 * @param tile de tile die je mee moet geven
-	 * @param bord het bord
-	 * @param entry de entrypoint
+	 * @param tile De tile
+	 * @param bord Bordklasse
+	 * @param entry Richting waarvan je naar binnen komt
 	 */
-	public void berekenKastelen(Tile tile, Bord bord, entryPoint entry) {
+	private void berekenKastelen(Tile tile, Bord bord, entryPoint entry) {
 		ArrayList<Tile> wegNetwerk = new ArrayList<>();
 		ArrayList<Horige> horigeInNetwerk = new ArrayList<Horige>();
 		eindes = 0;
@@ -691,7 +689,7 @@ public class PuntenTeller {
 	 * @param netwerk Het netwerk waar de tile aan toegevoegd moet worden
 	 * @param tile De tile die toegevoegd moet worden.
 	 */
-	public void addToNetwork(ArrayList<Tile> netwerk, Tile tile) {
+	private void addToNetwork(ArrayList<Tile> netwerk, Tile tile) {
 		if (tile == null) {
 			return;
 		}
@@ -712,7 +710,7 @@ public class PuntenTeller {
 	 * @param horige De horige die toegevoegd moet worden
 	 * @param tile De tile waar de horige op staat
 	 */
-	public void addHorigeToNetwork(ArrayList<Horige> Horige, Horige horige, Tile tile ) {
+	private void addHorigeToNetwork(ArrayList<Horige> Horige, Horige horige, Tile tile ) {
 		if (horige == null) {
 			return;
 		}
@@ -726,11 +724,11 @@ public class PuntenTeller {
 
 	/**
 	 * Berekent welke speler de meeste horige op een netwerk heeft staan
- 	 * @param bord het bord
+ 	 * @param bord Het spelbord
 	 * @param networkHorige het netwerk horige
 	 * @return een lijst van spelers die de punten krijgen (meerdere als ze evenveel horige hebben)
 	 */
-	public ArrayList<Speler> calculateplayerWithMostHorige(Bord bord, ArrayList<Horige> networkHorige) {
+	private ArrayList<Speler> calculateplayerWithMostHorige(Bord bord, ArrayList<Horige> networkHorige) {
 		ArrayList<Speler> alleSpelers = bord.getAlleSpelers();
 		spelerToHorige[] spelersToHorigen = new spelerToHorige[alleSpelers.size()];
 
@@ -771,7 +769,7 @@ public class PuntenTeller {
 	 * @param speler      Geef de speler mee die de punten moet krijgen
 	 * @param hoeveelheid Geef de hoeveelheid punten mee die de speler moet krijgen
 	 */
-	public void geefPunten(Speler speler, int hoeveelheid) {
+	private void geefPunten(Speler speler, int hoeveelheid) {
 		speler.geefPunten(hoeveelheid);
 		System.out.println("Punten gegeven aan speler " + speler.getNaam() + " ( " + speler.getPunten() + " punten)");
 	}
@@ -779,10 +777,10 @@ public class PuntenTeller {
 }
 
 class spelerToHorige {
-	public Speler speler;
-	public int aantalHorige = 0;
+	Speler speler;
+	int aantalHorige = 0;
 
-	public spelerToHorige(Speler speler) {
+	spelerToHorige(Speler speler) {
 		this.speler = speler;
 	}
 
