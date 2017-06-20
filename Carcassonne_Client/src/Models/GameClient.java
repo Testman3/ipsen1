@@ -10,6 +10,9 @@ import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * Deze class houdt de status van de client bij
+ */
 public class GameClient {
 
 	AudioClip meepMerp = new AudioClip(Paths.get("Sounds/meepMerp.mp3").toUri().toString());
@@ -255,6 +258,11 @@ public class GameClient {
 		}
 	}
 
+	/**
+	 * Laadt alle tiles
+	 * @return Gelade tiles
+	 * @throws RemoteException RMI exception
+	 */
 	public TileStump[] getTileLoad() throws RemoteException {
 		try {
 			return RmiStub.getPlacedKaartList();
