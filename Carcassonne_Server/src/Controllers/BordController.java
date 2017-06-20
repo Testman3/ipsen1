@@ -26,12 +26,10 @@ public class BordController {
 		bord.plaatsKaartCheat(50,50,kaartenStapel.getBeginTile());
 	}
 
-	public BordController(ArrayList<Speler> spelerList, Tile[][] tiles){
+	public BordController(ArrayList<Speler> spelerList, Tile[][] tiles, ArrayList<Tile> currentStapel){
 		puntenTeller = new PuntenTeller();
-		kaartenStapel = new Stapel();
+		kaartenStapel = new Stapel(currentStapel);
 		bord = new Bord(spelerList, tiles);
-		System.out.println("VUL BORD");
-		bord.plaatsKaartCheat(50,50,kaartenStapel.getBeginTile());
 		bord.plaatsLoadKaart(tiles);
 	}
 

@@ -21,7 +21,7 @@ public class FileManager {
 
 	/**
 	 * Maak JSON object aan van save game
-	 * @param String fileName
+	 * @param naam String
 	 * Geef het path van de safe file mee in de vorm van een String
 	 */
 	public File saveGame(String naam) {
@@ -37,7 +37,7 @@ public class FileManager {
 	}
 
 	/**
-	 *
+	 * Return spelers in Json
 	 * @return
 	 */
 	private JSONArray saveAlleSpelersJSON(){
@@ -158,11 +158,11 @@ public class FileManager {
 			kaart.put("oostZijde", currentStapel.get(i).getOostZijde().getZijde().toString());
 			kaart.put("oostEinde", currentStapel.get(i).getOostZijde().isEinde());
 			// Zuid
-			kaart.put("zuidZuid", currentStapel.get(i).getZuidZijde().getZijde().toString());
-			kaart.put("zuidZuid", currentStapel.get(i).getZuidZijde().isEinde());
+			kaart.put("zuidZijde", currentStapel.get(i).getZuidZijde().getZijde().toString());
+			kaart.put("zuidEinde", currentStapel.get(i).getZuidZijde().isEinde());
 			// West
-			kaart.put("westZuid", currentStapel.get(i).getWestZijde().getZijde().toString());
-			kaart.put("westZuid", currentStapel.get(i).getWestZijde().isEinde());
+			kaart.put("westZijde", currentStapel.get(i).getWestZijde().getZijde().toString());
+			kaart.put("westEinde", currentStapel.get(i).getWestZijde().isEinde());
 			// Heeft klooster
 			kaart.put("heeftKlooster", currentStapel.get(i).getHeeftKlooster());
 			// Heeft bonus
@@ -186,8 +186,9 @@ public class FileManager {
 	}
 
 	/**
-	 * Maak file aan van met een JSONobject erin
-	 * @param String file name, JSONObject object
+	 * Maak file aan van met een JSONObject erin
+	 * @param naam file name,
+	 * @param object JSONObject
 	 * @return Return file met JSON erin
 	 */
 	public File createFile(String naam, JSONObject object){
@@ -214,7 +215,7 @@ public class FileManager {
 
 	/**
 	 * Laden file en return JSONObject
-	 * @param File load json file
+	 * @param load file json file
 	 * @return Return JSONObject
 	 */
 	private static JSONObject loadGame(File load) {
@@ -248,8 +249,8 @@ public class FileManager {
 	}
 
 	/**
-	 * lezen file en maak tile kaarten
-	 * @param File json file
+	 * Lezen file en maak tile kaarten
+	 * @param load json file
 	 * @return return Tile[][]
 	 */
 	public static Tile[][] loadBordKaartenJSON(File load){
@@ -268,7 +269,6 @@ public class FileManager {
 			JSONObject jsonNumber = (JSONObject) number;
 			// Zijde x en y
 			int x = ((Number)jsonNumber.get("x")).intValue();
-			System.out.println("x num: " + x);
 			int y = ((Number)jsonNumber.get("y")).intValue();
 			//Zijde einde
 			boolean noordEinde = (boolean) jsonNumber.get("noordEinde");
@@ -314,19 +314,15 @@ public class FileManager {
 
 				if(jsonNumber.get("noordZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("noordZijdeHorige"))) {
 					spelerNaam = d.getNaam();
-//					System.out.println("Speler Hor:" + speler.getNaam());
 				}
 				if(jsonNumber.get("oostZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("oostZijdeHorige"))) {
 					spelerNaam = d.getNaam();
-//					System.out.println("Speler Hor:" + speler.getNaam());
 				}
 				if(jsonNumber.get("zuidZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("zuidZijdeHorige"))) {
 					spelerNaam = d.getNaam();
-//					System.out.println("Speler Hor:" + speler.getNaam());
 				}
 				if(jsonNumber.get("westZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("westZijdeHorige"))) {
 					spelerNaam = d.getNaam();
-					//					System.out.println("Speler Hor:" + speler.getNaam());
 				}
 			}
 
@@ -353,30 +349,24 @@ public class FileManager {
 				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("noordZijdeHorigePos")));
 				horigen.setSpeler(Spelers.get(spelerNaam));
 				noordZijde = new Zijde(noordZijdeType, noordEinde, horigen);
-				System.out.println("noordZijdeHorige: " + jsonNumber.get("noordZijdeHorige"));
 			}
 			if(jsonNumber.get("oostZijdeHorige") != null){
 				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("oostZijdeHorigePos")));
 				horigen.setSpeler(Spelers.get(spelerNaam));
 				oostZijde = new Zijde(oostZijdeType, oostEinde, horigen);
-				System.out.println("Oostzijde Horige: " + jsonNumber.get("oostZijdeHorige"));
 			}
 			if(jsonNumber.get("zuidZijdeHorige") != null){
 				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("zuidZijdeHorigePos")));
 				horigen.setSpeler(Spelers.get(spelerNaam));
 				zuidZijde = new Zijde(zuidZijdeType, zuidEinde, horigen);
-				System.out.println("zuidZijdeHorige: " + jsonNumber.get("zuidZijdeHorige"));
 			}
 			if(jsonNumber.get("westZijdeHorige") != null){
 				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("westZijdeHorigePos")));
 				horigen.setSpeler(Spelers.get(spelerNaam));
 				westZijde = new Zijde(westZijdeType, westEinde, horigen);
-				System.out.println("westZijdeHorige: " + jsonNumber.get("westZijdeHorige"));
 			}
 
 			boolean heeftBonus = (boolean)jsonNumber.get("heeftBonus");
-
-			System.out.println("allLoadedTiles.length = " + allLoadedTiles.length);
 
 			allLoadedTiles[x][y] = new Tile();
 
@@ -403,8 +393,8 @@ public class FileManager {
 	}
 
 	/**
-	 * JSONArray
-	 * @param JSONArray JSONSpelers (spelers in JSON format)
+	 * Laad alle spelers uit json array
+	 * @param JSONSpelers JSONArray (spelers in JSON format)
 	 * @return return ArrayList Speler
 	 */
 	public static ArrayList<Speler> getAlleSpelers(JSONArray JSONSpelers){
@@ -430,8 +420,8 @@ public class FileManager {
 	}
 
 	/**
-	 * JSONArray
-	 * @param File JSONSpelers in een file (spelers in JSON format)
+	 *  Laad alle spelers uit een json file
+	 * @param load JSONSpelers in een file (spelers in JSON format)
 	 * @return return ArrayList Speler
 	 */
 	public static ArrayList<Speler> loadAlleSpelersJSON(File load){
@@ -454,6 +444,73 @@ public class FileManager {
 			alleSpelers.add(new Speler(naam,punten,beurt,beschHorige,gebrHorige,horigeKleur));
 		}
 		return alleSpelers;
+	}
+
+	/**
+	 * Laad stapel uit json file
+	 * @param load JSONStapel in een file (Stapel in JSON format)
+	 * @return return ArrayList tiles
+	 */
+	public static ArrayList<Tile> loadCurrentStapelJSON(File load){
+		JSONObject jsonObject = loadGame(load);
+		ArrayList<Tile> alleKaarten =  new ArrayList<Tile>();
+
+		JSONArray numbers = (JSONArray) jsonObject.get("CurrentStapel");
+
+		// Loop through all card data in json
+		for (Object number : numbers) {
+			// Make json object
+			JSONObject jsonNumber = (JSONObject) number;
+
+			// Get soort zijde
+			Zijde.ZijdeType noordZijdeType = Zijde.ZijdeType.valueOf((String) jsonNumber.get("noordZijde"));
+			Zijde.ZijdeType oostZijdeType = Zijde.ZijdeType.valueOf((String) jsonNumber.get("oostZijde"));
+			Zijde.ZijdeType zuidZijdeType = Zijde.ZijdeType.valueOf((String) jsonNumber.get("zuidZijde"));
+			Zijde.ZijdeType westZijdeType = Zijde.ZijdeType.valueOf((String) jsonNumber.get("westZijde"));
+
+			// Get data eindpunt
+			boolean noordEinde = (boolean) jsonNumber.get("noordEinde");
+			boolean oostEinde = (boolean) jsonNumber.get("oostEinde");
+			boolean zuidEinde = (boolean) jsonNumber.get("zuidEinde");
+			boolean westEinde = (boolean) jsonNumber.get("westEinde");
+
+			// Get json data heeftKlooster
+			boolean heeftKlooster = (boolean) jsonNumber.get("heeftKlooster");
+
+			// Get json data heeftBonus
+			boolean heeftBonus = (boolean) jsonNumber.get("heeftBonus");
+
+			// Get json data image_id
+			String imageId = (String) jsonNumber.get("image_id");
+
+			//get JsonArray horigePosities
+			JSONArray array = (JSONArray) jsonNumber.get("horigePosities");
+
+			//new array
+			String[] positie = new String[array.size()];
+			Horige.Posities[] horigenPos = new Horige.Posities[array.size()];
+
+			//all data to array
+			for (int i = 0; i < array.size(); i++) {
+				positie[i] = (String) array.get(i);
+
+				horigenPos[i] = Horige.Posities.valueOf((String) array.get(i));
+			}
+
+			Zijde noordZijde = new Zijde(noordZijdeType, noordEinde);
+			Zijde oostZijde = new Zijde(oostZijdeType, oostEinde);
+			Zijde zuidZijde = new Zijde(zuidZijdeType, zuidEinde);
+			Zijde westZijde = new Zijde(westZijdeType, westEinde);
+
+			Horige.Posities[] pos = new Horige.Posities[array.size()];
+			for (int j = 0; j < array.size() ; j++) {
+				pos[j] = horigenPos[j];
+			}
+
+			Tile data = new Tile(imageId, noordZijde, oostZijde, zuidZijde, westZijde, heeftKlooster, heeftBonus, pos);
+			alleKaarten.add(data);
+		}
+		return alleKaarten;
 	}
 
 

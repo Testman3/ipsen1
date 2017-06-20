@@ -89,7 +89,8 @@ public class RMIController implements RMIInterface {
 		// File inhoud lezen
 		Tile[][] alleKaarten = FileManager.loadBordKaartenJSON(importedFile);
 		ArrayList<Speler> spelers = FileManager.loadAlleSpelersJSON(importedFile);
-		serverManager.startGame(spelers, alleKaarten);
+		ArrayList<Tile> currentStapel = FileManager.loadCurrentStapelJSON(importedFile);
+		serverManager.startGame(spelers, alleKaarten,currentStapel);
     }
 
     @Override
