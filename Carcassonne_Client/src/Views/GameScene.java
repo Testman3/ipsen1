@@ -210,8 +210,12 @@ public class GameScene extends Scene {
 		});
 
 		ShowKaart.setOnMouseClicked(e -> {
-			gameController.klikPakKaart();
-		});
+			try {
+				gameController.klikPakKaart();
+			} catch (IndexOutOfBoundsException e1){
+				System.out.println("INDEX OUT OF BOUNDS");
+			}
+			});
 
 		menuButton.setOnAction(event -> {
 			controller.showInGameMenu();
