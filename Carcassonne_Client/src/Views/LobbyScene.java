@@ -98,7 +98,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 		}
 
-		wachten = new SmartLabel("Wacht op de host om het spel te starten...");
+		wachten = new SmartLabel("Wacht op host om spel te starten...");
 		wachten.setId("wachten");
 
 		box1.getChildren().addAll(spelerBox, horigenBox);
