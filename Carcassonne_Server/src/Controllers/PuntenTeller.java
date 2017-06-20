@@ -461,6 +461,9 @@ public class PuntenTeller {
 			for (int i = 0; i < horigePoints.size(); i++) {
 				bord.verwijderHorige(horigePoints.get(i));
 			}
+			for (int i = 0; i < horigeInNetwerk.size(); i++) {
+				horigeInNetwerk.get(i).getSpeler().getHorigeTerug(horigeInNetwerk.get(i));
+			}
 		} else {
 			System.out.println("Er waren niet genoeg eindes voor het kasteel! namelijk " + eindes);
 		}

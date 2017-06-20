@@ -34,12 +34,13 @@ public class Speler implements Serializable {
 	}
 
 	// Overload voor saven game
-	public Speler(String naam, int punten, boolean beurt, int horigeBeschikbaar, int horigeGebruikt){
+	public Speler(String naam, int punten, boolean beurt, int horigeBeschikbaar, int horigeGebruikt, String horigeKleur){
 		this.naam = naam;
 		this.punten = punten;
 		this.beurt = beurt;
 		this.horigeBeschikbaar = new ArrayList<Horige>(horigeBeschikbaar);
 		this.horigeGebruikt = new ArrayList<Horige>(horigeGebruikt);
+		this.horigeKleur = horigeKleur;
 	}
 
 	public Speler(String naam, boolean beurt, int punten){
