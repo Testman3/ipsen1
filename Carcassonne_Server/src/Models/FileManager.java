@@ -7,10 +7,13 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FileManager {
 
 	private ServerManager manager;
+	static Map<String, Speler> Spelers = new HashMap<String, Speler>();
 
 	public FileManager(ServerManager manager){
 		this.manager = manager;
@@ -256,6 +259,8 @@ public class FileManager {
 
 		ArrayList<Speler> alleSpelers = getAlleSpelers(JSONSpelers);
 
+
+
 		Tile[][] allLoadedTiles = new Tile[100][100];
 
 		for(Object number : bordKaarten){
@@ -297,7 +302,8 @@ public class FileManager {
 			// Midden
 //			Zijde.ZijdeType middenZijde = Zijde.ZijdeType.valueOf((String) jsonNumber.get("middenZijde"));
 
-			Speler speler = new Speler();
+
+			String spelerNaam = null;
 
 			for(Speler d : alleSpelers){
 //				System.out.println("NOORD: " + (String) jsonNumber.get("noordZijdeHorige"));
@@ -306,20 +312,20 @@ public class FileManager {
 //				System.out.println("WEST: " + (String) jsonNumber.get("westZijdeHorige"));
 
 				if(jsonNumber.get("noordZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("noordZijdeHorige"))) {
-					speler = new Speler(d.getNaam(), d.getBeurt(), d.getPunten());
-					System.out.println("Speler Hor:" + speler.getNaam());
+					spelerNaam = d.getNaam();
+//					System.out.println("Speler Hor:" + speler.getNaam());
 				}
 				if(jsonNumber.get("oostZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("oostZijdeHorige"))) {
-					speler = new Speler(d.getNaam(), d.getBeurt(), d.getPunten());
-					System.out.println("Speler Hor:" + speler.getNaam());
+					spelerNaam = d.getNaam();
+//					System.out.println("Speler Hor:" + speler.getNaam());
 				}
 				if(jsonNumber.get("zuidZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("zuidZijdeHorige"))) {
-					speler = new Speler(d.getNaam(), d.getBeurt(), d.getPunten());
-					System.out.println("Speler Hor:" + speler.getNaam());
+					spelerNaam = d.getNaam();
+//					System.out.println("Speler Hor:" + speler.getNaam());
 				}
 				if(jsonNumber.get("westZijdeHorige") != null && d.getNaam().contains((String) jsonNumber.get("westZijdeHorige"))) {
-					speler = new Speler(d.getNaam(), d.getBeurt(), d.getPunten());
-					System.out.println("Speler Hor:" + speler.getNaam());
+					spelerNaam = d.getNaam();
+					//					System.out.println("Speler Hor:" + speler.getNaam());
 				}
 			}
 
@@ -344,27 +350,27 @@ public class FileManager {
 			//horige positie
 			if(jsonNumber.get("noordZijdeHorige") != null){
 				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("noordZijdeHorigePos")));
-				horigen.setSpeler(speler);
+				horigen.setSpeler(Spelers.get(spelerNaam));
 				noordZijde = new Zijde(noordZijdeType, noordEinde, horigen);
 				System.out.println("noordZijdeHorige: " + jsonNumber.get("noordZijdeHorige"));
 			}
 			if(jsonNumber.get("oostZijdeHorige") != null){
-				System.out.println("Oostzijde Horige: " + jsonNumber.get("oostZijdeHorige"));
 				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("oostZijdeHorigePos")));
-				horigen.setSpeler(speler);
+				horigen.setSpeler(Spelers.get(spelerNaam));
 				oostZijde = new Zijde(oostZijdeType, oostEinde, horigen);
+				System.out.println("Oostzijde Horige: " + jsonNumber.get("oostZijdeHorige"));
 			}
 			if(jsonNumber.get("zuidZijdeHorige") != null){
-				System.out.println("zuidZijdeHorige: " + jsonNumber.get("zuidZijdeHorige"));
 				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("zuidZijdeHorigePos")));
-				horigen.setSpeler(speler);
+				horigen.setSpeler(Spelers.get(spelerNaam));
 				zuidZijde = new Zijde(zuidZijdeType, zuidEinde, horigen);
+				System.out.println("zuidZijdeHorige: " + jsonNumber.get("zuidZijdeHorige"));
 			}
 			if(jsonNumber.get("westZijdeHorige") != null){
-				System.out.println("westZijdeHorige: " + jsonNumber.get("westZijdeHorige"));
 				horigen.setPositie(horigen.positie.valueOf((String)jsonNumber.get("westZijdeHorigePos")));
-				horigen.setSpeler(speler);
+				horigen.setSpeler(Spelers.get(spelerNaam));
 				westZijde = new Zijde(westZijdeType, westEinde, horigen);
+				System.out.println("westZijdeHorige: " + jsonNumber.get("westZijdeHorige"));
 			}
 
 			boolean heeftBonus = (boolean)jsonNumber.get("heeftBonus");
@@ -402,6 +408,8 @@ public class FileManager {
 	 */
 	public static ArrayList<Speler> getAlleSpelers(JSONArray JSONSpelers){
 		ArrayList<Speler> alleSpelers = new ArrayList<>();
+		Spelers = new HashMap<>();
+
 		for(Object number : JSONSpelers) {
 			JSONObject jsonNumber = (JSONObject) number;
 			// Speler gegevens
@@ -411,7 +419,10 @@ public class FileManager {
 			int beschHorige = ((Number)jsonNumber.get("beschikbareHorige")).intValue();
 			int gebrHorige = ((Number)jsonNumber.get("gebruikteHorige")).intValue();
 			//add speler
-			alleSpelers.add(new Speler(naam,punten,beurt,beschHorige,gebrHorige));
+			Speler speler = new Speler(naam,punten,beurt,beschHorige,gebrHorige);
+			alleSpelers.add(speler);
+			Spelers.put(speler.getNaam(),speler);
+			System.out.println("================================SPELER " + Spelers.get(speler.getNaam()).getNaam());
 		}
 		return alleSpelers;
 	}

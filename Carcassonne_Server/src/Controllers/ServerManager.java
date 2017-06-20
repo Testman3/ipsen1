@@ -82,9 +82,9 @@ public class ServerManager extends Application {
 	 * Geef een 2-dimensionale array mee met de type Tile.
 	 */
 	public void startGame(ArrayList<Speler> spelerList, Tile[][] tiles) {
-		gameLoaded = true;
 		bordController = new BordController(spelerList, tiles);
 		gameStarted = true;
+		gameLoaded = true;
 	}
 
 	/**

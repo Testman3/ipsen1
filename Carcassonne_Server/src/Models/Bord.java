@@ -115,6 +115,7 @@ public class Bord {
 	private String[] spelerKleuren = {"horigeRood", "horigeBlauw", "horigeGroen", "horigeGeel", "horigePaars"};
 
 	public void setSpelerKleuren() {
+		System.out.println(" Goeie shit COLOR ");
 		for (int i = 0; i < alleSpelers.size(); i++) {
 			alleSpelers.get(i).setHorigeKleur(spelerKleuren[i]);
 		}
