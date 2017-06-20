@@ -29,6 +29,9 @@ import java.rmi.RemoteException;
 import static Views.MenuViewScene.mediaPlayer;
 import static Models.GameClient.turnSound;
 
+/**
+ * Deze klasse laat het pauzescherm in-game zien.
+ */
 public class InGameMenuStage extends Stage implements SceneInitialiser{
 	private StackPane menuPane;
     private MenuController menuController;
