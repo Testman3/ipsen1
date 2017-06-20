@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * FileManager klasse, saven van speler, bord en current stapel data naar een JSON file.
+ * FileManager kan ook JSON data inlezen en speler, bord en stapel objecten maken
+ */
+
 public class FileManager {
 
 	private ServerManager manager;

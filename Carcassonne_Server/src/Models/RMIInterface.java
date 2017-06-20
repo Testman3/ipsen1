@@ -132,8 +132,18 @@ public interface RMIInterface extends Remote {
 	 */
 	public TileStump getPlacedKaart() throws RemoteException;
 
+	/**
+	 * Returnt een data-klasse met de informatie over de laatst geplaatste KAARTEN
+	 * @return de tilestump in array
+	 * @throws RemoteException RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public TileStump[] getPlacedKaartList() throws RemoteException;
 
+	/**
+	 * Return een boolean of game is geladen
+	 * @return boolean
+	 * @throws RemoteException RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public boolean getLoadedGame() throws RemoteException;
 
 
@@ -187,12 +197,31 @@ public interface RMIInterface extends Remote {
 	 */
 	public void beeindigenBeurt(String spelerNaam) throws RemoteException;
 
+
+	/**
+	 * Remove horige van het veld
+	 * @throws RemoteException RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public ArrayList<Point> getHorigeToRemove() throws RemoteException;
 
+	/**
+	 * Is einde spel
+	 * @throws RemoteException RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public boolean getisEindeSpel() throws RemoteException;
 
+	/**
+	 * Leave game doormiddel van spelernaam
+	 * @param naam spelernaam
+	 * @throws RemoteException RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public void leaveGame(String naam) throws RemoteException;
 
+	/**
+	 * Krijg beschikbare horige terug doormiddel van spelernaam
+	 * @param naam spelernaam
+	 * @throws RemoteException RemoteException wordt gegooid wanneer er iets mis gaat met de RMI verbinding
+	 */
 	public int getAvailableHorige(String naam) throws RemoteException;
 }
 
