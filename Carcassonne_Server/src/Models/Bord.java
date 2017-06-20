@@ -17,7 +17,7 @@ public class Bord {
 
 	private Tile laatstGeplaatst;
 
-	public ArrayList<Tile> placedTiles;
+	private ArrayList<Tile> placedTiles;
 
 	private boolean debug = false;
 

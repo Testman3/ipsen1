@@ -6,6 +6,7 @@ import Controllers.MenuController;
 import Models.GameClient;
 import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
+import commonFunctions.SmartLabel;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -45,6 +46,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	private Thread lobbyThread;
 	private ArrayList<String> allenamen;
 	private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
+	private SmartLabel wachten;
 
 	/**
 	 * Constructor van de LobbyScene
@@ -95,6 +97,9 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			horigenBox.getChildren().add(horigen[i]);
 
 		}
+
+		wachten = new SmartLabel("Wacht op de host om het spel te starten...");
+		wachten.setId("wachten");
 
 		box1.getChildren().addAll(spelerBox, horigenBox);
 		completeBox.getChildren().add(box1);
@@ -244,7 +249,13 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				else if (!lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && knoppenBox.getChildren().contains(startGame)) {
 					System.out.println("NIET READY!");
 					knoppenBox.getChildren().remove(startGame);
+				//	completeBox.getChildren().add(wachten);
 				}
+
+				if(!lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !completeBox.getChildren().contains(wachten)){
+					completeBox.getChildren().add(wachten);
+				}
+
 			} catch (java.rmi.RemoteException e1) {
 				e1.printStackTrace();
 			}
@@ -257,6 +268,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	private void setAbleToStartGame() {
 		if (!knoppenBox.getChildren().contains(startGame))
 			knoppenBox.getChildren().add(startGame);
+			completeBox.getChildren().remove(wachten);
 
 	}
 
