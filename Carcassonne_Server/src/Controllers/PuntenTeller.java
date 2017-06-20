@@ -131,13 +131,6 @@ public class PuntenTeller {
 
 	}
 
-
-	/**
-	 * Berekent een complete weg en houdt alles bij
-	 *
-	 * @param tile Geef de gewenste tile mee
-	 * @param bord Geef het bord mee
-	 */
 	int eindes = 0;
 	Tile startTile;
 	boolean startTileFoundTwice = false;
@@ -145,6 +138,11 @@ public class PuntenTeller {
 
 	boolean wegRond = true;
 
+	/**
+	 * Berekent een complete weg en houdt alles bij
+	 * @param tile Geef de gewenste tile mee
+	 * @param bord Geef het bord mee
+	 */
 	public void berekenWegen(Tile tile, Bord bord, entryPoint entry) {
 		ArrayList<Tile> wegNetwerk = new ArrayList<>();
 		ArrayList<Horige> horigeInNetwerk = new ArrayList<Horige>();
