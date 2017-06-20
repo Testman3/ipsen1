@@ -74,7 +74,13 @@ public class LobbyController {
 			errorSound.play();
 			alert.showAndWait();
 			return;
-		} else {
+		} else if(naam.length() < 2){
+			ableToConnect = false;
+			alert = new Alert(AlertType.ERROR, "Deze naam is te kort!", ButtonType.OK);
+			errorSound.play();
+			alert.showAndWait();
+			return;
+		}else {
 			if (controleerNaam(naam)) {
 				alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
 				errorSound.play();
@@ -85,7 +91,7 @@ public class LobbyController {
 				ableToConnect = false;
 				return;
 			} else if (getRmiStub().isGameStarted()) {
-				ableToConnect = true; //moet weer naar false
+				ableToConnect = false;
 				alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
 				errorSound.play();
 				alert.showAndWait();

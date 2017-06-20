@@ -48,10 +48,9 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 	/**
 	 * Constructor van de LobbyScene
-	 * @param controller
-	 * Geef de MenuController mee
-	 * @param lobbyController
-	 * Geef de lobbyController mee
+	 *
+	 * @param controller      Geef de MenuController mee
+	 * @param lobbyController Geef de lobbyController mee
 	 */
 	public LobbyScene(MenuController controller, LobbyController lobbyController) {
 		super(new BorderPane(), 1280, 720);
@@ -122,7 +121,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 		//Action voor de Start Game knop
 		startGame.setOnAction(e -> {
 			try {
-				if(controller.loadedFile == null) {
+				if (controller.loadedFile == null) {
 					lobbyController.RMIstub.startenGame();
 				} else {
 					lobbyController.RMIstub.startenGame(controller.loadedFile);
@@ -183,13 +182,14 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			if (lobbyController.RMIstub.isGameStarted()) {
 				starten = true;
 			}
-		} catch (NoSuchObjectException e2){
+		} catch (NoSuchObjectException e2) {
 			enableThread = false;
+
 			Platform.runLater(() -> {
 				errorSound.play();
-			Alert alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis met het server... Probeer de server opnieuw te sarten!", ButtonType.OK);
-			alert.showAndWait();
-			leaveGame.fire();
+				Alert alert = new Alert(Alert.AlertType.ERROR, "Er is iets mis met het server... Probeer de server opnieuw te sarten!", ButtonType.OK);
+				alert.showAndWait();
+				leaveGame.fire();
 			});
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
@@ -231,9 +231,12 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			//Controleer of de gekoppelde speler op de eerste plaats in de spelerlijst staat, en of hij nog geen stargame knop heeft
 			//Als dit het geval is wordt de start game knop toegevoegd aan de hbox in de lobbyscene
 			try {
-				if (lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !knoppenBox.getChildren().contains(startGame)) {
+				if (lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !knoppenBox.getChildren().contains(startGame)
+						)// <-- moet in deze if: && lobbyController.getRmiStub().getPlayerList().size() > 1
+				{
 					System.out.println("READY OM TE BEGINNEN");
 					setAbleToStartGame();
+
 				}
 
 				//Als de gekoppelde speler niet meer op de eerste plaats staat maar nog wel de startgame knop heeft
@@ -242,16 +245,19 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 					System.out.println("NIET READY!");
 					knoppenBox.getChildren().remove(startGame);
 				}
-			}catch (java.rmi.RemoteException e1){e1.printStackTrace();}
+			} catch (java.rmi.RemoteException e1) {
+				e1.printStackTrace();
+			}
 		});
 	}
 
 	/**
 	 * Deze functie plaatst een startGame knop in de lobby voor de speler die de lobby leader is
 	 */
-	public static void setAbleToStartGame() {
-		if(!knoppenBox.getChildren().contains(startGame))
+	private void setAbleToStartGame() {
+		if (!knoppenBox.getChildren().contains(startGame))
 			knoppenBox.getChildren().add(startGame);
+
 	}
 
 	private int getplayerNummer() {
