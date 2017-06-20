@@ -272,6 +272,10 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 	}
 
+	/**
+	 * Deze functie haalt het playernummer op
+	 * @return playerNummer in de vorm van een int
+	 */
 	private int getplayerNummer() {
 		int playerNummer = 0;
 		for (int i = 0; i < allenamen.size(); i++) {
