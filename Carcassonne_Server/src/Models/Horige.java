@@ -2,6 +2,10 @@ package Models;
 
 import java.io.Serializable;
 
+/**
+ * Horige klasse, is een object die de speler kan plaatsen (max 7)
+ */
+
 public class Horige implements Serializable {
 
 	Speler speler;
