@@ -91,7 +91,7 @@ public class LobbyController {
 				ableToConnect = false;
 				return;
 			} else if (getRmiStub().isGameStarted()) {
-				ableToConnect = true; //moet weer naar false
+				ableToConnect = false;
 				alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
 				errorSound.play();
 				alert.showAndWait();
