@@ -1,7 +1,6 @@
 package Controllers;
 
 import Models.*;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import java.util.ArrayList;
 
@@ -32,16 +31,8 @@ public class BordController {
 		kaartenStapel = new Stapel();
 		bord = new Bord(spelerList, tiles);
 		System.out.println("VUL BORD");
+		bord.plaatsKaartCheat(50,50,kaartenStapel.getBeginTile());
 		bord.plaatsLoadKaart(tiles);
-//		for(int x = 0; 100 < x; x++){
-//			for(int y = 0; 100 < y; y++){
-//				if(tiles[x][y].getImageID() != null) {
-//					System.out.println("Zien Tiles: " + tiles[x][y].getX());
-//					tiles[x][y] = tiles[x][y];
-//					bord.plaatsKaartCheat(tiles[x][y].getX(),tiles[x][y].getY(),tiles[x][y]);
-//				}
-//			}
-//		}
 	}
 
 	/**
