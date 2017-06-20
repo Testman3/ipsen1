@@ -119,7 +119,7 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 			mediaPlayer.stop();
 			musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 			musicPlayer.setVolume(0.25);
-			musicPlayer.setRate(1.15);
+			musicPlayer.setRate(1.10);
 			musicPlayer.play();
 		}else if (SettingsScene.optieGeluid){
 			turnSound.stop();
