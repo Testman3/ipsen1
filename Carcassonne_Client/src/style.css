@@ -39,6 +39,10 @@
     -fx-font-size: 4em;
 }
 
+#wachten{
+    -fx-font-size: 3em;
+}
+
 #inGameKnoppen {
 	-fx-font-size: 4em;
 }
