@@ -5,17 +5,16 @@ import org.json.simple.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Deze klasse zorgt voor data die de speler heeft.
+ */
 public class Speler implements Serializable {
 
 	private String naam;
-
 	private boolean beurt = false;
-
 	private int punten;
-
 	private ArrayList<Horige> horigeBeschikbaar;
 	private ArrayList<Horige> horigeGebruikt;
-
 	private String horigeKleur;
 
 	public Speler(){
@@ -40,7 +39,7 @@ public class Speler implements Serializable {
 	// Overload voor saven game
 	/**
 	 * Maak speler
-	 * @param naam ZijdeType object
+	 * @param naam naam van de type String
 	 * @param punten aantal punten
 	 * @param beurt spelerbeurt boolean
 	 * @param horigeBeschikbaar horigeGebruikt beschikbaar int
@@ -56,16 +55,31 @@ public class Speler implements Serializable {
 		this.horigeKleur = horigeKleur;
 	}
 
+	/**
+	 * Maak Speler
+	 * @param naam naam van de type String.
+	 * @param beurt spelerbeurt boolean.
+	 * @param punten aantal punten van de type int.
+	 */
 	public Speler(String naam, boolean beurt, int punten){
 		this.naam = naam;
 		this.beurt = beurt;
 		this.punten = punten;
 	}
 
+	/**
+	 * Geeft de horigekleur terug
+	 * @return Return me de horigeKleur
+	 */
 	public String getHorigeKleur(){
 		return horigeKleur;
 	}
 
+	/**
+	 * Set horigekleur
+	 * @param kleur
+	 * Geeft kleur mee in de type String
+	 */
 	public void setHorigeKleur(String kleur){
 		this.horigeKleur = kleur;
 	}
@@ -137,7 +151,10 @@ public class Speler implements Serializable {
 		return this.horigeGebruikt.size();
 	}
 
-	// Return alle variables van speler
+	/**
+	 * Deze functie zorgt dat de spelerdata terug wordt gegeven
+	 * @return speler van de type JSONOBJECT
+	 */
 	public JSONObject getSpelerData(){
 
 			JSONObject speler = new JSONObject();

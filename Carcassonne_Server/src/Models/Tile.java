@@ -1,7 +1,7 @@
 package Models;
 
 /**
- * Created by Marti on 8-6-2017.
+ * Een kaart die je kan plaatsen op het speelveld. Op deze tile kan een horige geplaatst worden.
  */
 public class Tile {
 
@@ -28,6 +28,17 @@ public class Tile {
 
 	}
 
+	/**
+	 * Een nieuwe tile die nog niet geplaatst is
+	 * @param imageId de css id van de kaart
+	 * @param noordZijde de noordzijde van de kaart
+	 * @param oostZijde de oostzijde van de kaart
+	 * @param zuidZijde de zuidzuide van de kaart
+	 * @param westZijde de westzijde van de kaart
+	 * @param heeftKlooster of de tile een klooster heeft
+	 * @param heeftBonus of de tile een bonus heeft
+	 * @param horigen de mogelijke posities om een horige te plaatsen
+	 */
 	public Tile(String imageId, Zijde noordZijde, Zijde oostZijde, Zijde zuidZijde, Zijde westZijde, boolean heeftKlooster, boolean heeftBonus, Horige.Posities[] horigen) {
 		this.imageID = imageId;
 		this.noordZijde = noordZijde;
@@ -42,7 +53,17 @@ public class Tile {
 		}
 	}
 
+	/**
+	 * Plaatst een horige op het speelveld
+	 * @param posititie de positie waar de horige op de tile wordt geplaatst
+	 * @param speler de speler die hem plaatst
+	 */
 	public void plaatsHorige(Horige.Posities posititie, Speler speler){
+
+		if(speler.getBeschikbareHorigeInt() == 0){
+			return;
+		}
+
 		if(posititie == Horige.Posities.NOORD){
 			noordZijde.setHorigeSpeler(speler.getBeschikbareHorige());
 			noordZijde.getHorigeSpeler().setPositie(Horige.Posities.NOORD);
@@ -61,11 +82,20 @@ public class Tile {
 		}
 	}
 
+	/**
+	 * Plaatst de tile
+	 * @param x gegeven X coordinaat
+	 * @param y gegeven Y coordinaat
+	 */
 	public void plaats(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * Checkt of er ergens een horige op de tile staat
+	 * @return de horige die op de tile staat (null als er geen is)
+	 */
 	public Horige getGeplaatsteHorigePositie(){
 		if(noordZijde.horigeSpeler != null){
 			return noordZijde.horigeSpeler;
@@ -81,6 +111,9 @@ public class Tile {
 		return null;
 	}
 
+	/**
+	 * Resets de rotation van de kaart naar 0 (standard rotation)
+	 */
 	public void resetRotation() {
 		while(rotation != 0){
 			draaiKaart();
@@ -90,6 +123,9 @@ public class Tile {
 		return imageID;
 	}
 
+	/**
+	 * Draait de kaart en alle zijdes mee
+	 */
 	public void draaiKaart() {
 
 		Zijde noordZijdetmp = noordZijde;
@@ -231,6 +267,9 @@ public class Tile {
 		this.horigenZijdes = horigenZijdes;
 	}
 
+	/**
+	 * Verwijderd de horige op de tile
+	 */
 	public void removeHorige() {
 		noordZijde.setHorigeSpeler(null);
 		oostZijde.setHorigeSpeler(null);
