@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class GameScene extends Scene implements SceneInitialiser{
 
 	private MenuController controller;
-	public GameController gameController;
+	GameController gameController;
 	public BorderPane mainPane;
 	private Pane tilesPane;
 	private HBox test;
@@ -458,6 +458,10 @@ public class GameScene extends Scene implements SceneInitialiser{
 		});
 	}
 
+	/**
+	 * Deze functie geeft de MenuController terug
+	 * @return controller
+	 */
 	public MenuController getController() {
 		return controller;
 	}
@@ -484,7 +488,7 @@ public class GameScene extends Scene implements SceneInitialiser{
 	 * Geeft spelers een horige kleur
 	 * @param spelerNummer Specifieke speler
 	 */
-	public void setHorigeKleur(int spelerNummer){
+	void setHorigeKleur(int spelerNummer){
 		switch (spelerNummer) {
 			case 0:
 				spelerKleur = "horigeRood";
@@ -512,7 +516,7 @@ public class GameScene extends Scene implements SceneInitialiser{
 	/**
 	 *  Switcht naar volledig scherm
 	 */
-	public void switchFullScreenMode(){
+	void switchFullScreenMode(){
 		controller.getGameStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 		controller.getGameStage().setFullScreenExitHint(null);
 		controller.getGameStage().setFullScreen(SettingsScene.optieFullscreen);
@@ -620,7 +624,11 @@ public class GameScene extends Scene implements SceneInitialiser{
 
 	}
 
-	public VBox getVerticaal() {
+	/**
+	 * Deze functie geeft de VBox verticaal terug, waar o.a. de spelernamen instaan ingame
+	 * @return verticaal
+	 */
+	VBox getVerticaal() {
 		return verticaal;
 	}
 }
