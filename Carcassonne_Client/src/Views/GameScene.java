@@ -133,7 +133,8 @@ public class GameScene extends Scene implements SceneInitialiser{
 		draaiImage.setFitWidth(200);
 
 		//size eindigButton
-
+		eindigBeurtImage.setFitHeight(65);
+		eindigBeurtImage.setFitWidth(265);
 
 
 		//Set PickOnBounds
@@ -527,7 +528,7 @@ public class GameScene extends Scene implements SceneInitialiser{
 			for (int i = 0; i < playerViews.length ; i++) {
 				playerViews[i].setMinSize(190, 110);
 				playerViews[i].setMaxSize(190, 110);
-				onderkantElement.setSpacing(200);
+				onderkantElement.setSpacing(230);
 				links.setSpacing(13);
 				draaiImage.setFitHeight(95);
 				draaiImage.setFitWidth(230);

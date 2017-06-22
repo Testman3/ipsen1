@@ -68,15 +68,15 @@ public class LobbyController {
 			return;
 		}
 
-		if(naam.length() > 20){
+		if(naam.length() > 10){
 			ableToConnect = false;
-			alert = new Alert(AlertType.ERROR, "Deze naam is te lang!", ButtonType.OK);
+			alert = new Alert(AlertType.ERROR, "De naam mag niet langer zijn dan 10 tekens!", ButtonType.OK);
 			errorSound.play();
 			alert.showAndWait();
 			return;
 		} else if(naam.length() < 2){
 			ableToConnect = false;
-			alert = new Alert(AlertType.ERROR, "Deze naam is te kort!", ButtonType.OK);
+			alert = new Alert(AlertType.ERROR, "De naam mag niet korter zijn dan 2 tekens!", ButtonType.OK);
 			errorSound.play();
 			alert.showAndWait();
 			return;
