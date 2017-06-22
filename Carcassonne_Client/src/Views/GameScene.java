@@ -528,11 +528,11 @@ public class GameScene extends Scene implements SceneInitialiser{
 				playerViews[i].setMinSize(190, 110);
 				playerViews[i].setMaxSize(190, 110);
 				onderkantElement.setSpacing(200);
-				links.setSpacing(16);
-				draaiImage.setFitHeight(105);
-				draaiImage.setFitWidth(240);
-				eindigBeurtImage.setFitHeight(105);
-				eindigBeurtImage.setFitWidth(305);
+				links.setSpacing(13);
+				draaiImage.setFitHeight(95);
+				draaiImage.setFitWidth(230);
+				eindigBeurtImage.setFitHeight(95);
+				eindigBeurtImage.setFitWidth(295);
 
 			}
 
