@@ -524,6 +524,10 @@ public class GameScene extends Scene implements SceneInitialiser{
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			double schermBreedte = screenSize.getWidth();
 			double schermHoogte = screenSize.getHeight();
+			for (int i = 0; i < playerViews.length ; i++) {
+				playerViews[i].setMinSize(200, 120);
+				playerViews[i].setMaxSize(200, 120);
+			}
 
 			mainPane.setMinSize(schermBreedte, schermHoogte);
 			getStylesheets().add("FullscreenStyle.css");
@@ -532,6 +536,10 @@ public class GameScene extends Scene implements SceneInitialiser{
 			getStylesheets().add("style.css");
 			getStylesheets().remove("FullscreenStyle.css");
 			mainPane.setMinSize(breedte, hoogte);
+			for (int i = 0; i < playerViews.length ; i++) {
+				playerViews[i].setMinSize(150, 70);
+				playerViews[i].setMaxSize(150, 70);
+			}
 		}
 	}
 
