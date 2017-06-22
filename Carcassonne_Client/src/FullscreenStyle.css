@@ -32,7 +32,7 @@
 }
 
 #inGameKnoppen {
-	-fx-font-size: 4em;
+	-fx-font-size: 4,5em;
 }
 
 #draaiImage{
@@ -52,7 +52,7 @@
 }
 
 #KaartenLeft{
-	-fx-font-size: 30px;
+	-fx-font-size: 40px;
 }
 
 #horigePreview {
