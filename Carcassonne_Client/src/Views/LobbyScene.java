@@ -237,8 +237,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			//Als dit het geval is wordt de start game knop toegevoegd aan de hbox in de lobbyscene
 			try {
 				if (lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !knoppenBox.getChildren().contains(startGame)
-						)// <-- moet in deze if: && lobbyController.getRmiStub().getPlayerList().size() > 1
-				{
+						&& lobbyController.getRmiStub().getPlayerList().size() > 1) {
 					System.out.println("READY OM TE BEGINNEN");
 					setAbleToStartGame();
 
@@ -249,10 +248,10 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 				else if (!lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && knoppenBox.getChildren().contains(startGame)) {
 					System.out.println("NIET READY!");
 					knoppenBox.getChildren().remove(startGame);
-				//	completeBox.getChildren().add(wachten);
+
 				}
 
-				if(!lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !completeBox.getChildren().contains(wachten)){
+				if (!lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !completeBox.getChildren().contains(wachten)) {
 					completeBox.getChildren().add(wachten);
 				}
 
@@ -268,12 +267,13 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	private void setAbleToStartGame() {
 		if (!knoppenBox.getChildren().contains(startGame))
 			knoppenBox.getChildren().add(startGame);
-			completeBox.getChildren().remove(wachten);
+		completeBox.getChildren().remove(wachten);
 
 	}
 
 	/**
 	 * Deze functie haalt het playernummer op
+	 *
 	 * @return playerNummer in de vorm van een int
 	 */
 	private int getplayerNummer() {
