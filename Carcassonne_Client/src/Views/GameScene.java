@@ -136,6 +136,7 @@ public class GameScene extends Scene implements SceneInitialiser{
 		eindigBeurtImage.setFitHeight(65);
 		eindigBeurtImage.setFitWidth(265);
 
+
 		//Set PickOnBounds
 		mainPane.setPickOnBounds(false);
 		links.setPickOnBounds(false);
@@ -524,6 +525,17 @@ public class GameScene extends Scene implements SceneInitialiser{
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			double schermBreedte = screenSize.getWidth();
 			double schermHoogte = screenSize.getHeight();
+			for (int i = 0; i < playerViews.length ; i++) {
+				playerViews[i].setMinSize(190, 110);
+				playerViews[i].setMaxSize(190, 110);
+				onderkantElement.setSpacing(230);
+				links.setSpacing(13);
+				draaiImage.setFitHeight(95);
+				draaiImage.setFitWidth(230);
+				eindigBeurtImage.setFitHeight(95);
+				eindigBeurtImage.setFitWidth(295);
+
+			}
 
 			mainPane.setMinSize(schermBreedte, schermHoogte);
 			getStylesheets().add("FullscreenStyle.css");
@@ -532,6 +544,16 @@ public class GameScene extends Scene implements SceneInitialiser{
 			getStylesheets().add("style.css");
 			getStylesheets().remove("FullscreenStyle.css");
 			mainPane.setMinSize(breedte, hoogte);
+			for (int i = 0; i < playerViews.length ; i++) {
+				playerViews[i].setMinSize(150, 70);
+				playerViews[i].setMaxSize(150, 70);
+				onderkantElement.setSpacing(100);
+				links.setSpacing(6);
+				draaiImage.setFitHeight(65);
+				draaiImage.setFitWidth(200);
+				eindigBeurtImage.setFitHeight(65);
+				eindigBeurtImage.setFitWidth(265);
+			}
 		}
 	}
 
