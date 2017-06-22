@@ -525,8 +525,9 @@ public class GameScene extends Scene implements SceneInitialiser{
 			double schermBreedte = screenSize.getWidth();
 			double schermHoogte = screenSize.getHeight();
 			for (int i = 0; i < playerViews.length ; i++) {
-				playerViews[i].setMinSize(200, 120);
-				playerViews[i].setMaxSize(200, 120);
+				playerViews[i].setMinSize(190, 110);
+				playerViews[i].setMaxSize(190, 110);
+				onderkantElement.setSpacing(200);
 			}
 
 			mainPane.setMinSize(schermBreedte, schermHoogte);
@@ -539,6 +540,7 @@ public class GameScene extends Scene implements SceneInitialiser{
 			for (int i = 0; i < playerViews.length ; i++) {
 				playerViews[i].setMinSize(150, 70);
 				playerViews[i].setMaxSize(150, 70);
+				onderkantElement.setSpacing(100);
 			}
 		}
 	}

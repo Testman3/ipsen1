@@ -8,6 +8,7 @@
 	-fx-text-fill: white;
 	-fx-stroke: black;
 }
+
 .button {
 	-fx-padding: 0;
 	-fx-background-color: transparent;
@@ -53,9 +54,6 @@
 #KaartenLeft{
 	-fx-font-size: 30px;
 }
-
-
-
 
 #horigePreview {
 	-fx-image: url("Afbeeldingen/Horige_Preview.png");
