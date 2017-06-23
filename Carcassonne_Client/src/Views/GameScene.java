@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.BordController;
 import Controllers.GameController;
 import Controllers.MenuController;
 import Models.GameClient;
@@ -245,7 +246,7 @@ public class GameScene extends Scene implements SceneInitialiser{
 		tilesPane.getChildren().add(verticaal);
 		tilesPane.setId("spelBordBackground");
 
-		//Verplaatsen over de map met W A S D keys, Speed is de snelheid dat je verplaatst.
+		//Set key actions
 		int speed = 20;
 		setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.W) {
@@ -256,6 +257,12 @@ public class GameScene extends Scene implements SceneInitialiser{
 				verticaal.setLayoutY(verticaal.getLayoutY() - speed);
 			} else if (e.getCode() == KeyCode.D) {
 				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
+			} else if (e.getCode() == KeyCode.F4){
+				try {
+					RmiStub.setEindespel();
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -300,8 +307,8 @@ public class GameScene extends Scene implements SceneInitialiser{
 			if (tilesPane.getScaleY() > 6.0) {
 				tilesPane.setScaleY(6.0);
 			}
-
 		});
+
 	}
 
 	/**

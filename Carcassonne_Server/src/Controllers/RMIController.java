@@ -202,4 +202,9 @@ public class RMIController implements RMIInterface {
 	public int getAvailableHorige(String naam) throws RemoteException {
 		return serverManager.bordController.bord.getSpelerHorige(naam);
 	}
+
+	@Override
+	public void setEindespel(){
+		serverManager.bordController.setStopgetal();
+	}
 }
