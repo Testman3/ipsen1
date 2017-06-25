@@ -51,7 +51,13 @@ public class Speler implements Serializable {
 		this.punten = punten;
 		this.beurt = beurt;
 		this.horigeBeschikbaar = new ArrayList<Horige>(horigeBeschikbaar);
+		for(int i = 0; i < horigeBeschikbaar; i ++){
+			this.horigeBeschikbaar.add(new Horige(this));
+		}
 		this.horigeGebruikt = new ArrayList<Horige>(horigeGebruikt);
+		for(int i = 0; i < horigeGebruikt; i ++){
+			this.horigeGebruikt.add(new Horige(this));
+		}
 		this.horigeKleur = horigeKleur;
 	}
 
