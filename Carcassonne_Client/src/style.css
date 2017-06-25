@@ -274,3 +274,11 @@
 	-fx-image: url("Afbeeldingen/Horige_Used.png");
 }
 
+#tekstInvoer{
+	-fx-font-size: 4.5em;
+	-fx-background-color: rgba(236, 247, 255, 0.11);
+	-fx-border-color: black;
+	-fx-border-width: 3;
+	-fx-border-radius: 3;
+}
+

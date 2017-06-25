@@ -57,10 +57,10 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 
 		naamVeld = new TextField("Player1");
 		naamVeld.setMaxWidth(maxTextFieldWidth);
-		naamVeld.setId("standardLabel");
+		naamVeld.setId("tekstInvoer");
 		ipVeld = new TextField("127.0.0.1");
 		ipVeld.setMaxWidth(maxTextFieldWidth);
-		ipVeld.setId("standardLabel");
+		ipVeld.setId("tekstInvoer");
 
 		joinViewButtons = new VBox(10);
 		joinViewButtons.setId("schild");
