@@ -13,6 +13,10 @@
     -fx-background-color: transparent;
     }
 
+.alertBox{
+	-fx-font-size: 3em;
+}
+
 #checkBox {
 }
 
@@ -281,4 +285,3 @@
 	-fx-border-width: 3;
 	-fx-border-radius: 3;
 }
-

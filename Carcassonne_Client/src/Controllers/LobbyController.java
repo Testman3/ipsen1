@@ -4,6 +4,7 @@ import Models.RMIInterface;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.media.AudioClip;
 
 import java.nio.file.Paths;
@@ -40,6 +41,14 @@ public class LobbyController {
 
 		if (!validateIP(ip)) {
 			alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
+
+			///////////////////////////////////////////////////////////
+			//Style voorbeeld Alert boxen, moet per new Alert voor nu//
+			///////////////////////////////////////////////////////////
+			DialogPane alertPane = alert.getDialogPane();
+			alertPane.getStylesheets().add("style.css");
+			alertPane.getStyleClass().add("alertBox");
+
 			errorSound.play();
 			alert.showAndWait();
 			return;
