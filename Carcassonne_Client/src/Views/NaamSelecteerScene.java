@@ -1,6 +1,7 @@
 package Views;
 
 
+import Controllers.LobbyController;
 import Controllers.MenuController;
 import commonFunctions.SceneInitialiser;
 import commonFunctions.SmartButton;
@@ -26,6 +27,7 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 	private ChoiceBox naamDropDown;
 	private SmartButton continueButton;
 
+	private LobbyScene lobbyScene;
 
 	/**
 	 * Constructor van de NaamSelecteerScene
@@ -79,14 +81,6 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 			controller.backToMainMenu();
 		});
 
-		continueButton.setOnAction(e -> {
-		//TODO Add functionality
-		});
-
-		ArrayList<String> spelerNamen = new ArrayList<>();
-		spelerNamen.add("Henk");
-		spelerNamen.add("Martijn");
-		fillDropDown(spelerNamen);
 	}
 
 	public void fillDropDown(ArrayList<String> spelerNamen){
@@ -95,4 +89,10 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 	}
 		naamDropDown.getSelectionModel().selectFirst();
 	}
+
+	public void join(LobbyScene scene, ArrayList<String> spelerNamen ){
+		this.lobbyScene = scene;
+		fillDropDown(spelerNamen);
+	}
+
 }

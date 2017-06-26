@@ -228,6 +228,12 @@ public interface RMIInterface extends Remote {
 	 * Set stapel op een getal om de spel erder te stoppen
 	 */
 	public void setEindespel() throws RemoteException;
+
+	public ArrayList<String> getGeladenSpelerNamen() throws RemoteException;
+
+	public void laadAlleSpelerNamen(File file) throws RemoteException;
+
+
 }
 
 

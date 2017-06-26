@@ -461,6 +461,24 @@ public class FileManager {
 	}
 
 	/**
+	 * Geeft een list van alle spelernamen, zodat deze gekozen kunnen worden in de lobby.
+	 * @param load
+	 * @return
+	 */
+	public static ArrayList<String> getAlleSpelerNamen(File load){
+
+		JSONObject jsonObject = loadGame(load);
+
+		JSONArray JSONSpelers = (JSONArray) jsonObject.get("Spelers");
+
+		ArrayList<String> alleSpelerStrings = new ArrayList<>();
+		for(Object number : JSONSpelers) {
+			JSONObject jsonNumber = (JSONObject) number;
+			alleSpelerStrings.add((String) jsonNumber.get("spelerNaam"));
+		}
+		return alleSpelerStrings;
+	}
+	/**
 	 * Laad stapel uit json file
 	 * @param load JSONStapel in een file (Stapel in JSON format)
 	 * @return return ArrayList tiles

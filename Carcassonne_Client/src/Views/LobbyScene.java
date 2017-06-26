@@ -161,6 +161,29 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 	 * thread runt de Update functie elke 500 Ms
 	 */
 	public void Join() {
+
+		if(controller.loadedFile != null){
+			try {
+				lobbyController.getRmiStub().laadAlleSpelerNamen(controller.loadedFile);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if(lobbyController.isGameLoaded()){
+			ArrayList<String> spelerStrings = null;
+			try {
+			spelerStrings = lobbyController.getRmiStub().getGeladenSpelerNamen();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+
+			controller.setNaamSelecteerScene();
+			controller.getNaamSelecteerScene().join(this, spelerStrings);
+
+		}
+
+
 		enableThread = true;
 		lobbyThread = new Thread(() -> {
 			while (enableThread == true) {
@@ -236,7 +259,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			//Controleer of de gekoppelde speler op de eerste plaats in de spelerlijst staat, en of hij nog geen stargame knop heeft
 			//Als dit het geval is wordt de start game knop toegevoegd aan de hbox in de lobbyscene
 			try {
-				if (lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !knoppenBox.getChildren().contains(startGame)
+				if (lobbyController.getRmiStub().getPlayerList().get(0).equals(controller.getSpelernaam()) && !knoppenBox.getChildren().contains(startGame)
 						&& lobbyController.getRmiStub().getPlayerList().size() > 1) {
 					System.out.println("READY OM TE BEGINNEN");
 					setAbleToStartGame();
@@ -245,13 +268,13 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 
 				//Als de gekoppelde speler niet meer op de eerste plaats staat maar nog wel de startgame knop heeft
 				//verwijderen we de startgame knop voor de gekoppelde speler uit de hbox in lobbyscene
-				else if (!lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && knoppenBox.getChildren().contains(startGame)) {
+				else if (!lobbyController.getRmiStub().getPlayerList().get(0).equals(controller.getSpelernaam()) && knoppenBox.getChildren().contains(startGame)) {
 					System.out.println("NIET READY!");
 					knoppenBox.getChildren().remove(startGame);
 
 				}
 
-				if (!lobbyController.getRmiStub().getPlayerList().get(0).contains(controller.getSpelernaam()) && !completeBox.getChildren().contains(wachten)) {
+				if (!lobbyController.getRmiStub().getPlayerList().get(0).equals(controller.getSpelernaam()) && !completeBox.getChildren().contains(wachten)) {
 					completeBox.getChildren().add(wachten);
 				}
 

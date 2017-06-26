@@ -116,6 +116,16 @@ public class LobbyController {
 
 	}
 
+	public boolean isGameLoaded() {
+		try {
+			return RMIstub.getLoadedGame();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+
 
 	private boolean controleerNaam(String naam) {
 		if (RMIstub == null) {
