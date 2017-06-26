@@ -1,11 +1,15 @@
 package Models;
 
 import Controllers.ServerManager;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.media.AudioClip;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +20,7 @@ import java.util.Map;
  */
 
 public class FileManager {
+	private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
 
 	private ServerManager manager;
 	static Map<String, Speler> Spelers = new HashMap<String, Speler>();
@@ -213,6 +218,10 @@ public class FileManager {
 			return newTextFile;
 		} catch (IOException iox) {
 			//do stuff with exception
+			Alert alert;
+			alert = new Alert(Alert.AlertType.ERROR, "Opslaan mislukt", ButtonType.OK);
+			errorSound.play();
+			alert.showAndWait();
 			iox.printStackTrace();
 		}
 		return null;
