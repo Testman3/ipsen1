@@ -105,6 +105,7 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 
 			if (lobbyController.canConnect()){
 				controller.setLobbyScene();
+				controller.getLobbyScene().Join();
 				try {
 					lobbyController.RMIstub.addPlayer(naamVeld.getText());
 					controller.setSpelernaam(naamVeld.getText());

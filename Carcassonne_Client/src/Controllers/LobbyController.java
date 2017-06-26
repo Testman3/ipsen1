@@ -171,6 +171,13 @@ public class LobbyController {
 		return false;
 	}
 
+	public void updateNaam(String old, String niew){
+		try {
+			RMIstub.updateSpelerNaam(old, niew);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 	public RMIInterface getRmiStub() {
 		return RMIstub;
 	}

@@ -233,6 +233,7 @@ public interface RMIInterface extends Remote {
 
 	public void laadAlleSpelerNamen(File file) throws RemoteException;
 
+	public void updateSpelerNaam(String oldNaam, String newNaam) throws RemoteException;
 
 }
 

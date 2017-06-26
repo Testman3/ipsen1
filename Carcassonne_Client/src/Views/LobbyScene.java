@@ -179,7 +179,7 @@ public class LobbyScene extends Scene implements SceneInitialiser {
 			}
 
 			controller.setNaamSelecteerScene();
-			controller.getNaamSelecteerScene().join(this, spelerStrings);
+			controller.getNaamSelecteerScene().join(lobbyController, spelerStrings);
 
 		}
 

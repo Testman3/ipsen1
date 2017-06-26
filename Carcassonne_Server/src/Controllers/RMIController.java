@@ -220,5 +220,14 @@ public class RMIController implements RMIInterface {
 		ServerManager.gameLoaded = true;
 	}
 
+	@Override
+	public void updateSpelerNaam(String oldNaam, String newNaam) throws RemoteException {
+		for (Speler speler : alleSpelers) {
+			if (speler.getNaam().equals(oldNaam)) {
+				speler.setNaam(newNaam);
+			}
+		}
+	}
+
 
 }

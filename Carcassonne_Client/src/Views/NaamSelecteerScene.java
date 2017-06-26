@@ -27,7 +27,7 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 	private ChoiceBox naamDropDown;
 	private SmartButton continueButton;
 
-	private LobbyScene lobbyScene;
+	private LobbyController lobbyController;
 
 	/**
 	 * Constructor van de NaamSelecteerScene
@@ -59,7 +59,7 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 		backToHome = new SmartButton("Terug naar Hoofdmenu");
 		backToHome.setId("terugNaarMenu");
 
-		credits = new SmartLabel("Credits");
+		credits = new SmartLabel("Selecteer Naam");
 		credits.setId("credits");
 
 		alleNamen.getChildren().addAll(naamDropDown, continueButton);
@@ -81,6 +81,14 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 			controller.backToMainMenu();
 		});
 
+		 continueButton.setOnAction(e -> {
+		 	controller.setLobbyScene();
+		 	String oldnaam = controller.getSpelernaam();
+		 	controller.setSpelernaam((String)naamDropDown.getValue());
+		 	String newnaam = controller.getSpelernaam();
+			lobbyController.updateNaam(oldnaam,newnaam);
+		 });
+
 	}
 
 	public void fillDropDown(ArrayList<String> spelerNamen){
@@ -90,8 +98,8 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 		naamDropDown.getSelectionModel().selectFirst();
 	}
 
-	public void join(LobbyScene scene, ArrayList<String> spelerNamen ){
-		this.lobbyScene = scene;
+	public void join(LobbyController controller, ArrayList<String> spelerNamen ){
+		this.lobbyController = controller;
 		fillDropDown(spelerNamen);
 	}
 

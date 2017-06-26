@@ -121,7 +121,6 @@ public class MenuController {
 	 */
 	public void setLobbyScene(){
 		gameStage.setScene(lobbyScene);
-		getLobbyScene().Join();
 	}
 
 	/**
