@@ -150,7 +150,7 @@ public class PuntenTeller {
 		startTile = tile;
 		startTileFoundTwice = false;
 		horigePoints = new ArrayList<>();
-		berekenWeg(tile, entry, false, bord,wegNetwerk, horigeInNetwerk);
+		berekenWeg(tile, entry, true, bord,wegNetwerk, horigeInNetwerk);
 
 		/*
 		for (int i = 0; i < wegNetwerk.size(); i++) {
@@ -193,6 +193,17 @@ public class PuntenTeller {
 		GEEN
 	}
 
+
+	private boolean isTweedeEindeZelfde(ArrayList<Tile> netwerk,Bord bord, int x, int y){
+		Tile tile = bord.getTile(x,y);
+		if(tile == null){
+			return false;
+		}
+		if(netwerk.contains(tile)){
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * Kijkt of er aan de weg een andere weg zit (en of de weg dus een doorlopend geheel is)
 	 * Deze functie mag niet gerunt worden (Alleen via berekenWegen)
@@ -209,6 +220,44 @@ public class PuntenTeller {
 		}
 
 		if (netwerk.contains(tile)) {
+
+			if(wasEinde){
+				return;
+			}
+			if(entry == entryPoint.NOORD){
+				if(isTweedeEindeZelfde(netwerk,bord,tile.getX() + 1,tile.getY()) ||
+					isTweedeEindeZelfde(netwerk,bord,tile.getX() - 1,tile.getY()) ||
+					isTweedeEindeZelfde(netwerk,bord,tile.getX(),tile.getY() - 1)) {
+					wegRond = true;
+					return;
+				}
+			}
+			if(entry == entryPoint.OOST){
+				if(isTweedeEindeZelfde(netwerk,bord,tile.getX() + 1,tile.getY()) ||
+						isTweedeEindeZelfde(netwerk,bord,tile.getX() ,tile.getY() + 1) ||
+						isTweedeEindeZelfde(netwerk,bord,tile.getX(),tile.getY() - 1)) {
+					wegRond = true;
+					return;
+				}
+			}
+			if(entry == entryPoint.ZUID){
+				if(isTweedeEindeZelfde(netwerk,bord,tile.getX() + 1,tile.getY()) ||
+						isTweedeEindeZelfde(netwerk,bord,tile.getX() - 1,tile.getY()) ||
+						isTweedeEindeZelfde(netwerk,bord,tile.getX(),tile.getY() + 1)) {
+					wegRond = true;
+					return;
+				}
+			}
+			if(entry == entryPoint.WEST){
+				if(isTweedeEindeZelfde(netwerk,bord,tile.getX() - 1,tile.getY()) ||
+						isTweedeEindeZelfde(netwerk,bord,tile.getX(),tile.getY() + 1) ||
+						isTweedeEindeZelfde(netwerk,bord,tile.getX(),tile.getY() - 1)) {
+					wegRond = true;
+					return;
+				}
+			}
+
+
 			if (tile == startTile && !wasEinde) {
 				wegRond = true;
 				return;
