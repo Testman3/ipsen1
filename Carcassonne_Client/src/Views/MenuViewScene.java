@@ -14,6 +14,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+
 import static javafx.scene.media.MediaPlayer.INDEFINITE;
 
 /**
@@ -54,6 +56,9 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 		mainPane.setCenter(buttonVBox);
 		buttonVBox.setAlignment(Pos.CENTER);
 
+
+
+
 		initAction();
 	}
 
@@ -85,6 +90,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 
 		knoppen[1].setText("Laden spel");
 		knoppen[1].setOnAction(e -> {
+//			controller.setNaamSelecteerScene();
 			controller.setPreLobbyScene();
 			controller.loadedFile = controller.openFileBrowser();
 		});

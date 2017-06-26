@@ -23,6 +23,7 @@ public class MenuController {
 	private SettingsScene settingsScene;
 	private CreditsScene creditsScene;
 	private InGameMenuStage inGameMenuStage;
+	private NaamSelecteerScene naamSelecteerScene;
 	private String spelernaam;
 	public File loadedFile;
 
@@ -51,6 +52,7 @@ public class MenuController {
 		preLobbyScene = new PreLobbyScene(this, lobbyController);
 		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
+		naamSelecteerScene = new NaamSelecteerScene(this);
 
 		setMenuViewScene();
 		//setGameScene();
@@ -157,6 +159,11 @@ public class MenuController {
 		gameStage.setScene(creditsScene);
 	}
 
+	public void setNaamSelecteerScene(){
+
+		gameStage.setScene(naamSelecteerScene);
+	}
+
 	/**
 	 * Deze functie haalt de gamestage op
 	 * @return gameStage
@@ -196,6 +203,13 @@ public class MenuController {
 	public MenuViewScene getMenuViewScene() {
 		return menuViewScene;
 	}
+
+	/**
+	 * Deze functie haalt de naamSelecteerScene op
+	 * @return naamSelecteerScene
+	 */
+	public NaamSelecteerScene getNaamSelecteerScene(){return naamSelecteerScene;}
+
 
 	/**
 	 * Deze functie haalt de preLobbyScene op
