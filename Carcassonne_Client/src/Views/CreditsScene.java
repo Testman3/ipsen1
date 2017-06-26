@@ -56,10 +56,6 @@ public class CreditsScene extends Scene implements SceneInitialiser {
 		credits = new SmartLabel("Credits");
 		credits.setId("credits");
 
-
-
-
-
 		/*
 		 * 0 = Martijn 1 = Jusin 2 = Raymon 3 = Haitam 4 = Henk
 		 */

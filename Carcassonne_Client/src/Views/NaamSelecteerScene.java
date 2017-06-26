@@ -7,6 +7,7 @@ import commonFunctions.SmartButton;
 import commonFunctions.SmartLabel;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -23,6 +24,7 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 	private VBox alleElementen;
 	private VBox alleNamen;
 	private ChoiceBox naamDropDown;
+	private SmartButton continueButton;
 
 
 	/**
@@ -44,8 +46,10 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 		alleElementen = new VBox(10);
 		alleNamen= new VBox(5);
 		alleElementen.setId("schild");
-		naamDropDown = new ChoiceBox();
-		alleNamen.getChildren().add(naamDropDown);
+		naamDropDown = new ChoiceBox();;
+		naamDropDown.setId("menuKnop");
+		continueButton = new SmartButton("Doorgaan");
+		continueButton.setId("dropDown");
 
 		mainPane.getStylesheets().add("style.css");
 		mainPane.setId("mainBackground");
@@ -56,15 +60,15 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 		credits = new SmartLabel("Credits");
 		credits.setId("credits");
 
+		alleNamen.getChildren().addAll(naamDropDown, continueButton);
+		alleNamen.setAlignment(Pos.CENTER);
 
 		alleElementen.getChildren().add(credits);
 		alleElementen.getChildren().add(alleNamen);
 		alleElementen.getChildren().add(backToHome);
 		alleElementen.setAlignment(Pos.CENTER);
 
-
 		mainPane.setCenter(alleElementen);
-
 
 		initAction();
 	}
@@ -73,6 +77,10 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 	public void initAction() {
 		backToHome.setOnAction(e -> {
 			controller.backToMainMenu();
+		});
+
+		continueButton.setOnAction(e -> {
+		//TODO Add functionality
 		});
 
 		ArrayList<String> spelerNamen = new ArrayList<>();
@@ -85,5 +93,6 @@ public class NaamSelecteerScene extends Scene implements SceneInitialiser{
 	for(int i = 0; i < spelerNamen.size(); i++){
 		naamDropDown.getItems().add(spelerNamen.get(i));
 	}
+		naamDropDown.getSelectionModel().selectFirst();
 	}
 }
