@@ -83,7 +83,7 @@ public class MenuViewScene extends Scene implements SceneInitialiser{
 			buttonVBox.getChildren().add(knoppen[i]);
 		}
 
-		knoppen[0].setText("Nieuw spel");
+		knoppen[0].setText("Join spel");
 		knoppen[0].setOnAction(e -> {
 			controller.setPreLobbyScene();
 		});

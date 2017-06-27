@@ -48,6 +48,7 @@ public class LobbyController {
 			DialogPane alertPane = alert.getDialogPane();
 			alertPane.getStylesheets().add("style.css");
 			alertPane.getStyleClass().add("alertBox");
+			alertPane.setMinWidth(500);
 
 			errorSound.play();
 			alert.showAndWait();
@@ -77,15 +78,15 @@ public class LobbyController {
 			return;
 		}
 
-		if(naam.length() > 10){
+		if(naam.length() > 15){
 			ableToConnect = false;
-			alert = new Alert(AlertType.ERROR, "De naam mag niet langer zijn dan 10 tekens!", ButtonType.OK);
+			alert = new Alert(AlertType.ERROR, "Je naam mag niet langer zijn dan 15 tekens!", ButtonType.OK);
 			errorSound.play();
 			alert.showAndWait();
 			return;
 		} else if(naam.length() < 2){
 			ableToConnect = false;
-			alert = new Alert(AlertType.ERROR, "De naam mag niet korter zijn dan 2 tekens!", ButtonType.OK);
+			alert = new Alert(AlertType.ERROR, "Je naam mag niet korter zijn dan 2 tekens!", ButtonType.OK);
 			errorSound.play();
 			alert.showAndWait();
 			return;

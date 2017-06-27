@@ -13,10 +13,6 @@
     -fx-background-color: transparent;
     }
 
-.alertBox{
-	-fx-font-size: 3em;
-}
-
 #checkBox {
 }
 
@@ -288,4 +284,14 @@
 	-fx-border-color: black;
 	-fx-border-width: 3;
 	-fx-border-radius: 3;
+}
+
+.alertBox{
+	-fx-font-size: 5em;
+	-fx-background-image: url("Afbeeldingen/SpelbordBackground.jpg");
+	-fx-background-position: center;
+}
+
+.alertBox .header-panel {
+	-fx-background-image: url("Afbeeldingen/SpelbordBackground.jpg");
 }
