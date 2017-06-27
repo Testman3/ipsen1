@@ -138,7 +138,7 @@ public class GameScene extends Scene implements SceneInitialiser{
 		eindigBeurtImage.setFitWidth(265);
 
 
-		//Set PickOnBounds
+		//Set PickOnBounds - Kan op alles klikken wat achter het aangegeven element staat
 		mainPane.setPickOnBounds(false);
 		links.setPickOnBounds(false);
 		onderkant.setPickOnBounds(false);
@@ -170,8 +170,6 @@ public class GameScene extends Scene implements SceneInitialiser{
 			playerViews[i] = new SpelerView();
 			playerViews[i].setMinSize(150, 70);
 			playerViews[i].setMaxSize(150, 70);
-			//playerViews[i].maxHeightProperty().bind(heightProperty().multiply(0.1));
-			//playerViews[i].maxWidthProperty().bind(widthProperty().multiply(0.1));
 			links.getChildren().add(playerViews[i]);
 		}
 
@@ -280,7 +278,6 @@ public class GameScene extends Scene implements SceneInitialiser{
 
 		//Zoom Functie(Scrol event)
 		verticaal.setOnScroll(e -> {
-			System.out.println("Werkt");
 			e.consume();
 
 			if (e.getDeltaY() == 0) {

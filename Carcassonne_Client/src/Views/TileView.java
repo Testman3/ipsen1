@@ -1,7 +1,6 @@
 package Views;
 
 import Models.Horige;
-import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -116,11 +115,7 @@ public class TileView extends Pane {
 	 */
 	public void verwijderHorige() {
 		Platform.runLater(() -> {
-			//getChildren().remove(horigeView);
 			try {
-				//System.out.println("" + this.getChildren());
-				//TODO FIX THIS SHIT
-				//this.getChildren().get(0).setId("");
 				this.getChildren().remove(1);
 			}catch (java.lang.IndexOutOfBoundsException e){
 				//Doe niks wanneer de fout wordt opgevangen
@@ -164,7 +159,7 @@ public class TileView extends Pane {
 				final Horige.Posities pos = horigenZijdes[i];
 				horigePreviews[i].setOnMouseClicked(e ->{
 						verwijderHorigePreviews();
-						System.out.println("Horige geplaatst door " + scene.gameController.getModel().spelerNaam);
+						System.out.println("Horige geplaatst door " + scene.gameController.getGameClientModel().spelerNaam);
 						scene.gameController.klikPlaatsHorige(pos);
 				});
 			}

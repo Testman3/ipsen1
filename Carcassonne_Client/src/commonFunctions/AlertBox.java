@@ -7,6 +7,9 @@ import javafx.scene.media.AudioClip;
 
 import java.nio.file.Paths;
 
+/**
+ * Deze class zorgt voor de styling en het geluidseffect van al onze alertboxen
+ */
 public class AlertBox {
 	private Alert alert;
 	private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());

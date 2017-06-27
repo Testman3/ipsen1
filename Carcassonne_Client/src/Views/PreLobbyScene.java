@@ -111,11 +111,8 @@ public class PreLobbyScene extends Scene implements SceneInitialiser{
 					controller.setSpelernaam(naamVeld.getText());
 
 				} catch (RemoteException e1) {
-					e1.printStackTrace();
+					System.out.println("Er is een probleem met de RMI verbinding opgetreden!");
 				}
-			}
-			else {
-				System.out.println("Kan niet connecten dus switcht de scene niet");
 			}
 
 		});
