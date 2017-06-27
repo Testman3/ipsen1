@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.RMIInterface;
+import commonFunctions.AlertBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -37,21 +38,10 @@ public class LobbyController {
 	 */
 	public void connectToServer(String ip, String naam) throws RemoteException {
 
-		Alert alert;
+		AlertBox alert;
 
 		if (!validateIP(ip)) {
-			alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
-
-			///////////////////////////////////////////////////////////
-			//Style voorbeeld Alert boxen, moet per new Alert voor nu//
-			///////////////////////////////////////////////////////////
-			DialogPane alertPane = alert.getDialogPane();
-			alertPane.getStylesheets().add("style.css");
-			alertPane.getStyleClass().add("alertBox");
-			alertPane.setMinWidth(500);
-
-			errorSound.play();
-			alert.showAndWait();
+			alert = new AlertBox("Dit is niet een geldig IP adres");
 			return;
 		}
 
@@ -63,38 +53,26 @@ public class LobbyController {
 			RMIstub = (RMIInterface) registry.lookup("Lobby");
 			ableToConnect = true;
 		} catch (ConnectException e) {
-			alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
-			ableToConnect = false;
+			alert = new AlertBox("Server niet bereikbaar!");
 			return;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
-			ableToConnect = false;
+			alert = new AlertBox("Server niet bereikbaar!");
 			return;
 		}
 
 		if(naam.length() > 15){
 			ableToConnect = false;
-			alert = new Alert(AlertType.ERROR, "Je naam mag niet langer zijn dan 15 tekens!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
+			alert = new AlertBox("Je naam mag niet langer zijn dan 15 tekens!");
 			return;
 		} else if(naam.length() < 2){
 			ableToConnect = false;
-			alert = new Alert(AlertType.ERROR, "Je naam mag niet korter zijn dan 2 tekens!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
+			alert = new AlertBox("Je naam mag niet korter zijn dan 2 tekens!");
 			return;
 		}else {
 			if (controleerNaam(naam)) {
-				alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
+				alert = new AlertBox("Deze naam bestaat al in de lobby!");
 				naam = "";
 				RMIstub = null;
 				registry = null;
@@ -102,15 +80,11 @@ public class LobbyController {
 				return;
 			} else if (getRmiStub().isGameStarted()) {
 				ableToConnect = false;
-				alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
+				alert = new AlertBox( "Er is al een spelsessie gestart!");
 				return;
 			} else if (getRmiStub().getPlayerList().size() == 5) {
 				ableToConnect = false;
-				alert = new Alert(AlertType.ERROR, "De lobby zit vol!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
+				alert = new AlertBox("De lobby zit vol!");
 				return;
 			}
 		}
