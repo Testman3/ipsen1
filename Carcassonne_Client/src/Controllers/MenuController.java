@@ -55,7 +55,6 @@ public class MenuController {
 		naamSelecteerScene = new NaamSelecteerScene(this);
 
 		setMenuViewScene();
-		//setGameScene();
 		gameStage.setTitle("Carcassonne");
 		gameStage.getIcons().add(new Image("Afbeeldingen/gameIcon.png"));
 		gameStage.show();
@@ -77,8 +76,6 @@ public class MenuController {
 	public void showInGameMenu(){
 		inGameMenuStage.getMenuStage().show();
 		gameScene.setSceneBlur();
-		//inGameMenuStage.getMenuStage().toFront();
-		//inGameMenuStage.initGui();
 	}
 
 	/**

@@ -46,30 +46,13 @@ public class BordController {
 			if (bord.isKaartPlaatsbaar(kaartenStapel.getTurnTile())) {
 				return kaartenStapel.getTurnTile().getImageID();
 			}
-			System.out.println("**************************************************************************************************");
-			System.out.println("**************************************************************************************************");
-			System.out.println("**************************************************************************************************");
-			System.out.println("Er is een onplaatsbare kaart gevonden! namelijk kaar ID " + kaartenStapel.getTurnTile().getImageID());
-			System.out.println("**************************************************************************************************");
-			System.out.println("**************************************************************************************************");
-			System.out.println("**************************************************************************************************");
+			System.out.println("Er is een onplaatsbare kaart gevonden! Namelijk kaart ID " + kaartenStapel.getTurnTile().getImageID());
 
 			kaartenStapel.stopLaatsteKaartTerug();
 			return pakKaartvanStapel(spelerNaam);
 
 		}
 		return null;
-	}
-
-	/**
-	 * Roept de functie checkKaartFit aan in het bord
-	 *
-	 * @param x De x co-ordinaat van de kaart
-	 * @param y De y co-ordinaat van de kaart
-	 * @return True als de kaart past op de meegegeven locatie, false als de kaart niet past
-	 */
-	public boolean checkKaartFit(int x, int y) {
-		return bord.checkKaartFit(x, y, kaartenStapel.getTurnTile());
 	}
 
 	/**
@@ -128,7 +111,7 @@ public class BordController {
 	 */
 	public void beeindigBeurt(String spelernaam) {
 		if (bord.isSpelerBeurt(spelernaam)) {
-			System.out.println("==@@@@@@@@@@@@@@@@@@@Speler heeft beurt beindigt");
+			System.out.println(spelernaam + " heeft beurt beindigt");
 			volgendeBeurt();
 		}
 	}

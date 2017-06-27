@@ -12,43 +12,44 @@ import java.rmi.RemoteException;
  */
 public class GameController {
 
-	GameClient model;
+	GameClient gameClientModel;
 	RMIInterface rmiStub;
 
-	public GameController(GameClient model){
-		this.model = model;
+	public GameController(GameClient gameClientModel){
+		this.gameClientModel = gameClientModel;
 	}
 
 	/**
-	 * Deze functie zorgt ervoor dat de kaart uit het model gepakt wordt (roept pakKaart() aan in het model)
+	 * Deze functie zorgt ervoor dat de kaart uit het gameClientModel gepakt wordt (roept pakKaart() aan in het gameClientModel)
 	 */
 	public void klikPakKaart() {
-		model.pakKaart();
+		gameClientModel.pakKaart();
 	}
-	public void klikDraaiKaart() {model.draaiKaart();}
+	public void klikDraaiKaart() {
+		gameClientModel.draaiKaart();}
 	public void klikPlaatsHorige(Horige.Posities positie){
-		model.plaatsHorige(positie);
+		gameClientModel.plaatsHorige(positie);
 	}
 	public void klikBeeindigbeurt() {
-		model.beeindigBeurt();
+		gameClientModel.beeindigBeurt();
 	}
 	/**
-	 * Deze functie zorgt ervoor dat de kaart in het model (GameClient) geplaatst wordt
+	 * Deze functie zorgt ervoor dat de kaart in het gameClientModel (GameClient) geplaatst wordt
 	 * @param x
 	 * geef de x co-ordinaat van de kaart mee
 	 * @param y
 	 * geef de y co-ordinaat van de kaart mee
 	 */
 	public void klikPlaatsKaart(int x, int y) {
-		model.plaatsKaart(x, y);
+		gameClientModel.plaatsKaart(x, y);
 	}
 
 	/**
 	 * Deze functie
-	 * @return model
+	 * @return gameClientModel
 	 */
-	public GameClient getModel() {
-		return model;
+	public GameClient getGameClientModel() {
+		return gameClientModel;
 	}
 
 
@@ -62,11 +63,11 @@ public class GameController {
 		fileChooser.setTitle("Save Game");
 		//extension filter json
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Carcassonne", "*.json"));
-		File file = fileChooser.showSaveDialog(model.getGameScene().getController().getGameStage());
+		File file = fileChooser.showSaveDialog(gameClientModel.getGameScene().getController().getGameStage());
 		// File handeling in class filemanager
 //		fileManager.saveGame();
 		try {
-			model.RmiStub.saveFile(file.getPath());
+			gameClientModel.RmiStub.saveFile(file.getPath());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

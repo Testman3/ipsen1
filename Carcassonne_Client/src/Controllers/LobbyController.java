@@ -22,16 +22,12 @@ import java.util.regex.Pattern;
  */
 public class LobbyController {
 
-	private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
-
-
 	private boolean ableToConnect = false;
 
 	public RMIInterface RMIstub;
 
 	/**
 	 * Probeert de speler te laten verbinden met de rmi server
-	 *
 	 * @param ip   ip adres in de vorm van een String
 	 * @param naam gebruikersnaam in de vorm van een String
 	 * @throws RemoteException RemoteException wordt gegooid wanneer er een fout zit in de verbinding met RMI
@@ -88,9 +84,12 @@ public class LobbyController {
 				return;
 			}
 		}
-
 	}
 
+	/**
+	 * Geeft terug of het spel geladen is of niet
+	 * @return true / false
+	 */
 	public boolean isGameLoaded() {
 		try {
 			return RMIstub.getLoadedGame();
@@ -100,8 +99,12 @@ public class LobbyController {
 		}
 	}
 
-
-
+	/**
+	 * Controleert of de meegegeven naam al bestaat in de server
+	 * @param naam
+	 * Geef de gewenste naam mee
+	 * @return true als de naam nog niet bestaat, false wanneer de naam al bestaat
+	 */
 	private boolean controleerNaam(String naam) {
 		if (RMIstub == null) {
 			//Speler is niet connected met de RMI, dus de naam kan niet gechecked worden
@@ -111,7 +114,7 @@ public class LobbyController {
 		try {
 			naamCheck = RMIstub.checkContains(naam);
 		} catch (RemoteException e) {
-
+			System.out.println("Er is een RMI fout opgetreden!");
 		}
 		return naamCheck;
 	}
@@ -146,11 +149,16 @@ public class LobbyController {
 		return false;
 	}
 
+	/**
+	 * Update de naam naar de geselecteerde naam uit het dropdown menu wanneer er een spel geladen wordt
+	 * @param old oude naam
+	 * @param niew geselecteerde naam
+	 */
 	public void updateNaam(String old, String niew){
 		try {
 			RMIstub.updateSpelerNaam(old, niew);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.out.println("Er is een RMI fout opgetreden!");
 		}
 	}
 	public RMIInterface getRmiStub() {
