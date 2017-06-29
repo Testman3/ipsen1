@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.BordController;
 import Controllers.GameController;
 import Controllers.MenuController;
 import Models.GameClient;
@@ -136,7 +137,8 @@ public class GameScene extends Scene implements SceneInitialiser{
 		eindigBeurtImage.setFitHeight(65);
 		eindigBeurtImage.setFitWidth(265);
 
-		//Set PickOnBounds
+
+		//Set PickOnBounds - Kan op alles klikken wat achter het aangegeven element staat
 		mainPane.setPickOnBounds(false);
 		links.setPickOnBounds(false);
 		onderkant.setPickOnBounds(false);
@@ -168,8 +170,6 @@ public class GameScene extends Scene implements SceneInitialiser{
 			playerViews[i] = new SpelerView();
 			playerViews[i].setMinSize(150, 70);
 			playerViews[i].setMaxSize(150, 70);
-			//playerViews[i].maxHeightProperty().bind(heightProperty().multiply(0.1));
-			//playerViews[i].maxWidthProperty().bind(widthProperty().multiply(0.1));
 			links.getChildren().add(playerViews[i]);
 		}
 
@@ -244,7 +244,7 @@ public class GameScene extends Scene implements SceneInitialiser{
 		tilesPane.getChildren().add(verticaal);
 		tilesPane.setId("spelBordBackground");
 
-		//Verplaatsen over de map met W A S D keys, Speed is de snelheid dat je verplaatst.
+		//Set key actions
 		int speed = 20;
 		setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.W) {
@@ -255,6 +255,12 @@ public class GameScene extends Scene implements SceneInitialiser{
 				verticaal.setLayoutY(verticaal.getLayoutY() - speed);
 			} else if (e.getCode() == KeyCode.D) {
 				verticaal.setLayoutX(verticaal.getLayoutX() - speed);
+			} else if (e.getCode() == KeyCode.F4){
+				try {
+					RmiStub.setEindespel();
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -272,7 +278,6 @@ public class GameScene extends Scene implements SceneInitialiser{
 
 		//Zoom Functie(Scrol event)
 		verticaal.setOnScroll(e -> {
-			System.out.println("Werkt");
 			e.consume();
 
 			if (e.getDeltaY() == 0) {
@@ -299,8 +304,8 @@ public class GameScene extends Scene implements SceneInitialiser{
 			if (tilesPane.getScaleY() > 6.0) {
 				tilesPane.setScaleY(6.0);
 			}
-
 		});
+
 	}
 
 	/**
@@ -524,6 +529,17 @@ public class GameScene extends Scene implements SceneInitialiser{
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			double schermBreedte = screenSize.getWidth();
 			double schermHoogte = screenSize.getHeight();
+			for (int i = 0; i < playerViews.length ; i++) {
+				playerViews[i].setMinSize(190, 110);
+				playerViews[i].setMaxSize(190, 110);
+				onderkantElement.setSpacing(230);
+				links.setSpacing(13);
+				draaiImage.setFitHeight(95);
+				draaiImage.setFitWidth(230);
+				eindigBeurtImage.setFitHeight(95);
+				eindigBeurtImage.setFitWidth(295);
+
+			}
 
 			mainPane.setMinSize(schermBreedte, schermHoogte);
 			getStylesheets().add("FullscreenStyle.css");
@@ -532,6 +548,16 @@ public class GameScene extends Scene implements SceneInitialiser{
 			getStylesheets().add("style.css");
 			getStylesheets().remove("FullscreenStyle.css");
 			mainPane.setMinSize(breedte, hoogte);
+			for (int i = 0; i < playerViews.length ; i++) {
+				playerViews[i].setMinSize(150, 70);
+				playerViews[i].setMaxSize(150, 70);
+				onderkantElement.setSpacing(100);
+				links.setSpacing(6);
+				draaiImage.setFitHeight(65);
+				draaiImage.setFitWidth(200);
+				eindigBeurtImage.setFitHeight(65);
+				eindigBeurtImage.setFitWidth(265);
+			}
 		}
 	}
 

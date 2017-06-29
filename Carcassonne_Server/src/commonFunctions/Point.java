@@ -3,7 +3,7 @@ package commonFunctions;
 import java.io.Serializable;
 
 /**
- * Created by Marti on 15-6-2017.
+ * Deze class is een simpele container voor een x- en y positie
  */
 public class Point implements Serializable {
 

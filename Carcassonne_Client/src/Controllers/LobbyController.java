@@ -1,9 +1,11 @@
 package Controllers;
 
 import Models.RMIInterface;
+import commonFunctions.AlertBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.media.AudioClip;
 
 import java.nio.file.Paths;
@@ -20,28 +22,22 @@ import java.util.regex.Pattern;
  */
 public class LobbyController {
 
-	private AudioClip errorSound = new AudioClip(Paths.get("Sounds/Error.WAV").toUri().toString());
-
-
 	private boolean ableToConnect = false;
 
 	public RMIInterface RMIstub;
 
 	/**
 	 * Probeert de speler te laten verbinden met de rmi server
-	 *
 	 * @param ip   ip adres in de vorm van een String
 	 * @param naam gebruikersnaam in de vorm van een String
 	 * @throws RemoteException RemoteException wordt gegooid wanneer er een fout zit in de verbinding met RMI
 	 */
 	public void connectToServer(String ip, String naam) throws RemoteException {
 
-		Alert alert;
+		AlertBox alert;
 
 		if (!validateIP(ip)) {
-			alert = new Alert(AlertType.ERROR, "Dit is niet een geldig IP adres", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
+			alert = new AlertBox("Dit is niet een geldig IP adres");
 			return;
 		}
 
@@ -53,38 +49,26 @@ public class LobbyController {
 			RMIstub = (RMIInterface) registry.lookup("Lobby");
 			ableToConnect = true;
 		} catch (ConnectException e) {
-			alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
-			ableToConnect = false;
+			alert = new AlertBox("Server niet bereikbaar!");
 			return;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			alert = new Alert(AlertType.ERROR, "Server niet bereikbaar!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
-			ableToConnect = false;
+			alert = new AlertBox("Server niet bereikbaar!");
 			return;
 		}
 
-		if(naam.length() > 20){
+		if(naam.length() > 15){
 			ableToConnect = false;
-			alert = new Alert(AlertType.ERROR, "Deze naam is te lang!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
+			alert = new AlertBox("Je naam mag niet langer zijn dan 15 tekens!");
 			return;
 		} else if(naam.length() < 2){
 			ableToConnect = false;
-			alert = new Alert(AlertType.ERROR, "Deze naam is te kort!", ButtonType.OK);
-			errorSound.play();
-			alert.showAndWait();
+			alert = new AlertBox("Je naam mag niet korter zijn dan 2 tekens!");
 			return;
 		}else {
 			if (controleerNaam(naam)) {
-				alert = new Alert(AlertType.ERROR, "Deze naam bestaat al in de lobby!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
+				alert = new AlertBox("Deze naam bestaat al in de lobby!");
 				naam = "";
 				RMIstub = null;
 				registry = null;
@@ -92,22 +76,35 @@ public class LobbyController {
 				return;
 			} else if (getRmiStub().isGameStarted()) {
 				ableToConnect = false;
-				alert = new Alert(AlertType.ERROR, "Er is al een spelsessie gestart!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
+				alert = new AlertBox( "Er is al een spelsessie gestart!");
 				return;
 			} else if (getRmiStub().getPlayerList().size() == 5) {
 				ableToConnect = false;
-				alert = new Alert(AlertType.ERROR, "De lobby zit vol!", ButtonType.OK);
-				errorSound.play();
-				alert.showAndWait();
+				alert = new AlertBox("De lobby zit vol!");
 				return;
 			}
 		}
-
 	}
 
+	/**
+	 * Geeft terug of het spel geladen is of niet
+	 * @return true / false
+	 */
+	public boolean isGameLoaded() {
+		try {
+			return RMIstub.getLoadedGame();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
+	/**
+	 * Controleert of de meegegeven naam al bestaat in de server
+	 * @param naam
+	 * Geef de gewenste naam mee
+	 * @return true als de naam nog niet bestaat, false wanneer de naam al bestaat
+	 */
 	private boolean controleerNaam(String naam) {
 		if (RMIstub == null) {
 			//Speler is niet connected met de RMI, dus de naam kan niet gechecked worden
@@ -117,7 +114,7 @@ public class LobbyController {
 		try {
 			naamCheck = RMIstub.checkContains(naam);
 		} catch (RemoteException e) {
-
+			System.out.println("Er is een RMI fout opgetreden!");
 		}
 		return naamCheck;
 	}
@@ -152,6 +149,18 @@ public class LobbyController {
 		return false;
 	}
 
+	/**
+	 * Update de naam naar de geselecteerde naam uit het dropdown menu wanneer er een spel geladen wordt
+	 * @param old oude naam
+	 * @param niew geselecteerde naam
+	 */
+	public void updateNaam(String old, String niew){
+		try {
+			RMIstub.updateSpelerNaam(old, niew);
+		} catch (RemoteException e) {
+			System.out.println("Er is een RMI fout opgetreden!");
+		}
+	}
 	public RMIInterface getRmiStub() {
 		return RMIstub;
 	}

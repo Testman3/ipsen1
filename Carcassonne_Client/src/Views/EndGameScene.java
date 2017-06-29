@@ -82,7 +82,6 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 		mainPane.setCenter(allesContainer);
 
-
 		initAction();
 
 	}
@@ -128,8 +127,6 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		}
 		}
 
-
-
 	/**
 	 * Deze functie zorgt ervoor dat de spelers worden gesorteerd op score, waarna ze op het scherm zullen verschijnen.
 	 */
@@ -158,7 +155,6 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 
 					spelerObj.get(j).setPunten(tempScore);
 					spelerObj.get(j).setNaam(tempNaam);
-
 				}
 			}
 		}
@@ -168,7 +164,5 @@ public class EndGameScene extends Scene implements SceneInitialiser {
 		}
 		setScorebord = true;
 		music();
-
 	}
-
 }

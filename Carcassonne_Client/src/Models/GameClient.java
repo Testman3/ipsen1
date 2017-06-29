@@ -15,20 +15,17 @@ import java.util.ArrayList;
  */
 public class GameClient {
 
-	AudioClip meepMerp = new AudioClip(Paths.get("Sounds/meepMerp.mp3").toUri().toString());
+	private AudioClip meepMerp = new AudioClip(Paths.get("Sounds/meepMerp.mp3").toUri().toString());
+	public static AudioClip turnSound = new AudioClip(Paths.get("Sounds/battleHorn.mp3").toUri().toString());
+	private AudioClip getCard = new AudioClip(Paths.get("Sounds/Shuffling_Cards.mp3").toUri().toString());
 
 	GameScene view;
-
 	Thread gameThread;
 
 	private boolean enableThread = true;
-
 	public String spelerNaam;
 	public String kaartPlaatsId = "";
-
 	String spelerBeurt;
-
-	//String spelerBeurt = "";
 	int beurt = 0;
 
 	public RMIInterface RmiStub;
@@ -36,12 +33,7 @@ public class GameClient {
 	private boolean kaartGepakt = false;
 	private boolean kaartGeplaatst = false;
 	private ArrayList<Point> verwijderHorige;
-
-	public static AudioClip turnSound = new AudioClip(Paths.get("Sounds/battleHorn.mp3").toUri().toString());
-	private AudioClip getCard = new AudioClip(Paths.get("Sounds/Shuffling_Cards.mp3").toUri().toString());
-
 	private int aantalHorigeBeschikbaar;
-
 
 	/**
 	 * Constructor van GameClient
@@ -205,8 +197,6 @@ public class GameClient {
 				spelerBeurt = RmiStub.getPlayerBeurt();
 				aantalHorigeBeschikbaar = RmiStub.getAvailableHorige(spelerNaam);
 
-				System.out.println(aantalHorigeBeschikbaar);
-
 			if(SettingsScene.optieGeluid) {
 				if (spelerBeurt.equals(spelerNaam)) {
 					turnSound.setVolume(0.5);
@@ -238,7 +228,6 @@ public class GameClient {
 		}
 
 		getGameScene().updateHorigenInUi(this);
-		//System.out.println("Horigen in UI geüpdatet");
 		});
 	}
 

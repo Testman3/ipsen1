@@ -8,6 +8,7 @@
 	-fx-text-fill: white;
 	-fx-stroke: black;
 }
+
 .button {
 	-fx-padding: 0;
 	-fx-background-color: transparent;
@@ -31,7 +32,7 @@
 }
 
 #inGameKnoppen {
-	-fx-font-size: 4em;
+	-fx-font-size: 4.5em;
 }
 
 #draaiImage{
@@ -51,24 +52,21 @@
 }
 
 #KaartenLeft{
-	-fx-font-size: 30px;
+	-fx-font-size: 55px;
 }
-
-
-
 
 #horigePreview {
 	-fx-image: url("Afbeeldingen/Horige_Preview.png");
 }
 
 #spelerInfo{
-	-fx-font-size: 3em;
-	-fx-padding: -10px;
+	-fx-font-size: 4em;
+	-fx-padding: -15px;
 }
 
 #spelerInfoHigh{
-	-fx-font-size: 3em;
-	-fx-padding: -10px;
+	-fx-font-size: 4em;
+	-fx-padding: -15px;
 	-fx-text-fill: #00ff00;
 }
 

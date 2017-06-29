@@ -236,11 +236,7 @@ public class InGameMenuStage extends Stage implements SceneInitialiser{
 					exitConfirmation.showAndWait().ifPresent(response -> {
 						if (response == ButtonType.OK) {
 							try {
-
 								gameClient.getRmiStub().leaveGame(gameClient.getSpelerNaam());
-
-								gameClient.getRmiStub().leaveGame(gameClient.getSpelerNaam());
-
 								gameClient.getRmiStub().removePlayer(gameClient.getSpelerNaam());
 								System.exit(0);
 							} catch (RemoteException e) {

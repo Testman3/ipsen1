@@ -35,7 +35,15 @@
 	-fx-font-size: 4em;
 }
 
+#dropDown{
+	-fx-font-size: 4em;
+}
+
 #standardLabel {
+    -fx-font-size: 4em;
+}
+#inputBoxText {
+    -fx-text-fill: black;
     -fx-font-size: 4em;
 }
 
@@ -270,3 +278,20 @@
 	-fx-image: url("Afbeeldingen/Horige_Used.png");
 }
 
+#tekstInvoer{
+	-fx-font-size: 4.5em;
+	-fx-background-color: rgba(236, 247, 255, 0.11);
+	-fx-border-color: black;
+	-fx-border-width: 3;
+	-fx-border-radius: 3;
+}
+
+.alertBox{
+	-fx-font-size: 5em;
+	-fx-background-image: url("Afbeeldingen/SpelbordBackground.jpg");
+	-fx-background-position: center;
+}
+
+.alertBox .header-panel {
+	-fx-background-image: url("Afbeeldingen/SpelbordBackground.jpg");
+}

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class RMIController implements RMIInterface {
 
 	public static ArrayList<Speler> alleSpelers = new ArrayList<Speler>();
+	private ArrayList<String> geladenSpelerNamen = new ArrayList<>();
 
 	public ServerManager serverManager;
 
@@ -68,7 +69,7 @@ public class RMIController implements RMIInterface {
 	@Override
 	public boolean checkContains(String naam) throws RemoteException {
 		for (Speler speler : alleSpelers) {
-			if (speler.getNaam().contains(naam)) {
+			if (speler.getNaam().equals(naam)) {
 				return true;
 			}
 		}
@@ -202,4 +203,31 @@ public class RMIController implements RMIInterface {
 	public int getAvailableHorige(String naam) throws RemoteException {
 		return serverManager.bordController.bord.getSpelerHorige(naam);
 	}
+
+	@Override
+	public void setEindespel(){
+		serverManager.bordController.setStopgetal();
+	}
+
+	@Override
+	public ArrayList<String> getGeladenSpelerNamen() throws RemoteException {
+		return geladenSpelerNamen;
+	}
+
+	@Override
+	public void laadAlleSpelerNamen(File file) throws RemoteException {
+		geladenSpelerNamen = FileManager.getAlleSpelerNamen(file);
+		ServerManager.gameLoaded = true;
+	}
+
+	@Override
+	public void updateSpelerNaam(String oldNaam, String newNaam) throws RemoteException {
+		for (Speler speler : alleSpelers) {
+			if (speler.getNaam().equals(oldNaam)) {
+				speler.setNaam(newNaam);
+			}
+		}
+	}
+
+
 }

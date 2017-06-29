@@ -23,6 +23,7 @@ public class MenuController {
 	private SettingsScene settingsScene;
 	private CreditsScene creditsScene;
 	private InGameMenuStage inGameMenuStage;
+	private NaamSelecteerScene naamSelecteerScene;
 	private String spelernaam;
 	public File loadedFile;
 
@@ -51,9 +52,9 @@ public class MenuController {
 		preLobbyScene = new PreLobbyScene(this, lobbyController);
 		settingsScene = new SettingsScene(this);
 		creditsScene = new CreditsScene(this);
+		naamSelecteerScene = new NaamSelecteerScene(this);
 
 		setMenuViewScene();
-		//setGameScene();
 		gameStage.setTitle("Carcassonne");
 		gameStage.getIcons().add(new Image("Afbeeldingen/gameIcon.png"));
 		gameStage.show();
@@ -75,8 +76,6 @@ public class MenuController {
 	public void showInGameMenu(){
 		inGameMenuStage.getMenuStage().show();
 		gameScene.setSceneBlur();
-		//inGameMenuStage.getMenuStage().toFront();
-		//inGameMenuStage.initGui();
 	}
 
 	/**
@@ -119,7 +118,6 @@ public class MenuController {
 	 */
 	public void setLobbyScene(){
 		gameStage.setScene(lobbyScene);
-		getLobbyScene().Join();
 	}
 
 	/**
@@ -155,6 +153,11 @@ public class MenuController {
 	public void setCreditsScene(){
 
 		gameStage.setScene(creditsScene);
+	}
+
+	public void setNaamSelecteerScene(){
+
+		gameStage.setScene(naamSelecteerScene);
 	}
 
 	/**
@@ -196,6 +199,13 @@ public class MenuController {
 	public MenuViewScene getMenuViewScene() {
 		return menuViewScene;
 	}
+
+	/**
+	 * Deze functie haalt de naamSelecteerScene op
+	 * @return naamSelecteerScene
+	 */
+	public NaamSelecteerScene getNaamSelecteerScene(){return naamSelecteerScene;}
+
 
 	/**
 	 * Deze functie haalt de preLobbyScene op
